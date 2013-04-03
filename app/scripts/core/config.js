@@ -1,0 +1,5 @@
+whp.Config = function() {
+
+	return {
+	}
+};

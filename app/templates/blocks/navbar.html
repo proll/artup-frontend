@@ -1,0 +1,26 @@
+<div class="navbar-inner">
+	<div class="container">
+		<a class="brand" href="/"><div class="navbar__logo"><img src="/images/ico/logo.png" width="28" height="24" alt="We heart"></div></a>
+		<div class="nav-collapse collapse">
+			<ul class="nav">
+				{{#each items}}
+					<li class="navbar__item-{{name}}{{#if active}} active{{/if}}"><a href="{{link}}">{{title}}</a></li>
+				{{/each}}
+					<li class="nav__add-photo"><a href="/add"><i class="i i-add"></i><span class="nav__add-photo-title">Add photo</span></a></li>
+			</ul>
+			<ul class="nav pull-right">
+				<li class="nav__login"><a href="/login">Log In</a></li>
+				<li class="nav__profile-drop"><a href="/profile"><div class="i i-no-avatar"></div><span class="nav__profile-name">oh, hello!</span><i class="i i-nav-drop-arrow"></i></a>
+					<ul class="nav__drop-menu">
+						<li class="nav__profile"><a href="/profile">Profile</a></li>
+						<li class="nav__notifications"><a href="/notifications">Notifications</a></li>
+						<li class="nav__dialogs"><a href="/dialogs">Dialogs</a></li>
+						<li class="nav__settings"><a href="/settings">Settings</a></li>
+						<li class="nav__logout"><a href="/logout">Log out</a></li>
+					</ul>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</div>

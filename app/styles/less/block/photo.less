@@ -1,0 +1,299 @@
+// .pic-tile-grid {
+// 	overflow: hidden;
+// 	margin-left: -20px;
+// 	margin-top: 30px;
+// }
+
+
+// .pic-tile-grid__container {
+// 	overflow: hidden;
+// }
+
+
+// .pic-tile-grid__spinner {
+// 	width: 100%;
+// 	height: 54px;
+// 	background: url(/images/ani/spinner.gif)  center 0px no-repeat;
+// }
+
+
+.photo__pic-tile {
+	background: @grayLighter2 url(/images/ani/loading_ani_s2.gif) center center no-repeat;
+	height: 730px;
+
+
+	img {
+		opacity: 0;
+		.transition(opacity 0.5s);
+	}
+}
+.photo-loaded {
+	background-image: none;
+	.photo__pic-tile {
+		img {
+			opacity: 1;
+		}
+	}
+}
+
+
+.photo__text-row {
+	margin-top: 16px;
+}
+
+
+.photo__pic {
+	position: relative;
+}
+
+.photo__vote {
+	position: relative;
+	margin: -27px 15px 0 20px;
+	float: right;
+	
+	cursor: pointer;
+	text-align: center;
+	.user-select(none);
+}
+
+.active {
+	.photo__vote-title {
+		color: @white;
+	}	
+}
+	.photo__vote-title {
+		display: inline-block;
+		margin-top: 20px;
+		
+		font-size: 14px;
+		font-weight: bold;
+		color: @red;
+	}
+
+	.i-vote.active {
+		.i-vote_active;
+	}
+
+
+
+
+
+.photo__story {
+	color: @black;
+	font-size: 14px;
+	padding: 15px 0;
+}
+
+	.photo__story-name {
+		font-weight: bold;
+	}
+
+	.photo__story-by {
+		color: @grayDarker;
+	}
+
+	.photo__ts {
+		color: #b7b7b7;
+	}
+
+
+.photo__caption {
+	margin: 0 0 36px 0;
+	padding: 0;
+	font-size: 18px;
+	line-height: 1.6;
+	font-weight: normal;
+	color: @grayDarker;
+}
+
+
+.photo__location {
+	margin-bottom: 40px;
+
+	.i-streetview {
+		float: right;
+		display: none;
+	}
+}
+
+.photo-streetview-available {
+	.i-streetview {
+		display: inline-block;
+	}
+}
+
+	.photo__location-link {
+		display: inline-block;
+	}
+
+		.photo__location-map {
+			width: 290px;
+			height: 84px;
+			background-color: @grayLighter2;
+			margin-bottom: 10px
+		}
+
+	.photo__location-name {
+		color: @red;
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 1.2;
+		padding: 0;
+		margin: 0 0 10px 0;
+	}
+	.photo__location-addr {
+		color: @gray;
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 1.2;
+		padding: 0;
+		margin: 0;
+	}
+
+
+
+
+// Photo likers
+.photo-likers {
+	margin-bottom: 40px
+}
+
+	.photo-likers__total {
+		font-size: 16px;
+		font-weight: normal;
+		color: @grayDarker;
+		margin: 0 0 10px 0;
+		padding: 0;
+		.transition(color 0.2s);
+	}
+
+.photo-likers_my-vote {
+	.photo-likers__total {
+		color: @red;
+	}
+}
+
+	.photo-likers__user-cont {
+		overflow: hidden;
+		margin-left: -10px;
+	}
+
+		.photo-likers__user {
+			width: 50px;
+			height: 50px;
+			float: left;
+			margin: 0 0 10px 10px;
+
+			a {
+				display: inline-block;
+			}
+		}
+
+
+// Photo share
+.photo-share {
+	margin-bottom: 40px;
+	font-size: 16px;
+}
+
+	.photo-share__title {
+		margin: 0;
+		padding: 0;
+		color: @grayDarker;
+		font-size: 16px;
+		font-weight: normal;
+	}
+
+	.photo-share__menu {
+		margin: 0;
+		padding: 0;
+	}
+
+		.photo-share__item {
+			margin-top: 16px;
+		}
+
+			.photo-share__link {
+				color: @blue;
+				text-decoration: none;
+				&:hover {
+					color: @blue;
+					text-decoration: underline;
+				}
+			}
+
+		.photo-share__download,
+		.photo-share__report {
+			margin-top: 32px;
+		}
+
+		.photo-share__item {
+			&:before {
+				content: '';
+				display: inline-block;
+				width: 0;
+				height: 18px;
+				background: url(/images/ani/spinner.gif)  left center no-repeat;
+
+				float:left;
+				.transition(all .2s);
+				opacity: 0;
+			}
+		}
+
+		.photo-share__report {
+			.photo-share__link {
+				color: @red;
+				&:hover {
+					color: @red;
+					text-decoration: underline;
+				}
+			}
+		}
+
+	.photo-share_reporting {
+		.photo-share__report {
+			&:before {
+				width: 20px;
+				opacity: 1;
+			}
+		}
+	}
+
+
+	.photo-share_fb-sharing {
+		.photo-share__fb {
+			&:before {
+				width: 20px;
+				opacity: 1;
+			}
+		}
+	}
+
+	.photo-share_tw-sharing {
+		.photo-share__tw {
+			&:before {
+				width: 20px;
+				opacity: 1;
+			}
+		}
+	}
+
+	.photo-share_vk-sharing {
+		.photo-share__vk {
+			&:before {
+				width: 20px;
+				opacity: 1;
+			}
+		}
+	}
+
+	.photo-share_pt-sharing {
+		.photo-share__pt {
+			&:before {
+				width: 20px;
+				opacity: 1;
+			}
+		}
+	}
+

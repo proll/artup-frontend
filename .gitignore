@@ -1,0 +1,8 @@
+.DS_Store
+#app/images/sprites/*.png
+app/images/sprites/*.json
+node_modules
+deploy/*
+.dropbox
+Icon?
+deploy

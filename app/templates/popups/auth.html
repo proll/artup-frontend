@@ -1,0 +1,66 @@
+<div class="auth-popup_close"></div>
+<div id="auth-popup_container">
+	<div id="auth-popup_login">
+		<div class="header">Log in</div>
+		<div id="auth-popup_services">
+			<div class="login-via-fb">Facebook</div>
+			<div class="login-via-tw">Twitter</div>
+			<div class="login-via-vk">VKontakte</div>
+			<div class="login-via-email">E-mail</div>
+		</div>
+	</div>
+
+	<div class="auth-popup__registration">
+		<h2 class="header">Register by e-mail</h2>
+		<form class="auth-popup__form">
+			<input type="email" name="email" id="registration-email" placeholder="E-mail">
+			<input type="password" name="password" id="registration-password" placeholder="Password">
+			<div class="clearfix"></div>
+		<div class="auth-popup__registration_next">Sign up<i class="icn icn-arrow-medium_right"></i></div>
+			<input type="submit" class="inv">
+		</form>
+		<div class="auth-error auth-popup__registration-error"></div>
+	</div>
+
+	<div class="auth-popup__registration-names">
+		<div class="auth-popup__registration-names_dummy">
+			<div class="dummy">Log in</div>
+			<div class="clearfix"></div>
+			<div class="dummy">Facebook</div>
+			<div class="dummy">Twitter</div>
+			<div class="dummy">VKontakte</div>
+			<div class="dummy">E-mail</div>
+		</div>
+
+		<div class="back-header auth-popup__registration_back"><i class="icn icn-arrow-medium_left"></i>E-mail &amp; password</div>
+
+		<div class="header">Account information</div>
+		<form  class="auth-popup__form">
+			<input type="text" name="first_name" id="registration-first_name" placeholder="First name" maxlength="32">
+			<input type="text" name="last_name" id="registration-last_name" placeholder="Last name" maxlength="32">
+			<div class="clearfix"></div>
+			<div class="auth-popup__registration_ok">Sign up<i class="icn icn-arrow-medium_right"></i></div>
+			<input type="submit" class="inv">
+		</form>
+		<div class="auth-error auth-popup__registration-names-error"></div>
+	</div>
+
+
+	<div class="auth-popup__login-email">
+		<div class="back-header auth-popup__login-email_back"><i class="icn icn-arrow-medium_left"></i>Log in / sign up</div>
+		<h2 class="header">Log in by e-mail</h2>
+		<form action="/api/auth/" class="auth-popup__form">
+			<input type="email" name="email" id="login-email" placeholder="E-mail">
+			<div class="clearfix"></div>
+			<input type="password" name="password" id="login-password" placeholder="Password">
+			<a class="auth-popup__login-email_forgot" href="/reset">Forgot?</a>
+			<div class="clearfix"></div>
+			<div type="submit" class="auth-popup__login-email_ok">Log in<i class="icn icn-arrow-medium_right"></i></div>
+			<input type="submit" class="inv">
+		</form>
+		<div class="auth-error auth-popup__login-error"></div>
+	</div>
+
+
+
+</div>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<link rel="dns-prefetch" href="http://img.weheartpics.com" />
+	<title>WeHeartPics</title>
+	<meta name="description" content="Enough with sharing links and occasional moments, take care about the real lives of people.">
+
+	<!-- Facebook -->
+	<meta property="og:title" content="WeHeartPics" />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="http://weheartpics.com/img/social_ico.png" />
+	<meta property="og:url" content="http://weheartpics.com/" />
+	<meta property="og:site_name" content="WeHeartPics" />
+	<meta property="og:description" content="We Heart Pics позволяет вам не думать о том, что снимать. Множество идей для фотографий на каждый день!"/>
+
+	<!-- Facebook app -->
+	<meta property="fb:admins" content="100000074821361, 501545068" />
+	<meta property="fb:app_id" content="205868409437437" />
+
+	<!-- Mobile readiness tags -->
+	<meta name="HandheldFriendly" content="True" />
+	<meta name="MobileOptimized" content="320" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta http-equiv="cleartype" content="on">
+
+	<!-- To point that it is a mobile version at the same time -->
+	<link rel="alternate" media="handheld" href="" />
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ico/fav144.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/fav114.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/fav72.png" />
+	<link rel="apple-touch-icon-precomposed" href="/images/ico/fav57.png" />
+	<link rel="shortcut icon" href="/images/ico/fav57.png">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+	 <!-- Tile icon for Win8 (144x144 + tile color) -->
+	<meta name="msapplication-TileImage" content="/images/ico/fav144.png">
+	<meta name="msapplication-TileColor" content="#222222">
+
+	<meta name="application-name" content="WeHeartPics" />
+	<!-- http://developer.apple.com/library/ios/#documentation/AppleApplications/Reference/SafariWebContent/PromotingAppswithAppBanners/PromotingAppswithAppBanners.html -->
+	<!-- <meta name="apple-itunes-app" content="app-id=488515478, affiliate-data=myAffiliateData, app-argument=myURL"> -->
+
+	<!-- Skype phone parse disable -->
+	<meta name="format-detection" content="telephone=no"/>
+	<meta name="format-detection" content="address=no"/>
+
+	<!-- build:css /styles/whp.css -->
+	<link rel="stylesheet" href="/styles/css/whp.css"/>
+	<!-- endbuild -->
+
+	<!-- build:js /scripts/mdrnzr.js -->
+	<script src="/scripts/vendor/modernizr.custom.24244.js"></script>
+	<!-- endbuild -->
+</head>
+<body>
+<div class="navbar navbar-fixed-top navbar-header"></div>
+<header class="page-header"></header>
+<div class="container" id="whp-container"></div>
+<footer></footer>
+<div class="auth-popup hide"></div>
+
+
+<!-- build:templates -->
+<script type="text/javascript">
+	var templates = {
+		path: "/templates",
+		ext: "html",
+		files: [
+			"blocks/navbar",
+			"blocks/header",
+			"blocks/pictile",
+			"blocks/pictile-grid",
+			"blocks/explore-menu",
+			"blocks/story-menu",
+			"blocks/dailylist-menu",
+			"blocks/post",
+			"blocks/photo",
+			"blocks/photo_phone",
+			"blocks/photo-likers",
+			"blocks/comment",
+			"blocks/comment-pane",
+			"blocks/photo-share",
+
+
+			"misc/pinterest-share",
+
+
+
+			"popups/auth",
+			"pages/404-page",
+			"pages/explore-page",
+			"pages/photofeed-page",
+			"pages/photo-page",
+
+			"popups/popup",
+		]
+	}
+</script>
+<!-- endbuild -->
+
+<!-- build:js /scripts/jquery.js -->
+	<script src="/scripts/vendor/jquery/jquery.js"></script>
+	<script src="/scripts/vendor/jquery/jquery.mousewheel.min.js"></script>
+	<script src="/scripts/vendor/jquery/jquery.autosize.js"></script>
+<!-- endbuild -->
+
+<!-- build:js /scripts/vendor.js -->
+	<script src="/scripts/vendor/lodash.js"></script>
+	<script src="/scripts/vendor/backbone/backbone-0.9.10.js"></script>
+	<script src="/scripts/vendor/handlebars/handlebars.js"></script>
+<!-- endbuild -->
+
+<!-- <script src="/scripts/vendor/jquery-ui-draggable.min.js"></script>
+<script src="/scripts/vendor/jquery.mousewheel.min.js"></script>
+<script src="/scripts/vendor/instagram.min.js"></script> -->
+
+<!-- build:js /scripts/whp.js -->
+	<script src="/scripts/extentions/lodash-extention.js"></script>
+	<script src="/scripts/extentions/handlebars-helpers.js"></script>
+	<script src="/scripts/whp.js"></script>
+
+	<script src="/scripts/core/page_model.js"></script>
+	<script src="/scripts/core/page_view.js"></script>
+	<script src="/scripts/core/pages_collection.js"></script>
+
+	<script src="/scripts/popups/popup_view.js"></script>
+
+	<!-- Auth, Login, Login Social, Registration -->
+	<script src="/scripts/core/user-settings_model.js"></script>
+	<script src="/scripts/core/user_model.js"></script>
+	<script src="/scripts/core/auth/registration_model.js"></script>
+	<script src="/scripts/core/auth/signin-auth_model.js"></script>
+	<script src="/scripts/core/auth/twitter-auth_model.js"></script>
+	<script src="/scripts/core/auth/vkontakte-auth_model.js"></script>
+	<script src="/scripts/core/auth/facebook-auth_model.js"></script>
+	<script src="/scripts/popups/auth_view.js"></script>
+	<script src="/scripts/popups/auth_model.js"></script>
+
+
+	<!-- APP -->
+	<script src="/scripts/core/config.js"></script>
+	<script src="/scripts/core/statistic.js"></script>
+	<script src="/scripts/core/application_model.js"></script>
+	<script src="/scripts/core/application_router.js"></script>
+
+
+	<!-- Common Blocks -->
+	<script src="/scripts/blocks/navbar_model.js"></script>
+	<script src="/scripts/blocks/navbar_view.js"></script>
+	<script src="/scripts/blocks/header_model.js"></script>
+	<script src="/scripts/blocks/header_view.js"></script>
+
+
+
+
+	<!-- Explore Page-->
+	<script src="/scripts/pages/explore-page_model.js"></script>
+	<script src="/scripts/pages/explore-page_view.js"></script>
+	<script src="/scripts/blocks/pictile_model.js"></script>
+	<script src="/scripts/blocks/pictile_view.js"></script>
+	<script src="/scripts/blocks/explore-menu_model.js"></script>
+	<script src="/scripts/blocks/explore-menu_view.js"></script>
+	<script src="/scripts/blocks/story-menu_model.js"></script>
+	<script src="/scripts/blocks/story-menu_view.js"></script>
+	<script src="/scripts/blocks/dailylist-menu_model.js"></script>
+	<script src="/scripts/blocks/dailylist-menu_view.js"></script>
+
+
+	<script src="/scripts/blocks/pictile_collection.js"></script>
+	<script src="/scripts/blocks/pictile-grid_model.js"></script>
+	<script src="/scripts/blocks/pictile-grid_view.js"></script>
+
+	<!-- Photofeed Page -->
+	<script src="/scripts/pages/photofeed-page_model.js"></script>
+	<script src="/scripts/pages/photofeed-page_view.js"></script>
+	<script src="/scripts/blocks/timeline_model.js"></script>
+	<script src="/scripts/blocks/timeline_view.js"></script>
+	<script src="/scripts/blocks/post_model.js"></script>
+	<script src="/scripts/blocks/post_view.js"></script>
+	<script src="/scripts/blocks/post_collection.js"></script>
+
+
+	<!-- Photo popup/page -->
+	<script src="/scripts/pages/photo-page_model.js"></script>
+	<script src="/scripts/pages/photo-page_view.js"></script>
+	<script src="/scripts/blocks/photo_model.js"></script>
+	<script src="/scripts/blocks/photo_view.js"></script>
+	<script src="/scripts/blocks/photo-likers_model.js"></script>
+	<script src="/scripts/blocks/photo-likers_view.js"></script>
+	<!-- comments -->
+	<script src="/scripts/blocks/comment_model.js"></script>
+	<script src="/scripts/blocks/comment_view.js"></script>
+	<script src="/scripts/blocks/comment_collection.js"></script>
+	<script src="/scripts/blocks/comment-pane_model.js"></script>
+	<script src="/scripts/blocks/comment-pane_view.js"></script>
+	<script src="/scripts/blocks/photo-share_model.js"></script>
+	<script src="/scripts/blocks/photo-share_view.js"></script>
+
+
+<!-- endbuild -->
+
+
+<!-- 
+	unbuild:js /scripts/old.js
+<script src="/scripts/old/01whp_lib.js"></script>
+<script src="/scripts/old/02whp_main.js"></script>
+<script src="/scripts/old/03whp_controller.js"></script>
+<script src="/scripts/old/04whp_auth.js"></script>
+<script src="/scripts/old/05whp_comments.js"></script>
+<script src="/scripts/old/06whp_likes.js"></script>
+<script src="/scripts/old/07whp_mainmenu.js"></script>
+<script src="/scripts/old/08whp_landing.js"></script>
+<script src="/scripts/old/09whp_404.js"></script>
+<script src="/scripts/old/10whp_popular.js"></script>
+<script src="/scripts/old/10whp_whp.js"></script>
+<script src="/scripts/old/11whp_opengraph.js"></script>
+<script src="/scripts/old/11whp_registration.js"></script>
+<script src="/scripts/old/11whp_settings.js"></script>
+<script src="/scripts/old/11whp_story.js"></script>
+<script src="/scripts/old/12whp_timeline.js"></script>
+<script src="/scripts/old/13Zwhp_photolist_prototype.js"></script>
+<script src="/scripts/old/13whp_photo.js"></script>
+<script src="/scripts/old/14whp_error.js"></script>
+<script src="/scripts/old/15whp_stats.js"></script>
+<script src="/scripts/old/15whp_user.js"></script>
+<script src="/scripts/old/16whp_stories.js"></script>
+<script src="/scripts/old/17whp_profile.js"></script>
+<script src="/scripts/old/18whp_feed_prototype.js"></script>
+<script src="/scripts/old/19whp_window_prototype.js"></script>
+<script src="/scripts/old/20whp_timeline_prototype.js"></script>
+<script src="/scripts/old/21whp_rolloutstory_prototype.js"></script>
+<script src="/scripts/old/22whp_subscribers_prototype.js"></script>
+<script src="/scripts/old/23whp_newfaces_prototype.js"></script>
+<script src="/scripts/old/24whp_links.js"></script>
+<script src="/scripts/old/25whp_random.js"></script>
+<script src="/scripts/old/27whp_download.js"></script>
+<script src="/scripts/old/28whp_servicemessages.js"></script>
+<script src="/scripts/old/29whp_l10n.js"></script>
+<script src="/scripts/old/30whp_upload.js"></script>
+<script src="/scripts/old/31whp_newsletter.js"></script>
+ unendbuild -->
+
+
+<!-- unbuild:js /scripts/l10n/all.js
+<script src="/scripts/l10n/l10n_common.js"></script>
+<script src="/scripts/l10n/l10n_footer.js"></script>
+<script src="/scripts/l10n/l10n_header.js"></script>
+<script src="/scripts/l10n/l10n_landing.js"></script>
+<script src="/scripts/l10n/l10n_photos.js"></script>
+<script src="/scripts/l10n/l10n_timeline.js"></script>
+<script src="/scripts/l10n/l10n_user.js"></script>
+<script src="/scripts/l10n/l10n_error.js"></script>
+unendbuild -->
+
+<!-- GA Analytics dont use it on dev env -->
+<script type="text/javascript">
+	// var _gaq = _gaq || [];
+	// _gaq.push(['_setAccount', 'UA-26985717-1']);
+	// _gaq.push(['_trackPageview']);
+	// //analytics do not load on test
+	// (function() {
+	// 	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	// 	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	// 	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	// })();
+</script>
+</body>
+</html>

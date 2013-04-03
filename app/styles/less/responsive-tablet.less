@@ -1,0 +1,34 @@
+//
+// Responsive: Tablet to desktop
+// --------------------------------------------------
+
+
+@media (min-width: @gridRowWidthTablet) and (max-width: @gridRowMaxWidthTablet)  {
+	.container {
+		width: @gridRowWidthTablet;
+	}
+	.container,
+	.navbar-static-top .container,
+	.navbar-fixed-top .container,
+	.navbar-fixed-bottom .container { 
+		width: @gridRowWidthTablet;
+	}
+
+	.span10 {
+		#grid > .core > .span(6);
+	}
+	
+	.photo-page-row{
+		.offset3 {
+			#grid > .core > .offset(1);
+		}	
+	}
+
+	.pic-tile-grid {
+		margin-left: -16px;
+	}
+
+	.pic-tile {
+		margin: 0 0 16px 16px;
+	}
+}

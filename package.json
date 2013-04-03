@@ -1,0 +1,35 @@
+{
+  "author": "Gleb Polushkin",
+  "name": "whp-frontend",
+  "version": "0.0.0-53",
+  "dependencies": {
+    "connect": "2.5.x",
+    "http-proxy": "0.8.x"
+  },
+  "devDependencies": {
+    "connect": "2.5.x",
+    "grunt": "0.4.0a",
+    "http-proxy": "0.8.x",
+    "grunt-contrib-less": "0.3.x",
+    "html-minifier": "~0.4.5",
+    "grunt-handlebars": "x",
+    "grunt-contrib-handlebars": "~0.3.3",
+    "grunt-contrib-watch": "x",
+    "handlebars": "x",
+    "requirejs": "2.1.x",
+    "node-sprite": "~0.1.x",
+    "underscore": "1.4.x",
+    "uglify-js": "1.x",
+    "uglifycss": "x",
+    "nopt": "~2.0.0",
+    "fs-extra": "x",
+    "imagemagick": "http://github.com/naltatis/node-imagemagick/tarball/master"
+  },
+  "scripts": {
+    "start": "node tasks/server.js"
+  },
+  "subdomain": "proll.whp",
+  "engines": {
+    "node": "0.8.x"
+  }
+}

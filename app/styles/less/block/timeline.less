@@ -1,0 +1,111 @@
+.timeline {
+	margin-right: -20px;
+	margin-top: 30px;
+}
+
+
+.timeline__container {
+}
+
+
+.timeline__spinner {
+	width: 100%;
+	height: 54px;
+	background: url(/images/ani/spinner.gif)  center 0px no-repeat;
+}
+
+.timeline__post {
+	font-size: 0;
+	padding-top: @gridGutterWidth;
+	border-top: 1px solid @grayLighter;
+	position: relative;
+}
+
+	.timeline__caption {
+		color: @grayDarker;
+		font-weight: normal;
+		font-size: 24px;
+		line-height: 1.4;
+		padding: 0;
+		margin: -5px 0 25px 0;
+	}
+	.timeline__location-name {
+		color: @red;
+		font-weight: normal;
+		font-size: 18px;
+		line-height: 1.2;
+		padding: 0;
+		margin: 0;
+	}
+	.timeline__location-addr {
+		color: @gray;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 1.4;
+		padding: 0;
+		margin: 0;
+	}
+
+
+	.timeline__story {
+		color: @black;
+		font-size: 14px;
+		padding: 15px 0;
+	}
+
+		.timeline__story-name {
+			font-weight: bold;
+		}
+
+		.timeline__story-by {
+			color: @grayDarker;
+		}
+
+		.timeline__user-name {
+			color: @red !important;
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: none;
+			}
+		}
+
+		.timeline__ts {
+			color: #b7b7b7;
+		}
+
+
+
+
+.timeline__likes {
+	overflow: hidden;
+	margin-bottom: @gridGutterWidth;
+}
+
+	.timeline__like-h {
+		color:@red;
+		font-weight: normal;
+		font-size: 36px;
+		line-height: 1;
+		padding: 0;
+		margin: 0;
+		position: absolute;
+		left: -124px;
+	}
+
+	.timeline__like {
+		float:left;
+		display: inline-block;
+		font-size: 0;
+		width:  212px;
+		height: 212px;
+		margin: 0;
+	}
+
+
+// .pic-tile-loaded {
+// 	background-image: none;
+// 	img {
+// 		opacity: 1;
+// 	}
+// }

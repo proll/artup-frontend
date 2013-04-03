@@ -1,0 +1,306 @@
+//
+// Responsive: Landscape phone to desktop/tablet
+// --------------------------------------------------
+@media (min-width: @gridRowWidthPhone) and (max-width: @gridRowMaxWidthPhone)  {
+// @media (max-width: @gridRowMaxWidthPhone)  {
+	.container {
+		width: @gridRowWidthTablet;
+	}
+	.container,
+	.navbar-static-top .container,
+	.navbar-fixed-top .container,
+	.navbar-fixed-bottom .container { 
+		width: @gridRowWidthPhone;
+	}
+
+	.span3 {
+		display: none;
+	}
+
+	.span10 {
+		width: @gridRowWidthPhone;
+	}
+
+
+	.pic-tile-grid {
+		margin: 0;
+	}
+
+	.pic-add {
+		border: 0 none;
+	}
+
+	.pic-tile {
+		width:  213px;
+		height: 213px;
+		margin: 0;
+		background: none;
+
+		img {
+			width:  213px;
+			height: 213px;
+		}
+	}
+
+	.pic-tile-grid__spinner {
+		margin-top: 20px;
+	}
+
+
+	// header
+	.page-header {
+		display: none;
+	}
+
+	.page-header p {
+		display: none
+	}
+
+	// Photo page
+	.photo-page-row{
+		.span7 {
+			width: @gridRowWidthPhone;
+		}
+		
+		.offset3 {
+			#grid > .core > .offset(0);
+		}	
+	}
+
+	.photo__pic-tile {
+		height: @gridRowWidthPhone;
+	}
+
+	.photo__pic-col1,
+	.photo__pic-col2 {
+		width: @gridRowWidthPhone;
+	}
+
+	.photo__pic-col2 {
+		display: block;
+	}
+}
+
+
+@media (max-width: @gridRowMinWidthPhone) {
+	.container {
+		width: auto;
+		min-width: 300px;
+	}
+	.container,
+	.navbar-static-top .container,
+	.navbar-fixed-top .container,
+	.navbar-fixed-bottom .container { 
+		width: auto;
+	}
+
+
+	[class*="span"] {
+		float: none;
+		display: block;
+		width: 100%;
+		margin-left: 0;
+		.box-sizing(border-box);
+	}
+
+	.row {
+		margin-left: 0;
+	}
+
+	.span3 {
+		display: none;
+	}
+
+	.pic-tile-grid {
+		margin: 0;
+	}
+
+	.pic-add {
+		border: 0 none;
+	}
+
+	.pic-tile {
+		width:  33.3%;
+		height: auto;
+		margin: 0;
+		background: none;
+		img {
+			width:  100%;
+			height: auto;
+		}
+	}
+
+	.pic-tile-grid__spinner {
+		margin-top: 20px;
+	}
+
+
+	// header
+	.page-header {
+		display: none;
+	}
+
+	.page-header p {
+		display: none
+	}
+
+	
+	// Photo page
+	.photo__pic-tile {
+		height: auto;
+	}
+
+	.photo__pic-col1,
+	.photo__pic-col2 {
+		width: auto;
+		padding: 0 10px;
+	}
+
+	.photo__pic-col2 {
+		display: block;
+	}
+
+	.photo__story {
+		padding: 13px 10px;
+		font-size: 12px;
+	}
+		.photo__story-name {
+			display: block;
+		}
+
+	.photo__text-row {
+		margin-top: 5px;
+	}
+
+
+	.photo__caption {
+		margin: 0 0 20px 0;
+		font-size: 15px;
+		line-height: 1.3;
+	}
+
+
+	.photo__location {
+		margin-bottom: 20px;
+	}
+
+		.photo__location-map {
+			width: auto;
+			height: auto;
+			margin-top: 4px;
+			margin-bottom: 0;
+		}
+			.photo__location-image {
+				width: 100%;
+				height: auto;
+			}
+
+		.photo__location-name {
+			font-size: 12px;
+			margin: 0;
+		}
+
+		.photo__location-addr {
+			font-size: 12px;
+		}
+
+	// Photo likers
+	.photo-likers {
+		margin-bottom: 20px
+	}
+
+		.photo-likers__total {
+			font-size: 13px;
+			margin: 0 0 6px 0;
+		}
+
+		.photo-likers__user-cont {
+			overflow-y: scroll;
+			margin-left: -7px;
+			margin-bottom: -7px;
+		}
+
+			.photo-likers__user {
+				width: 30px;
+				height: 30px;
+				float: left;
+				margin: 0 0 7px 7px;
+
+				&:nth-child(n+9) {
+					display: none;
+				}
+			}
+
+			.i-no-avatar_50 {
+				.i-no-avatar_30;
+				vertical-align: top;
+			}
+
+	// Photo share
+	.photo-share {
+		margin-bottom: 40px;
+		font-size: 13px;
+		overflow: hidden;
+	}
+
+		.photo-share__title {
+			font-size: 13px;	
+		}
+
+			.photo-share__item {
+				margin-top: 0;
+				margin-right: 11px;
+				display: inline-block;
+				float:left;
+				&:before {
+					display: none;
+				}
+			}
+
+			.photo-share__email {
+				margin-right: 0;
+				clear: right;
+			}
+
+			.photo-share__download,
+			.photo-share__report {
+				margin-top: 20px;
+			}
+			
+	// Comments
+	.comment {
+		font-size: 12px;
+		margin-bottom: 8px;
+		min-height: 30px;
+	}
+
+		.comment__avatar {
+			width: 30px;
+			height: 30px;
+		}
+
+		.comment__content {
+			margin-left:42px;
+		}
+
+		.i-no-avatar_40 {
+			.i-no-avatar_30;
+			vertical-align: top;
+		}
+
+	.comment-pane {
+		margin-bottom: 20px;
+	}
+		.comment-pane__total {
+			margin-bottom: 7px;
+			font-size: 13px;
+		}
+
+		.comment-pane__add {
+			padding: 10px 0;
+		}
+
+			.comment-pane__add-input {
+				font-size: 13px;
+			}
+}
