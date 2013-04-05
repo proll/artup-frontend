@@ -8,7 +8,7 @@ aup.Router = Backbone.Router.extend({
 		"explore/:category/:story/:sort/:filter/": "explore",
 		"photofeed": "photofeed",
 		"photofeed/": "photofeed",
-		"photo/:photo/": "photo",
+		"artwork/:artwork/": "artwork",
 		"*default": "default"
 	},
 
@@ -21,8 +21,8 @@ aup.Router = Backbone.Router.extend({
 		// console.log("hello photofeed");
 	},
 
-	photo: function () {
-		// console.log("hello photo");
+	artwork: function () {
+		// console.log("hello artwork");
 	},
 
 	logout:function(){
