@@ -1,4 +1,4 @@
-whp.ExploreMenuView = Backbone.View.extend({
+aup.ExploreMenuView = Backbone.View.extend({
 	template: "blocks/explore-menu",
 	tagName: "div",
 	className: "explore-menu",
@@ -6,11 +6,11 @@ whp.ExploreMenuView = Backbone.View.extend({
 	locationSortAvailable: false,
 
 	initialize: function(){
-		this.template = whp.Templates.get(this.template);
+		this.template = aup.Templates.get(this.template);
 		this.render();
 		this.model.on("change", this.render, this);
 
-		whp.on("geo_position:ready", this.showLocationFilter, this);
+		aup.on("geo_position:ready", this.showLocationFilter, this);
 	},
 	render: function(){
 		// if(!this.rendered) {
@@ -35,7 +35,7 @@ whp.ExploreMenuView = Backbone.View.extend({
 
 		// }
 
-		if(!!whp.user.settings.get("geo_position")) {
+		if(!!aup.user.settings.get("geo_position")) {
 			this.showLocationFilter();
 		}
 	},

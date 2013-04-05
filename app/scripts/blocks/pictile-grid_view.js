@@ -1,4 +1,4 @@
-whp.PicTileGridView = Backbone.View.extend({
+aup.PicTileGridView = Backbone.View.extend({
 	tagName: "div",
 	className: "pic-tile-grid",
 	template: "blocks/pictile-grid",
@@ -21,7 +21,7 @@ whp.PicTileGridView = Backbone.View.extend({
 	},
 
 	render: function(){
-		var template = whp.Templates.get(this.template);
+		var template = aup.Templates.get(this.template);
 		this.$el.html(template(this.model.toJSON()));
 	},
 

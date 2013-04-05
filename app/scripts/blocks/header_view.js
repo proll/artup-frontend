@@ -1,9 +1,9 @@
-whp.HeaderView = Backbone.View.extend({
+aup.HeaderView = Backbone.View.extend({
 	template: "blocks/header",
 	el: ".page-header",
 
 	initialize: function(){
-		this.template = whp.Templates.get(this.template);
+		this.template = aup.Templates.get(this.template);
 		this.render();
 		this.model.on("change:currentItem", this.render, this);
 	},

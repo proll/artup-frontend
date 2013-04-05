@@ -1,4 +1,4 @@
-WHP.l10n.pages.landing = {
+aup.l10n.pages.landing = {
     "promo-text-1": {
         selector: "#promo-text-1-top, #promo-text-1-top-red, #promo-text-1-bottom",
         en: "Hundreds of new ideas",

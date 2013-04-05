@@ -1,9 +1,9 @@
-WHP.opengraph = {
+aup.opengraph = {
     makeLikeAction : function(_photoId)
     {
-        if (!WHP.settings.useOpenGraph)
+        if (!aup.settings.useOpenGraph)
             return false;
-        //FB.api('/me/weheartpics:like', 'post', { photo : WHP.links.getPhotoLink(_photoId)}, function(response) {
+        //FB.api('/me/weheartpics:like', 'post', { photo : aup.links.getPhotoLink(_photoId)}, function(response) {
         FB.api('/me/weheartpics:like', 'post', { photo : "http://weheartpics.com/photo/"+_photoId+"/"}, function(response) {
             log(response);
         });
@@ -12,9 +12,9 @@ WHP.opengraph = {
 
     makeFolowAction : function(_userId)
     {
-        if (!WHP.settings.useOpenGraph)
+        if (!aup.settings.useOpenGraph)
             return false;
-        //FB.api('/me/weheartpics:follow', 'post', { user : WHP.links.getUserProfileLink(_userId) }, function(response) {
+        //FB.api('/me/weheartpics:follow', 'post', { user : aup.links.getUserProfileLink(_userId) }, function(response) {
         setTimeout(bind(function(){
         FB.api('/me/weheartpics:follow', 'post', { user : "http://weheartpics.com/user/"+_userId+"/" }, function(response) {
             log(response);
@@ -24,9 +24,9 @@ WHP.opengraph = {
 
     makeCommentAction : function(_photoId)
     {
-        if (!WHP.settings.useOpenGraph)
+        if (!aup.settings.useOpenGraph)
             return false;
-        //FB.api('/me/weheartpics:follow', 'post', { user : WHP.links.getUserProfileLink(_userId) }, function(response) {
+        //FB.api('/me/weheartpics:follow', 'post', { user : aup.links.getUserProfileLink(_userId) }, function(response) {
         setTimeout(bind(function(){
             FB.api('/me/weheartpics:comment', 'post', { photo : "http://weheartpics.com/photo/"+_photoId+"/" }, function(response) {
                 log(response);

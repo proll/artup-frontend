@@ -1,4 +1,4 @@
-whp.CommentView = Backbone.View.extend({
+aup.CommentView = Backbone.View.extend({
 	template: "blocks/comment",
 	tagName: "div",
 	className: "comment",
@@ -6,7 +6,7 @@ whp.CommentView = Backbone.View.extend({
 	image: null,
 
 	initialize: function(options){
-		this.template = whp.Templates.get(this.template);
+		this.template = aup.Templates.get(this.template);
 		this.render();
 	},
 

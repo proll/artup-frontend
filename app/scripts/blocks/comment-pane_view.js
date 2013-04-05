@@ -1,4 +1,4 @@
-whp.CommentPaneView = Backbone.View.extend({
+aup.CommentPaneView = Backbone.View.extend({
 	tagName: 'div',
 	className: 'comment-pane',
 	template: 'blocks/comment-pane',
@@ -21,7 +21,7 @@ whp.CommentPaneView = Backbone.View.extend({
 	},
 
 	render: function(){
-		var template = whp.Templates.get(this.template);
+		var template = aup.Templates.get(this.template);
 		this.$el.html(template(this.model.toJSON()));
 
 		this.$cont = 	this.$el.find('.comment-pane__container');

@@ -1,4 +1,4 @@
-whp.FB = Backbone.Model.extend({
+aup.FB = Backbone.Model.extend({
 	url : "/api/auth/",
 	app_id: "205868409437437",
 	inited : false,
@@ -20,9 +20,9 @@ whp.FB = Backbone.Model.extend({
 			}
 			FB.getLoginStatus(_.bind(function (response) {
 				if (response.status == "connected"){
-					whp.log("Facebook : user was succesfully connected! :)");
+					aup.log("Facebook : user was succesfully connected! :)");
 				}else{
-					whp.log("Facebook : user was not connected! :(");
+					aup.log("Facebook : user was not connected! :(");
 				}
 			}, this));
 
@@ -69,10 +69,10 @@ whp.FB = Backbone.Model.extend({
 		{
 			if (resp.error.code == "API_AuthFailed") {
 				this.trigger("error", {description:"This account isn't linked with WeHeartPics"})
-				// WHP.auth.showRegStep1Error("This account isn't linked with WeHeartPics");
+				// aup.auth.showRegStep1Error("This account isn't linked with WeHeartPics");
 			} else {
 				this.trigger("error", {description:"Something went wrong"});
-				// WHP.auth.showRegStep1Error("Something went wrong");
+				// aup.auth.showRegStep1Error("Something went wrong");
 
 			}
 		}else{
@@ -82,20 +82,20 @@ whp.FB = Backbone.Model.extend({
 					user: resp.user, 
 					session:{ token: resp.user.token, uid: resp.user.id }
 				});
-			// WHP.pages.settings.onData(resp);
-			// WHP.auth.setUser(resp.user);
-			// WHP.auth.setSession({ token: resp.user.token, id: resp.user.id , uid: resp.user.id });
-			// WHP.controller.onChangeAuthState(true);
-			// WHP.auth.onStartWork(resp);
+			// aup.pages.settings.onData(resp);
+			// aup.auth.setUser(resp.user);
+			// aup.auth.setSession({ token: resp.user.token, id: resp.user.id , uid: resp.user.id });
+			// aup.controller.onChangeAuthState(true);
+			// aup.auth.onStartWork(resp);
 		}
 
-		// WHP.controller.setTitle();
+		// aup.controller.setTitle();
 	},
 
 	error: function(e) {
-		whp.log("WHP/auth/FB : error while logging in!");
+		aup.log("aup/auth/FB : error while logging in!");
 		// TODO слушать ошибку выше
-		this.trigger("error", {description:"WHP/auth/FB : error while logging in!"})
+		this.trigger("error", {description:"aup/auth/FB : error while logging in!"})
 	},
 
 	
@@ -118,33 +118,33 @@ whp.FB = Backbone.Model.extend({
 	},
 
 	fbShareEvents : function(e){
-		whp.log("CreateEdge");
+		aup.log("CreateEdge");
 		// TODO:надо слушать это событие гдето
 		this.trigger("fb:like", e);
 
 		// OLD
-		// if (WHP.shares.onFbLike(e))
+		// if (aup.shares.onFbLike(e))
 		// 	return false;
 
-		// if (WHP.controller.curPage.onFBlike)
+		// if (aup.controller.curPage.onFBlike)
 		// {
-		// 	WHP.controller.curPage.onFBlike(e);
+		// 	aup.controller.curPage.onFBlike(e);
 		// }
 	},
 
 	onFBData: function(response){
-		// WHP.pages.getstarted.hidePopup();
+		// aup.pages.getstarted.hidePopup();
 		if (response.status == "connected"){
-			whp.log("Facebook : user was succesfully connected! :)");
+			aup.log("Facebook : user was succesfully connected! :)");
 			var token = response.authResponse.accessToken;
 			if (this.access_token!=token){
-				whp.log("Facebook : token = ["+token+"]");
+				aup.log("Facebook : token = ["+token+"]");
 				this.access_token = token;
 				this.fetch();
 			}else{
-				whp.log("Facebook : user was not connected! :(");
+				aup.log("Facebook : user was not connected! :(");
 			}
 		}
-		// WHP.controller.setTitle();
+		// aup.controller.setTitle();
 	},
 })

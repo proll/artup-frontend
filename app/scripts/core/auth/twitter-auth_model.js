@@ -1,4 +1,4 @@
-whp.TW = Backbone.Model.extend({
+aup.TW = Backbone.Model.extend({
 	url_token: 	"/api/auth/twitter/request_token/",
 	url: 		"/api/auth/",
 
@@ -20,7 +20,7 @@ whp.TW = Backbone.Model.extend({
 	},
 
 	login : function (){
-		whp.log("login tw >");
+		aup.log("login tw >");
 		this.req_count = 0;
 		this.curWind = _.openWindow2("Twitter auth", 640, 480);
 		this.fetchToken();
@@ -52,9 +52,9 @@ whp.TW = Backbone.Model.extend({
 		this.req_count++;
 
 		if (resp.error){
-			this.trigger("error", {description: "WHP/auth/TW : got error while getting twitter token = ["+resp.error.code+"]"})
+			this.trigger("error", {description: "aup/auth/TW : got error while getting twitter token = ["+resp.error.code+"]"})
 		}else{
-			whp.log("WHP/auth/TW : get twitter request token = ["+resp.oauth_token+"]");
+			aup.log("aup/auth/TW : get twitter request token = ["+resp.oauth_token+"]");
 			this.req_count = 0;
 			if ( this.curWind )
 				this.curWind.location.href = "http://api.twitter.com/oauth/authorize?oauth_token="+resp.oauth_token;
@@ -63,14 +63,14 @@ whp.TW = Backbone.Model.extend({
 
 	errorToken: function(response, status, xhr){
 		this.req_count++;
-		this.trigger("error", {description:"WHP/auth/TW : error while logging in!"})
+		this.trigger("error", {description:"aup/auth/TW : error while logging in!"})
 
 		var status = response.status;
 		console.log(response);
 		if (status == 0){
-			this.trigger("error", {description:"WHP/auth/TW : OFFLINE mode!"})
+			this.trigger("error", {description:"aup/auth/TW : OFFLINE mode!"})
 		}else{
-			this.trigger("error", {description:"WHP/auth/TW : error while getting twitter request token! Status = ["+status+"] Tries = ["+this.req_count+"]"})
+			this.trigger("error", {description:"aup/auth/TW : error while getting twitter request token! Status = ["+status+"] Tries = ["+this.req_count+"]"})
 		}
 		this.fetchToken();
 	},
@@ -78,8 +78,8 @@ whp.TW = Backbone.Model.extend({
 
 	fetch: function(user_obj){
 
-		whp.log("GET TW AUTH = ["+user_obj.uid+" : "+user_obj.token+" : "+user_obj.secret+"]");
-		whp.log("WHP/auth/TW : get auth...");
+		aup.log("GET TW AUTH = ["+user_obj.uid+" : "+user_obj.token+" : "+user_obj.secret+"]");
+		aup.log("aup/auth/TW : get auth...");
 
 		var that = this;
 		$.ajax({
@@ -120,6 +120,6 @@ whp.TW = Backbone.Model.extend({
 	},
 
 	error: function(e){
-		this.trigger("error", {description:"WHP/auth/TW : error while logging in!"})
+		this.trigger("error", {description:"aup/auth/TW : error while logging in!"})
 	}
 });

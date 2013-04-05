@@ -1,4 +1,4 @@
-whp.Post = Backbone.Model.extend({
+aup.Post = Backbone.Model.extend({
 	defaults: {
 		type: "PHOTO",
 		group: 4334856,
@@ -37,7 +37,7 @@ whp.Post = Backbone.Model.extend({
 		timestamp: 1363775315
 	},
 	initialize: function (options) {
-		this.view = new whp.PostView({model:this});
+		this.view = new aup.PostView({model:this});
 		this.view.on("post:loaderror", this.remove, this);
 	},
 	fetch: function () {

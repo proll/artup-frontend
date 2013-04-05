@@ -1,9 +1,9 @@
-whp.VK = Backbone.Model.extend({
+aup.VK = Backbone.Model.extend({
 	url: "/api/auth/",
 	inited : false,
 	wind: null,
 	app_id: 3154513,
-	redirect_url: whp.root + "/go/close_vk.html",
+	redirect_url: aup.root + "/go/close_vk.html",
 
 	initialize: function (){},
 
@@ -35,7 +35,7 @@ whp.VK = Backbone.Model.extend({
 		// .timeout(function (e) {
 		// 	// TODO: сделать чтото при timeout
 		// 	// OLD
-		// 	// WHP.netTimeOut(e);
+		// 	// aup.netTimeOut(e);
 		// });
 	},
 	success:function (response, status, xhr){
@@ -57,7 +57,7 @@ whp.VK = Backbone.Model.extend({
 		}
 	},
 	error: function(e){
-		whp.log("WHP/auth/VK : error while logging in!");
+		aup.log("aup/auth/VK : error while logging in!");
 		this.trigger("error", {description:"Something went wrong"})
 	},
 });

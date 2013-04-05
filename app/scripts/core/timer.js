@@ -1,4 +1,4 @@
-whp.Timer = function (_delay, _count) { return {
+aup.Timer = function (_delay, _count) { return {
 	timerId : -1,
 	currentCount : 0,
 	repeatCount : Math.max(0,_count),

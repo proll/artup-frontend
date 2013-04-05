@@ -1,4 +1,4 @@
-WHP.l10n.pages.common = {
+aup.l10n.pages.common = {
     "l10n_yes": {
         selector: ".l10n_yes",
         en: "Yes",

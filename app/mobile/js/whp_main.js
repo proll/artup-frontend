@@ -1,4 +1,4 @@
-WHP = {
+aup = {
 	inited : false,
 
 
@@ -55,23 +55,23 @@ WHP = {
 		var $body = $("body");
 
 		if(this.language=="ru") {
-			$body.toggleClass("whp-ru");
+			$body.toggleClass("aup-ru");
 		} else if (this.language=="ko"){
-			$body.toggleClass("whp-ko");
+			$body.toggleClass("aup-ko");
 		} else {
-			$body.toggleClass("whp-en");
+			$body.toggleClass("aup-en");
 		}
 
 		if(browser.iphone) {
-			$body.toggleClass("whp-iphone", true);
+			$body.toggleClass("aup-iphone", true);
 			if(browser.iosversion >= 6 && browser.safari && !browser.mchrome && !browser.opera && !browser.firefox) {
-				$body.toggleClass("whp-iphone-6", true);
+				$body.toggleClass("aup-iphone-6", true);
 			}
 		} else if (browser.android) {
-			$body.toggleClass("whp-android", true);
+			$body.toggleClass("aup-android", true);
 
 		} else if(browser.wmobile || browser.symbian){
-			$body.toggleClass("whp-other", true);
+			$body.toggleClass("aup-other", true);
 		}
 
 		$(".app-bar-close").click(function (e) {
@@ -112,7 +112,7 @@ WHP = {
 		window.addEventListener("orientationchange", bind(this.changeSize, this));
 		window.addEventListener("resize", bind(this.changeSize, this));
 
-		if (params[0].toLowerCase() == "whp")
+		if (params[0].toLowerCase() == "aup")
 		{
 			if (params[1] == "signup_confirmed")
 			{
@@ -435,7 +435,7 @@ WHP = {
 		$.ajax({
 			url: "http://"+this.domain+"/api/photo/comments/",
 			data : { r : Math.random(), photo : _id },
-			timeout : WHP.netTimeOut,
+			timeout : aup.netTimeOut,
 			success: bind(this.commentsLoaded, this),
 			error: bind(this.onError, this)
 		});
@@ -548,7 +548,7 @@ WHP = {
 		$.ajax({
 			url: "http://"+this.domain+"/api/promo/",
 			data : { r : Math.random(), email :  mailStr},
-			timeout:WHP.netTimeOut,
+			timeout:aup.netTimeOut,
 			success:bind(this.mailResp, this),
 			error:bind(this.errorMail, this)
 		});

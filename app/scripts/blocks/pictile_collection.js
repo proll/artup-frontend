@@ -1,6 +1,6 @@
-whp.PicTileCollection = Backbone.Collection.extend({
+aup.PicTileCollection = Backbone.Collection.extend({
 	url: "/api/photos/",
-	model: whp.PicTile,
+	model: aup.PicTile,
 	more: true,
 
 	// 

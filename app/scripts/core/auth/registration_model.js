@@ -1,4 +1,4 @@
-whp.Registration = Backbone.Model.extend({
+aup.Registration = Backbone.Model.extend({
 	url: 		"/api/auth/signup/",
 
 	initialize: function (){},
@@ -54,7 +54,7 @@ whp.Registration = Backbone.Model.extend({
 		} else {
 			this.trigger("error", {description:"Something went wrong"});
 		}
-		// WHP.controller.setTitle();
+		// aup.controller.setTitle();
 	},
 
 	error : function(e) {

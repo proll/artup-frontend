@@ -1,4 +1,4 @@
-WHP.pages.timeline = {
+aup.pages.timeline = {
 	//controller parametres
 	urlStr : "timeline",
 	title : "Timeline",
@@ -14,37 +14,37 @@ WHP.pages.timeline = {
 	init: function ()
 	{
 		this.mainObject = id$('timeline');
-		this.timelineObject = new whp_timeline_proto();
+		this.timelineObject = new aup_timeline_proto();
         var t = this.timelineObject;
 		
 		var tl_cont = $(this.mainObject).find(".timeline_box");
-		t.controlUrl = WHP.netcalls.timelineGlobalCallUrl;
+		t.controlUrl = aup.netcalls.timelineGlobalCallUrl;
 		t.prefix = this.urlStr;
 		t.showEvents = true;
 		t.controlCanvas = true;
-		t.userObject = WHP.auth.userObject;
+		t.userObject = aup.auth.userObject;
         t.parent = this;
         t.usePosRecalAfterRebuild = true;
         t.showEmpty = true;
 		t.init(tl_cont);
         this.resetRestore();
 
-//        WHP.l10n.localize_page("timeline");
+//        aup.l10n.localize_page("timeline");
 //
-//        $("#l10n_" + WHP.l10n.locale).addClass("active");
+//        $("#l10n_" + aup.l10n.locale).addClass("active");
 //
 //        $("#l10n_ru").click(function() {
 //            $(".main-header-l10n span").removeClass("active");
 //            $(this).addClass("active");
-//            WHP.l10n.locale = "ru";
-//            WHP.l10n.localize_page("timeline");
+//            aup.l10n.locale = "ru";
+//            aup.l10n.localize_page("timeline");
 //        });
 //
 //        $("#l10n_en").click(function() {
 //            $(".main-header-l10n span").removeClass("active");
 //            $(this).addClass("active");
-//            WHP.l10n.locale = "en";
-//            WHP.l10n.localize_page("timeline");
+//            aup.l10n.locale = "en";
+//            aup.l10n.localize_page("timeline");
 //        });
 	},
 
@@ -53,7 +53,7 @@ WHP.pages.timeline = {
         if (this.restoreParams.setScroll)
         {
             window.scrollTo(0,this.restoreParams.scrollpos);
-            WHP.menu.setShadow(this.restoreParams.scrollpos);
+            aup.menu.setShadow(this.restoreParams.scrollpos);
             this.restoreParams.setScroll = false;
         }
     },
@@ -69,12 +69,12 @@ WHP.pages.timeline = {
 	//std for each module control functions
     restore: function (e)
     {
-        WHP.controller.showCanvas();
+        aup.controller.showCanvas();
 
-        if (WHP.controller.removedList.length>0)
+        if (aup.controller.removedList.length>0)
         {
             log("REbuild");
-            this.timelineObject.rebuildTimeline(WHP.controller.removedList, this.restoreParams);
+            this.timelineObject.rebuildTimeline(aup.controller.removedList, this.restoreParams);
         }else{
             log("restore = ["+this.restoreParams.scrollpos+"]");
             this.restoreParams.setScroll = true;
@@ -94,9 +94,9 @@ WHP.pages.timeline = {
 
 	show: function (_q)
 	{
-        if (!WHP.auth.status)
+        if (!aup.auth.status)
         {
-            WHP.controller.navigateTo("popular/");
+            aup.controller.navigateTo("popular/");
             return false;
         }
 

@@ -1,4 +1,4 @@
-whp.PhotoView = Backbone.View.extend({
+aup.PhotoView = Backbone.View.extend({
 	template: "blocks/photo",
 	tagName: "div",
 	className: "photo-row",
@@ -14,7 +14,7 @@ whp.PhotoView = Backbone.View.extend({
 		if(!!options.template) {
 			this.template = options.template;
 		}
-		this.template = whp.Templates.get(this.template);
+		this.template = aup.Templates.get(this.template);
 		this.model.on("load:success", this.render, this);
 		this.model.on("change:sleeped", this.reset, this);
 		this.model.on("update:vote", this.updateVote, this);

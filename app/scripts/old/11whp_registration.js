@@ -1,4 +1,4 @@
-WHP.pages.getstarted = {
+aup.pages.getstarted = {
 	//controller parametres
 	urlStr : "getstarted",
 	title : "Get started",
@@ -30,8 +30,8 @@ WHP.pages.getstarted = {
         this.pw_input = $("#register-password");
 
         var self = this;
-        $("#auth-popup input").click(function() { WHP.auth.hideAllErrors(); $("#auth-popup input").removeClass("input_error"); });
-        $("#auth-popup input").keypress(function() { WHP.auth.hideAllErrors(); $("#auth-popup input").removeClass("input_error"); });
+        $("#auth-popup input").click(function() { aup.auth.hideAllErrors(); $("#auth-popup input").removeClass("input_error"); });
+        $("#auth-popup input").keypress(function() { aup.auth.hideAllErrors(); $("#auth-popup input").removeClass("input_error"); });
         $("#auth-popup_register_ok").click(bind(this.formProceed, this));
         $("#auth-popup_close").click(this.hidePopup);
 
@@ -72,13 +72,13 @@ WHP.pages.getstarted = {
             $('#auth-popup_login-email').fadeOut();
         });
         $("#login-via-fb").click(function(event) {
-            WHP.auth.FB.login(event);
+            aup.auth.FB.login(event);
         });
         $("#login-via-tw").click(function(event) {
-            WHP.auth.TW.login(event);
+            aup.auth.TW.login(event);
         });
         $("#login-via-vk").click(function(event) {
-            WHP.auth.VK.login(event);
+            aup.auth.VK.login(event);
         });
 
 
@@ -102,7 +102,7 @@ WHP.pages.getstarted = {
         var password = this.pw_input.val();
         if (!validateEmail(email))
         {
-            WHP.auth.showRegStep1Error("Doesn't look like a valid email");
+            aup.auth.showRegStep1Error("Doesn't look like a valid email");
             this.mail_input.focus();
             this.mail_input.addClass("input_error");
             return false;
@@ -110,7 +110,7 @@ WHP.pages.getstarted = {
 
         if (password.length<6)
         {
-            WHP.auth.showRegStep1Error("Please use at least 6 characters");
+            aup.auth.showRegStep1Error("Please use at least 6 characters");
             this.pw_input.focus();
             this.pw_input.addClass("input_error");
             return false;
@@ -118,7 +118,7 @@ WHP.pages.getstarted = {
 
         if  (password.length>16)
         {
-            WHP.auth.showRegStep1Error("You can't use more than 16 characters");
+            aup.auth.showRegStep1Error("You can't use more than 16 characters");
             this.pw_input.focus();
             this.pw_input.addClass("input_error");
             return false;
@@ -130,7 +130,7 @@ WHP.pages.getstarted = {
     showPopup: function() {
         log("Show auth popup");
         $("#auth-popup").fadeIn();
-        WHP.contentCont.fadeOut();
+        aup.contentCont.fadeOut();
     },
 
     hidePopup: function() {
@@ -138,7 +138,7 @@ WHP.pages.getstarted = {
         $("#auth-popup").hide();
         $("#auth-popup_login-email").hide();
         $("#auth-popup_register-names").hide();
-        WHP.contentCont.show();
+        aup.contentCont.show();
 
         setTimeout(function() {
             $("#login-email").val("");
@@ -147,7 +147,7 @@ WHP.pages.getstarted = {
             $("#register-password").val("");
             $("#register-last_name").val("");
             $("#register-first_name").val("");
-            WHP.auth.hideAllErrors();
+            aup.auth.hideAllErrors();
         }, 1000);
     },
 	
@@ -156,7 +156,7 @@ WHP.pages.getstarted = {
 	{
         this.active = true;
         this.reset();
-        WHP.controller.showCanvas();
+        aup.controller.showCanvas();
 	},
 
 	hide: function ()
@@ -182,7 +182,7 @@ WHP.pages.getstarted = {
 
         if (!validateEmail(email))
         {
-            WHP.auth.showRegStep1Error("Doesn't look like a valid e-mail");
+            aup.auth.showRegStep1Error("Doesn't look like a valid e-mail");
             this.mail_input.focus();
             this.mail_input.addClass("input_error");
             return false;
@@ -191,7 +191,7 @@ WHP.pages.getstarted = {
 
         if (password.length<6)
         {
-            WHP.auth.showRegStep1Error("Please use at least 6 characters");
+            aup.auth.showRegStep1Error("Please use at least 6 characters");
             this.pw_input.focus();
             this.pw_input.addClass("input_error");
             return false;
@@ -199,20 +199,20 @@ WHP.pages.getstarted = {
 
         if  (password.length>16)
         {
-            WHP.auth.showRegStep1Error("You can't use more than 16 characters");
+            aup.auth.showRegStep1Error("You can't use more than 16 characters");
             this.pw_input.focus();
             this.pw_input.addClass("input_error");
             return false;
         }
 
         if (!first_name) {
-            WHP.auth.showRegStep2Error("Enter your first name");
+            aup.auth.showRegStep2Error("Enter your first name");
             $("#register-first_name").addClass("input_error");
             return false;
         }
 
         if (!last_name) {
-            WHP.auth.showRegStep2Error("Enter your last name");
+            aup.auth.showRegStep2Error("Enter your last name");
             $("#register-last_name").addClass("input_error");
             return false;
         }
@@ -220,9 +220,9 @@ WHP.pages.getstarted = {
         //pew set resend params
         if (!true)
         {
-            WHP.pages.confirmation.resendMail = email;
-            WHP.pages.confirmation.resendPw = password;
-            WHP.controller.navigateTo("confirmation");
+            aup.pages.confirmation.resendMail = email;
+            aup.pages.confirmation.resendPw = password;
+            aup.controller.navigateTo("confirmation");
             return false;
         }
 
@@ -230,9 +230,9 @@ WHP.pages.getstarted = {
         $("#register-last_name").blur();
 
         $.ajax({
-            url:WHP.netcalls.regCall,
+            url:aup.netcalls.regCall,
             data : { r : Math.random(), login :  email, passw : password, first_name: first_name, last_name: last_name },
-            timeout:WHP.netTimeOut,
+            timeout:aup.netTimeOut,
             method : "POST",
             success:bind(this.onRegOk, this),
             error:bind(this.onRegFail, this)
@@ -257,22 +257,22 @@ WHP.pages.getstarted = {
             {
                 if (resp.error.code == "API_AlreadyInUse")
                 {
-                    WHP.auth.showRegStep1Error("This email already registered");
+                    aup.auth.showRegStep1Error("This email already registered");
                     this.mail_input.focus();
                     this.mail_input.addClass("input_error");
                     return false;
                 }
                 if (resp.error.code == "API_BadParams") {
-                    WHP.auth.showRegStep2Error("Enter your first and last name");
+                    aup.auth.showRegStep2Error("Enter your first and last name");
                     return false;
                 }
-                WHP.auth.showRegStep2Error("Something went wrong");
+                aup.auth.showRegStep2Error("Something went wrong");
                 this.mail_input.focus();
                 return false;
             }
         }
 
-        WHP.pages.getstarted.hidePopup();
+        aup.pages.getstarted.hidePopup();
 
         //check pending
         var pending = resp.state == "PENDING_CONFIRMATION";
@@ -283,22 +283,22 @@ WHP.pages.getstarted = {
         pending = pending || errorPending;
         if (pending)
         {
-            WHP.pages.confirmation.resendMail = this.mail_input.val();
-            WHP.pages.confirmation.resendPw = this.pw_input.val();
-            WHP.controller.navigateTo("confirmation");
+            aup.pages.confirmation.resendMail = this.mail_input.val();
+            aup.pages.confirmation.resendPw = this.pw_input.val();
+            aup.controller.navigateTo("confirmation");
             return false;
         }
 
         //
         log("Normal reg");
-        WHP.auth.STD.onData(resp, true);
-        WHP.pages.getstarted.hidePopup();
-        WHP.controller.navigateTo("findfriends");
+        aup.auth.STD.onData(resp, true);
+        aup.pages.getstarted.hidePopup();
+        aup.controller.navigateTo("findfriends");
     },
 
     onRegFail : function(e)
     {
-        WHP.auth.showRegStep2Error("Something went wrong");
+        aup.auth.showRegStep2Error("Something went wrong");
         //404???
     },
 
@@ -317,13 +317,13 @@ WHP.pages.getstarted = {
             return false;
 
         if (_auth)
-            WHP.controller.navigateTo(WHP.controller.getMainPage().urlStr);
+            aup.controller.navigateTo(aup.controller.getMainPage().urlStr);
 	}
 };
 
 
 
-WHP.pages.confirmation = {
+aup.pages.confirmation = {
     //controller parametres
     urlStr : "confirmation",
     title : "Confirmation",
@@ -370,9 +370,9 @@ WHP.pages.confirmation = {
 
         log("resend with =["+this.resendMail+"] ["+this.resendPw+"]");
         $.ajax({
-            url:WHP.netcalls.resendCall,
+            url:aup.netcalls.resendCall,
             data : { r : Math.random(), login :  this.resendMail, passw : this.resendPw },
-            timeout:WHP.netTimeOut,
+            timeout:aup.netTimeOut,
             method : "POST",
             success:bind(this.resendOk, this),
             error:bind(this.resendFail, this)
@@ -384,7 +384,7 @@ WHP.pages.confirmation = {
         var resp = getObjectJson(response);
         if (resp.error)
         {
-            log("WHP/registration : error while loading page data! Err =["+response+"]");
+            log("aup/registration : error while loading page data! Err =["+response+"]");
             if (resp.error.code == "API_Rejected")
             {
                 this.showErrMsg("Too many tries");
@@ -419,13 +419,13 @@ WHP.pages.confirmation = {
 
     show: function (_q)
     {
-        if ((WHP.auth.status) || (this.resendMail.length ==0) || (this.resendPw.length == 0))
+        if ((aup.auth.status) || (this.resendMail.length ==0) || (this.resendPw.length == 0))
         {
-            WHP.controller.showErrorPage();
+            aup.controller.showErrorPage();
         }
 
         log("1Show find friends");
-        WHP.controller.showCanvas();
+        aup.controller.showCanvas();
         log("2Show find friends");
         log("Resend to = ["+this.resendMail+"]");
         this.resendCount = 0;
@@ -439,7 +439,7 @@ WHP.pages.confirmation = {
     onAuthChange: function (_auth)
     {
         if (_auth)
-            WHP.controller.navigateTo("/timeline");
+            aup.controller.navigateTo("/timeline");
     }
 }
 
@@ -447,7 +447,7 @@ WHP.pages.confirmation = {
 
 
 
-WHP.pages.findfriends = {
+aup.pages.findfriends = {
     //controller parametres
     urlStr : "findfriends",
     title : "Connect with friends",
@@ -481,7 +481,7 @@ WHP.pages.findfriends = {
 
         var btnNext = $(this.mainObject).find(".form_confirm_button");
         btnNext.click(bind(function(){
-            WHP.controller.navigateTo(WHP.controller.getMainPage().urlStr);
+            aup.controller.navigateTo(aup.controller.getMainPage().urlStr);
         }, this));
 
 
@@ -498,9 +498,9 @@ WHP.pages.findfriends = {
         if (this.twLinked)
             return false;
 
-        WHP.pages.settings.linker.TW.showErrMsg = bind(this.showErrMsg,this);
-        WHP.pages.settings.linker.TW.onLink = bind(this.linkTwCallback,this);
-        WHP.pages.settings.linker.TW.linkTw();
+        aup.pages.settings.linker.TW.showErrMsg = bind(this.showErrMsg,this);
+        aup.pages.settings.linker.TW.onLink = bind(this.linkTwCallback,this);
+        aup.pages.settings.linker.TW.linkTw();
     },
 
     linkTwCallback : function(e)
@@ -519,9 +519,9 @@ WHP.pages.findfriends = {
             return false;
 
         //set up callbacks
-        WHP.pages.settings.linker.FB.showErrMsg = bind(this.showErrMsg,this);
-        WHP.pages.settings.linker.FB.onLink = bind(this.linkFbCallback,this);
-        WHP.pages.settings.linker.FB.linkFb();
+        aup.pages.settings.linker.FB.showErrMsg = bind(this.showErrMsg,this);
+        aup.pages.settings.linker.FB.onLink = bind(this.linkFbCallback,this);
+        aup.pages.settings.linker.FB.linkFb();
     },
 
     linkFbCallback : function(e)
@@ -548,28 +548,28 @@ WHP.pages.findfriends = {
     //std for each module control functions
     show: function (_q)
     {
-        if (!WHP.auth.status)
+        if (!aup.auth.status)
         {
-            WHP.controller.showErrorPage();
+            aup.controller.showErrorPage();
         }
 
         log("1Show find friends");
-        WHP.controller.showCanvas();
+        aup.controller.showCanvas();
         log("2Show find friends");
 
         log("SETTINGS SHOW FINDFRIENDS");
-        log(WHP.settings+" "+typeof(WHP.settings.social));
-        log(WHP.settings+" "+(WHP.settings.social !== null)+" "+(WHP.settings.social != null)+" "+WHP.settings.social);
+        log(aup.settings+" "+typeof(aup.settings.social));
+        log(aup.settings+" "+(aup.settings.social !== null)+" "+(aup.settings.social != null)+" "+aup.settings.social);
 
-        if (WHP.settings.social)
+        if (aup.settings.social)
         {
-            log(typeof(WHP.settings.social.twitter));
-            if (WHP.settings.social.twitter)
+            log(typeof(aup.settings.social.twitter));
+            if (aup.settings.social.twitter)
             {
                 log("LINK TW");
                 this.linkTwCallback();
             }
-            if (WHP.settings.social.facebook)
+            if (aup.settings.social.facebook)
             {
                 log("LINK FB");
                 this.linkFbCallback();
@@ -591,7 +591,7 @@ WHP.pages.findfriends = {
 
 
 
-WHP.pages.setpassword = {
+aup.pages.setpassword = {
     //controller parametres
     urlStr : "setpassword",
     title : "Set new password",
@@ -662,9 +662,9 @@ WHP.pages.setpassword = {
 
 
         $.ajax({
-            url:WHP.netcalls.setPwCall,
+            url:aup.netcalls.setPwCall,
             data : { r : Math.random(), passw : email, code : this.code },
-            timeout:WHP.netTimeOut,
+            timeout:aup.netTimeOut,
             success:bind(this.resendOk, this),
             error:bind(this.resendFail, this)
         });
@@ -675,7 +675,7 @@ WHP.pages.setpassword = {
         var resp = getObjectJson(response);
         if (resp.error)
         {
-            WHP.controller.showErrorPage();
+            aup.controller.showErrorPage();
             return false;
         }
 
@@ -694,12 +694,12 @@ WHP.pages.setpassword = {
     show: function (_q)
     {
         log("1Show find friends");
-        WHP.controller.showCanvas();
+        aup.controller.showCanvas();
         log("2Show find friends");
         this.reset();
 
         if (this.code == "")
-            WHP.controller.navigateTo(WHP.controller.getMainPage().urlStr);
+            aup.controller.navigateTo(aup.controller.getMainPage().urlStr);
     },
 
 
@@ -748,7 +748,7 @@ WHP.pages.setpassword = {
 
 
 
-WHP.pages.resendpw = {
+aup.pages.resendpw = {
     //controller parametres
     urlStr : "reset",
     title : "Reset password",
@@ -798,9 +798,9 @@ WHP.pages.resendpw = {
         log("RESET!");
 
         $.ajax({
-            url:WHP.netcalls.resetPwCall,
+            url:aup.netcalls.resetPwCall,
             data : { r : Math.random(), login :  email },
-            timeout:WHP.netTimeOut,
+            timeout:aup.netTimeOut,
             success:bind(this.resendOk, this),
             error:bind(this.resendFail, this)
         });
@@ -816,7 +816,7 @@ WHP.pages.resendpw = {
                 this.showErrMsg("No user with this e-mail");
                 this.mail_input.focus();
             }else{
-                WHP.controller.showErrorPage();
+                aup.controller.showErrorPage();
             }
             return false;
         }
@@ -835,7 +835,7 @@ WHP.pages.resendpw = {
     show: function (_q)
     {
         log("1Show find friends");
-        WHP.controller.showCanvas();
+        aup.controller.showCanvas();
         log("2Show find friends");
         this.reset();
     },
@@ -881,7 +881,7 @@ WHP.pages.resendpw = {
     onAuthChange: function (_auth)
     {
         if (_auth)
-            WHP.controller.navigateTo(WHP.controller.getMainPage().urlStr);
+            aup.controller.navigateTo(aup.controller.getMainPage().urlStr);
     }
 }
 

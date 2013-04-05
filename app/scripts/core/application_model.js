@@ -1,31 +1,31 @@
-whp.App = Backbone.Model.extend({
+aup.App = Backbone.Model.extend({
 	_didScroll: false,
 
 	initialize:function () {
 		var that = this,
-			whp = window.whp;
+			aup = window.aup;
 
-		this.config 	= new whp.Config;
-		this.statistic 	= new whp.Statistic;
+		this.config 	= new aup.Config;
+		this.statistic 	= new aup.Statistic;
 
-		this.router = new whp.Router;
-		this.pages 	= new whp.PagesCollection;
+		this.router = new aup.Router;
+		this.pages 	= new aup.PagesCollection;
 
 
-		this.auth = new whp.Auth;
-		this.user = new whp.User;
+		this.auth = new aup.Auth;
+		this.user = new aup.User;
 
 		
 		// GLOBAL objects
-		whp.config = this.config;
-		whp.user = this.user;
+		aup.config = this.config;
+		aup.user = this.user;
 
 
-		this.navbar = new whp.Navbar;
-		this.header = new whp.Header;
+		this.navbar = new aup.Navbar;
+		this.header = new aup.Header;
 
 		// 404 page
-		this.pages.add(new whp.Page({
+		this.pages.add(new aup.Page({
 			name:"404",
 			template:"pages/404-page"
 		}));
@@ -37,19 +37,19 @@ whp.App = Backbone.Model.extend({
 
 
 		
-		this.photofeed = new whp.PhotoFeedPage({
+		this.photofeed = new aup.PhotoFeedPage({
 			name: "photofeed",
 			template: "pages/photofeed-page"
 		});
 		this.pages.add(this.photofeed);
 
-		this.explore = new whp.ExplorePage({
+		this.explore = new aup.ExplorePage({
 			name: "explore",
 			template: "pages/explore-page"
 		});
 		this.pages.add(this.explore);
 
-		this.photo = new whp.PhotoPage({
+		this.photo = new aup.PhotoPage({
 			name: "photo",
 			template: "pages/photo-page"
 		});
@@ -132,7 +132,7 @@ whp.App = Backbone.Model.extend({
 
 		// this.router.on("route:popup", function(){
 		// 	if(!this.pages.havePage("popup")){
-		// 		var page = new whp.Page({
+		// 		var page = new aup.Page({
 		// 			name:"popup",
 		// 			template:"pages/popup-test",
 		// 			view: "popupPage"
@@ -143,7 +143,7 @@ whp.App = Backbone.Model.extend({
 		// }, this);
 
 		// this.router.on("confirm", function(token){
-		// 	whp.trigger("auth:confirm", token);
+		// 	aup.trigger("auth:confirm", token);
 		// });
 
 		
@@ -170,7 +170,7 @@ whp.App = Backbone.Model.extend({
 		this.on("error", function (err) {
 			console.error("error");
 			if(!!err && !!err.description) {
-				whp.error(err.description);
+				aup.error(err.description);
 			}
 		});
 
@@ -184,66 +184,66 @@ whp.App = Backbone.Model.extend({
 		 */
 
 		this.auth.on("auth:success", function (user_obj) {
-			whp.trigger("auth:success", user_obj);
+			aup.trigger("auth:success", user_obj);
 		}, this);
 		this.auth.on("auth:clear", function () {
-			whp.trigger("auth:clear");
+			aup.trigger("auth:clear");
 		}, this);
 
 		this.user.on("user:error", function(err){
 			this.trigger("error", err);
-			whp.trigger("auth:clear");
+			aup.trigger("auth:clear");
 		}, this)
 
 		this.user.settings.on("change:geo_position", function (model, value) {
-			whp.trigger("geo_position:ready", value);
+			aup.trigger("geo_position:ready", value);
 		}, this);
 
 		this.user.settings.on("usersettings:ready", function (user_obj) {
-			whp.trigger("usersettings:ready", user_obj);
+			aup.trigger("usersettings:ready", user_obj);
 		}, this);
 
 
 		this.navbar.on("auth:show", function () {
-			whp.trigger("auth:show");
+			aup.trigger("auth:show");
 		}, this)
 
 		this.navbar.on("navbar:logout", function () {
-			whp.trigger("navbar:logout");
+			aup.trigger("navbar:logout");
 		}, this)
 
 
 		// this.user.on("no-login", function () {
-		// 	whp.trigger("auth:required");
-		// 	// whp.trigger("auth:not-required")
+		// 	aup.trigger("auth:required");
+		// 	// aup.trigger("auth:not-required")
 		// });
 
 		// this.user.on("login", function (credentials) {
-		// 	whp.trigger("user:login", credentials);
+		// 	aup.trigger("user:login", credentials);
 		// });
 
 		// this.user.on("settings", function () {
-		// 	whp.trigger("auth:success", this.user.toJSON());
+		// 	aup.trigger("auth:success", this.user.toJSON());
 		// }, this);
 
 		// this.user.on("change", function () {
-		// 	whp.trigger("user:change", this.user.toJSON());
+		// 	aup.trigger("user:change", this.user.toJSON());
 		// }, this);
 
 		// this.navbar.on("login", function () {
-		// 	whp.trigger("auth:required");
+		// 	aup.trigger("auth:required");
 		// });
 
 		// this.navbar.on("register", function () {
-		// 	whp.trigger("auth:register");
+		// 	aup.trigger("auth:register");
 		// });
 
 		// this.profile.on("user:token", function (token) {
-		// 	whp.trigger("user:token", token)
+		// 	aup.trigger("user:token", token)
 		// });
 
 		// this.profile.on("user:update", function(userObj){
-		// 	whp.trigger("user:update", userObj) 
+		// 	aup.trigger("user:update", userObj) 
 		// });
 
 
@@ -255,7 +255,7 @@ whp.App = Backbone.Model.extend({
 
 		$(window).scroll(function(){
 			if( $win.scrollTop()+100 >= ($doc.height() - $win.height()) ) {
-				whp.trigger("pagebottom:reached");
+				aup.trigger("pagebottom:reached");
 			}
 		});
 
@@ -263,6 +263,6 @@ whp.App = Backbone.Model.extend({
 		/**
 		 * APPLICATION READY
 		 */
-		whp.trigger("app:init");
+		aup.trigger("app:init");
 	}
 });

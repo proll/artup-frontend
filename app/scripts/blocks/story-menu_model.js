@@ -1,4 +1,4 @@
-whp.StoryMenu = Backbone.Model.extend({
+aup.StoryMenu = Backbone.Model.extend({
 	url: "/api/story_tree/",
 	defaults:{
 		sort: "date",
@@ -55,11 +55,11 @@ whp.StoryMenu = Backbone.Model.extend({
 			this.daily_list.sleep();
 		}, this);
 
-		this.view = new whp.StoryMenuView({
+		this.view = new aup.StoryMenuView({
 			model: this
 		});
 
-		this.daily_list = new whp.DailyListMenu(options);
+		this.daily_list = new aup.DailyListMenu(options);
 	},
 
 

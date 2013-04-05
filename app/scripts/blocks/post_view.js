@@ -1,4 +1,4 @@
-whp.PostView = Backbone.View.extend({
+aup.PostView = Backbone.View.extend({
 	template: "blocks/post",
 	tagName: "div",
 	className: "timeline__post",
@@ -6,7 +6,7 @@ whp.PostView = Backbone.View.extend({
 	image: null,
 
 	initialize: function(options){
-		this.template = whp.Templates.get(this.template);
+		this.template = aup.Templates.get(this.template);
 		this.model.on("change:src", this.loadTile, this);
 	},
 

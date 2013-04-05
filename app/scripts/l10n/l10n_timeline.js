@@ -1,4 +1,4 @@
-WHP.l10n.pages.timeline = {
+aup.l10n.pages.timeline = {
     "tl_add_fb_tl": {
         selector: "#tl_add_fb_tl",
         en: "Add WeHeartPics to your Facebook Timeline.",

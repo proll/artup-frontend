@@ -1,4 +1,4 @@
-WHP.stats = {
+aup.stats = {
     inited : false,
     trackPermission : false,
 
@@ -7,7 +7,7 @@ WHP.stats = {
 
     init : function()
     {
-        this.trackPermission = (WHP.domain.indexOf("test") == -1);
+        this.trackPermission = (aup.domain.indexOf("test") == -1);
     },
 
     trackPageChange : function(_url)
@@ -15,13 +15,13 @@ WHP.stats = {
         if (!this.trackPermission)
             return false;
 
-        if (!WHP.controller.curPage)
+        if (!aup.controller.curPage)
             return true;
 
-        if ((WHP.controller.curPage.urlStr == "profile") && (WHP.auth.status))
+        if ((aup.controller.curPage.urlStr == "profile") && (aup.auth.status))
         {
             //for profile tracking
-            str = "/profile/"+WHP.pages.profile.states[WHP.pages.profile.curState].urlPrefix;
+            str = "/profile/"+aup.pages.profile.states[aup.pages.profile.curState].urlPrefix;
         }else{
             var str = new String(_url);
             if (str.charAt(0)!="/")
@@ -32,7 +32,7 @@ WHP.stats = {
 
 
 
-        log("WHP/stats : Track page = ["+str+"]");
+        log("aup/stats : Track page = ["+str+"]");
 
         _gaq.push(['_trackPageview', str]);
 
@@ -42,14 +42,14 @@ WHP.stats = {
     {
         if (!this.trackPermission)
             return false;
-        log("WHP/stats : Track like");
+        log("aup/stats : Track like");
         _gaq.push(['_trackEvent', 'Photo', 'like', _label]);
 
     },
 
     getCommentsCount : function()
     {
-        var counter = parseInt(getCookie("whp_comc"));
+        var counter = parseInt(getCookie("aup_comc"));
         if (isNaN(counter))
         {
             counter = 0;
@@ -59,7 +59,7 @@ WHP.stats = {
 
     getLikesCount : function()
     {
-        var counter = parseInt(getCookie("whp_likec"));
+        var counter = parseInt(getCookie("aup_likec"));
         if (isNaN(counter))
         {
             counter = 0;
@@ -69,7 +69,7 @@ WHP.stats = {
 
     getSharesCount : function()
     {
-        var counter = parseInt(getCookie("whp_shrc"));
+        var counter = parseInt(getCookie("aup_shrc"));
         if (isNaN(counter))
         {
             counter = 0;
@@ -81,25 +81,25 @@ WHP.stats = {
 
     trackLike: function()
     {
-        var counter = getCookie("whp_likec");
+        var counter = getCookie("aup_likec");
         if (isNaN(counter))
         {
             counter = 0;
         }
         counter++;
-        setCookie("whp_likec", counter, 60*1000);
+        setCookie("aup_likec", counter, 60*1000);
     },
 
 
     trackComment: function(_reply)
     {
-        var counter = getCookie("whp_comc");
+        var counter = getCookie("aup_comc");
         if (isNaN(counter))
         {
             counter = 0;
         }
         counter++;
-        setCookie("whp_comc", counter, 60*1000);
+        setCookie("aup_comc", counter, 60*1000);
 
 
         if (!this.trackPermission)
@@ -107,7 +107,7 @@ WHP.stats = {
         var reply = _reply == true;
 
 
-        log("WHP/stats : Track comment reply = ["+reply+"]");
+        log("aup/stats : Track comment reply = ["+reply+"]");
 
         if (reply)
         {
@@ -121,13 +121,13 @@ WHP.stats = {
     {
         if (_param == "SHARE_FACEBOOK")
         {
-            var counter = getCookie("whp_shrc");
+            var counter = getCookie("aup_shrc");
             if (isNaN(counter))
             {
                 counter = 0;
             }
             counter++;
-            setCookie("whp_shrc", counter, 60*1000);
+            setCookie("aup_shrc", counter, 60*1000);
         }
 
         if (!this.trackPermission)
@@ -148,14 +148,14 @@ WHP.stats = {
 
 
         $.ajax({
-            url:WHP.netcalls.shareCallSvr,
+            url:aup.netcalls.shareCallSvr,
             data : { r : Math.random(), photo :  _id, social : _social },
-            timeout:WHP.netTimeOut,
+            timeout:aup.netTimeOut,
             success:bind(function (e) { log("trackServer success! ["+_social+"] ["+_id+"]");}, this)
         });
 
 
-        log("WHP/stats : Track share = ["+_param+"]");
+        log("aup/stats : Track share = ["+_param+"]");
         _gaq.push(['_trackEvent', 'Photo', 'share', _param]);
     },
 
@@ -168,7 +168,7 @@ WHP.stats = {
             mainStr = "MAIN_TIMELINE_";
 
 
-        log("WHP/stats : Track timeline ["+mainStr+_N+"]");
+        log("aup/stats : Track timeline ["+mainStr+_N+"]");
         _gaq.push(['_trackEvent', 'Timeline', 'PagesLoaded', mainStr+_N, _N]);
     },
 
@@ -176,7 +176,7 @@ WHP.stats = {
     {
         if (!this.trackPermission)
             return false;
-        log("WHP/stats : Track notifications loaded ["+_N+"]");
+        log("aup/stats : Track notifications loaded ["+_N+"]");
         _gaq.push(['_trackEvent', 'Notifications', 'PagesLoaded', "PAGES_LOADED_"+_N, _N]);
     },
 
@@ -187,7 +187,7 @@ WHP.stats = {
     {
         if (!this.trackPermission)
             return false;
-        log("WHP/stats : Track download ["+_param+"]");
+        log("aup/stats : Track download ["+_param+"]");
         _gaq.push(['_trackEvent', 'Download', 'click', _param]);
     },
 
@@ -202,7 +202,7 @@ WHP.stats = {
         if (_main)
             mainStr = "SHOW_TIMELINE_MAIN_EMPTY";
 
-        log("WHP/stats : Track empty timeline ["+mainStr+"]");
+        log("aup/stats : Track empty timeline ["+mainStr+"]");
         _gaq.push(['_trackEvent', 'Download', 'Views', mainStr]);
     },
 
@@ -211,7 +211,7 @@ WHP.stats = {
         if (!this.trackPermission)
             return false;
         var mainStr = "SHOW_PHOTO_PAGE_PLATE";
-        log("WHP/stats : Track show plate []");
+        log("aup/stats : Track show plate []");
         _gaq.push(['_trackEvent', 'Download', 'Views', mainStr]);
     },
 
@@ -224,7 +224,7 @@ WHP.stats = {
         else
             var mainStr = "SHOW_DOWNLOAD_MENU_NEW";
 
-        log("WHP/stats : Track download button click ["+mainStr+"]");
+        log("aup/stats : Track download button click ["+mainStr+"]");
         _gaq.push(['_trackEvent', 'Download', 'Views', mainStr]);
     },
 
@@ -233,7 +233,7 @@ WHP.stats = {
         if (!this.trackPermission)
             return false;
         var mainStr = "SHOW_EMPTYSTORIES_DOWNLOAD";
-        log("WHP/stats : Track empty stories ["+mainStr+"]");
+        log("aup/stats : Track empty stories ["+mainStr+"]");
         _gaq.push(['_trackEvent', 'Download', 'Views', mainStr]);
     },
 
@@ -242,7 +242,7 @@ WHP.stats = {
         if (!this.trackPermission)
             return false;
         var mainStr = "SHOW_MAIN_DOWNLOAD";
-        log("WHP/stats : Track empty stories ["+mainStr+"]");
+        log("aup/stats : Track empty stories ["+mainStr+"]");
         _gaq.push(['_trackEvent', 'Download', 'Views', mainStr]);
     },
 
@@ -251,7 +251,7 @@ WHP.stats = {
         if (!this.trackPermission)
             return false;
         var mainStr = "SHOW_CLICK_CLOSE_PLATE";
-        log("WHP/stats : Track X click service message ["+mainStr+"]");
+        log("aup/stats : Track X click service message ["+mainStr+"]");
         _gaq.push(['_trackEvent', 'Download', 'Views', mainStr]);
     },
 
@@ -259,13 +259,13 @@ WHP.stats = {
     {
         if (!this.trackPermission)
             return false;
-        var N = parseInt(getCookie("whpsc"));
+        var N = parseInt(getCookie("aupsc"));
         if (isNaN(N))
             N = 0;
         N++;
-        setCookie("whpsc", N, 1000);
+        setCookie("aupsc", N, 1000);
 
-        log("WHP/stats : click rnd ["+N+"]");
+        log("aup/stats : click rnd ["+N+"]");
         _gaq.push(['_trackEvent', 'Other', 'Shuffle', "click", N]);
 
 

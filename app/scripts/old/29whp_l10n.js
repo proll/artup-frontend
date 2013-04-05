@@ -1,5 +1,5 @@
-WHP.l10n = {
-    locale: (WHP.language == "ru") ? "ru" : "en",   // Current locale codename
+aup.l10n = {
+    locale: (aup.language == "ru") ? "ru" : "en",   // Current locale codename
     default_locale: "ru",           // Default (fallback) locale codename
     always_localize : [ "header", "footer", "common" ],
     pages: {

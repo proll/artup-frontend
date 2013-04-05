@@ -1,4 +1,4 @@
-whp.PicTile = Backbone.Model.extend({
+aup.PicTile = Backbone.Model.extend({
 	defaults: {
 		src: "",
 		caption: "",
@@ -18,7 +18,7 @@ whp.PicTile = Backbone.Model.extend({
 		timestamp: 1361882917
 	},
 	initialize: function (options) {
-		this.view = new whp.PicTileView({model:this});
+		this.view = new aup.PicTileView({model:this});
 		this.view.on("pictile:loaderror", this.remove, this);
 	},
 	fetch: function () {

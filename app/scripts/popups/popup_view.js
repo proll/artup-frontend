@@ -1,4 +1,4 @@
-whp.PopupView = Backbone.View.extend({
+aup.PopupView = Backbone.View.extend({
 	template: "popups/popup",
 	className: 'popup',
 	events: {
@@ -14,7 +14,7 @@ whp.PopupView = Backbone.View.extend({
 	$fader: null,
 
 	initialize: function(options){
-		this.template = whp.Templates.get(this.template);
+		this.template = aup.Templates.get(this.template);
 		 _.defaults(this.options, this.defaults);
 		 this.transitionEvent = $.support.transition && $.support.transition.end;
 		 _.bindAll(this, "show", "showFader", "hideFader", "showPopup", "hidePopup");

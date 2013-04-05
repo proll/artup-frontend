@@ -1,4 +1,4 @@
-WHP.l10n.pages.header = {
+aup.l10n.pages.header = {
     "l10n_stories": {
         selector: "#l10n_stories",
         en: "Stories",

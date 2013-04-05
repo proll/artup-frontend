@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 			compile:{
 				options:{
 					wrapped:true,
-					namespace:"whp.Templates.FORM.TEMPLATES",
+					namespace:"aup.Templates.FORM.TEMPLATES",
 					processName:function (filename) {
 						var name = filename.split('/');
 						name = name[name.length - 1];
@@ -39,8 +39,8 @@ module.exports = function(grunt) {
 		/* Compiling less files */
 		less: {
 			all: {
-				src: 'app/styles/less/whp.less',
-				dest: 'app/styles/css/whp.css',
+				src: 'app/styles/less/aup.less',
+				dest: 'app/styles/css/aup.css',
 				options: {
 					compress: true
 				}

@@ -1,4 +1,4 @@
-whp.PhotoLikers = Backbone.Model.extend({
+aup.PhotoLikers = Backbone.Model.extend({
 	url: "/api/photo/likers/",
 	defaults: {
 		photo_model: null,
@@ -37,7 +37,7 @@ whp.PhotoLikers = Backbone.Model.extend({
 	},
 
 	initialize: function (options) {
-		this.view = new whp.PhotoLikersView({model:this});
+		this.view = new aup.PhotoLikersView({model:this});
 		if(this.get("photo_model")) {
 			this.get("photo_model").on("update:vote", function (options) {
 				this.trigger("update:vote", options);

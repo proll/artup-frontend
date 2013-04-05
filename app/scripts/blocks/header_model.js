@@ -1,4 +1,4 @@
-whp.Header = Backbone.Model.extend({
+aup.Header = Backbone.Model.extend({
 	defaults:{
 		items:{
 			photofeed:{
@@ -35,9 +35,9 @@ whp.Header = Backbone.Model.extend({
 	
 	// TODO: доделать currentItem должен корелировать с items..active
 	initialize: function(){
-		this.view = new whp.HeaderView({model: this});
-		// whp.on("auth:success", 	this.setUser, this);
-		// whp.on("user:update", 	this.setUser, this);
+		this.view = new aup.HeaderView({model: this});
+		// aup.on("auth:success", 	this.setUser, this);
+		// aup.on("user:update", 	this.setUser, this);
 	},
 
 	changeItem: function (itemName) {

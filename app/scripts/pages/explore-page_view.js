@@ -1,4 +1,4 @@
-whp.ExplorePageView = whp.PageView.extend({
+aup.ExplorePageView = aup.PageView.extend({
 	addGrid: function (grid_model) {
 		this.$el.find('.pic-tile-grid-col').html(grid_model.view.$el);
 	},

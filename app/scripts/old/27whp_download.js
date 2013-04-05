@@ -1,4 +1,4 @@
-WHP.download = {
+aup.download = {
     alreadyShown: false,  // для показа всего 1 раз
     dontShowFlag: false,
     popupHeight: 210,
@@ -7,9 +7,9 @@ WHP.download = {
     init: function() {
         this.dontShowFlag = getCookie("download_dont_show");
 
-        if (!this.dontShowFlag && WHP.controller.current_page != "" && !this.alreadyShown) {
+        if (!this.dontShowFlag && aup.controller.current_page != "" && !this.alreadyShown) {
             setTimeout(function() {
-                var block = (WHP.auth.status) ? $("#download_popup_open_auth") : $("#download_popup_open_noauth");
+                var block = (aup.auth.status) ? $("#download_popup_open_auth") : $("#download_popup_open_noauth");
                 block.click();
             }, 2000);
         }
@@ -28,7 +28,7 @@ WHP.download = {
 
     showPopup: function(event) {
         if (this.dontShowFlag) {
-            WHP.controller.navigateTo("/");
+            aup.controller.navigateTo("/");
             return;
         }
 

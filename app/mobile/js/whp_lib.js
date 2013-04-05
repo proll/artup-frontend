@@ -163,7 +163,7 @@ function getLinkNormolizedHash()
 function getLinkNormolized()
 {
 	var hashLink = new String(document.location) ;
-	hashLink = hashLink.replace(WHP.domain, "");
+	hashLink = hashLink.replace(aup.domain, "");
 	hashLink = hashLink.replace("http://", "");
 	
 	while(hashLink.charAt(0) == "#")

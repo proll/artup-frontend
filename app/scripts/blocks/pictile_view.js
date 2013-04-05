@@ -1,4 +1,4 @@
-whp.PicTileView = Backbone.View.extend({
+aup.PicTileView = Backbone.View.extend({
 	template: "blocks/pictile",
 	tagName: "div",
 	className: "pic-tile",
@@ -6,7 +6,7 @@ whp.PicTileView = Backbone.View.extend({
 	image: null,
 
 	initialize: function(options){
-		this.template = whp.Templates.get(this.template);
+		this.template = aup.Templates.get(this.template);
 		this.render();
 		this.model.on("change:src", this.loadTile, this);
 	},

@@ -1,13 +1,13 @@
-whp.Auth = Backbone.Model.extend({
+aup.Auth = Backbone.Model.extend({
 	url_logout: "/api/auth/logout/",
 
 	initialize: function (){
 
-		this.FB  = new whp.FB({url:"/api/auth/", app_id: "205868409437437"});
-		this.TW  = new whp.TW({url:"/api/auth/", url_token:"/api/auth/twitter/request_token/"});
-		this.VK  = new whp.VK({url:"/api/auth/", app_id:3154513, redirect_url: "http://weheartpics.com/go/close_vk.html"});
-		this.signin 		= new whp.Signin({url:"/api/auth/signin/"});
-		this.registration 	= new whp.Registration({url:"/api/auth/signup/"});
+		this.FB  = new aup.FB({url:"/api/auth/", app_id: "205868409437437"});
+		this.TW  = new aup.TW({url:"/api/auth/", url_token:"/api/auth/twitter/request_token/"});
+		this.VK  = new aup.VK({url:"/api/auth/", app_id:3154513, redirect_url: "http://weheartpics.com/go/close_vk.html"});
+		this.signin 		= new aup.Signin({url:"/api/auth/signin/"});
+		this.registration 	= new aup.Registration({url:"/api/auth/signup/"});
 
 		this.on("twitter:hi", function (user_obj) {
 			this.TW.fetch(user_obj);
@@ -30,23 +30,23 @@ whp.Auth = Backbone.Model.extend({
 		this.signin.on		("error", this.error, this);
 		this.registration.on("error", this.error, this);
 
-		// TODO: вынести отсюда whp.navigate
+		// TODO: вынести отсюда aup.navigate
 		this.registration.on("registration:pending", function () {
-			whp.navigate("/confirmation");
+			aup.navigate("/confirmation");
 		}, this);
 		this.registration.on("registration:success", function () {
-			whp.navigate("/findfriends");
+			aup.navigate("/findfriends");
 		}, this);
 
-		whp.on("auth:show", function () {
+		aup.on("auth:show", function () {
 			this.trigger("auth:show")
 		}, this)
 
-		whp.on("navbar:logout", function () {
+		aup.on("navbar:logout", function () {
 			this.logout();
 		}, this)
 
-		this.view = new whp.AuthView({model: this});
+		this.view = new aup.AuthView({model: this});
 		this.view.render();
 	},
 

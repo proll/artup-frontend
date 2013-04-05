@@ -1,4 +1,4 @@
-whp_timeline_proto = function () { return {
+aup_timeline_proto = function () { return {
 	//controller parametres
 	inited : false,
 	active : false,
@@ -194,9 +194,9 @@ whp_timeline_proto = function () { return {
 
         if (this.showEvents)
         {
-            _elem.downloadButtonT.click(function() { WHP.stats.trackDownload("DOWNLOAD_TIMELINE_MAIN_EMPTY") });
+            _elem.downloadButtonT.click(function() { aup.stats.trackDownload("DOWNLOAD_TIMELINE_MAIN_EMPTY") });
         }else{
-            _elem.downloadButtonT.click(function() { WHP.stats.trackDownload("DOWNLOAD_TIMELINE_USER_EMPTY") });
+            _elem.downloadButtonT.click(function() { aup.stats.trackDownload("DOWNLOAD_TIMELINE_USER_EMPTY") });
         }
     },
 
@@ -210,9 +210,9 @@ whp_timeline_proto = function () { return {
 
 
         $.ajax({
-            url:WHP.netcalls.promoCall,
+            url:aup.netcalls.promoCall,
             data : { r : Math.random(), email :  this.input.val() },
-            timeout:WHP.netTimeOut,
+            timeout:aup.netTimeOut,
             success:bind(this.parent.promoOk, this),
             error:bind(this.parent.promoFail, this)
         });
@@ -269,7 +269,7 @@ whp_timeline_proto = function () { return {
                 if (this.restoreParams.setScroll)
                 {
                     window.scrollTo(0,this.restoreParams.scrollpos);
-                    WHP.menu.setShadow(this.restoreParams.scrollpos);
+                    aup.menu.setShadow(this.restoreParams.scrollpos);
                     this.restoreParams.setScroll = false;
                 }
             }, this.parent), 100);
@@ -322,7 +322,7 @@ whp_timeline_proto = function () { return {
 
 
 
-        WHP.stats.trackTimeline(this.showEvents, this.pagesN);
+        aup.stats.trackTimeline(this.showEvents, this.pagesN);
 	},
 
 	loadElements: function()
@@ -340,7 +340,7 @@ whp_timeline_proto = function () { return {
 			return false;
 
 		if (this.initLoad)
-            WHP.controller.scrollToPos(0, 0);
+            aup.controller.scrollToPos(0, 0);
 
 		if (this.mainObject.css('display') != 'block')
 			this.mainObject.css({display : 'block'});
@@ -353,7 +353,7 @@ whp_timeline_proto = function () { return {
         var curCall = new Number(this.curTLcall);
 		this.jqxhr = $.ajax({
 			  url: this.controlUrl,
-			  timeout : WHP.netTimeOut,
+			  timeout : aup.netTimeOut,
 			  data : { offset : this.curOffset, limit : this.elementsLimit, r : Math.random() },
 			  success: bind(function(resp) { this.onData(resp, canvas, curCall); } , this),
 			  error: bind(this.onError, this)
@@ -387,15 +387,15 @@ whp_timeline_proto = function () { return {
 
 		if (resp.error)
 		{
-			log("WHP/timeline_prot : error while loading page data! Err =["+response+"]");
-			if (!WHP.errors.hasNetError(resp))
+			log("aup/timeline_prot : error while loading page data! Err =["+response+"]");
+			if (!aup.errors.hasNetError(resp))
 			{
                 if (this.onErrorEvent)
                 {
                     var e = { error : 'DATA_ERROR' };
                     this.onErrorEvent(e);
                 }
-				//WHP.controller.showErrorPage();
+				//aup.controller.showErrorPage();
 			}
 			return false;
 		}
@@ -409,7 +409,7 @@ whp_timeline_proto = function () { return {
 
 
 		if (this.controlCanvas)
-            WHP.controller.showCanvas();
+            aup.controller.showCanvas();
 
 
 
@@ -447,14 +447,14 @@ whp_timeline_proto = function () { return {
                 setClass(this.mainObject,"blocks_canvas_empty");
                 if (this.showEmpty)
                 {
-                    WHP.stats.trackEmptyTimeline(this.showEvents);
+                    aup.stats.trackEmptyTimeline(this.showEvents);
                     this.curPage.mainCanvas.append(this.emptyTemplate);
                 }else{
                     this.curPage.mainCanvas.append(this.emptyTemplate2);
                 }
 
 
-                WHP.controller.scrollToPos(0, 0);
+                aup.controller.scrollToPos(0, 0);
                 this.clocksInd.css({ display : 'none'});
                 this.initLoad = false;
                 return false;
@@ -549,7 +549,7 @@ whp_timeline_proto = function () { return {
         log("COUNT = [ "+listAdded+" / "+resp.feed.list.length+" ]");
 
 		if (this.initLoad)
-            WHP.controller.scrollToPos(0, 0);
+            aup.controller.scrollToPos(0, 0);
 
 		this.curOffset = this.curOffset + resp.feed.list.length;
 
@@ -565,8 +565,8 @@ whp_timeline_proto = function () { return {
 			if (this.userObject)
                 userName = this.userObject.name
             else
-                if (WHP.auth.userObject)
-                    userName = WHP.auth.userObject.name;
+                if (aup.auth.userObject)
+                    userName = aup.auth.userObject.name;
 
 			var textL = userName+" joined WeHeartPics";
 			label.html(textL);
@@ -608,7 +608,7 @@ whp_timeline_proto = function () { return {
 		{
 			b = this.createFollow(_resp);
 		}else{
-			log("WHP/timeline_prot : undeclarated type of element = ["+_resp.type+"]");
+			log("aup/timeline_prot : undeclarated type of element = ["+_resp.type+"]");
 			return false;
 		}
 
@@ -750,9 +750,9 @@ whp_timeline_proto = function () { return {
 		if (typeof(storyName) == 'undefined')
 		{
 			storyName = "Draft";
-			storyLink = WHP.links.getUserProfileLink(user.id)+"drafts/";
+			storyLink = aup.links.getUserProfileLink(user.id)+"drafts/";
 		}else{
-			storyLink = WHP.links.getScenarioLink(storyName.id);
+			storyLink = aup.links.getScenarioLink(storyName.id);
             if (storyName.type=="UNSORTED")
             {
                 storyName = storyName.name;
@@ -773,7 +773,7 @@ whp_timeline_proto = function () { return {
 
         }
 
-        storyName = storyName + "by <a class='feed_author_name' style='font-size:16px' href='"+WHP.links.getUserProfileLink(user.id)+"' >"+user.name+"</a>";
+        storyName = storyName + "by <a class='feed_author_name' style='font-size:16px' href='"+aup.links.getUserProfileLink(user.id)+"' >"+user.name+"</a>";
 		a.titleLCD.html(storyName);
 
 		//avatar image
@@ -790,7 +790,7 @@ whp_timeline_proto = function () { return {
 
 		//profile link
 		a.avatarLCD_link = $(a).find( ".timeline_a_ava_holder" );
-		a.avatarLCD_link.attr('href', WHP.links.getUserProfileLink(_resp.photo.user.id));
+		a.avatarLCD_link.attr('href', aup.links.getUserProfileLink(_resp.photo.user.id));
 
 
 		//photo
@@ -800,7 +800,7 @@ whp_timeline_proto = function () { return {
 
 		//image link
 		a.photo_link = $(a).find( ".timeline_a_image_holder" );
-		a.photo_link.attr('href', WHP.links.getPhotoLink(_resp.photo.id));
+		a.photo_link.attr('href', aup.links.getPhotoLink(_resp.photo.id));
 
 		//controls
 		a.likesAction = bind(this.likeAct, a);
@@ -817,7 +817,7 @@ whp_timeline_proto = function () { return {
 		a.commentsControl.find(".timeline_comments_label").text(NformatMin(a.commentsCount));
 		a.commentsControl.click(bind(function() {
 
-			WHP.controller.navigateTo(WHP.links.getPhotoLink(a.photo_id, true));
+			aup.controller.navigateTo(aup.links.getPhotoLink(a.photo_id, true));
 			},a));
 
 
@@ -831,7 +831,7 @@ whp_timeline_proto = function () { return {
 
 	setViewLikes: function()
 	{
-        if (WHP.auth.status)
+        if (aup.auth.status)
         {
             var wL = this.wasVote;
         }else{
@@ -844,9 +844,9 @@ whp_timeline_proto = function () { return {
 
 	likeAct: function(_vote)
 	{
-        if (!WHP.auth.status)
+        if (!aup.auth.status)
         {
-            WHP.loginMenus.showLoginMenu();
+            aup.loginMenus.showLoginMenu();
             return false;
         }
 
@@ -862,7 +862,7 @@ whp_timeline_proto = function () { return {
             this.likesCount++;
 		}
 		this.setViewLikes();
-		WHP.actions.likes.likePhoto(this.photo_id, this.wasVote, "LIKE_TIMELINE");
+		aup.actions.likes.likePhoto(this.photo_id, this.wasVote, "LIKE_TIMELINE");
 	},
 
 
@@ -888,7 +888,7 @@ whp_timeline_proto = function () { return {
 
 		//title
 		a.titleLCD = $(a).find( ".timeline_header_text_cont" );
-		var storyName = "<a class='feed_author_name' style='font-size:16px' href='"+WHP.links.getUserProfileLink(user.id)+"' >"+user.name+"</a><br/>";
+		var storyName = "<a class='feed_author_name' style='font-size:16px' href='"+aup.links.getUserProfileLink(user.id)+"' >"+user.name+"</a><br/>";
 		storyName = storyName + "<span style='font-size:15px;'>liked "+_resp.photos.length;
 		if (_resp.photos.length>1)
 			storyName = storyName + " photos"
@@ -910,7 +910,7 @@ whp_timeline_proto = function () { return {
 
 		//profile link
 		a.avatarLCD_link = $(a).find( ".timeline_a_ava_holder" );
-		a.avatarLCD_link.attr('href', WHP.links.getUserProfileLink(user.id));
+		a.avatarLCD_link.attr('href', aup.links.getUserProfileLink(user.id));
 		a.paginL = $(a).find( ".timeline_elem_pagin_l" );
 		a.paginL.click(function () { a.slidePage(-1); });
 		a.paginR = $(a).find( ".timeline_elem_pagin_r" );
@@ -964,7 +964,7 @@ whp_timeline_proto = function () { return {
         }
 
         log("CURN = ["+this.N+"]");
-        WHP.pages.photo.imagesList.setContent(_arr, this.N);
+        aup.pages.photo.imagesList.setContent(_arr, this.N);
     },
 
 	addLikedImage: function(_resp, _N)
@@ -977,7 +977,7 @@ whp_timeline_proto = function () { return {
 
 		a.image_link = $(a).find( ".timeline_a_ava_holder" );
 
-        a.site_url = WHP.links.getPhotoLink(_resp.id);
+        a.site_url = aup.links.getPhotoLink(_resp.id);
         a.image_link.attr('href', a.site_url);
         a.image_link.click(bind(this.parent.getPhotoPage, a));
         a.parent = this;
@@ -1140,7 +1140,7 @@ whp_timeline_proto = function () { return {
 
 		//title
 		a.titleLCD = $(a).find( ".timeline_header_text_cont" );
-		var storyName = "<a class='feed_author_name' style='font-size:16px' href='"+WHP.links.getUserProfileLink(user.id)+"' >"+user.name+"</a><br/>";
+		var storyName = "<a class='feed_author_name' style='font-size:16px' href='"+aup.links.getUserProfileLink(user.id)+"' >"+user.name+"</a><br/>";
 		storyName = storyName + "<span style='font-size:15px;'>subscribed to</span>";
 		a.titleLCD.html(storyName);
 
@@ -1156,7 +1156,7 @@ whp_timeline_proto = function () { return {
 
 		//profile link
 		a.avatarLCD_link = $(a).find( ".timeline_a_ava_holder" );
-		a.avatarLCD_link.attr('href', WHP.links.getUserProfileLink(user.id));
+		a.avatarLCD_link.attr('href', aup.links.getUserProfileLink(user.id));
 		a.paginL = $(a).find( ".timeline_elem_pagin_l" );
 		a.paginL.click(function () { a.slidePage(-1); });
 		a.paginR = $(a).find( ".timeline_elem_pagin_r" );
@@ -1204,14 +1204,14 @@ whp_timeline_proto = function () { return {
 		if (_resp.photo)
             setImageOnload(a.image, _resp.photo['i106x106'])
         else
-            setImageOnload(a.image, "/gui/profile_no_ava72.jpg?whp16");
+            setImageOnload(a.image, "/gui/profile_no_ava72.jpg?aup16");
 
 
 		a.image_link = $(a).find( ".timeline_a_ava_holder" );
-		a.image_link.attr('href', WHP.links.getUserProfileLink(_resp.id));
+		a.image_link.attr('href', aup.links.getUserProfileLink(_resp.id));
 
 		a.name_label = $(a).find( ".timeline_template_follow_label" );
-		a.name_label.html("<a class='feed_author_name' style='font-size:16px' href='"+WHP.links.getUserProfileLink(_resp.id)+"'>"+_resp.name+"</a>");
+		a.name_label.html("<a class='feed_author_name' style='font-size:16px' href='"+aup.links.getUserProfileLink(_resp.id)+"'>"+_resp.name+"</a>");
 
 		var _w = 397;
 		var curP = null;
@@ -1250,10 +1250,10 @@ whp_timeline_proto = function () { return {
 		//title
 		a.titleLCD = $(a).find( ".timeline_header_text_cont" );
 		var storyName = getTrimmedTextToSize(_resp.story.name,20,279,true);
-		var storyLink = WHP.links.getScenarioLink(_resp.story.id);
+		var storyLink = aup.links.getScenarioLink(_resp.story.id);
 		
 		storyName = "<a class='tl_theme_text' style='font-size:16px;font-weight:bold;' href='"+storyLink+"'>"+storyName+"</a><br/>";
-		storyName = storyName + "by <a class='feed_author_name' style='font-size:16px' href='"+WHP.links.getUserProfileLink(user.id)+"' >"+user.name+"</a>";
+		storyName = storyName + "by <a class='feed_author_name' style='font-size:16px' href='"+aup.links.getUserProfileLink(user.id)+"' >"+user.name+"</a>";
 		a.titleLCD.html(storyName);
 		
 		//avatar image
@@ -1270,7 +1270,7 @@ whp_timeline_proto = function () { return {
 
 		//profile link
 		a.avatarLCD_link = $(a).find( ".timeline_a_ava_holder" );
-		a.avatarLCD_link.attr('href', WHP.links.getUserProfileLink(user.uid));
+		a.avatarLCD_link.attr('href', aup.links.getUserProfileLink(user.uid));
 		
 			
 		//photo
@@ -1292,13 +1292,13 @@ whp_timeline_proto = function () { return {
 	onError: function(response)
 	{
 		var status = response['status'];
-		log("WHP/timeline_prot : error status = ["+status+"]");
+		log("aup/timeline_prot : error status = ["+status+"]");
 		this.loading = false;
 		if (status!=0)
 		{
 			this.loadElements();
 		}
-		//WHP.controller.showErrorPage();
+		//aup.controller.showErrorPage();
 	},
 	
 	scrollEvent: function(e)
@@ -1309,7 +1309,7 @@ whp_timeline_proto = function () { return {
 		var sensitivity = 800;
 
         if (!this.initLoad && (this.curTotal>0))
-		if ( getScrollTop() + WHP.screenH - $(document).height() > -sensitivity )
+		if ( getScrollTop() + aup.screenH - $(document).height() > -sensitivity )
 		{
 			//log("end");	
 			this.loadElements();
@@ -1346,7 +1346,7 @@ whp_timeline_proto = function () { return {
                         curElem.images.splice(i,1);
                         removedLikes++;
 
-                        var storyName = "<a class='feed_author_name' style='font-size:16px' href='"+WHP.links.getUserProfileLink(curElem.user.id)+"' >"+curElem.user.name+"</a><br/>";
+                        var storyName = "<a class='feed_author_name' style='font-size:16px' href='"+aup.links.getUserProfileLink(curElem.user.id)+"' >"+curElem.user.name+"</a><br/>";
                         storyName = storyName + "<span style='font-size:15px;'>liked "+curElem.images.length;
                         if (curElem.images.length>1)
                             storyName = storyName + " photos"
@@ -1444,7 +1444,7 @@ whp_timeline_proto = function () { return {
         }
 
         window.scrollTo(0,this.restoreParams.scrollpos);
-        WHP.menu.setShadow(this.restoreParams.scrollpos);
+        aup.menu.setShadow(this.restoreParams.scrollpos);
     },
 
 

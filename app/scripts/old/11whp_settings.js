@@ -1,4 +1,4 @@
-WHP.pages.settings = {
+aup.pages.settings = {
     //controller parametres
     urlStr : "settings",
     title : "Settings",
@@ -153,9 +153,9 @@ WHP.pages.settings = {
 
             //need call
             $.ajax({
-                url:WHP.netcalls.confirmPwCall,
+                url:aup.netcalls.confirmPwCall,
                 data : { r : Math.random(), passw : password },
-                timeout:WHP.netTimeOut,
+                timeout:aup.netTimeOut,
                 success:bind(this.onPwConfirm, this),
                 error:bind(this.onPwConfirmErr, this)
             });
@@ -206,9 +206,9 @@ WHP.pages.settings = {
 
             //need call
             $.ajax({
-                url:WHP.netcalls.changeLoginCall,
+                url:aup.netcalls.changeLoginCall,
                 data : { r : Math.random(), login : email, code : this.window2.page2.code },
-                timeout:WHP.netTimeOut,
+                timeout:aup.netTimeOut,
                 success:bind(this.onLoginConfirm, this),
                 error:bind(this.onLoginConfirmErr, this)
             });
@@ -327,7 +327,7 @@ WHP.pages.settings = {
     clickLogin : function(e)
     {
         this.window2.css({display:"block"});
-        WHP.main_fader.show();
+        aup.main_fader.show();
 
         //positions
         var scrollTop = getScrollTop();
@@ -336,9 +336,9 @@ WHP.pages.settings = {
         if (browser.ie)
         {
             this.window2.css({ position : 'absolute' });
-            this.window2.css({ top : (scrollTop + (WHP.screenH - this.window2.height())*0.5 )+'px', left : (WHP.screenWl-285)*0.5 +'px' });
+            this.window2.css({ top : (scrollTop + (aup.screenH - this.window2.height())*0.5 )+'px', left : (aup.screenWl-285)*0.5 +'px' });
         }else
-            this.window2.css({ top : (WHP.screenH - this.window2.height())*0.5 +'px', left : (WHP.screenWl-285)*0.5 +'px' });
+            this.window2.css({ top : (aup.screenH - this.window2.height())*0.5 +'px', left : (aup.screenWl-285)*0.5 +'px' });
 
         this.window2.page2.input_mail.val("");
         this.window2.page1.input_pass.val("");
@@ -373,7 +373,7 @@ WHP.pages.settings = {
 
         log("hideWindow2");
         this.window2.css({display:"none"});
-        WHP.main_fader.hide();
+        aup.main_fader.hide();
     },
 
 
@@ -381,9 +381,9 @@ WHP.pages.settings = {
     clickPassword : function(e)
     {
         $.ajax({
-            url:WHP.netcalls.setPwSettingsCall,
+            url:aup.netcalls.setPwSettingsCall,
             data : { r : Math.random(), login :  this.appSettings.login },
-            timeout:WHP.netTimeOut,
+            timeout:aup.netTimeOut,
             success:bind(this.onpwResponse, this),
             error:bind(this.onErrorMessage, this)
         });
@@ -391,7 +391,7 @@ WHP.pages.settings = {
 
     onErrorMessage : function(response)
     {
-        WHP.popup_message.showAlert("Something went wrong!");
+        aup.popup_message.showAlert("Something went wrong!");
     },
 
     onpwResponse : function(response)
@@ -399,14 +399,14 @@ WHP.pages.settings = {
         var resp = getObjectJson(response);
         if (resp.error)
         {
-            if (!WHP.errors.hasNetError(resp))
+            if (!aup.errors.hasNetError(resp))
             {
-                WHP.controller.showErrorPage();
+                aup.controller.showErrorPage();
             }
             return false;
         }
 
-        WHP.popup_message.showAlert("We have sent instructions to your email.", null, "/gui/mail_ico.png");
+        aup.popup_message.showAlert("We have sent instructions to your email.", null, "/gui/mail_ico.png");
     },
 
 
@@ -444,18 +444,18 @@ WHP.pages.settings = {
         //pew set resend params
         if (!true)
         {
-            WHP.pages.confirmation.resendMail = email;
-            WHP.pages.confirmation.resendPw = password;
-            WHP.controller.navigateTo("confirmation");
+            aup.pages.confirmation.resendMail = email;
+            aup.pages.confirmation.resendPw = password;
+            aup.controller.navigateTo("confirmation");
             return false;
         }
 
         this.prelogin = email;
         this.window1.activeSet = true;
         $.ajax({
-            url:WHP.netcalls.setLogPwCall,
+            url:aup.netcalls.setLogPwCall,
             data : { r : Math.random(), login :  email, passw : password, pass : password },
-            timeout:WHP.netTimeOut,
+            timeout:aup.netTimeOut,
             method : "POST",
             success:bind(this.onsetPWLGNOK, this),
             error:bind(this.onsetPWLGNFail, this)
@@ -501,18 +501,18 @@ WHP.pages.settings = {
     linkerFBClick:function(e)
     {
         var fbConnected = false;
-        if (WHP.settings.social)
-        if (WHP.settings.social.facebook)
+        if (aup.settings.social)
+        if (aup.settings.social.facebook)
             fbConnected = true;
 
         if ( !fbConnected )
         {
             this.linker.FB.onLink = bind(this.linkerFB_link, this);
-            this.linker.FB.showErrMsg = bind(WHP.popup_message.showAlert,WHP.popup_message);
+            this.linker.FB.showErrMsg = bind(aup.popup_message.showAlert,aup.popup_message);
             this.linker.FB.linkFb();
         }else{
             this.linker.FB.onUnlink = bind(this.linkerFB_unlink, this);
-            this.linker.FB.showErrMsg = bind(WHP.popup_message.showAlert,WHP.popup_message);
+            this.linker.FB.showErrMsg = bind(aup.popup_message.showAlert,aup.popup_message);
             this.linker.FB.unlinkFb();
         }
     },
@@ -540,11 +540,11 @@ WHP.pages.settings = {
         if ( !linked )
         {
             this.linker.TW.onLink = bind(this.linkerTW_link, this);
-            this.linker.TW.showErrMsg = bind(WHP.popup_message.showAlert,WHP.popup_message);
+            this.linker.TW.showErrMsg = bind(aup.popup_message.showAlert,aup.popup_message);
             this.linker.TW.linkTw();
         }else{
             this.linker.TW.onUnlink = bind(this.linkerTW_unlink, this);
-            this.linker.TW.showErrMsg = bind(WHP.popup_message.showAlert,WHP.popup_message);
+            this.linker.TW.showErrMsg = bind(aup.popup_message.showAlert,aup.popup_message);
             this.linker.TW.unlinkTw();
         }
     },
@@ -568,11 +568,11 @@ WHP.pages.settings = {
         if ( !linked )
         {
             this.linker.VK.onLink = bind(this.linkerVK_link, this);
-            this.linker.VK.showErrMsg = bind(WHP.popup_message.showAlert,WHP.popup_message);
+            this.linker.VK.showErrMsg = bind(aup.popup_message.showAlert,aup.popup_message);
             this.linker.VK.linkVk();
         } else {
             this.linker.VK.onUnlink = bind(this.linkerVK_unlink, this);
-            this.linker.VK.showErrMsg = bind(WHP.popup_message.showAlert,WHP.popup_message);
+            this.linker.VK.showErrMsg = bind(aup.popup_message.showAlert,aup.popup_message);
             this.linker.VK.unlinkVk();
         }
     },
@@ -599,10 +599,10 @@ WHP.pages.settings = {
         if (this.opengraphSwitcher.state)
         {
             //FB.api('/me/permissions', bind(this.checkStatusCallback,this));
-            this.linker.FB.showErrMsg = bind(WHP.popup_message.showAlert,WHP.popup_message);
+            this.linker.FB.showErrMsg = bind(aup.popup_message.showAlert,aup.popup_message);
             var madeLinkBefore = false;
-            if (WHP.settings.social)
-            if (WHP.settings.social.facebook)
+            if (aup.settings.social)
+            if (aup.settings.social.facebook)
                 madeLinkBefore = true;
 
             log("madeLinkBefore = ["+madeLinkBefore+"]");
@@ -610,13 +610,13 @@ WHP.pages.settings = {
             {
                 this.linkerFBClick();
             }else{
-                WHP.auth.FB.loginOG(null, bind(function() {
+                aup.auth.FB.loginOG(null, bind(function() {
                     FB.api('/me/permissions', bind(this.checkStatusCallback2,this));
                 }, this));
             }
 
         }else{
-            WHP.pages.settings.appSettings.useOpenGraph = false;
+            aup.pages.settings.appSettings.useOpenGraph = false;
 
             this.setView();
             this.setSettings();
@@ -635,7 +635,7 @@ WHP.pages.settings = {
             {
                 this.appSettings.social.facebook = true;
             }
-            WHP.pages.settings.appSettings.useOpenGraph = true;
+            aup.pages.settings.appSettings.useOpenGraph = true;
             this.setSettings();
         }
     },
@@ -656,9 +656,9 @@ WHP.pages.settings = {
             q = "0";
         var params = q.split("/");
 
-        if (!WHP.auth.status)
+        if (!aup.auth.status)
         {
-            WHP.controller.navigateTo(WHP.controller.getMainPage().urlStr);
+            aup.controller.navigateTo(aup.controller.getMainPage().urlStr);
             return false;
         }
 
@@ -673,9 +673,9 @@ WHP.pages.settings = {
 
 
         $.ajax({
-            url:WHP.netcalls.getSettingsCall,
+            url:aup.netcalls.getSettingsCall,
             data : { r : Math.random() },
-            timeout:WHP.netTimeOut,
+            timeout:aup.netTimeOut,
             success:bind(this.dataSet, this),
             error:bind(this.onError, this)
         });
@@ -701,9 +701,9 @@ WHP.pages.settings = {
         var resp = getObjectJson(response);
         if (resp.error)
         {
-            if (!WHP.errors.hasNetError(resp))
+            if (!aup.errors.hasNetError(resp))
             {
-                WHP.controller.showErrorPage();
+                aup.controller.showErrorPage();
             }
             return false;
         }
@@ -714,20 +714,20 @@ WHP.pages.settings = {
 
 
         this.setView();
-        WHP.controller.showCanvas();
+        aup.controller.showCanvas();
     },
 
     onError : function(resp)
     {
-        WHP.controller.showErrorPage();
+        aup.controller.showErrorPage();
     },
 
     setSettings : function(e)
     {
         $.ajax({
-            url:WHP.netcalls.setSettingsCall,
+            url:aup.netcalls.setSettingsCall,
             data : { r : Math.random(), opengraph : this.appSettings.useOpenGraph },
-            timeout : WHP.netTimeOut,
+            timeout : aup.netTimeOut,
             success : bind(this.onSetCallback, this)
         });
     },
@@ -781,7 +781,7 @@ WHP.pages.settings = {
 
         log("showWindow");
         this.window1.css({display:"block"});
-        WHP.main_fader.show();
+        aup.main_fader.show();
 
         //positions
         var scrollTop = getScrollTop();
@@ -790,9 +790,9 @@ WHP.pages.settings = {
         if (browser.ie)
         {
             this.window1.css({ position : 'absolute' });
-            this.window1.css({ top : (scrollTop + (WHP.screenH - this.window1.height())*0.5 )+'px', left : (WHP.screenWl-285)*0.5 +'px' });
+            this.window1.css({ top : (scrollTop + (aup.screenH - this.window1.height())*0.5 )+'px', left : (aup.screenWl-285)*0.5 +'px' });
         }else
-            this.window1.css({ top : (WHP.screenH - this.window1.height())*0.5 +'px', left : (WHP.screenWl-285)*0.5 +'px' });
+            this.window1.css({ top : (aup.screenH - this.window1.height())*0.5 +'px', left : (aup.screenWl-285)*0.5 +'px' });
 
         this.window1.input_mail.val("");
         this.window1.input_pass.val("");
@@ -807,7 +807,7 @@ WHP.pages.settings = {
 
         log("hideWindow");
         this.window1.css({display:"none"});
-        WHP.main_fader.hide();
+        aup.main_fader.hide();
     },
 
 
@@ -829,9 +829,9 @@ WHP.pages.settings = {
             unlinkFb : function()
             {
                 $.ajax({
-                    url:WHP.netcalls.unlinkSocialCall,
+                    url:aup.netcalls.unlinkSocialCall,
                     data : { r : Math.random(), social : 'facebook' },
-                    timeout: WHP.netTimeOut,
+                    timeout: aup.netTimeOut,
                     success:bind(this.fbUnlink, this),
                     error:bind(this.err, this)
                 });
@@ -844,9 +844,9 @@ WHP.pages.settings = {
                 {
                     if (resp.error.code == "API_UnlinkLastAccount")
                     {
-                        WHP.popup_message.showAlert("You can't unlink all accounts!");
+                        aup.popup_message.showAlert("You can't unlink all accounts!");
                     }else{
-                        WHP.popup_message.showAlert("Something went wrong!");
+                        aup.popup_message.showAlert("Something went wrong!");
                     }
                     return false;
                 }
@@ -883,9 +883,9 @@ WHP.pages.settings = {
             finalLinkFb : function(_token)
             {
                 $.ajax({
-                    url:WHP.netcalls.linkSocialCall,
+                    url:aup.netcalls.linkSocialCall,
                     data : { r : Math.random(), social : 'facebook', access_token : _token },
-                    timeout: WHP.netTimeOut,
+                    timeout: aup.netTimeOut,
                     success:bind(this.fbLink, this),
                     error:bind(this.err, this)
                 });
@@ -903,7 +903,7 @@ WHP.pages.settings = {
                         if (this.showErrMsg)
                             this.showErrMsg("This account is already linked with WeHeartPics!");
                     }else{
-                        WHP.controller.showErrorPage();
+                        aup.controller.showErrorPage();
                     }
                     return false;
                 }
@@ -911,9 +911,9 @@ WHP.pages.settings = {
                 if (this.onLink)
                     this.onLink(resp);
 
-                if (!WHP.settings.social)
-                    WHP.settings.social = {};
-                WHP.settings.social.facebook = true;
+                if (!aup.settings.social)
+                    aup.settings.social = {};
+                aup.settings.social.facebook = true;
 
 
 
@@ -923,8 +923,8 @@ WHP.pages.settings = {
                     var hasOGpermission = e.data[0].publish_actions == 1;
                     if (hasOGpermission)
                     {
-                        WHP.pages.settings.appSettings.useOpenGraph = true;
-                        WHP.pages.settings.setView();
+                        aup.pages.settings.appSettings.useOpenGraph = true;
+                        aup.pages.settings.setView();
                     }
                 },this));
 
@@ -955,9 +955,9 @@ WHP.pages.settings = {
             unlinkTw : function()
             {
                 $.ajax({
-                    url:WHP.netcalls.unlinkSocialCall,
+                    url:aup.netcalls.unlinkSocialCall,
                     data : { r : Math.random(), social : 'twitter' },
-                    timeout: WHP.netTimeOut,
+                    timeout: aup.netTimeOut,
                     success:bind(this.twUnlink, this),
                     error:bind(this.err, this)
                 });
@@ -970,9 +970,9 @@ WHP.pages.settings = {
                 {
                     if (resp.error.code == "API_UnlinkLastAccount")
                     {
-                        WHP.popup_message.showAlert("You can't unlink all accounts!");
+                        aup.popup_message.showAlert("You can't unlink all accounts!");
                     }else{
-                        WHP.popup_message.showAlert("Something went wrong!");
+                        aup.popup_message.showAlert("Something went wrong!");
                     }
                     return false;
                 }
@@ -993,9 +993,9 @@ WHP.pages.settings = {
             {
                 this.activeToken = true;
                 this.jqxhr = $.ajax({
-                    url: WHP.netcalls.twReqTokenCall,
+                    url: aup.netcalls.twReqTokenCall,
                     data : { r : Math.random() },
-                    timeout : WHP.netTimeOut,
+                    timeout : aup.netTimeOut,
                     success: bind(this.onDataToken, this),
                     error: bind(this.onErrorToken, this)
                 });
@@ -1025,11 +1025,11 @@ WHP.pages.settings = {
                 if (status==0)
                 {
                     //offline
-                    log("WHP/auth/TW : OFFLINE mode!");
+                    log("aup/auth/TW : OFFLINE mode!");
                 }else{
                     this.getReqTokenAct();
                     this.req_count++;
-                    log("WHP/auth/TW : error while getting twitter request token! Status = ["+status+"] Tries = ["+this.req_count+"]");
+                    log("aup/auth/TW : error while getting twitter request token! Status = ["+status+"] Tries = ["+this.req_count+"]");
                 }
             },
 
@@ -1038,9 +1038,9 @@ WHP.pages.settings = {
             {
                 log("Final link twitter");
                 $.ajax({
-                    url:WHP.netcalls.linkSocialCall,
+                    url:aup.netcalls.linkSocialCall,
                     data : { r : Math.random(), social : 'twitter', access_token : _token, access_token_secret : _secret },
-                    timeout: WHP.netTimeOut,
+                    timeout: aup.netTimeOut,
                     success:bind(this.onData, this),
                     error:bind(this.err, this)
                 });
@@ -1056,16 +1056,16 @@ WHP.pages.settings = {
                         if (this.showErrMsg)
                             this.showErrMsg("This account is already linked with WeHeartPics!");
                     }else{
-                        WHP.controller.showErrorPage();
+                        aup.controller.showErrorPage();
                     }
                     return false;
                 }
 
 
-                if (!WHP.settings.social)
-                    WHP.settings.social = {};
-                WHP.settings.social.twitter = true;
-                WHP.pages.settings.setView();
+                if (!aup.settings.social)
+                    aup.settings.social = {};
+                aup.settings.social.twitter = true;
+                aup.pages.settings.setView();
 
                 log("onLink");
                 if (this.onLink)
@@ -1089,9 +1089,9 @@ WHP.pages.settings = {
             unlinkVk : function()
             {
                 $.ajax({
-                    url:WHP.netcalls.unlinkSocialCall,
+                    url:aup.netcalls.unlinkSocialCall,
                     data : { r : Math.random(), social : 'vk' },
-                    timeout: WHP.netTimeOut,
+                    timeout: aup.netTimeOut,
                     success:bind(this.vkUnlink, this),
                     error:bind(this.err, this)
                 });
@@ -1104,9 +1104,9 @@ WHP.pages.settings = {
                 {
                     if (resp.error.code == "API_UnlinkLastAccount")
                     {
-                        WHP.popup_message.showAlert("You can't unlink all accounts!");
+                        aup.popup_message.showAlert("You can't unlink all accounts!");
                     }else{
-                        WHP.popup_message.showAlert("Something went wrong!");
+                        aup.popup_message.showAlert("Something went wrong!");
                     }
                     return false;
                 }
@@ -1119,16 +1119,16 @@ WHP.pages.settings = {
             linkVk : function()
             {
                 this.wind = openWindow2("VK auth", 640, 480);
-                this.wind.location.href = "https://api.vk.com/oauth/authorize?client_id=" + WHP.auth.VK.app_id + "&scope=friends,photos,wall,offline&response_type=token&redirect_uri=http://weheartpics.com/close_vk_link.html";
+                this.wind.location.href = "https://api.vk.com/oauth/authorize?client_id=" + aup.auth.VK.app_id + "&scope=friends,photos,wall,offline&response_type=token&redirect_uri=http://weheartpics.com/close_vk_link.html";
                 return false;
             },
 
             auth: function(token, user_id) {
                 var self = this;
                 $.ajax({
-                    url: WHP.netcalls.linkSocialCall,
+                    url: aup.netcalls.linkSocialCall,
                     data : { r : Math.random(), social : 'vk', access_token : token, vk_id: user_id },
-                    timeout: WHP.netTimeOut,
+                    timeout: aup.netTimeOut,
                     success: self.onData,
                     error: self.err
                 });
@@ -1144,16 +1144,16 @@ WHP.pages.settings = {
                         if (this.showErrMsg)
                             this.showErrMsg("This account is already linked with WeHeartPics!");
                     }else{
-                        WHP.controller.showErrorPage();
+                        aup.controller.showErrorPage();
                     }
                     return false;
                 }
 
 
-                if (!WHP.settings.social)
-                    WHP.settings.social = {};
-                WHP.settings.social.vkontakte = true;
-                WHP.pages.settings.setView();
+                if (!aup.settings.social)
+                    aup.settings.social = {};
+                aup.settings.social.vkontakte = true;
+                aup.pages.settings.setView();
             },
 
             err : function(e)
@@ -1168,7 +1168,7 @@ WHP.pages.settings = {
 }
 
 
-WHP.settings = WHP.pages.settings.appSettings;
+aup.settings = aup.pages.settings.appSettings;
 
 
 

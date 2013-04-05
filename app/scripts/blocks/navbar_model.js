@@ -1,4 +1,4 @@
-whp.Navbar = Backbone.Model.extend({
+aup.Navbar = Backbone.Model.extend({
 	defaults:{
 		user: null,
 		items:[
@@ -24,6 +24,6 @@ whp.Navbar = Backbone.Model.extend({
 	
 	// TODO: доделать currentItem должен корелировать с items..active
 	initialize: function(){
-		this.view = new whp.NavbarView({model: this});
+		this.view = new aup.NavbarView({model: this});
 	}
 });

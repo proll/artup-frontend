@@ -1,4 +1,4 @@
-WHP.auth = {
+aup.auth = {
 	inited : false,	
 	status : null,
 	userObject : {},
@@ -19,16 +19,16 @@ WHP.auth = {
         },
         eventOnTimer : function()
         {
-            var whp_uid = parseInt(getCookie("uid"));
-            var whp_token = getCookie("token");
+            var aup_uid = parseInt(getCookie("uid"));
+            var aup_token = getCookie("token");
             var newStatus = true;
 
 
 
-            if (isNaN(whp_uid))
+            if (isNaN(aup_uid))
             {
-                whp_uid = -1;
-                whp_token = 1;
+                aup_uid = -1;
+                aup_token = 1;
                 newStatus = false;
             }
 
@@ -39,14 +39,14 @@ WHP.auth = {
                     if (newStatus)
                     {
                         //login
-                        this.parent.setSession({  id: whp_uid , uid : whp_uid , token: whp_token }	);
+                        this.parent.setSession({  id: aup_uid , uid : aup_uid , token: aup_token }	);
                         this.parent.checkAuth();
                     }else{
                         //logout
                         if (!this.parent.activeLogout)
                         {
-                            WHP.auth.onlogoutData({ state : "OK" });
-                            WHP.loginMenus.showLoginMenu();
+                            aup.auth.onlogoutData({ state : "OK" });
+                            aup.loginMenus.showLoginMenu();
                         }
 
                         if (this.parent.activeLogout)
@@ -80,18 +80,18 @@ WHP.auth = {
 	
 	init: function ()
 	{
-		var whp_uid = parseInt(getCookie("uid"));
-		if (isNaN(whp_uid))
-			whp_uid = -1;
-		var whp_token = getCookie("token");
-		if ((whp_uid==-1) || (whp_token == 'undefined'))
+		var aup_uid = parseInt(getCookie("uid"));
+		if (isNaN(aup_uid))
+			aup_uid = -1;
+		var aup_token = getCookie("token");
+		if ((aup_uid==-1) || (aup_token == 'undefined'))
 		{
-			//log("WHP.auth : client - user didnt log in!");
+			//log("aup.auth : client - user didnt log in!");
 			this.clearSession();
-			WHP.controller.init();
+			aup.controller.init();
 		}else{			
-			//log("WHP.auth : client - cookie user_id = ["+whp_uid+"] token = ["+whp_token+"]");	
-			this.setSession({  id: whp_uid , uid : whp_uid , token: whp_token }	);	
+			//log("aup.auth : client - cookie user_id = ["+aup_uid+"] token = ["+aup_token+"]");	
+			this.setSession({  id: aup_uid , uid : aup_uid , token: aup_token }	);	
 			this.checkAuth();			
 		}
 		
@@ -136,7 +136,7 @@ WHP.auth = {
 	//set gui etc of auth state
 	checkStatus : function ()
 	{
-		WHP.menu.checkMenuState();
+		aup.menu.checkMenuState();
 	},	
 	
 	//session control functions
@@ -148,7 +148,7 @@ WHP.auth = {
 
 	setSession : function (_status)
 	{
-		log("(!) WHP/auth : Session check for ID = ["+_status.id+"] TOKEN = ["+_status.token+"]");
+		log("(!) aup/auth : Session check for ID = ["+_status.id+"] TOKEN = ["+_status.token+"]");
 			
 		this.status = _status;
 		
@@ -159,8 +159,8 @@ WHP.auth = {
 
 	clearSession : function ()
 	{
-		WHP.auth.status = null;
-		WHP.auth.checkStatus();
+		aup.auth.status = null;
+		aup.auth.checkStatus();
 		setClass(document.body, "body_main");
 
 
@@ -172,8 +172,8 @@ WHP.auth = {
 		if (this.status)
 		{
 			$.ajax({
-				url: WHP.netcalls.checkAuthCall+"?"+Math.random(),
-				timeout : WHP.netTimeOut,
+				url: aup.netcalls.checkAuthCall+"?"+Math.random(),
+				timeout : aup.netTimeOut,
 				data : this.status,
 				success: bind(this.oncheckAuthData, this),
 				error: bind(this.oncheckAuthDataErr, this)
@@ -183,10 +183,10 @@ WHP.auth = {
 	
 	onStartWork : function (resp)
 	{
-		WHP.auth.checkStatus();
-        if (WHP.controller.current_page && WHP.controller.current_page.indexOf("photo") != 0) {
+		aup.auth.checkStatus();
+        if (aup.controller.current_page && aup.controller.current_page.indexOf("photo") != 0) {
             // если только мы не на странице фото, то перекидываем в таймлайн
-            WHP.controller.navigateTo("/timeline");
+            aup.controller.navigateTo("/timeline");
         }
 	},
 	
@@ -196,29 +196,29 @@ WHP.auth = {
 		var resp = getObjectJson(response);	
 		if (resp.error)
 		{
-            WHP.controller.init();
+            aup.controller.init();
 			//user id and token arent actal
-			log("WHP/auth : check state ERROR after netcall!");
+			log("aup/auth : check state ERROR after netcall!");
 			delCookie("uid");
 			delCookie("token");	
 			this.checkStatus();
 			this.clearSession();
 		} else {
-            $("#main-header-logo-img").attr("src", "/gui/whp_logo.png");
-			WHP.auth.setUser(resp.user, resp.settings);
-			WHP.auth.onStartWork(resp);
+            $("#main-header-logo-img").attr("src", "/gui/aup_logo.png");
+			aup.auth.setUser(resp.user, resp.settings);
+			aup.auth.onStartWork(resp);
 			setClass(document.body, "body_main");
             log("AUTH.oncheck");
-            WHP.controller.init(resp);
-            //WHP.pages.settings.onData(
+            aup.controller.init(resp);
+            //aup.pages.settings.onData(
 		}
 	},
 	
 	oncheckAuthDataErr : function(e)
 	{
 		//set up unloged
-		log("WHP/auth : check state ERROR self!");
-		WHP.controller.init();
+		log("aup/auth : check state ERROR self!");
+		aup.controller.init();
 		delCookie("uid");
 		delCookie("token");	
 		this.checkStatus();
@@ -240,12 +240,12 @@ WHP.auth = {
 	},
 	logoutServer : function(response)
 	{
-		log("WHP/auth : logout...");
+		log("aup/auth : logout...");
         this.activeLogout = true;
-		setClass(WHP.menu.logoutButton[0], "controls_logout_button_procces");
+		setClass(aup.menu.logoutButton[0], "controls_logout_button_procces");
 		$.ajax({
-				url: WHP.netcalls.logoutCall+"?"+Math.random(),
-			 	timeout : WHP.netTimeOut,
+				url: aup.netcalls.logoutCall+"?"+Math.random(),
+			 	timeout : aup.netTimeOut,
 			 	success: bind(this.onlogoutData, this),
 			 	error: bind(this.onlogoutDataErr, this)
 			});
@@ -255,35 +255,35 @@ WHP.auth = {
 		var resp = getObjectJson(response);	
 		if (resp.error)
 		{
-			log("WHP/auth : on logout error = ["+resp.error.code+"]");
+			log("aup/auth : on logout error = ["+resp.error.code+"]");
 			if (resp.error.code == API_Auth_Failed)
-				WHP.auth.authError();
+				aup.auth.authError();
 		}else{
-			log("WHP/auth : response status = ["+resp.status+"]");
-            $("#main-header-logo-img").attr("src", "/gui/web_landing/whp_logo_bigger.png");
+			log("aup/auth : response status = ["+resp.status+"]");
+            $("#main-header-logo-img").attr("src", "/gui/web_landing/aup_logo_bigger.png");
 		}
 		this.logoutCallBack();
 	},
 	onlogoutDataErr : function(e)
 	{
-		log("WHP/auth : error while logging out!");
-		WHP.controller.showErrorPage();
+		log("aup/auth : error while logging out!");
+		aup.controller.showErrorPage();
 	},
 	logoutCallBack : function()
 	{
 		delCookie("uid");
 		delCookie("token");	
 		this.clearSession();
-        WHP.controller.setTitle();
-		WHP.controller.onChangeAuthState(null);
+        aup.controller.setTitle();
+		aup.controller.onChangeAuthState(null);
 	},
 	logoutCallBackOnerr : function()
 	{
-		log("WHP/auth : LOGOUT ERROR!");
+		log("aup/auth : LOGOUT ERROR!");
 		delCookie("uid");
 		delCookie("token");	
 		this.clearSession();
-		WHP.controller.onChangeAuthState(null);
+		aup.controller.onChangeAuthState(null);
 	},
 	
 	
@@ -292,15 +292,15 @@ WHP.auth = {
 	//global error
 	authError : function()
 	{
-		log("WHP/auth : LOGOUT!");
+		log("aup/auth : LOGOUT!");
 		this.logoutOnerrorServer();
 	},
 	logoutOnerrorServer : function(response)
 	{
-		log("WHP/auth : on Err server logout...");
+		log("aup/auth : on Err server logout...");
 		$.ajax({
-				url: WHP.netcalls.logoutCall+"?"+Math.random(),
-			 	timeout : WHP.netTimeOut,
+				url: aup.netcalls.logoutCall+"?"+Math.random(),
+			 	timeout : aup.netTimeOut,
 			 	success: bind(this.logoutCallBackOnerr, this),
 			 	error: bind(this.onlogoutDataErr, this)
 			});
@@ -361,13 +361,13 @@ WHP.auth = {
         getAuth: function()
         {
             var senddata = { social : 'fb',  access_token : this.access_token };
-            if (!WHP.auth.status)
+            if (!aup.auth.status)
             if (this.access_token!=null)
             {
-                log("WHP.auth : get auth for FB...");
+                log("aup.auth : get auth for FB...");
                  this.jqxhr = $.ajax({
-                    url: WHP.netcalls.fbAuthCall+"?r="+Math.random(),
-                    timeout : WHP.netTimeOut,
+                    url: aup.netcalls.fbAuthCall+"?r="+Math.random(),
+                    timeout : aup.netTimeOut,
                     data : senddata,
                     success: bind(this.onData, this),
                     error: bind(this.onError, this)
@@ -382,32 +382,32 @@ WHP.auth = {
             if (resp.error)
             {
                 if (resp.error.code == "API_AuthFailed") {
-                    WHP.auth.showRegStep1Error("This account isn't linked with WeHeartPics");
+                    aup.auth.showRegStep1Error("This account isn't linked with WeHeartPics");
                 } else {
-                    WHP.auth.showRegStep1Error("Something went wrong");
+                    aup.auth.showRegStep1Error("Something went wrong");
 
                 }
             }else{
-                WHP.pages.settings.onData(resp);
-                WHP.auth.setUser(resp.user);
-                WHP.auth.setSession({ token: resp.user.token, id: resp.user.id , uid: resp.user.id });
-                WHP.controller.onChangeAuthState(true);
-                WHP.auth.onStartWork(resp);
+                aup.pages.settings.onData(resp);
+                aup.auth.setUser(resp.user);
+                aup.auth.setSession({ token: resp.user.token, id: resp.user.id , uid: resp.user.id });
+                aup.controller.onChangeAuthState(true);
+                aup.auth.onStartWork(resp);
             }
-            //setClass(WHP.menu.loginButton[0], "controls_login_button");
-            WHP.controller.setTitle();
+            //setClass(aup.menu.loginButton[0], "controls_login_button");
+            aup.controller.setTitle();
         },
 
         onFBData: function(response)
         {
-            WHP.pages.getstarted.hidePopup();
+            aup.pages.getstarted.hidePopup();
             if (response.status == "connected")
             {
                 log("Facebook : user was succesfully connected! :)");
                 var token = response.authResponse.accessToken;
                 if (this.access_token!=token)
                 {
-                    //setClass(WHP.menu.loginButton[0], "controls_logout_button_procces");
+                    //setClass(aup.menu.loginButton[0], "controls_logout_button_procces");
                     log("Facebook : token = ["+token+"]");
                     this.access_token = token;
                     this.getAuth();
@@ -415,21 +415,21 @@ WHP.auth = {
                     log("Facebook : user was not connected! :(");
                 }
             }
-            WHP.controller.setTitle();
+            aup.controller.setTitle();
         },
 
         onError: function(e)
         {
-            log("WHP/auth/FB : error while logging in!");
-            WHP.controller.showErrorPage();
-            //setClass(WHP.menu.loginButton[0], "controls_login_button");
-            WHP.controller.setTitle();
+            log("aup/auth/FB : error while logging in!");
+            aup.controller.showErrorPage();
+            //setClass(aup.menu.loginButton[0], "controls_login_button");
+            aup.controller.setTitle();
         },
 
         login : function (e)
         {
             this.access_token = "";
-            FB.login(bind(this.onFBData, WHP.auth.FB), { scope:'publish_actions,publish_stream,user_photos,offline_access,email,user_birthday'});
+            FB.login(bind(this.onFBData, aup.auth.FB), { scope:'publish_actions,publish_stream,user_photos,offline_access,email,user_birthday'});
         },
 
         loginOG : function (e, _func)
@@ -442,12 +442,12 @@ WHP.auth = {
         fbShareEvents : function(e)
         {
             log("CreateEdge");
-            if (WHP.shares.onFbLike(e))
+            if (aup.shares.onFbLike(e))
                 return false;
 
-            if (WHP.controller.curPage.onFBlike)
+            if (aup.controller.curPage.onFBlike)
             {
-                WHP.controller.curPage.onFBlike(e);
+                aup.controller.curPage.onFBlike(e);
             }
         }
     },
@@ -483,7 +483,7 @@ WHP.auth = {
 
         twLoadedCall : function(e)
         {
-            //WHP.pages.photo.share.setShareEvents();
+            //aup.pages.photo.share.setShareEvents();
         },
 
 
@@ -493,8 +493,8 @@ WHP.auth = {
             //active?t
             this.activeToken = true;
             this.jqxhr = $.ajax({
-                url: WHP.netcalls.twReqTokenCall+"?"+Math.random(),
-                timeout : WHP.netTimeOut,
+                url: aup.netcalls.twReqTokenCall+"?"+Math.random(),
+                timeout : aup.netTimeOut,
                 success: bind(this.onDataToken, this),
                 error: bind(this.onErrorToken, this)
             });
@@ -505,15 +505,15 @@ WHP.auth = {
             log("data token");
             this.activeToken = false;
             var resp = getObjectJson(response);
-            WHP.pages.getstarted.hidePopup();
+            aup.pages.getstarted.hidePopup();
 
             if (resp.error)
             {
-                log("WHP/auth/TW : got error while getting twitter token = ["+resp.error.code+"]");
+                log("aup/auth/TW : got error while getting twitter token = ["+resp.error.code+"]");
                 this.req_count++;
                 this.getReqTokenAct();
             }else{
-                log("WHP/auth/TW : get twitter request token = ["+resp.oauth_token+"]");
+                log("aup/auth/TW : get twitter request token = ["+resp.oauth_token+"]");
                 this.req_count = 0;
 
                 if ( this.curWind )
@@ -529,11 +529,11 @@ WHP.auth = {
             if (status==0)
             {
                 //offline
-                log("WHP/auth/TW : OFFLINE mode!");
+                log("aup/auth/TW : OFFLINE mode!");
             }else{
                 this.getReqTokenAct();
                 this.req_count++;
-                log("WHP/auth/TW : error while getting twitter request token! Status = ["+status+"] Tries = ["+this.req_count+"]");
+                log("aup/auth/TW : error while getting twitter request token! Status = ["+status+"] Tries = ["+this.req_count+"]");
             }
         },
 
@@ -541,20 +541,20 @@ WHP.auth = {
         getAuth: function(_id, _token, _secret)
         {
             log("GET TW AUTH = ["+_id+" : "+_token+" : "+_secret+"]");
-            log("WHP/auth/TW : get auth...");
+            log("aup/auth/TW : get auth...");
 
-            if (WHP.auth.status)
+            if (aup.auth.status)
             {
-                WHP.pages.settings.linker.TW.finalLinkTw(_id, _token, _secret);
+                aup.pages.settings.linker.TW.finalLinkTw(_id, _token, _secret);
                 return false;
             }
 
 
-            //setClass(WHP.menu.loginButton[0], "controls_logout_button_procces");
+            //setClass(aup.menu.loginButton[0], "controls_logout_button_procces");
 
             this.jqxhr = $.ajax({
-                url: WHP.netcalls.fbAuthCall,
-                timeout : WHP.netTimeOut,
+                url: aup.netcalls.fbAuthCall,
+                timeout : aup.netTimeOut,
                 data : { r : Math.random(), social : 'tw' , access_token : _token, access_token_secret : _secret},
                 success: bind(this.onData, this),
                 error: bind(this.onError, this)
@@ -580,22 +580,22 @@ WHP.auth = {
 
 
                 }else{
-                    WHP.pages.settings.onData(resp);
-                    WHP.auth.setUser(resp.user);
-                    WHP.auth.setSession({ token: resp.user.token, id: resp.user.id , uid: resp.user.id });
-                    WHP.controller.onChangeAuthState(true);
-                    WHP.auth.onStartWork(resp);
+                    aup.pages.settings.onData(resp);
+                    aup.auth.setUser(resp.user);
+                    aup.auth.setSession({ token: resp.user.token, id: resp.user.id , uid: resp.user.id });
+                    aup.controller.onChangeAuthState(true);
+                    aup.auth.onStartWork(resp);
                 }
-            //setClass(WHP.menu.loginButton[0], "controls_login_button");
-            WHP.controller.setTitle();
+            //setClass(aup.menu.loginButton[0], "controls_login_button");
+            aup.controller.setTitle();
         },
 
 
         onError: function(e)
         {
-            log("WHP/auth/TW : error while logging in!");
+            log("aup/auth/TW : error while logging in!");
             this.preStatus = null;
-            //setClass(WHP.menu.loginButton[0], "controls_login_button");
+            //setClass(aup.menu.loginButton[0], "controls_login_button");
         },
 
         login : function (e)
@@ -632,8 +632,8 @@ WHP.auth = {
         auth: function(token, user_id) {
             var self = this;
             $.ajax({
-                url: WHP.netcalls.vkAuthCall,
-                timeout : WHP.netTimeOut,
+                url: aup.netcalls.vkAuthCall,
+                timeout : aup.netTimeOut,
                 data : { r : Math.random(), social : 'vk' , access_token : token, vk_id : user_id },
                 success: self.onData,
                 error: self.onError
@@ -644,23 +644,23 @@ WHP.auth = {
             console.debug("AUTH SUCCCEEED!", response);
             if (response.error) {
                 if (resp.error.code == "API_AuthFailed") {
-                    WHP.auth.showRegStep1Error("This account isn't linked with WeHeartPics");
+                    aup.auth.showRegStep1Error("This account isn't linked with WeHeartPics");
                 } else {
-                    WHP.auth.showRegStep1Error("Something went wrong");
+                    aup.auth.showRegStep1Error("Something went wrong");
                 }
             } else {
-                WHP.pages.settings.onData(response);
-                WHP.auth.setUser(response.user);
-                WHP.auth.setSession({ token: response.user.token, id: response.user.id , uid: response.user.id });
-                WHP.controller.onChangeAuthState(true);
-                WHP.auth.onStartWork(response);
-                WHP.pages.getstarted.hidePopup();
+                aup.pages.settings.onData(response);
+                aup.auth.setUser(response.user);
+                aup.auth.setSession({ token: response.user.token, id: response.user.id , uid: response.user.id });
+                aup.controller.onChangeAuthState(true);
+                aup.auth.onStartWork(response);
+                aup.pages.getstarted.hidePopup();
             }
-            WHP.controller.setTitle();
+            aup.controller.setTitle();
         },
 
         onError : function(e) {
-            WHP.auth.showRegStep1Error("Something went wrong");
+            aup.auth.showRegStep1Error("Something went wrong");
         }
     },
 
@@ -671,8 +671,8 @@ WHP.auth = {
         login: function(_login, _pw)
         {
             this.jqxhr = $.ajax({
-                url: WHP.netcalls.mailLoginCall,
-                timeout : WHP.netTimeOut,
+                url: aup.netcalls.mailLoginCall,
+                timeout : aup.netTimeOut,
                 data : { r : Math.random(), login : _login, passw : _pw},
                 success: bind(this.onData, this),
                 error: bind(this.onError, this)
@@ -686,34 +686,34 @@ WHP.auth = {
                 if (resp.error)
                 {
                     if (resp.error.code == "API_BadParams") {
-                        WHP.auth.showLoginError("Wrong e-mail and password combination");
+                        aup.auth.showLoginError("Wrong e-mail and password combination");
                         $("#login-email, #login-password").addClass("input_error");
                     } else if (resp.error.code == "API_AuthFailed") {
-                        WHP.auth.showLoginError("Wrong e-mail and password combination");
+                        aup.auth.showLoginError("Wrong e-mail and password combination");
                         $("#login-email, #login-password").addClass("input_error");
                     } else if (resp.error.code = "API_PendingConfirmation") {
-                        WHP.auth.showLoginError("We have sent you an e-mail to confirm");
+                        aup.auth.showLoginError("We have sent you an e-mail to confirm");
                     } else {
-                        WHP.auth.showLoginError("Something went wrong");
+                        aup.auth.showLoginError("Something went wrong");
 
                     }
 
                 }else{
-                    WHP.pages.getstarted.hidePopup();
-                    WHP.pages.settings.onData(resp);
-                    WHP.auth.setUser(resp.user);
-                    WHP.auth.setSession({ token: resp.user.token, id: resp.user.id , uid: resp.user.id });
-                    WHP.controller.onChangeAuthState(true);
-                    WHP.auth.onStartWork(resp);
+                    aup.pages.getstarted.hidePopup();
+                    aup.pages.settings.onData(resp);
+                    aup.auth.setUser(resp.user);
+                    aup.auth.setSession({ token: resp.user.token, id: resp.user.id , uid: resp.user.id });
+                    aup.controller.onChangeAuthState(true);
+                    aup.auth.onStartWork(resp);
                 }
-            //setClass(WHP.menu.loginButton[0], "controls_login_button");
-            WHP.controller.setTitle();
+            //setClass(aup.menu.loginButton[0], "controls_login_button");
+            aup.controller.setTitle();
         },
 
 
         onError : function(e)
         {
-            WHP.auth.showLoginError("Something went wrong");
+            aup.auth.showLoginError("Something went wrong");
             $("#login-email, #login-password").addClass("input_error");
         }
     }

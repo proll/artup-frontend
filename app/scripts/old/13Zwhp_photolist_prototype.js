@@ -1,5 +1,5 @@
 
-whp_photolist_prototype = function () { return {
+aup_photolist_prototype = function () { return {
     //main nav
     position : 0,
     elements : [],
@@ -72,7 +72,7 @@ whp_photolist_prototype = function () { return {
             $.ajax({
                 url:this.parent.callUrl,
                 data : { offset : this.offset, limit : this.nToLoad, r : Math.random() },
-                timeout:WHP.netTimeOut,
+                timeout:aup.netTimeOut,
                 success:bind(this.onData, this),
                 error:bind(this.onError, this)
             });
@@ -120,7 +120,7 @@ whp_photolist_prototype = function () { return {
                 $.ajax({
                     url:this.parent.callUrl,
                     data : { offset : this.offset, limit : this.nToLoad, r : Math.random() },
-                    timeout:WHP.netTimeOut,
+                    timeout:aup.netTimeOut,
                     success:bind(this.onData, this),
                     error:bind(this.onError, this)
                 });
@@ -289,7 +289,7 @@ whp_photolist_prototype = function () { return {
         $.ajax({
             url:this.callUrl,
             data : { offset : this.offset, limit : this.limit, r : Math.random() },
-            timeout:WHP.netTimeOut,
+            timeout:aup.netTimeOut,
             success:bind(this.onDataStart, this),
             error:bind(this.onError, this)
         });
@@ -354,10 +354,10 @@ whp_photolist_prototype = function () { return {
         a.mainImage.likeShadow.css({ visibility : 'hidden'});
 
         a.onData(this.parent.curPageObject);
-        WHP.pages.photo.setHearts();
+        aup.pages.photo.setHearts();
         this.viewCheck();
 
-        setLinkReplace(WHP.links.getPhotoLink(this.elements[_pos].photo.id), null);
+        setLinkReplace(aup.links.getPhotoLink(this.elements[_pos].photo.id), null);
     },
 
 

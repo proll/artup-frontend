@@ -73,8 +73,8 @@ function addIntelloLink(_obj)
 			}else{
 				if (_link.length>0)
 				{
-					WHP.menu.htmlClick();
-					WHP.controller.navigateTo(_link);
+					aup.menu.htmlClick();
+					aup.controller.navigateTo(_link);
 				}
 				return cancelEvent(e);
 			}			
@@ -350,7 +350,7 @@ function getLinkNormolizedHash()
 function getLinkNormolized()
 {
 	var hashLink = new String(document.location) ;
-	hashLink = hashLink.replace(WHP.domain, "");
+	hashLink = hashLink.replace(aup.domain, "");
 	hashLink = hashLink.replace("http://", "");
 	hashLink = hashLink.replace("https://", "");
 	if (hashLink.indexOf("//")==0)
@@ -384,7 +384,7 @@ var globalSetLinksN = 0;
 function setLink(_link, _restoreState)
 {
 	globalSetLinksN++;
-	var hashLink = _link.replace(WHP.domain, "");
+	var hashLink = _link.replace(aup.domain, "");
 	hashLink = hashLink.replace("http://", "");
 	hashLink = hashLink.replace("https://", "");
 	if (hashLink.indexOf("//")==0)
@@ -405,20 +405,20 @@ function setLink(_link, _restoreState)
 	}
 
 	var restparams = null;
-	if (WHP.controller.curPage)
-		restparams = WHP.controller.curPage.restoreParams;
+	if (aup.controller.curPage)
+		restparams = aup.controller.curPage.restoreParams;
 
 	var histObj = { url : getcurPageId(), object : restparams };
-	WHP.controller.history.push(histObj);
-	WHP.curHash = new String(document.location.hash);
+	aup.controller.history.push(histObj);
+	aup.curHash = new String(document.location.hash);
 
-	WHP.stats.trackPageChange(getcurPageId());
+	aup.stats.trackPageChange(getcurPageId());
 }
 
 function setLinkReplace(_link, _restoreState)
 {
 	globalSetLinksN++;
-	var hashLink = _link.replace(WHP.domain, "");
+	var hashLink = _link.replace(aup.domain, "");
 	hashLink = hashLink.replace("http://", "");
 	hashLink = hashLink.replace("https://", "");
 	if (hashLink.indexOf("//")==0)
@@ -433,10 +433,10 @@ function setLinkReplace(_link, _restoreState)
 		var stateObj = { curLink: hashLink };
 		window.history.replaceState(_restoreState, document.title, _link);
 	}
-	WHP.curHash = new String(document.location.hash);
+	aup.curHash = new String(document.location.hash);
 
 
-	WHP.stats.trackPageChange(hashLink);
+	aup.stats.trackPageChange(hashLink);
 }
 
 
@@ -901,9 +901,9 @@ function setOnLoadIMG(_src, _func)
 {
 	var nScr = _src;
 	var img = new Image();
-	img.whp_complete = false;
+	img.aup_complete = false;
 	$(img).load(bind(function() {
-		if (this.whp_complete)
+		if (this.aup_complete)
 		{
 			log("1 img fired from cache FALSE");
 			return false;
@@ -915,7 +915,7 @@ function setOnLoadIMG(_src, _func)
 	if (img.complete)
 	{
 		log("COMPLETE EXCACTLY!");
-		img.whp_complete = true;
+		img.aup_complete = true;
 		if (_func)
 			_func();
 	}
@@ -926,9 +926,9 @@ function setOnLoad(_img, _src, _loaderbk, _func)
 	{
 		var nScr = _src;
 		var img = new Image();
-		img.whp_complete = false;
+		img.aup_complete = false;
 		$(img).load(bind(function() {
-			if (this.whp_complete)
+			if (this.aup_complete)
 			{
 				log("2 img fired from cache FALSE");
 				return false;
@@ -947,7 +947,7 @@ function setOnLoad(_img, _src, _loaderbk, _func)
 
 		if (img.complete)
 		{
-			img.whp_complete = true;
+			img.aup_complete = true;
 			$(_img).attr('src', nScr);
 			$(_img).css({visibility: 'visible'});
 
@@ -977,7 +977,7 @@ function setImageOnload(_img, _src, _loaderbk, _func)
 
 	var nScr = _src;
 	var img = _img.get()[0];
-	img.whp_complete = false;
+	img.aup_complete = false;
 	img.onLoadTimer = new Timer(1000/30, 4);
 
 	img.onLoadTimerEvent = bind(onLoadTimerEvent, img);
@@ -985,12 +985,12 @@ function setImageOnload(_img, _src, _loaderbk, _func)
 
 
 	var func = bind(function() {
-		if (this.whp_complete)
+		if (this.aup_complete)
 		{
 			//log("CANCELED!");
 			return false;
 		}
-		this.whp_complete = true;
+		this.aup_complete = true;
 
 		if (browser.ie)
 		{

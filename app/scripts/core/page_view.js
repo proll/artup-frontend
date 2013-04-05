@@ -1,14 +1,14 @@
-whp.PageView = Backbone.View.extend({
-	el: "#whp-container",
+aup.PageView = Backbone.View.extend({
+	el: "#aup-container",
 	template: "",
 	renderedHtml: null,
 
 	initialize: function(options){
 		if(!(options && options.template)){
-			whp.error("Page must have a template");
+			aup.error("Page must have a template");
 			return;
 		}
-		this.template = whp.Templates.get(options.template);
+		this.template = aup.Templates.get(options.template);
 		this.createDom();
 	},
 

@@ -1,4 +1,4 @@
-WHP.pages.stories = {
+aup.pages.stories = {
     //controller parametres
     urlStr:"stories",
     title:"Stories",
@@ -129,7 +129,7 @@ WHP.pages.stories = {
     //std for each module control functions
     show:function (_q) {
         $('#photobackbutton').css({ visibility: 'hidden'});
-        WHP.l10n.localize_page("landing");
+        aup.l10n.localize_page("landing");
 
         //get parametres
         var q = _q;
@@ -167,21 +167,21 @@ WHP.pages.stories = {
     loadCats:function () {
         //clear canvas
         this.jqxhr = $.ajax({
-            url:WHP.netcalls.storiesCall,
-            data:{ lang: WHP.l10n.locale, r : Math.random() },
-            timeout:WHP.netTimeOut,
+            url:aup.netcalls.storiesCall,
+            data:{ lang: aup.l10n.locale, r : Math.random() },
+            timeout:aup.netTimeOut,
             success:bind(this.onData, this),
             error:bind(this.onError, this)
         });
     },
     onData:function (response) {
-        WHP.controller.scrollToPos(0, 0);
+        aup.controller.scrollToPos(0, 0);
 
         var resp = getObjectJson(response);
         if (resp.error) {
-            log("WHP/pages/stories : error while loading page data! Err =[" + response + "]");
-            if (!WHP.errors.hasNetError(resp)) {
-                WHP.controller.showErrorPage();
+            log("aup/pages/stories : error while loading page data! Err =[" + response + "]");
+            if (!aup.errors.hasNetError(resp)) {
+                aup.controller.showErrorPage();
             }
             return false;
         }
@@ -240,7 +240,7 @@ WHP.pages.stories = {
 
         //add Daily story
         var elem = this.getIcon();
-        elem.label.text(WHP.l10n.localize_string("daily_story", "landing"));
+        elem.label.text(aup.l10n.localize_string("daily_story", "landing"));
         elem.id = "daily";
         elem.parent = this;
         setClass(elem.ico, "stories_ico_7");
@@ -261,7 +261,7 @@ WHP.pages.stories = {
         this.headElements[this.headElements.length - 1].daily = true;
 
 
-        WHP.controller.showCanvas();
+        aup.controller.showCanvas();
         //load content
 
         //get cur elem by id
@@ -279,8 +279,8 @@ WHP.pages.stories = {
         //this.getContent(this.headElements[this.curElem].id);
 
         this.storiesVobject.css({ display:'block'});
-        WHP.controller.setTitle();
-        //WHP.resetH();
+        aup.controller.setTitle();
+        //aup.resetH();
     },
 
     getCatById : function(_id)
@@ -303,7 +303,7 @@ WHP.pages.stories = {
         if (this.restoreParams.setScroll)
         {
             window.scrollTo(0,this.restoreParams.scrollpos);
-            WHP.menu.setShadow(this.restoreParams.scrollpos);
+            aup.menu.setShadow(this.restoreParams.scrollpos);
             this.restoreParams.setScroll = false;
         }
 
@@ -312,14 +312,14 @@ WHP.pages.stories = {
         {
             this.showParams.scrollActive = false;
             var scrollPos = elementOffset(this.contentElements[this.showParams.scrollTo]).top;
-            //WHP.smoothScrollTo(0, scrollPos);
+            //aup.smoothScrollTo(0, scrollPos);
         }
     },
 
     restore: function (e)
     {
         this.restoreParams.setScroll = true;
-        WHP.controller.showCanvas();
+        aup.controller.showCanvas();
     },
 
     hide : function()
@@ -338,7 +338,7 @@ WHP.pages.stories = {
 
 
     onError:function (response, status, xhr) {
-        log("WHP/pages/stories : Error while loading actual data! Err = [" + response + "]");
+        log("aup/pages/stories : Error while loading actual data! Err = [" + response + "]");
     },
 
 
@@ -351,7 +351,7 @@ WHP.pages.stories = {
     },
 
     setPosFast:function (_N) {
-        WHP.shares.hideAct2();
+        aup.shares.hideAct2();
         this.setLabelsActive(_N);
         var a = 124;
         var b = 57;
@@ -362,23 +362,23 @@ WHP.pages.stories = {
     },
 
     headElemClick:function (e) {
-        WHP.shares.hideAct2();
+        aup.shares.hideAct2();
 
         var curN = parseInt(this.curN);
         this.parent.setPosMotion(curN);
 
         if (this.daily)
         {
-            setLinkReplace( WHP.links.getStoriesLinkDaily(), this.restoreParams);
+            setLinkReplace( aup.links.getStoriesLinkDaily(), this.restoreParams);
             this.parent.getContentDaily();
         }else{
             if (this.loadingBar)
                 this.loadingBar.css({ display : 'none'});
-            setLinkReplace( WHP.links.getStoriesLink(this.id), this.restoreParams);
+            setLinkReplace( aup.links.getStoriesLink(this.id), this.restoreParams);
             this.parent.getContent(this.id);
         }
 
-        WHP.shares.hideAct2();
+        aup.shares.hideAct2();
 
     },
 
@@ -405,7 +405,7 @@ WHP.pages.stories = {
     },
 
     setPosMotion:function (_N) {
-        //WHP.stats.trackPageChange("/"+this.urlStr+"/"+this.headElements[_N].id+"/");
+        //aup.stats.trackPageChange("/"+this.urlStr+"/"+this.headElements[_N].id+"/");
         this.setLabelsActive(_N);
         var a = 124;
         var b = 57;
@@ -440,7 +440,7 @@ WHP.pages.stories = {
 
         var resp = getObjectJson(response);
         if (resp.error) {
-            log("WHP/pages/stories : error while loading page data! Err =[" + response + "]");
+            log("aup/pages/stories : error while loading page data! Err =[" + response + "]");
             return false;
         }
 
@@ -452,7 +452,7 @@ WHP.pages.stories = {
             this.storyTemplateCanvas.append(element_div);
             this.contentElements.push(element_div);
         }
-        //WHP.resetH();
+        //aup.resetH();
         addIntelloLinks(this.storyTemplateCanvas);
         return true;
     },
@@ -527,10 +527,10 @@ WHP.pages.stories = {
 
         if (this.is_for_upload) {
             element_div.image_link.attr('href', "#");
-            element_div.image_link.click(function() { WHP.upload.completeUpload("story", element_div.id); });
+            element_div.image_link.click(function() { aup.upload.completeUpload("story", element_div.id); });
         } else {
-            element_div.image_link.attr('href', WHP.links.getScenarioLink(element_div.id));
-            element_div.image_link.click(bind(function() { WHP.pages.story.linkBack = true; }, this));
+            element_div.image_link.attr('href', aup.links.getScenarioLink(element_div.id));
+            element_div.image_link.click(bind(function() { aup.pages.story.linkBack = true; }, this));
         }
 
         if (_resp.is_new)
@@ -540,7 +540,7 @@ WHP.pages.stories = {
     },
 
     miniLoaded:function () {
-        this.story_bk_fader.css({ 'background-image':'url(/gui/story_bk_fader.png?whp16)'});
+        this.story_bk_fader.css({ 'background-image':'url(/gui/story_bk_fader.png?aup16)'});
         this.image.css({ 'background-image':'none' });
         this.label.css({ 'color' : "#ffffff" });
     },
@@ -561,7 +561,7 @@ WHP.pages.stories = {
 
 
         var scrollPos = elementOffset(this).top-70;
-        WHP.smoothScrollTo(0, scrollPos, null, true);
+        aup.smoothScrollTo(0, scrollPos, null, true);
 
         return cancelEvent(e);
     },
@@ -586,9 +586,9 @@ WHP.pages.stories = {
         }
 
         $.ajax({
-            url:WHP.netcalls.dailyStories,
+            url:aup.netcalls.dailyStories,
             data:{  r:Math.random() , offset : this.dailyOffset, limit : 14 },
-            timeout:WHP.netTimeOut,
+            timeout:aup.netTimeOut,
             success:bind(function (resp) {
                 this.getContentDailyResponse(resp, k);
             }, this),
@@ -619,9 +619,9 @@ WHP.pages.stories = {
         }
 
         $.ajax({
-            url:WHP.netcalls.dailyStories,
+            url:aup.netcalls.dailyStories,
             data:{  r:Math.random() , offset : this.dailyOffset, limit : 14 },
-            timeout:WHP.netTimeOut,
+            timeout:aup.netTimeOut,
             success:bind(function (resp) {
                 this.getContentDailyResponse(resp, k);
             }, this),
@@ -635,7 +635,7 @@ WHP.pages.stories = {
 
         var resp = getObjectJson(response);
         if (resp.error) {
-            log("WHP/pages/stories : error while loading page data! Err =[" + response + "]");
+            log("aup/pages/stories : error while loading page data! Err =[" + response + "]");
             return false;
         }
 
@@ -655,7 +655,7 @@ WHP.pages.stories = {
         }
 
 
-        //WHP.resetH();
+        //aup.resetH();
         addIntelloLinks(this.dailyStoriesCanvas);
         this.checkDailyPagin();
         this.dailystoriesTemplate.css({display : 'block'});
@@ -710,10 +710,10 @@ WHP.pages.stories = {
 
         if (this.is_for_upload) {
             element_div.image_link.attr('href', "#");
-            element_div.image_link.click(function() { WHP.upload.completeUpload("story", _resp.id); });
+            element_div.image_link.click(function() { aup.upload.completeUpload("story", _resp.id); });
         } else {
-            element_div.image_link.attr('href', WHP.links.getScenarioLink(_resp.id));
-            element_div.image_link.click(bind(function() { WHP.pages.story.linkBack = true; }, this));
+            element_div.image_link.attr('href', aup.links.getScenarioLink(_resp.id));
+            element_div.image_link.click(bind(function() { aup.pages.story.linkBack = true; }, this));
         }
 
         var newIco = $(element_div).find(".story_new_ico");
@@ -766,10 +766,10 @@ WHP.pages.stories = {
 
         if (this.is_for_upload) {
             element_div.image_link.attr('href', "#");
-            element_div.image_link.click(function() { WHP.upload.completeUpload("story", _resp.id); });
+            element_div.image_link.click(function() { aup.upload.completeUpload("story", _resp.id); });
         } else {
-            element_div.image_link.attr('href', WHP.links.getScenarioLink(_resp.id));
-            element_div.image_link.click(bind(function() { WHP.pages.story.linkBack = true; }, this));
+            element_div.image_link.attr('href', aup.links.getScenarioLink(_resp.id));
+            element_div.image_link.click(bind(function() { aup.pages.story.linkBack = true; }, this));
         }
 
 
@@ -806,7 +806,7 @@ WHP.pages.stories = {
 
     miniLoadedDaily:function () {
         //log("LOADED! = ["+this.image_src+"] ["+ this.story_bk_fader.css( 'background-image')+"] ["+this.image.css('background-image')+"]")
-        this.story_bk_fader.css({ 'background-image':'url(/gui/story_bk_fader.png?whp16)'});
+        this.story_bk_fader.css({ 'background-image':'url(/gui/story_bk_fader.png?aup16)'});
         this.image.css({ 'background-image':'url(' + this.image_src + ')' });
         this.label.css({ 'color' : "#ffffff" });
         this.loaded = true;

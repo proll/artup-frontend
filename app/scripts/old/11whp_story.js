@@ -1,4 +1,4 @@
-WHP.pages.story = {
+aup.pages.story = {
 	//controller parametres
 	urlStr : "story",
 	title : "Scenario",
@@ -26,7 +26,7 @@ WHP.pages.story = {
 	init: function ()
 	{
 		this.mainObject = id$('story');
-		this.feedObject = new whp_feed_proto();
+		this.feedObject = new aup_feed_proto();
 		
 		this.titleLabel = $(this.mainObject).find(".feed_name_labl2");
 
@@ -38,7 +38,7 @@ WHP.pages.story = {
 		
 		this.feedObject.changeUrl = true;
         this.feedObject.useGalleryPhoto = true;
-		this.feedObject.callWasVote = WHP.netcalls.wasVoteCall;
+		this.feedObject.callWasVote = aup.netcalls.wasVoteCall;
         this.feedObject.hidePaginOnNull = false;
 		this.feedObject.onLoadCall = bind(this.onloadCall,this);
 	},
@@ -55,9 +55,9 @@ WHP.pages.story = {
 		var storyId = parseInt(params[0]);
 		if (isNaN(storyId))
 		{
-			log("WHP/scenario : parametres error");
+			log("aup/scenario : parametres error");
 			this.storyId = null;
-			WHP.controller.showErrorPage(2);
+			aup.controller.showErrorPage(2);
 			return false;
 		}
 		this.storyId = storyId;
@@ -78,7 +78,7 @@ WHP.pages.story = {
 		
 		
 		this.feedObject.urlPrefix = this.urlStr+"/"+this.storyId;
-		this.feedObject.controlUrl = WHP.netcalls.storyInfoUrl+"?story="+this.storyId;
+		this.feedObject.controlUrl = aup.netcalls.storyInfoUrl+"?story="+this.storyId;
 		this.feedObject.show(offset);
 	},
 	hide: function ()
@@ -88,11 +88,11 @@ WHP.pages.story = {
 	
 	restore: function ()
 	{
-        if (WHP.controller.removedList.length>0)
+        if (aup.controller.removedList.length>0)
         {
             this.show(this.storyId+"/");
         }else{
-            WHP.controller.showCanvas();
+            aup.controller.showCanvas();
         }
 	},
 	
@@ -108,7 +108,7 @@ WHP.pages.story = {
             storyName = "<span class='feed_name_labl2'>"+_resp.story.name+"</span>";
             this.storyName = _resp.story.name;
 
-            navStr = "<a class='controls_link_text' style='font-size:26px;' href='"+WHP.links.getStoriesLink(_resp.story.storycat.id)+"'>"+_resp.story.storycat.name+"</a>";
+            navStr = "<a class='controls_link_text' style='font-size:26px;' href='"+aup.links.getStoriesLink(_resp.story.storycat.id)+"'>"+_resp.story.storycat.name+"</a>";
         }else if (this.storyType == "UNSORTED")
         {
             this.labl1.css({ display : ''});
@@ -117,18 +117,18 @@ WHP.pages.story = {
 
             this.storyCat = _resp.story.storycat.id;
 
-            navStr = "<a class='controls_link_text' style='font-size:26px;' href='"+WHP.links.getStoriesLink(_resp.story.storycat.id)+"'>"+_resp.story.storycat.name+"</a>";
+            navStr = "<a class='controls_link_text' style='font-size:26px;' href='"+aup.links.getStoriesLink(_resp.story.storycat.id)+"'>"+_resp.story.storycat.name+"</a>";
         }else if (this.storyType == "DAILY")
         {
             this.labl1.css({ display : ''});
             storyName = "<span class='feed_name_labl2'>"+_resp.story.name+"</span>";
             this.storyName = _resp.story.name;
 
-            navStr = "<a class='controls_link_text' style='font-size:26px;' href='"+WHP.links.getStoriesLinkDaily()+"'>Daily stories</a>";
+            navStr = "<a class='controls_link_text' style='font-size:26px;' href='"+aup.links.getStoriesLinkDaily()+"'>Daily stories</a>";
         }else if (this.storyType == "PRIVATE")
         {
             this.labl1.css({ display : 'none'});
-            storyName = "<a class='feed_name_labl2' href='"+WHP.links.getScenarioLink(_resp.story.id)+"'>PERSONAL PHOTOS</a>";
+            storyName = "<a class='feed_name_labl2' href='"+aup.links.getScenarioLink(_resp.story.id)+"'>PERSONAL PHOTOS</a>";
             this.storyName = "Personal photo";
         }else{
             this.labl1.css({ display : 'none'});
@@ -158,7 +158,7 @@ WHP.pages.story = {
     setTitle : function()
     {
         this.title = this.storyName;
-        WHP.controller.setTitle();
+        aup.controller.setTitle();
     },
 
 
@@ -171,16 +171,16 @@ WHP.pages.story = {
         }else{
             if (this.storyType == "DAILY")
             {
-                WHP.controller.navigateTo( "stories/daily" );
+                aup.controller.navigateTo( "stories/daily" );
             }else{
-                WHP.controller.navigateTo( "stories/"+this.storyCat );
+                aup.controller.navigateTo( "stories/"+this.storyCat );
             }
         }
     },
 	
 	onAuthChange: function (_auth)
 	{
-		log("WHP/pages/scenario : on auth change to = ["+_auth+"]");
+		log("aup/pages/scenario : on auth change to = ["+_auth+"]");
 		//this.feedObject.loadWasVote(_auth);
 	}
 }

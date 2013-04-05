@@ -1,6 +1,6 @@
-whp.CommentCollection = Backbone.Collection.extend({
+aup.CommentCollection = Backbone.Collection.extend({
 	url: "/api/photo/comments/",
-	model: whp.Comment,
+	model: aup.Comment,
 	more: true,
 
 	// 

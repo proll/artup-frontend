@@ -1,5 +1,5 @@
-whp.PagesCollection = Backbone.Collection.extend({
-	// model: whp.Page,
+aup.PagesCollection = Backbone.Collection.extend({
+	// model: aup.Page,
 	initialize: function(options){
 	},
 	

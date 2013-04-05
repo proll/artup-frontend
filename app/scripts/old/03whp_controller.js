@@ -1,4 +1,4 @@
- WHP.controller = {
+ aup.controller = {
 	inited : false,	
 	started : false,
 
@@ -40,27 +40,27 @@
             else
                 urla = hashLink;
 
-            urla = urla.replace(WHP.domain, "");
+            urla = urla.replace(aup.domain, "");
 
             if (urla.indexOf("?")>-1)
                 urla = urla.substring(0, urla.indexOf("?"));
-            urla = urla.replace("http://"+WHP.domain+"/","");
-            urla = urla.replace("https://"+WHP.domain+"/","");
-            urla = urla.replace("//"+WHP.domain+"/","");
+            urla = urla.replace("http://"+aup.domain+"/","");
+            urla = urla.replace("https://"+aup.domain+"/","");
+            urla = urla.replace("//"+aup.domain+"/","");
             this.navigateTo(urla);
         }else{
             var url = new String(document.location);
-            url = url.replace("http://"+WHP.domain+"/","");
-            url = url.replace("https://"+WHP.domain+"/","");
-            url = url.replace("//"+WHP.domain+"/","");
+            url = url.replace("http://"+aup.domain+"/","");
+            url = url.replace("https://"+aup.domain+"/","");
+            url = url.replace("//"+aup.domain+"/","");
             this.navigateTo(url);
         }
 	},
 	
 	onChangeAuthState: function (_auth)
 	{
-        WHP.serviceMessages.onAuthChange(_auth);
-        WHP.timelineMessages.onAuthChange(_auth);
+        aup.serviceMessages.onAuthChange(_auth);
+        aup.timelineMessages.onAuthChange(_auth);
 
 		if (_auth)
 		{
@@ -76,12 +76,12 @@
 
 
 		}else{
-            WHP.loginMenus.loginWindowWind.reset(true);
-            WHP.loginMenus.loginWindowWind2.reset(true);
+            aup.loginMenus.loginWindowWind.reset(true);
+            aup.loginMenus.loginWindowWind2.reset(true);
 			this.navigateTo("/");
 		}
 
-        WHP.menu.currentMenuPos();
+        aup.menu.currentMenuPos();
         this.setTitle();
 	},
 	
@@ -115,7 +115,7 @@
 			if (urla.indexOf("?")>-1)
 				urla = urla.substring(0, urla.indexOf("?"));
 
-            urla = urla.replace(WHP.domain, "");
+            urla = urla.replace(aup.domain, "");
 				
 			if (document.location.hash.length>0)
 			{
@@ -125,44 +125,44 @@
 					if (!_doNotChangeLink)	
 					if (!this.started)
                     {
-						//document.location = "http://" + WHP.domain + "/" + urla;
+						//document.location = "http://" + aup.domain + "/" + urla;
                         //return false;
                     }
 				}else{
 					//change link for other browsers	
 					if (!_doNotChangeLink)
-						setLink( "//" + WHP.domain + "/" + urla);
+						setLink( "//" + aup.domain + "/" + urla);
 				}				
 			}
 		}else{
             log(urla);
-            urla = urla.replace("https://"+WHP.domain,"");
-			urla = urla.replace("http://"+WHP.domain,"");	
+            urla = urla.replace("https://"+aup.domain,"");
+			urla = urla.replace("http://"+aup.domain,"");	
 			urla = urla.replace("http://weheartpics.com","");
-            urla = urla.replace("//"+WHP.domain+"/","");
+            urla = urla.replace("//"+aup.domain+"/","");
 			//remove ?query
 			if (urla.indexOf("?")>-1)
 				urla = urla.substring(0, urla.indexOf("?"));
 
 			urla = normolizeLink(urla);
 
-            urla = urla.replace(WHP.domain, "");
+            urla = urla.replace(aup.domain, "");
 			if (!_doNotChangeLink)
             {
                 var histObj = { url : getcurPageId(), object : this.curPage.restoreParams };
                 this.history.push(histObj);
                 if (typeof(this.curPage.restoreParams) == "undefined")
                 {
-                    setLink( "//" + WHP.domain + "/" + urla);
+                    setLink( "//" + aup.domain + "/" + urla);
                 }else{
-                    setLink( "//" + WHP.domain + "/" + urla, this.curPage.restoreParams);
+                    setLink( "//" + aup.domain + "/" + urla, this.curPage.restoreParams);
                 }
             }
 		}
 
 
 		//load content
-		log("WHP/controller : get = ["+urla+"]");
+		log("aup/controller : get = ["+urla+"]");
 		this.getPage(urla, _restorePrev);
 	},
 	
@@ -173,7 +173,7 @@
 
         this.current_page = normStr;
         if (this.current_page && this.current_page.indexOf("photo") < 0) { // если это не лендинг и не фото
-            WHP.download.init();
+            aup.download.init();
         }
 
         log("GET = ["+_str+"]");
@@ -183,10 +183,10 @@
 		//show start page with no parametres
 		if (normStr.length == 0)
 		{
-			log("WHP/controller : redirect to main = ["+this.getMainPage().urlStr+"]");
+			log("aup/controller : redirect to main = ["+this.getMainPage().urlStr+"]");
             switchPage = this.getMainPage();
 
-			setLink( "//" + WHP.domain + "/" + switchPage.urlStr);
+			setLink( "//" + aup.domain + "/" + switchPage.urlStr);
 		}
 
 		if (!switchPage)
@@ -200,9 +200,9 @@
 			{
 				//maxL for maximum match strings
 				var maxL = Math.min(normStr.length, this.pages[i].urlStr.length);
-				//for urls like http://whp.com/controlstr
+				//for urls like http://aup.com/controlstr
 				var shortUrl = (normStr.indexOf(this.pages[i].urlStr)==0) && (maxL>maxLength) && (normStr.length == this.pages[i].urlStr.length);
-				//for urls like http://whp.com/controlstr/
+				//for urls like http://aup.com/controlstr/
 				var longUrl = (normStr.indexOf(this.pages[i].urlStr+"/")==0) && (maxL>maxLength);
 
 
@@ -236,11 +236,11 @@
 			this.setPage(switchPage,true,query,_restorePrev);
 
             //service_messages
-            WHP.serviceMessages.checkVisible();
-            WHP.timelineMessages.checkVisible();
+            aup.serviceMessages.checkVisible();
+            aup.timelineMessages.checkVisible();
 		}			
 		
-		WHP.curHash = new String(document.location.hash);
+		aup.curHash = new String(document.location.hash);
 		return true;
 	},	
 	
@@ -266,14 +266,14 @@
 	
 	setPage: function (switchPage, _useQ, query, _restorePrev)
 	{
-        WHP.loginMenus.hideMenus();
+        aup.loginMenus.hideMenus();
 
-		WHP.menu.currentMenuPos();
+		aup.menu.currentMenuPos();
 		//show new page
 		this.curPage = switchPage;
 
         //
-        WHP.shares.hideAct2();
+        aup.shares.hideAct2();
 
 
 
@@ -293,9 +293,9 @@
 		//set up rnd button
 		if (this.curPage.rndEnable)
 		{
-			$(WHP.menu.randomButton).css({ display : 'block' });
+			$(aup.menu.randomButton).css({ display : 'block' });
 		}else{
-			$(WHP.menu.randomButton).css({ display : 'none' });
+			$(aup.menu.randomButton).css({ display : 'none' });
 		}
 		this.mainCanvas.appendChild(this.curPage.mainObject);
 
@@ -306,7 +306,7 @@
 	detectURLchange: function ()
 	{
 		var newLink = new String(document.location.hash);
-		if (newLink.valueOf() != WHP.curHash.valueOf())
+		if (newLink.valueOf() != aup.curHash.valueOf())
 		{
             if (this.history.length>1)
             {
@@ -314,13 +314,13 @@
                 {
                     //var histObj = { url : getcurPageId(), object : this.curPage.restoreParams}
                     //this.history.push(histObj);
-                    WHP.curHash = newLink;
+                    aup.curHash = newLink;
                     this.popState(this.history[this.history.length-2]);
                     return false;
                 }
             }
 			this.navigateTo();
-			WHP.curHash = newLink;
+			aup.curHash = newLink;
 		}
 	},
 	
@@ -330,8 +330,8 @@
 		if (typeof(str) == 'undefined')
 			str = "";
 		
-		WHP.docTitle = WHP.pageTitle;
-		setDocTitle(WHP.docTitle);
+		aup.docTitle = aup.pageTitle;
+		setDocTitle(aup.docTitle);
 	},
 	
 	init: function (_settings)
@@ -342,24 +342,24 @@
 
         this.initLocation = new String(document.location);
 			
-		this.pages.push(WHP.pages.error404);   //0
-		this.pages.push(WHP.pages.photoPopular);   //1
-		this.pages.push(WHP.pages.photo);   //2
-		this.pages.push(WHP.pages.profile);  //3
-		this.pages.push(WHP.pages.user);   //4
-		this.pages.push(WHP.pages.timeline);     //5
-		this.pages.push(WHP.pages.story);  //6
-		this.pages.push(WHP.pages.stories);      //7
-        this.pages.push(WHP.pages.landing);  //8
-        this.pages.push(WHP.pages.settings);  //9
+		this.pages.push(aup.pages.error404);   //0
+		this.pages.push(aup.pages.photoPopular);   //1
+		this.pages.push(aup.pages.photo);   //2
+		this.pages.push(aup.pages.profile);  //3
+		this.pages.push(aup.pages.user);   //4
+		this.pages.push(aup.pages.timeline);     //5
+		this.pages.push(aup.pages.story);  //6
+		this.pages.push(aup.pages.stories);      //7
+        this.pages.push(aup.pages.landing);  //8
+        this.pages.push(aup.pages.settings);  //9
         //registration
-        this.pages.push(WHP.pages.getstarted);  //10
-        this.pages.push(WHP.pages.findfriends);   //11
-        this.pages.push(WHP.pages.confirmation);   //12
-        this.pages.push(WHP.pages.resendpw);    //13
+        this.pages.push(aup.pages.getstarted);  //10
+        this.pages.push(aup.pages.findfriends);   //11
+        this.pages.push(aup.pages.confirmation);   //12
+        this.pages.push(aup.pages.resendpw);    //13
 
-        this.pages.push(WHP.pages.whp);    //14
-        this.pages.push(WHP.pages.setpassword);    //15
+        this.pages.push(aup.pages.aup);    //14
+        this.pages.push(aup.pages.setpassword);    //15
 
 		for (var i=0; i<this.pages.length; i++)
 		{
@@ -367,7 +367,7 @@
 			this.pages[i].init();			
 		}
 		
-		this.mainCanvas = document.getElementById(WHP.canvasContId);
+		this.mainCanvas = document.getElementById(aup.canvasContId);
         this.loadingBar = $( "#loading_tab" );
 
 
@@ -378,12 +378,12 @@
 
 
         if (_settings)
-            WHP.pages.settings.onData(_settings);
+            aup.pages.settings.onData(_settings);
 
 		//get start page
 		this.navigateTo();
 		this.started = true;		
-		WHP.curHash = new String(document.location.hash);
+		aup.curHash = new String(document.location.hash);
 
         if (browser.ie)
         {
@@ -396,19 +396,19 @@
 		$(window).bind('popstate', bind(this.popState, this));
         $(window).bind('beforeunload', bind(this.terminateEvent, this));
 
-//        WHP.download.checkVersions();
+//        aup.download.checkVersions();
 		//slide shadow
 		this.slideShadowTimer.onTimerEvent = bind(this.shadowTimerEvent, this);
-		WHP.resize();
+		aup.resize();
 		this.inited = true;
 
 
         //ipad
         if (browser.ipad)
         {
-            WHP.shadows.tile.css({ visibility: 'hidden'});
-            WHP.shadows.vtop.css({ visibility: 'hidden'});
-            $(WHP.menu.randomButton).css({ right : -68+'px' });
+            aup.shadows.tile.css({ visibility: 'hidden'});
+            aup.shadows.vtop.css({ visibility: 'hidden'});
+            $(aup.menu.randomButton).css({ right : -68+'px' });
         }
 
 
@@ -419,17 +419,17 @@
 		var A = e.currentCount/e.repeatCount;
 		var B = Math.sin(Math.PI*0.5*A);
 		var C = (1-B)*this.slideShadowP0 + B*this.slideShadowP1;
-		WHP.menu.setShadowA(C);
+		aup.menu.setShadowA(C);
 	},
 	
 	setShadowAuto: function()
 	{
 		this.slideShadowTimer.reset();
-		this.slideShadowP0 = WHP.menu.menuShadow.alpha;
+		this.slideShadowP0 = aup.menu.menuShadow.alpha;
 		this.slideShadowP1 = 0;
 		this.slideShadowTimer.start();
 		//var top = $(document).scrollTop();
-		//WHP.menu.setShadow(top);
+		//aup.menu.setShadow(top);
 	},
 
     terminateEvent : function(e)
@@ -471,7 +471,7 @@
                 log("mstate['"+key+"'] = ["+mstate[key]+"]");
 
 			this.navigateTo(new String(document.location).valueOf(), true, mstate);
-            WHP.controller.removedList = [];
+            aup.controller.removedList = [];
         }
 
 
@@ -489,16 +489,16 @@
         this.loadingBar.css({ display : 'none' });
 		setClass(this.mainCanvas, "content_visible");
 
-        WHP.footer.css({ visibility: "visible"});
+        aup.footer.css({ visibility: "visible"});
 
-        WHP.changeContentH(null, true);
+        aup.changeContentH(null, true);
 
 		this.setShadowAuto();
         this.setTitle();
 
 
-        WHP.serviceMessages.checkVisible();
-        WHP.timelineMessages.checkVisible();
+        aup.serviceMessages.checkVisible();
+        aup.timelineMessages.checkVisible();
 	},
 	hideCanvas: function()
 	{
@@ -509,11 +509,11 @@
         this.loadingBar.css({ display : 'block' });
 		setClass(this.mainCanvas, "content_hidden");
         $(".main-header-l10n").hide();
-        WHP.shares.hideAct2();
+        aup.shares.hideAct2();
 
-        WHP.footer.css({ visibility: "hidden"});
+        aup.footer.css({ visibility: "hidden"});
 
-		//WHP.resetH();
+		//aup.resetH();
 
 		this.setShadowAuto();
         this.setTitle();
@@ -523,7 +523,7 @@
     getMainPage : function()
     {
         var a = this.pages[8];
-        if (WHP.auth.status)
+        if (aup.auth.status)
         {
             if (this.history.length>0)
             {

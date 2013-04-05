@@ -1,4 +1,4 @@
-whp.PhotoShare = Backbone.Model.extend({
+aup.PhotoShare = Backbone.Model.extend({
 	defaults: {
 		photo_id: 0,
 		photo_link: 		'http://img.weheartpics.com/photo/1000x1000/1.jpg',
@@ -23,16 +23,16 @@ whp.PhotoShare = Backbone.Model.extend({
 	pt_shared: false,
 
 	initialize: function (options) {
-		this.view = new whp.PhotoShareView({model:this});
+		this.view = new aup.PhotoShareView({model:this});
 
-		if(!!whp.app.auth) {
-			whp.app.auth.FB.on("auth:success",  this.shareAuthedFB, this);
-			whp.app.auth.TW.on("auth:success",  this.shareAuthedTW, this);
-			whp.app.auth.VK.on("auth:success",  this.shareAuthedVK, this);
+		if(!!aup.app.auth) {
+			aup.app.auth.FB.on("auth:success",  this.shareAuthedFB, this);
+			aup.app.auth.TW.on("auth:success",  this.shareAuthedTW, this);
+			aup.app.auth.VK.on("auth:success",  this.shareAuthedVK, this);
 
-			whp.app.auth.FB.on("error",  this.shareErrorFB, this);
-			whp.app.auth.TW.on("error",  this.shareErrorTW, this);
-			whp.app.auth.VK.on("error",  this.shareErrorVK, this);
+			aup.app.auth.FB.on("error",  this.shareErrorFB, this);
+			aup.app.auth.TW.on("error",  this.shareErrorTW, this);
+			aup.app.auth.VK.on("error",  this.shareErrorVK, this);
 		}
 	},
 
@@ -83,11 +83,11 @@ whp.PhotoShare = Backbone.Model.extend({
 		this.fb_sharing = true;
 		this.trigger("fbshare:start");
 
-		var user_social = whp.user.settings.get("social");
+		var user_social = aup.user.settings.get("social");
 		if(!!user_social && !!user_social.facebook) {
 			this.shareAuthedFB();
 		} else {
-			whp.app.auth.FB.login();
+			aup.app.auth.FB.login();
 		}
 	},
 
@@ -158,11 +158,11 @@ whp.PhotoShare = Backbone.Model.extend({
 		this.tw_sharing = true;
 		this.trigger("twshare:start");
 
-		var user_social = whp.user.settings.get("social");
+		var user_social = aup.user.settings.get("social");
 		if(!!user_social && !!user_social.twitter) {
 			this.shareAuthedTW();
 		} else {
-			whp.app.auth.TW.login();
+			aup.app.auth.TW.login();
 		}
 	},
 
@@ -214,11 +214,11 @@ whp.PhotoShare = Backbone.Model.extend({
 		this.vk_sharing = true;
 		this.trigger("vkshare:start");
 
-		var user_social = whp.user.settings.get("social");
+		var user_social = aup.user.settings.get("social");
 		if(!!user_social && !!user_social.vkontakte) {
 			this.shareAuthedVK();
 		} else {
-			whp.app.auth.VK.login();
+			aup.app.auth.VK.login();
 		}
 	},
 
@@ -282,7 +282,7 @@ whp.PhotoShare = Backbone.Model.extend({
 			url = this.get('link'),
 			title = this.get('story_name')
 
-		var template = whp.Templates.get('misc/pinterest-share'),
+		var template = aup.Templates.get('misc/pinterest-share'),
 			desc = template(this.toJSON());
 
 		// strange quotes feature in pinterest they just disappears

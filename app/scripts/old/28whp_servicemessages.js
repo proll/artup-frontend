@@ -1,4 +1,4 @@
-WHP.serviceMessages = {
+aup.serviceMessages = {
 	
 	
 	inited : false,
@@ -24,7 +24,7 @@ WHP.serviceMessages = {
         this.mainObject.closeButton.click(bind(this.closeButton, this));
         this.mainObject.donwloadButton = this.mainObject.find(".servicemessage_download");
         this.mainObject.donwloadButton.click( bind(this.clickDownload, this) );
-        this.mainObject.donwloadButton.click(function() { WHP.stats.trackDownload("DOWNLOAD_SERVICE_MESSAGE") });
+        this.mainObject.donwloadButton.click(function() { aup.stats.trackDownload("DOWNLOAD_SERVICE_MESSAGE") });
 
         this.timer.onTimerEvent = bind(this.timerEvent, this);
 
@@ -54,22 +54,22 @@ WHP.serviceMessages = {
     checkVisible : function()
     {
         var photoDirect = true;
-        if (WHP.controller.history.length>0)
-            photoDirect = WHP.controller.history[0].url.indexOf("photo/")>-1;
+        if (aup.controller.history.length>0)
+            photoDirect = aup.controller.history[0].url.indexOf("photo/")>-1;
 
-        this.showMessage = (!(getCookie("hsdodl") == "true") && (WHP.auth.status == null) && photoDirect);
+        this.showMessage = (!(getCookie("hsdodl") == "true") && (aup.auth.status == null) && photoDirect);
 
         if (this.mainObject == null)
             return false;
 
 
         //only on photo
-        if (WHP.controller.curPage.urlStr == "photo")
+        if (aup.controller.curPage.urlStr == "photo")
         {
-            if (WHP.controller.visible)
+            if (aup.controller.visible)
             if (this.showMessage)
             {
-                WHP.stats.trackPhotoPlateShow();
+                aup.stats.trackPhotoPlateShow();
                 this.show();
             }
         }else{
@@ -94,7 +94,7 @@ WHP.serviceMessages = {
 
     closeButton : function(e)
     {
-        WHP.stats.trackXclick();
+        aup.stats.trackXclick();
         setCookie("hsdodl", "true", 60*100);
         this.hide();
     },
@@ -133,7 +133,7 @@ WHP.serviceMessages = {
 
 
 
-WHP.timelineMessages = {
+aup.timelineMessages = {
     inited : false,
     mainObject : null,
     showMessage : false,
@@ -192,14 +192,14 @@ WHP.timelineMessages = {
     getOG : function()
     {
         FB.api('/me', function(e){ log(e);});
-        WHP.auth.FB.loginOG(null, bind(this.onFBcall, this));
+        aup.auth.FB.loginOG(null, bind(this.onFBcall, this));
     },
 
     onFBcall: function (e)
     {
-        WHP.pages.settings.linker.FB.onLink = bind( this.afterLink, this);
-        WHP.pages.settings.linker.FB.showErrMsg = bind(WHP.popup_message.showAlert,WHP.popup_message);
-        WHP.pages.settings.linker.FB.linkFb();
+        aup.pages.settings.linker.FB.onLink = bind( this.afterLink, this);
+        aup.pages.settings.linker.FB.showErrMsg = bind(aup.popup_message.showAlert,aup.popup_message);
+        aup.pages.settings.linker.FB.linkFb();
     },
 
     afterLink : function(resp)
@@ -219,24 +219,24 @@ WHP.timelineMessages = {
        }else{
            log("Opengraph access");
            this.hide();
-           WHP.settings.useOpenGraph = true;
-           WHP.pages.settings.setSettings();
+           aup.settings.useOpenGraph = true;
+           aup.pages.settings.setSettings();
        }
     },
 
 
     checkVisible : function()
     {
-        var showWindow = !(getCookie("whp_stogw") == "true");
-        var authStatus = WHP.auth.status;
-        var OGStatus = WHP.settings.useOpenGraph;
-        var cp = WHP.controller.curPage.urlStr;
-        var registrationPages = (cp == WHP.pages.getstarted.urlStr) || (cp == WHP.pages.findfriends.urlStr);
+        var showWindow = !(getCookie("aup_stogw") == "true");
+        var authStatus = aup.auth.status;
+        var OGStatus = aup.settings.useOpenGraph;
+        var cp = aup.controller.curPage.urlStr;
+        var registrationPages = (cp == aup.pages.getstarted.urlStr) || (cp == aup.pages.findfriends.urlStr);
 
 
-        var commentsC =  WHP.stats.getCommentsCount();
-        var likesC = WHP.stats.getLikesCount();
-        var sharesC = WHP.stats.getSharesCount();
+        var commentsC =  aup.stats.getCommentsCount();
+        var likesC = aup.stats.getLikesCount();
+        var sharesC = aup.stats.getSharesCount();
 
         if ((likesC == 100) || (commentsC == 20) || (sharesC == 5)|| (sharesC == 25))
         {
@@ -247,7 +247,7 @@ WHP.timelineMessages = {
 
                 log("Make Show window on trigger!");
                 this.timerObject.cP = 1.0;
-                setCookie("whp_stogw", "false", 60*1000);
+                setCookie("aup_stogw", "false", 60*1000);
                 showWindow = true;
             }
         }
@@ -302,7 +302,7 @@ WHP.timelineMessages = {
         this.timer.reset();
         this.timer.start();
 
-        setCookie("whp_stogw", "true", 60*1000);
+        setCookie("aup_stogw", "true", 60*1000);
     },
 
     closeButton : function(e)

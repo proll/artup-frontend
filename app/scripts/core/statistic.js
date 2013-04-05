@@ -1,13 +1,13 @@
-whp.Statistic = Backbone.Model.extend({
+aup.Statistic = Backbone.Model.extend({
 	url: '/api/photo/share/',
 
 	initialize : function() {
 	},
 
 	trackPageChange : function(_url) {
-		if ((whp.router == "profile")) {
+		if ((aup.router == "profile")) {
 			str = "/profile/";
-			// str = "/profile/"+WHP.pages.profile.states[WHP.pages.profile.curState].urlPrefix;
+			// str = "/profile/"+aup.pages.profile.states[aup.pages.profile.curState].urlPrefix;
 		}else{
 			var str = new String(_url);
 			if (str.charAt(0)!="/") {
@@ -23,7 +23,7 @@ whp.Statistic = Backbone.Model.extend({
 
 	// TODO перевести счетчики на localStorage
 	getCommentsCount : function() {
-		var counter = parseInt(_.getCookie("whp_comc"));
+		var counter = parseInt(_.getCookie("aup_comc"));
 		if (_.isNaN(counter)){
 			counter = 0;
 		}
@@ -31,7 +31,7 @@ whp.Statistic = Backbone.Model.extend({
 	},
 
 	getLikesCount : function() {
-		var counter = parseInt(_.getCookie("whp_likec"));
+		var counter = parseInt(_.getCookie("aup_likec"));
 		if (_.isNaN(counter)) {
 			counter = 0;
 		}
@@ -39,7 +39,7 @@ whp.Statistic = Backbone.Model.extend({
 	},
 
 	getSharesCount : function() {
-		var counter = parseInt(_.getCookie("whp_shrc"));
+		var counter = parseInt(_.getCookie("aup_shrc"));
 		if (_.isNaN(counter)) {
 			counter = 0;
 		}
@@ -47,22 +47,22 @@ whp.Statistic = Backbone.Model.extend({
 	},
 
 	trackLike: function(){
-		var counter = _.getCookie("whp_likec");
+		var counter = _.getCookie("aup_likec");
 		if (_.isNaN(counter)) {
 			counter = 0;
 		}
 		counter++;
-		_.setCookie("whp_likec", counter, 60*1000);
+		_.setCookie("aup_likec", counter, 60*1000);
 	},
 
 
 	trackComment: function(_reply) {
-		var counter = _.getCookie("whp_comc");
+		var counter = _.getCookie("aup_comc");
 		if (_.isNaN(counter)) {
 			counter = 0;
 		}
 		counter++;
-		_.setCookie("whp_comc", counter, 60*1000);
+		_.setCookie("aup_comc", counter, 60*1000);
 
 		var reply = _reply == true;
 		if (reply) {
@@ -74,12 +74,12 @@ whp.Statistic = Backbone.Model.extend({
 
 	trackShare : function(_param, _id) {
 		if (_param == "SHARE_FACEBOOK") {
-			var counter = _.getCookie("whp_shrc");
+			var counter = _.getCookie("aup_shrc");
 			if (_.isNaN(counter)) {
 				counter = 0;
 			}
 			counter++;
-			_.setCookie("whp_shrc", counter, 60*1000);
+			_.setCookie("aup_shrc", counter, 60*1000);
 		}
 
 		var _social = "";
@@ -153,12 +153,12 @@ whp.Statistic = Backbone.Model.extend({
 	},
 
 	trackShuffle : function() {
-		var N = parseInt(_.getCookie("whpsc"));
+		var N = parseInt(_.getCookie("aupsc"));
 		if (_.isNaN(N)) {
 			N = 0;
 		}
 		N++;
-		_.setCookie("whpsc", N, 1000);
+		_.setCookie("aupsc", N, 1000);
 		_gaq.push(['_trackEvent', 'Other', 'Shuffle', "click", N]);
 	}
 

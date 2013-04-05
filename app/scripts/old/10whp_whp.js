@@ -1,6 +1,6 @@
-WHP.pages.whp = {
+aup.pages.aup = {
 	//controller parametres
-	urlStr : "whp",
+	urlStr : "aup",
 	title : "Redirect...",
 	rndEnable : true,
 	inited : false,
@@ -12,7 +12,7 @@ WHP.pages.whp = {
 	//init function
 	init: function ()
 	{
-		this.mainObject = id$('whp');
+		this.mainObject = id$('aup');
 
         this.inited = true;
 	},
@@ -28,36 +28,36 @@ WHP.pages.whp = {
 
         if (params[0] == "signup_confirmed")
         {
-            WHP.controller.navigateTo(WHP.pages.findfriends.urlStr);
+            aup.controller.navigateTo(aup.pages.findfriends.urlStr);
 
             return false;
         }
 
         if (params[0] == "signup_confirm_failed")
         {
-            WHP.controller.showErrorPage();
+            aup.controller.showErrorPage();
             return false;
         }
 
         if (params[0] == "changepass")
         {
             log("code = ["+params[1]+"]");
-            WHP.pages.setpassword.code = params[1];
-            WHP.controller.navigateTo(WHP.pages.setpassword.urlStr);
+            aup.pages.setpassword.code = params[1];
+            aup.controller.navigateTo(aup.pages.setpassword.urlStr);
             return false;
         }
 
         if (params[0] == "signup_confirm_failed")
         {
             log("PW FILED!2");
-            WHP.controller.showErrorPage(5);
+            aup.controller.showErrorPage(5);
             return false;
         }
 
         if (params[0] == "password_reset_failed")
         {
             log("PW FILED!");
-            WHP.controller.showErrorPage(4);
+            aup.controller.showErrorPage(4);
             return false;
         }
 
@@ -65,7 +65,7 @@ WHP.pages.whp = {
 
 
 
-        WHP.controller.navigateTo("timeline");
+        aup.controller.navigateTo("timeline");
 	},
 	hide: function ()
 	{

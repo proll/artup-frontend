@@ -1,4 +1,4 @@
-whp.Signin = Backbone.Model.extend({
+aup.Signin = Backbone.Model.extend({
 	url: 		"/api/auth/signin/",
 
 	initialize: function (){},
@@ -50,7 +50,7 @@ whp.Signin = Backbone.Model.extend({
 				);
 			}
 		}
-		// WHP.controller.setTitle();
+		// aup.controller.setTitle();
 	},
 
 	error : function(e) {

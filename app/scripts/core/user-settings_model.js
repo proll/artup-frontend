@@ -1,4 +1,4 @@
-whp.UserSettings = Backbone.Model.extend({
+aup.UserSettings = Backbone.Model.extend({
 	url: "/api/auth/me/",
 
 	defaults: {
@@ -65,7 +65,7 @@ whp.UserSettings = Backbone.Model.extend({
 		var user_info = _.toJSON(response);	
 		if (!!user_info.error){
 			//user id and token arent actual
-			this.trigger("error", {description: "WHP/auth : check state ERROR after netcall!"})
+			this.trigger("error", {description: "aup/auth : check state ERROR after netcall!"})
 		} else {
 			this.set(user_info);
 			this.trigger("usersettings:ready", user_info)
@@ -73,7 +73,7 @@ whp.UserSettings = Backbone.Model.extend({
 	},
 
 	error: function(response, status, xhr){
-		this.trigger("error", {description: "WHP/auth : check state ERROR self!"})
+		this.trigger("error", {description: "aup/auth : check state ERROR self!"})
 	},
 
 	getGeoPosition: function () {
@@ -91,6 +91,6 @@ whp.UserSettings = Backbone.Model.extend({
 	},
 
 	getGeoError: function (txt) {
-		whp.error(txt)
+		aup.error(txt)
 	}
 });

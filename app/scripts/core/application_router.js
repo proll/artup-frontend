@@ -1,4 +1,4 @@
-whp.Router = Backbone.Router.extend({
+aup.Router = Backbone.Router.extend({
 	_prevRoute: "",
 	routes: {
 		"": "default",

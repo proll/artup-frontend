@@ -1,4 +1,4 @@
-whp.AuthView = Backbone.View.extend({
+aup.AuthView = Backbone.View.extend({
 	el: ".auth-popup",
 	template: "popups/auth",
 	rendered: false,
@@ -39,7 +39,7 @@ whp.AuthView = Backbone.View.extend({
 	},
 
 	initialize: function(options){
-		this.template = whp.Templates.get(this.template);
+		this.template = aup.Templates.get(this.template);
 	},
 
 	render: function(){

@@ -1,4 +1,4 @@
-WHP.pages.user = {
+aup.pages.user = {
 	urlStr : "user",
 	title : "User",
 	rndEnable : false,
@@ -59,7 +59,7 @@ WHP.pages.user = {
 		
 		//fedd object init
 		this.timelineCont = $(this.mainObject).find(".timeline_box");		
-		this.timelineObject = whp_timeline_proto();		
+		this.timelineObject = aup_timeline_proto();		
 		this.timelineObject.prefix = this.urlStr;
 		this.timelineObject.lastposRelated = false;
 		this.timelineObject.showEvents = false;
@@ -71,7 +71,7 @@ WHP.pages.user = {
 		
 		
 		this.storiesCont = $(this.mainObject).find(".rolloutstory_box");		
-		this.storiesObject = whp_rolloutstory_proto();
+		this.storiesObject = aup_rolloutstory_proto();
 		this.storiesObject.init( this.storiesCont );
 		
 		var fButton = $(this.mainObject).find(".profile_black_plate2");
@@ -84,7 +84,7 @@ WHP.pages.user = {
 		
 		
 		this.subscribersCont = $(this.mainObject).find(".subscribers_box");		
-		this.subscribersObject = whp_subscribers_proto();
+		this.subscribersObject = aup_subscribers_proto();
 		this.subscribersObject.onSubscribe = bind(this.onSubscribeCallback, this);
 		this.subscribersObject.onDeSubscribe = bind(this.onSubscribeCallback, this);
 		this.subscribersObject.init( this.subscribersCont );
@@ -93,7 +93,7 @@ WHP.pages.user = {
 		
 		
 		this.subscriptionsCont = $(this.mainObject).find(".subscriptions_box");		
-		this.subscriptionsObject = whp_subscribers_proto();
+		this.subscriptionsObject = aup_subscribers_proto();
 		this.subscriptionsObject.onSubscribe = bind(this.onSubscriptionCallback, this);
 		this.subscriptionsObject.onDeSubscribe = bind(this.onSubscriptionCallback, this);
 		this.subscriptionsObject.init( this.subscriptionsCont );
@@ -124,7 +124,7 @@ WHP.pages.user = {
             urlPrefix : "",
             show : bind(function()
             {
-                //WHP.stats.trackPageChange("/"+this.urlStr+"/"+this.curUserId+"/");
+                //aup.stats.trackPageChange("/"+this.urlStr+"/"+this.curUserId+"/");
                 this.timelineCont.css({ display : 'block' });
                 this.timelineObject.show(0);
             }, this),
@@ -135,9 +135,9 @@ WHP.pages.user = {
             }, this),
             restore : bind(function()
             {
-                if (WHP.controller.removedList.length>0)
+                if (aup.controller.removedList.length>0)
                 {
-                    this.timelineObject.rebuildTimeline(WHP.controller.removedList, this.restoreParams);
+                    this.timelineObject.rebuildTimeline(aup.controller.removedList, this.restoreParams);
                 }else{
                     this.timelineObject.restore();
                 }
@@ -156,7 +156,7 @@ WHP.pages.user = {
             urlPrefix : "stories",
             show : bind(function()
             {
-                //WHP.stats.trackPageChange("/"+this.urlStr+"/"+this.curUserId+"/stories/");
+                //aup.stats.trackPageChange("/"+this.urlStr+"/"+this.curUserId+"/stories/");
                 this.storiesCont.css({ display : 'block' });
                 this.storiesObject.show();
             }, this),
@@ -167,7 +167,7 @@ WHP.pages.user = {
             }, this),
             restore : bind(function()
             {
-                if (WHP.controller.removedList.length>0)
+                if (aup.controller.removedList.length>0)
                 {
                     this.storiesObject.show();
                 }else{
@@ -187,7 +187,7 @@ WHP.pages.user = {
             urlPrefix : "subscribers",
             show : bind(function()
             {
-                //WHP.stats.trackPageChange("/"+this.urlStr+"/"+this.curUserId+"/subscribers/");
+                //aup.stats.trackPageChange("/"+this.urlStr+"/"+this.curUserId+"/subscribers/");
                 this.subscribersCont.css({ display : 'block' });
                 this.subscribersObject.show();
             }, this),
@@ -213,7 +213,7 @@ WHP.pages.user = {
             urlPrefix : "subscriptions",
             show : bind(function()
             {
-                //WHP.stats.trackPageChange("/"+this.urlStr+"/"+this.curUserId+"/subscriptions/");
+                //aup.stats.trackPageChange("/"+this.urlStr+"/"+this.curUserId+"/subscriptions/");
                 this.subscriptionsCont.css({ display : 'block' });
                 this.subscriptionsObject.show();
             }, this),
@@ -247,7 +247,7 @@ WHP.pages.user = {
 	
 	hideSubWindows : function ()
 	{
-		WHP.pages.user.pointsHelper.hide();
+		aup.pages.user.pointsHelper.hide();
 	},
 
     onSubscriptionsData : function(resp)
@@ -280,9 +280,9 @@ WHP.pages.user = {
 		var userId = parseInt(params[0]);
 		if (isNaN(userId))
 		{
-			log("WHP/user : parametres error");
+			log("aup/user : parametres error");
 			this.curPageId = null;
-			WHP.controller.showErrorPage(2);
+			aup.controller.showErrorPage(2);
 			return false;
 		}
 		this.params = params;
@@ -290,22 +290,22 @@ WHP.pages.user = {
         this.resetRestore();
 		
 			
-		if (WHP.auth.status)
-		if (userId == WHP.auth.status.id)
+		if (aup.auth.status)
+		if (userId == aup.auth.status.id)
 		{
-            WHP.controller.getPage(WHP.controller.pages[3].urlStr+"/"+q);
+            aup.controller.getPage(aup.controller.pages[3].urlStr+"/"+q);
             return false;
 		}
 		
 		
 		
 		this.curUserId = userId;	
-		this.timelineObject.controlUrl = WHP.netcalls.timelineCallUrl+"?user="+userId;
-		this.storiesObject.controlUrl = WHP.netcalls.storiesUserCall+"?user="+userId;
+		this.timelineObject.controlUrl = aup.netcalls.timelineCallUrl+"?user="+userId;
+		this.storiesObject.controlUrl = aup.netcalls.storiesUserCall+"?user="+userId;
 		
 		
-		this.subscribersObject.controlUrl = WHP.netcalls.followersCall+"?user="+userId;
-		this.subscriptionsObject.controlUrl = WHP.netcalls.followingsCall+"?user="+userId;
+		this.subscribersObject.controlUrl = aup.netcalls.followersCall+"?user="+userId;
+		this.subscriptionsObject.controlUrl = aup.netcalls.followingsCall+"?user="+userId;
 
 
 		this.getProfile();
@@ -316,7 +316,7 @@ WHP.pages.user = {
         if (this.restoreParams.setScroll)
         {
             window.scrollTo(0,this.restoreParams.scrollpos);
-            WHP.menu.setShadow(this.restoreParams.scrollpos);
+            aup.menu.setShadow(this.restoreParams.scrollpos);
             this.restoreParams.setScroll = false;
         }
     },
@@ -344,11 +344,11 @@ WHP.pages.user = {
         log("RESTORE!!! restore id =["+userId+"] ["+this.restoreParams.user+"] userId = ["+this.curUserId+"]");
 
 
-        if (WHP.auth.status)
-        if (userId == WHP.auth.status.id)
+        if (aup.auth.status)
+        if (userId == aup.auth.status.id)
         {
-            WHP.controller.getPage(WHP.controller.pages[3].urlStr+"/"+q, true);
-            //WHP.controller.pages[3].restore(e);
+            aup.controller.getPage(aup.controller.pages[3].urlStr+"/"+q, true);
+            //aup.controller.pages[3].restore(e);
 
             //log("RESTORE PROFILE");
             return false;
@@ -368,7 +368,7 @@ WHP.pages.user = {
 
         this.restoreParams.setScroll = true;
 
-        WHP.controller.showCanvas();
+        aup.controller.showCanvas();
 
         var chStr = "";
 
@@ -388,7 +388,7 @@ WHP.pages.user = {
             if (this.restoreParams.setScroll)
             {
                 window.scrollTo(0,this.restoreParams.scrollpos);
-                WHP.menu.setShadow(this.restoreParams.scrollpos);
+                aup.menu.setShadow(this.restoreParams.scrollpos);
                 this.restoreParams.setScroll = false;
             }
         }, this), 100)
@@ -410,9 +410,9 @@ WHP.pages.user = {
 	getProfile: function ()
 	{
 		$.ajax({
-			  url: WHP.netcalls.getProfileCall,
+			  url: aup.netcalls.getProfileCall,
               data : { user : this.curUserId, r : Math.random() },
-			  timeout : WHP.netTimeOut,
+			  timeout : aup.netTimeOut,
 			  success: bind(this.onData, this),
 			  error: bind(this.onError, this)
 		});
@@ -428,21 +428,21 @@ WHP.pages.user = {
 		var resp = getObjectJson(response);
 		if (resp.error)
 		{
-			log("WHP/pages/user : get picture error = ["+resp.error.code+"]");
-			if (!WHP.errors.hasNetError(resp))
+			log("aup/pages/user : get picture error = ["+resp.error.code+"]");
+			if (!aup.errors.hasNetError(resp))
 			{
-				WHP.controller.showErrorPage();
+				aup.controller.showErrorPage();
 			}
 			return false;
 		}	
 
-        resp.user = WHP.auth.escapeUser(resp.user);
+        resp.user = aup.auth.escapeUser(resp.user);
 		this.userObject = resp.user;
 		this.timelineObject.userObject = this.userObject;
 		
 		this.setProfile(resp);
 		this.setTitle(resp);
-		WHP.controller.showCanvas();
+		aup.controller.showCanvas();
 		
 		var qStr = "";
 		if (this.params.length>1)
@@ -456,7 +456,7 @@ WHP.pages.user = {
 	
 	onError : function (e)
 	{
-		log("WHP/pages/user: Error while loading actual data! : ["+e+"]");
+		log("aup/pages/user: Error while loading actual data! : ["+e+"]");
 	},	
 	
 	
@@ -495,7 +495,7 @@ WHP.pages.user = {
 	
 	setBk : function ()
 	{
-		var _link = "http://"+WHP.domain+"/gui/profile_default_bk.jpg";
+		var _link = "http://"+aup.domain+"/gui/profile_default_bk.jpg";
 		if (this.bk)
 		{
 			_link = this.bk['i1000x314'];
@@ -557,7 +557,7 @@ WHP.pages.user = {
 	setButtonLabel: function (_q)
 	{
 		var labl = $(this.followButton).find(".control_button_label");
-		if (WHP.auth.status)
+		if (aup.auth.status)
 		{
 			
 			if (this.follow)
@@ -575,19 +575,19 @@ WHP.pages.user = {
 	
 	clickFollowBut: function (e)
 	{
-		if (!WHP.auth.status)
+		if (!aup.auth.status)
 		{
-            WHP.loginMenus.showLoginMenu();
+            aup.loginMenus.showLoginMenu();
 			return false;	
 		}
 		
-		var call = WHP.netcalls.followCall;
+		var call = aup.netcalls.followCall;
 		
 		if (this.follow)
         {
-			call = WHP.netcalls.unfollowCall;
+			call = aup.netcalls.unfollowCall;
         }else{
-            WHP.opengraph.makeFolowAction(this.curUserId);
+            aup.opengraph.makeFolowAction(this.curUserId);
         }
 		
 		var labl = $(this.followButton).find(".control_button_label");
@@ -595,7 +595,7 @@ WHP.pages.user = {
 		$.ajax({
 			  url: call+"?r="+Math.random() ,
               data : { user : this.curUserId },
-			  timeout : WHP.netTimeOut,
+			  timeout : aup.netTimeOut,
 			  success: bind(this.onFollowButCall, this),
 			  error: bind(this.onError, this)
 		});
@@ -620,7 +620,7 @@ WHP.pages.user = {
 		var resp = getObjectJson(response);			
 		if (resp.error)
 		{
-			WHP.errors.hasNetError(resp);
+			aup.errors.hasNetError(resp);
 			return false;
 		}
 
@@ -642,7 +642,7 @@ WHP.pages.user = {
 	setTitle : function (resp)
 	{
 		this.title = resp.user.name;	 
-		WHP.controller.setTitle(); 
+		aup.controller.setTitle(); 
 	},
 	
 	detectState : function (q, _NotChangeLink)
@@ -687,12 +687,12 @@ WHP.pages.user = {
 			var urla = this.urlStr+"/"+this.curUserId+"/"+stateStr;
             if (!_NotChangeLink)
             {
-                setLink( "http://" + WHP.domain + "/" + urla);
+                setLink( "http://" + aup.domain + "/" + urla);
             }
 		}
 
-        WHP.shares.hideAct2();
-		//WHP.resetH();
+        aup.shares.hideAct2();
+		//aup.resetH();
 	},
 	
 	
@@ -717,7 +717,7 @@ WHP.pages.user = {
 		{
 			this.windCont.style.display = "block";
 			this.setPos();		
-			//WHP.resetH();
+			//aup.resetH();
 		},
 		
 		setPos: function ()

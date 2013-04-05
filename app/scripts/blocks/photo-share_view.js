@@ -1,4 +1,4 @@
-whp.PhotoShareView = Backbone.View.extend({
+aup.PhotoShareView = Backbone.View.extend({
 	template: 	'blocks/photo-share',
 	tagName: 	'div',
 	className: 	'photo-share',
@@ -12,7 +12,7 @@ whp.PhotoShareView = Backbone.View.extend({
 	},
 
 	initialize: function(options){
-		this.template = whp.Templates.get(this.template);
+		this.template = aup.Templates.get(this.template);
 		this.render();
 
 		this.model.on("reportphoto:success reportphoto:error", function() {

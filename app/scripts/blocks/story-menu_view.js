@@ -1,4 +1,4 @@
-whp.StoryMenuView = Backbone.View.extend({
+aup.StoryMenuView = Backbone.View.extend({
 	template: "blocks/story-menu",
 	tagName: "div",
 	className: "story-menu",
@@ -13,7 +13,7 @@ whp.StoryMenuView = Backbone.View.extend({
 	},
 
 	initialize: function(){
-		this.template = whp.Templates.get(this.template);
+		this.template = aup.Templates.get(this.template);
 		this.model.on("change", this.render, this);
 		this.model.on("activate", this.activate, this);
 		this.model.on("sleep", this.sleep, this);

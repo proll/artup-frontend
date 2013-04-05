@@ -1,4 +1,4 @@
-whp.Photo = Backbone.Model.extend({
+aup.Photo = Backbone.Model.extend({
 	url: "/api/photo/",
 	defaults: {
 		sleeped: true,
@@ -59,27 +59,27 @@ whp.Photo = Backbone.Model.extend({
 			template = 'blocks/photo_phone';
 		}
 
-		this.view = new whp.PhotoView({template:template, model:this});
+		this.view = new aup.PhotoView({template:template, model:this});
 		this.on("load:success", this.initMisc, this)
 	},
 
 
 	initMisc: function () {
-		this.photo_likers = new whp.PhotoLikers({
+		this.photo_likers = new aup.PhotoLikers({
 			photo_id: 		this.get("photo_id"),
 			likers_count: 	this.get("photo").like,
 			photo_model: 	this
 		})
 		this.view.addLikers(this.photo_likers);
 
-		this.photo_comments = new whp.CommentPane({
+		this.photo_comments = new aup.CommentPane({
 			photo_id: 		this.get("photo_id"),
 			limit:          6,
 			total: 			this.get("photo").comments_count
 		});
 		this.view.addComments(this.photo_comments);
 
-		this.photo_share = new whp.PhotoShare({
+		this.photo_share = new aup.PhotoShare({
 			photo_id: 			this.get("photo_id"),
 			photo_link: 		this.get('photo').i1000x1000,
 			photo_sm_link: 		this.get('photo').i106x106,

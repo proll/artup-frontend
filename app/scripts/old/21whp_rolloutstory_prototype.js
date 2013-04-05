@@ -1,4 +1,4 @@
-whp_rolloutstory_proto = function () { return {
+aup_rolloutstory_proto = function () { return {
 	//controller parametres
 	inited : false,
 	
@@ -109,7 +109,7 @@ whp_rolloutstory_proto = function () { return {
 
         _elem.downloadButtonT = _elem.find(".timeline_empty_download_iphone");
 
-        _elem.downloadButtonT.click(function() { WHP.stats.trackDownload("DOWNLOAD_STORIES_EMPTY") });
+        _elem.downloadButtonT.click(function() { aup.stats.trackDownload("DOWNLOAD_STORIES_EMPTY") });
     },
 
     sendRequest : function(e)
@@ -121,9 +121,9 @@ whp_rolloutstory_proto = function () { return {
             return false;
 
         $.ajax({
-            url:WHP.netcalls.promoCall,
+            url:aup.netcalls.promoCall,
             data : { r : Math.random(), email :  this.input.val() },
-            timeout:WHP.netTimeOut,
+            timeout:aup.netTimeOut,
             success:bind(this.parent.promoOk, this),
             error:bind(this.parent.promoFail, this)
         });
@@ -197,7 +197,7 @@ whp_rolloutstory_proto = function () { return {
 			return false;
 			
 		if (!this.initLoad)
-			WHP.controller.scrollToPos(0,0);
+			aup.controller.scrollToPos(0,0);
 			
 		if (this.mainObject.css('display') != 'block')
 			this.mainObject.css({display : 'block'});
@@ -208,7 +208,7 @@ whp_rolloutstory_proto = function () { return {
 		$.ajax({
 			  url: this.controlUrl,
 			  data : { r : Math.random() },
-			  timeout : WHP.netTimeOut,
+			  timeout : aup.netTimeOut,
 			  success: bind(this.onData, this),
 			  error: bind(this.onError, this)
 		});
@@ -224,10 +224,10 @@ whp_rolloutstory_proto = function () { return {
 		var resp = getObjectJson(response);		
 		if (resp.error)
 		{
-			log("WHP/timeline_prot : error while loading page data! Err =["+response+"]");
-			if (!WHP.errors.hasNetError(resp))
+			log("aup/timeline_prot : error while loading page data! Err =["+response+"]");
+			if (!aup.errors.hasNetError(resp))
 			{
-				WHP.controller.showErrorPage();
+				aup.controller.showErrorPage();
 			}
 			return false;
 		}
@@ -270,7 +270,7 @@ whp_rolloutstory_proto = function () { return {
             if (this.showEmpty)
             {
                 log("SET EMPTY!!");
-                WHP.stats.trackEmptyStories();
+                aup.stats.trackEmptyStories();
                 this.mainCanvas.append(this.emptyTemplate);
             }else{
                 this.mainCanvas.append(this.emptyElement);
@@ -285,7 +285,7 @@ whp_rolloutstory_proto = function () { return {
 		
 		
 		//log(response);
-		//WHP.resetH();
+		//aup.resetH();
 		this.initLoad = false;
 	},
 	
@@ -395,12 +395,12 @@ whp_rolloutstory_proto = function () { return {
                     setTimeout(bind(function() {
                         var scrollPos = this.parentLine.offset().top-90 + getScrollTop();
                         log("scrollto = ["+scrollPos+"] ["+getScrollTop()+"]");
-                        WHP.smoothScrollTo(0, scrollPos, null, true);
+                        aup.smoothScrollTo(0, scrollPos, null, true);
                     }, this), 200);
                 }else{
                     var scrollPos = this.parentLine.offset().top-90;
                     log("scrollto = ["+scrollPos+"]");
-                    WHP.smoothScrollTo(0, scrollPos, null, true);
+                    aup.smoothScrollTo(0, scrollPos, null, true);
 
                 }
 
@@ -423,8 +423,8 @@ whp_rolloutstory_proto = function () { return {
         }
 
         log("CURN = ["+this.N+"]");
-        WHP.pages.photo.imagesList.setContent(_arr, this.N);
-        //WHP.controller.navigateTo(this.site_url);
+        aup.pages.photo.imagesList.setContent(_arr, this.N);
+        //aup.controller.navigateTo(this.site_url);
     },
 	
 	createPageImage: function(resp)
@@ -452,7 +452,7 @@ whp_rolloutstory_proto = function () { return {
         }
 
         setImageOnload(a.image, resp['i212x212'], a.image_cont, bind(this.faderHider, a));
-        a.site_url = WHP.links.getPhotoLink(resp.id);
+        a.site_url = aup.links.getPhotoLink(resp.id);
         a.image_link.click(bind(this.getPhotoPage, a));
 		a.image_link.attr('href', a.site_url);
 
@@ -627,7 +627,7 @@ whp_rolloutstory_proto = function () { return {
 
         if (A==1)
         {
-            //WHP.resetH();
+            //aup.resetH();
         }
 	},
 	
@@ -703,14 +703,14 @@ whp_rolloutstory_proto = function () { return {
 	onError: function(response)
 	{
 		var status = response['status'];
-		log("WHP/timeline_prot : error status = ["+status+"]");
+		log("aup/timeline_prot : error status = ["+status+"]");
 		this.loading = false;
 		if (status!=0)
 		{
 			log("Reload data");
 			this.loadElements();
 		}
-		//WHP.controller.showErrorPage();
+		//aup.controller.showErrorPage();
 	},
 	
 	clearCanvas: function()

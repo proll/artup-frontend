@@ -21,7 +21,7 @@ var browser = {
 
 
 
-window.whp = {
+window.aup = {
 	root: "http://webdev.weheartpics.com",
 	Models: {},
 	Collections: {},
@@ -53,7 +53,7 @@ window.whp = {
 		_.each(window.templates.files, function(templateName){
 			var file = templates.path + "/" + templateName + "." + templates.ext;
 			files.push( $.get(file, function(templateData){
-				whp.Templates.add(templateName, templateData);
+				aup.Templates.add(templateName, templateData);
 			}));
 		});
 		return files;
@@ -62,7 +62,7 @@ window.whp = {
 
 		// Templates preloaded TODO: builder must inject templates into body
 		$.when.apply(this, this.preloadTemplates()).done(function(){
-			whp.error = function(text, context){
+			aup.error = function(text, context){
 				var error = "";
 				// if(context && testErrors[context]){
 				// 	error = testErrors[context][text];
@@ -73,9 +73,9 @@ window.whp = {
 				return error || text;
 			}
 			/**
-			 * whp app initialization
+			 * aup app initialization
 			 */
-			whp.app = new whp.App({ 
+			aup.app = new aup.App({ 
 				debug: true,
 				language: "ru"
 			});
@@ -90,7 +90,7 @@ window.whp = {
 			if($(this).attr("target")) return true;
 			evt.stopPropagation();
 			evt.preventDefault();
-			whp.app.router.navigate($(this).attr("href"), {trigger: true});
+			aup.app.router.navigate($(this).attr("href"), {trigger: true});
 			return false;
 		});
 	},
@@ -101,7 +101,7 @@ window.whp = {
 		console.error(desc);
 	},
 	navigate: function (path, options) {
-		whp.app.router.navigate(path, options);
+		aup.app.router.navigate(path, options);
 	}
 };
 
@@ -117,8 +117,8 @@ Backbone.sync = function(method, model, options){
 		}
 	}else{
 		credentials = {
-			uid: whp.app.user.get("uid"),
-			token: whp.app.user.get("token")
+			uid: aup.app.user.get("uid"),
+			token: aup.app.user.get("token")
 		}
 	}
 	options.url = (options.url || (model.url && _.result(model, 'url'))) + "?" + _.map(credentials, function(value, key){ return key+"="+value}).join("&");
@@ -126,6 +126,6 @@ Backbone.sync = function(method, model, options){
 }
 
 $(document).ready(function(){
-	_.extend(whp, Backbone.Events);
-	whp.init();
+	_.extend(aup, Backbone.Events);
+	aup.init();
 });

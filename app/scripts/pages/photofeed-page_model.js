@@ -1,4 +1,4 @@
-whp.PhotoFeedPage = whp.Page.extend({
+aup.PhotoFeedPage = aup.Page.extend({
 	visited: false,
 	defaults: {
 	},
@@ -10,13 +10,13 @@ whp.PhotoFeedPage = whp.Page.extend({
 		if(!this.visited) {
 
 			this.visited = true;
-			this.view = new whp.PhotoFeedPageView({
+			this.view = new aup.PhotoFeedPageView({
 				model: this, 
 				template:"pages/photofeed-page"
 			});
-			this.timeline = new whp.Timeline(options);
-			// this.menu = new whp.ExploreMenu(options);
-			// this.story_menu = new whp.StoryMenu(options);
+			this.timeline = new aup.Timeline(options);
+			// this.menu = new aup.ExploreMenu(options);
+			// this.story_menu = new aup.StoryMenu(options);
 			// this.story_menu.fetch();
 
 			this.view.render();

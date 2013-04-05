@@ -1,4 +1,4 @@
-whp.ExplorePage = whp.Page.extend({
+aup.ExplorePage = aup.Page.extend({
 	visited: false,
 	defaults: {
 		uid: null
@@ -6,10 +6,10 @@ whp.ExplorePage = whp.Page.extend({
 
 	initialize: function(options){
 		options 		= options || {};
-		whp.on("usersettings:ready", function(user_obj){
+		aup.on("usersettings:ready", function(user_obj){
 			this.set("uid", user_obj.user.id);
 		}, this);
-		whp.on("auth:clear", function(user_obj){
+		aup.on("auth:clear", function(user_obj){
 			this.unset("uid");
 		}, this);
 
@@ -24,13 +24,13 @@ whp.ExplorePage = whp.Page.extend({
 		if(!this.visited) {
 
 			this.visited = true;
-			this.view = new whp.ExplorePageView({
+			this.view = new aup.ExplorePageView({
 				model: this, 
 				template:"pages/explore-page"
 			});
-			this.grid = new whp.PicTileGrid( _.extend(options, {user: this.get("uid")}) );
-			this.menu = new whp.ExploreMenu(options);
-			this.story_menu = new whp.StoryMenu(options);
+			this.grid = new aup.PicTileGrid( _.extend(options, {user: this.get("uid")}) );
+			this.menu = new aup.ExploreMenu(options);
+			this.story_menu = new aup.StoryMenu(options);
 			this.story_menu.fetch();
 
 			this.view.render();

@@ -1,4 +1,4 @@
-WHP.pages.profile = {
+aup.pages.profile = {
 
 	urlStr : "profile",
 
@@ -101,8 +101,8 @@ WHP.pages.profile = {
 		
 		//fedd object init
 		this.timelineCont = $(this.mainObject).find(".timeline_box");		
-		this.timelineObject = whp_timeline_proto();		
-		//this.timelineObject.prefix = this.urlStr2+"/"+WHP.auth.status.id;
+		this.timelineObject = aup_timeline_proto();		
+		//this.timelineObject.prefix = this.urlStr2+"/"+aup.auth.status.id;
 		this.timelineObject.lastposRelated = false;
 		this.timelineObject.showEvents = false;
 		this.timelineObject.displayLastVisit = false;
@@ -136,13 +136,13 @@ WHP.pages.profile = {
 		
 		
 		this.storiesCont = $(this.mainObject).find(".rolloutstory_box");		
-		this.storiesObject = whp_rolloutstory_proto();
+		this.storiesObject = aup_rolloutstory_proto();
         this.storiesObject.showEmpty = true;
 		this.storiesObject.init( this.storiesCont );
 		
 		
 		this.privateCont = $(this.mainObject).find(".private_box");
-		this.privateObject = new whp_feed_proto();	
+		this.privateObject = new aup_feed_proto();	
 		this.privateObject.changeUrl = true;
         this.privateObject.useGalleryPhoto = true;
 		this.privateObject.init(this.privateCont);	
@@ -159,7 +159,7 @@ WHP.pages.profile = {
 		
 		
 		this.subscribersCont = $(this.mainObject).find(".subscribers_box");		
-		this.subscribersObject = whp_subscribers_proto();
+		this.subscribersObject = aup_subscribers_proto();
 		this.subscribersObject.onSubscribe = bind(this.onSubscribeCallback, this);
 		this.subscribersObject.onDeSubscribe = bind(this.onSubscribeCallback, this);
 		this.subscribersObject.init( this.subscribersCont );
@@ -167,7 +167,7 @@ WHP.pages.profile = {
 
         this.subscriptionsCont = $(this.mainObject).find(".subscriptions_box");
 
-        this.newfacesObject = whp_newfaces_proto();
+        this.newfacesObject = aup_newfaces_proto();
         this.newfacesObject.onSubscribe = bind(this.onNewfacesCallback, this);
         this.newfacesObject.onDeSubscribe = bind(this.onNewfacesCallback, this);
         this.newfacesObject.onDataLoad = bind(this.onNewFacesData, this);
@@ -175,7 +175,7 @@ WHP.pages.profile = {
 
 		
 
-		this.subscriptionsObject = whp_subscribers_proto();
+		this.subscriptionsObject = aup_subscribers_proto();
 		this.subscriptionsObject.onSubscribe = bind(this.onSubscriptionCallback, this);
 		this.subscriptionsObject.onDeSubscribe = bind(this.onSubscriptionCallback, this);
 		this.subscriptionsObject.init( this.subscriptionsCont );
@@ -248,7 +248,7 @@ WHP.pages.profile = {
 				urlPrefix : "",
 				show : bind(function()
 				{
-                    //WHP.stats.trackPageChange("/user/"+this.curUserId+"/");
+                    //aup.stats.trackPageChange("/user/"+this.curUserId+"/");
 					this.timelineCont.css({ display : 'block' });
 					this.timelineObject.show(0);
 				}, this),
@@ -259,9 +259,9 @@ WHP.pages.profile = {
 				}, this),
                 restore : bind(function()
                 {
-                    if (WHP.controller.removedList.length>0)
+                    if (aup.controller.removedList.length>0)
                     {
-                        this.timelineObject.rebuildTimeline(WHP.controller.removedList, this.restoreParams);
+                        this.timelineObject.rebuildTimeline(aup.controller.removedList, this.restoreParams);
                     }else{
                         this.timelineObject.restore();
                     }
@@ -280,7 +280,7 @@ WHP.pages.profile = {
 				urlPrefix : "stories",
 				show : bind(function()
 				{
-                    //WHP.stats.trackPageChange("/user/"+this.curUserId+"/stories/");
+                    //aup.stats.trackPageChange("/user/"+this.curUserId+"/stories/");
 					this.storiesCont.css({ display : 'block' });
 					this.storiesObject.show();
 				}, this),
@@ -291,7 +291,7 @@ WHP.pages.profile = {
 				}, this),
                 restore : bind(function()
                 {
-                    if (WHP.controller.removedList.length>0)
+                    if (aup.controller.removedList.length>0)
                     {
                         this.storiesObject.show();
                     }else{
@@ -312,7 +312,7 @@ WHP.pages.profile = {
 				urlPrefix : "subscribers",
 				show : bind(function()
 				{
-                    //WHP.stats.trackPageChange("/user/"+this.curUserId+"/subscribers/");
+                    //aup.stats.trackPageChange("/user/"+this.curUserId+"/subscribers/");
 					this.subscribersCont.css({ display : 'block' });
 					this.subscribersObject.show();
 				}, this),
@@ -338,7 +338,7 @@ WHP.pages.profile = {
 				urlPrefix : "subscriptions",
 				show : bind(function()
 				{
-                    //WHP.stats.trackPageChange("/user/"+this.curUserId+"/subscriptions/");
+                    //aup.stats.trackPageChange("/user/"+this.curUserId+"/subscriptions/");
 					this.subscriptionsCont.css({ display : 'block' });
 
 					this.subscriptionsObject.show();
@@ -372,7 +372,7 @@ WHP.pages.profile = {
 				urlPrefix : "private",
 				show : bind(function()
 				{
-                    //WHP.stats.trackPageChange("/user/"+this.curUserId+"/private/");
+                    //aup.stats.trackPageChange("/user/"+this.curUserId+"/private/");
 					this.privateCont.css({ display : 'block' });
 					this.privateObject.show(0);
 				}, this),
@@ -385,7 +385,7 @@ WHP.pages.profile = {
                 restore : bind(function()
                 {
                     this.privateCont.css({ display : 'block' });
-                    if (WHP.controller.removedList.length>0)
+                    if (aup.controller.removedList.length>0)
                     {
                         log("AFTER REMOVE!!");
                         this.privateObject.show(0);
@@ -424,7 +424,7 @@ WHP.pages.profile = {
     clickChangeName : function(e)
     {
         this.window1.css({display:"block"});
-        WHP.main_fader.show();
+        aup.main_fader.show();
 
         //positions
         var scrollTop = getScrollTop();
@@ -433,12 +433,12 @@ WHP.pages.profile = {
         if (browser.ie)
         {
             this.window1.css({ position : 'absolute' });
-            this.window1.css({ top : (scrollTop + (WHP.screenH - this.window1.height())*0.5 )+'px', left : (WHP.screenWl-285)*0.5 +'px' });
+            this.window1.css({ top : (scrollTop + (aup.screenH - this.window1.height())*0.5 )+'px', left : (aup.screenWl-285)*0.5 +'px' });
         }else
-            this.window1.css({ top : (WHP.screenH - this.window1.height())*0.5 +'px', left : (WHP.screenWl-285)*0.5 +'px' });
+            this.window1.css({ top : (aup.screenH - this.window1.height())*0.5 +'px', left : (aup.screenWl-285)*0.5 +'px' });
 
-        this.window1.input_fn.val(WHP.auth.userObject.first_name);
-        this.window1.input_ln.val(WHP.auth.userObject.last_name);
+        this.window1.input_fn.val(aup.auth.userObject.first_name);
+        this.window1.input_ln.val(aup.auth.userObject.last_name);
         //this.window1.setState1();
         //this.window1.page1.input_pass.focus();
 
@@ -466,9 +466,9 @@ WHP.pages.profile = {
 
 
         $.ajax({
-            url:WHP.netcalls.setNameCall,
+            url:aup.netcalls.setNameCall,
             data : { r : Math.random(), first_name : fn, last_name : ln },
-            timeout:WHP.netTimeOut,
+            timeout:aup.netTimeOut,
             success:bind(this.onsetNameOk, this),
             error:bind(this.onsetNameFail, this)
         });
@@ -487,7 +487,7 @@ WHP.pages.profile = {
         }
 
         this.hideWindow1();
-        WHP.controller.reloadPage();
+        aup.controller.reloadPage();
     },
 
     onsetNameFail : function(e)
@@ -505,7 +505,7 @@ WHP.pages.profile = {
 
         log("hideWindow2");
         this.window1.css({display:"none"});
-        WHP.main_fader.hide();
+        aup.main_fader.hide();
     },
 
 
@@ -531,7 +531,7 @@ WHP.pages.profile = {
 	
 	hideSubWindows : function ()
 	{
-		WHP.pages.profile.pointsHelper.hide();
+		aup.pages.profile.pointsHelper.hide();
 	},
 
     bkMouseDown : function (e)
@@ -614,14 +614,14 @@ WHP.pages.profile = {
         this.bkMove.drUgEnable = false;
         this.bkImage.css({visibility : 'hidden'});
 
-        this.bkContainer.css({ 'background-image' : 'url(/gui/loading_ani.gif?whp16)'});
+        this.bkContainer.css({ 'background-image' : 'url(/gui/loading_ani.gif?aup16)'});
         setClass(this.bkImage, "profile_background_img");
 
 
         $.ajax({
-            url: WHP.netcalls.shiftBkCall ,
+            url: aup.netcalls.shiftBkCall ,
             data : { y : -this.bkMove.bkPos },
-            timeout : WHP.netTimeOut,
+            timeout : aup.netTimeOut,
             success: bind(this.applyCallback, this),
             error: bind(this.applyCallback, this)
         });
@@ -688,12 +688,12 @@ WHP.pages.profile = {
 
         if (String(document.location).indexOf("/profile")>-1)
         {
-            if (!WHP.auth.status)
+            if (!aup.auth.status)
             {
-                WHP.controller.navigateTo("popular/");
+                aup.controller.navigateTo("popular/");
                 return false;
             }else{
-                WHP.controller.navigateTo("user/"+WHP.auth.status.id);
+                aup.controller.navigateTo("user/"+aup.auth.status.id);
             }
         }
 
@@ -703,19 +703,19 @@ WHP.pages.profile = {
         this.resetRestore();
 
 
-		this.curUserId = WHP.auth.status.id;	
-		this.timelineObject.controlUrl = WHP.netcalls.timelineCallUrl+"?user="+this.curUserId;
-		this.storiesObject.controlUrl = WHP.netcalls.storiesUserCall+"?user="+this.curUserId;
+		this.curUserId = aup.auth.status.id;	
+		this.timelineObject.controlUrl = aup.netcalls.timelineCallUrl+"?user="+this.curUserId;
+		this.storiesObject.controlUrl = aup.netcalls.storiesUserCall+"?user="+this.curUserId;
 		
-		this.subscribersObject.controlUrl = WHP.netcalls.followersCall+"?user="+this.curUserId;
-		this.subscriptionsObject.controlUrl = WHP.netcalls.followingsCall+"?user="+this.curUserId;
+		this.subscribersObject.controlUrl = aup.netcalls.followersCall+"?user="+this.curUserId;
+		this.subscriptionsObject.controlUrl = aup.netcalls.followingsCall+"?user="+this.curUserId;
 
-        this.newfacesObject.controlUrl = WHP.netcalls.newFacesCall;
+        this.newfacesObject.controlUrl = aup.netcalls.newFacesCall;
 		
-		this.privateObject.controlUrl = WHP.netcalls.userPhotosCall+"?user="+this.curUserId+"&area=private";
+		this.privateObject.controlUrl = aup.netcalls.userPhotosCall+"?user="+this.curUserId+"&area=private";
 
-        this.privateObject.urlPrefix = this.urlStr2+"/"+WHP.auth.status.id;
-        this.timelineObject.prefix = this.urlStr2+"/"+WHP.auth.status.id;
+        this.privateObject.urlPrefix = this.urlStr2+"/"+aup.auth.status.id;
+        this.timelineObject.prefix = this.urlStr2+"/"+aup.auth.status.id;
 
 
 
@@ -771,7 +771,7 @@ WHP.pages.profile = {
 
         this.restoreParams.setScroll = true;
 
-        WHP.controller.showCanvas();
+        aup.controller.showCanvas();
 
         var chStr = "";
         if (params.length>1)
@@ -806,9 +806,9 @@ WHP.pages.profile = {
 	getProfile: function ()
 	{		
 		$.ajax({
-			  url: WHP.netcalls.getProfileCall,
+			  url: aup.netcalls.getProfileCall,
               data : { user : this.curUserId, r : Math.random() },
-			  timeout : WHP.netTimeOut,
+			  timeout : aup.netTimeOut,
 			  success: bind(this.onData, this),
 			  error: bind(this.onError, this)
 		});
@@ -824,10 +824,10 @@ WHP.pages.profile = {
 		var resp = getObjectJson(response);		
 		if (resp.error)
 		{
-			log("WHP/pages/user : get picture error = ["+resp.error.code+"]");
-			if (!WHP.errors.hasNetError(resp))
+			log("aup/pages/user : get picture error = ["+resp.error.code+"]");
+			if (!aup.errors.hasNetError(resp))
 			{
-				WHP.controller.showErrorPage();
+				aup.controller.showErrorPage();
 			}
 			return false;
 		}	
@@ -842,7 +842,7 @@ WHP.pages.profile = {
 		this.setTitle(resp);
 
         this.active = true;
-		WHP.controller.showCanvas();
+		aup.controller.showCanvas();
 		
 		var qStr = "";
 		if (this.params.length>1)
@@ -858,7 +858,7 @@ WHP.pages.profile = {
 	
 	onError : function (e)
 	{
-		log("WHP/pages/user: Error while loading actual data! : ["+e+"]");
+		log("aup/pages/user: Error while loading actual data! : ["+e+"]");
 	},	
 	
 	
@@ -898,7 +898,7 @@ WHP.pages.profile = {
 	
 	setBk : function ()
 	{
-		var _link = "http://"+WHP.domain+"/gui/profile_default_bk.jpg";
+		var _link = "http://"+aup.domain+"/gui/profile_default_bk.jpg";
 		if (this.bk)
 		{
             _link = this.bk['i1000x314'];
@@ -915,7 +915,7 @@ WHP.pages.profile = {
         this.bkMove.moving = false;
         this.bkMove.drUgEnable = false;
 
-        this.bkContainer.css({ 'background-image' : 'url(/gui/loading_ani.gif?whp16)'});
+        this.bkContainer.css({ 'background-image' : 'url(/gui/loading_ani.gif?aup16)'});
         setClass(this.bkImage, "profile_background_img");
         this.bkImage.css({  height : 314+'px', width: 1000+'px', top:0+'px'});
         setImageOnload(this.bkImage, _link, this.bkContainer );
@@ -998,7 +998,7 @@ WHP.pages.profile = {
         {
             this.subscriptionsObject.removeElement(obj.target.uid);
         }
-        //WHP.resetH();
+        //aup.resetH();
         //this.subscriptionsObject.addElement(_a);
     },
 
@@ -1010,7 +1010,7 @@ WHP.pages.profile = {
             this.newFaces.showCallBack(resp);
             this.subscriptionsObject.refresh();
         }
-        //WHP.resetH();
+        //aup.resetH();
     },
 	
 	
@@ -1018,7 +1018,7 @@ WHP.pages.profile = {
 	setTitle : function (resp)
 	{
 		this.title = resp.user.name;	 
-		WHP.controller.setTitle(); 
+		aup.controller.setTitle(); 
 	},
 	
 	detectState : function (q, _NotChangeLink)
@@ -1058,14 +1058,14 @@ WHP.pages.profile = {
 				if (this.states[this.curState].urlPrefix != "")
 					stateStr  = this.states[this.curState].urlPrefix+"/";
 			}
-			var urla = this.urlStr2+"/"+WHP.auth.status.id+"/"+stateStr;
+			var urla = this.urlStr2+"/"+aup.auth.status.id+"/"+stateStr;
             if (!_NotChangeLink)
             {
-			    setLink( "http://" + WHP.domain + "/" + urla);
+			    setLink( "http://" + aup.domain + "/" + urla);
             }
 		}
-        WHP.shares.hideAct2();
-		//WHP.resetH();
+        aup.shares.hideAct2();
+		//aup.resetH();
 	},
 
     moveButtons : function(_dY)
@@ -1095,7 +1095,7 @@ WHP.pages.profile = {
 		{
 			this.windCont.style.display = "block";
 			this.setPos();		
-			//WHP.resetH();
+			//aup.resetH();
 		},
 
 
@@ -1175,12 +1175,12 @@ WHP.pages.profile = {
         {
             if (this.oneUser)
             {
-                var call = WHP.netcalls.followCall;
-                WHP.opengraph.makeFolowAction(this.userId);
+                var call = aup.netcalls.followCall;
+                aup.opengraph.makeFolowAction(this.userId);
                 $.ajax({
                     url: call,
                     data : { user : this.userId, r : Math.random() },
-                    timeout : WHP.netTimeOut,
+                    timeout : aup.netTimeOut,
                     success: bind(this.followResponse, this),
                     error: bind(this.followError, this)
                 });
@@ -1194,11 +1194,11 @@ WHP.pages.profile = {
         {
             if (this.oneUser)
             {
-                var call = WHP.netcalls.unfollowCall;
+                var call = aup.netcalls.unfollowCall;
                 $.ajax({
                     url: call,
                     data : { user : this.userId, r : Math.random() },
-                    timeout : WHP.netTimeOut,
+                    timeout : aup.netTimeOut,
                     success: bind(this.followResponse, this),
                     error: bind(this.followError, this)
                 });
@@ -1230,9 +1230,9 @@ WHP.pages.profile = {
         {
             this.userL = 0;
             $.ajax({
-                url: WHP.netcalls.newFacesCall ,
+                url: aup.netcalls.newFacesCall ,
                 data : { r : Math.random() },
-                timeout : WHP.netTimeOut,
+                timeout : aup.netTimeOut,
                 success: bind(this.showCallBack, this),
                 error: bind(this.showCallBackErr, this)
             });
@@ -1243,10 +1243,10 @@ WHP.pages.profile = {
             var resp = getObjectJson(response);
             if (resp.error)
             {
-                log("WHP/pages/user : get picture error = ["+resp.error.code+"]");
-                if (!WHP.errors.hasNetError(resp))
+                log("aup/pages/user : get picture error = ["+resp.error.code+"]");
+                if (!aup.errors.hasNetError(resp))
                 {
-                    WHP.controller.showErrorPage();
+                    aup.controller.showErrorPage();
                 }
                 return false;
             }
@@ -1265,7 +1265,7 @@ WHP.pages.profile = {
                 }
 
 
-                var str = "<a class='newfaces_text' style='top:0px;' href='"+WHP.links.getUserProfileLink(resp.newfaces.list[0].id)+"'><b>"+resp.newfaces.list[0].name+"</b></a>";
+                var str = "<a class='newfaces_text' style='top:0px;' href='"+aup.links.getUserProfileLink(resp.newfaces.list[0].id)+"'><b>"+resp.newfaces.list[0].name+"</b></a>";
                 this.oneUser = true;
                 if (resp.newfaces.list.length>1)
                 {

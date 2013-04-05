@@ -1,4 +1,4 @@
-WHP.l10n.pages.photos = {
+aup.l10n.pages.photos = {
     "l10n_title": {
         selector: "#l10n_title",
         en: "Title",

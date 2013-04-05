@@ -1,11 +1,11 @@
-WHP.randomPage = {
+aup.randomPage = {
     randomPicsIds : [],
     randomCount : 0,
     active : false,
 	
 	clickButton: function (e)
 	{
-        WHP.stats.trackShuffle();
+        aup.stats.trackShuffle();
 		this.getRnd();
 	},
 	
@@ -13,13 +13,13 @@ WHP.randomPage = {
 	{
         if (this.active)
             return false;
-		WHP.controller.hideCanvas();
+		aup.controller.hideCanvas();
 
         this.active = true;
         $.ajax({
-            url: WHP.netcalls.randomImageCall,
+            url: aup.netcalls.randomImageCall,
             data : { r : Math.random() },
-            timeout : WHP.netTimeOut,
+            timeout : aup.netTimeOut,
             success: bind(this.rndImageCallback, this),
             error: bind(this.onError, this)
         });
@@ -56,10 +56,10 @@ WHP.randomPage = {
 		var resp = getObjectJson(response);	
 		if (resp.error)
 		{
-			log("WHP/random : get picture error = ["+resp.error.code+"]");
-			if (!WHP.errors.hasNetError(resp))
+			log("aup/random : get picture error = ["+resp.error.code+"]");
+			if (!aup.errors.hasNetError(resp))
 			{
-				WHP.controller.showErrorPage();
+				aup.controller.showErrorPage();
 			}
 			return false;
 		}
@@ -84,9 +84,9 @@ WHP.randomPage = {
 
 
 		//set photo page
-		var page = WHP.pages.photo;
-		WHP.controller.clearCurPage();
-		WHP.controller.setPage(page);
+		var page = aup.pages.photo;
+		aup.controller.clearCurPage();
+		aup.controller.setPage(page);
 
 		//set main variables
 
@@ -106,23 +106,23 @@ WHP.randomPage = {
 		page.share.resetShare();
         page.removePhoto.checkButtonVisibility();
 
-		var str = WHP.links.getPhotoLink(resp.photo.id);
+		var str = aup.links.getPhotoLink(resp.photo.id);
 		setLink(str);
-        WHP.menu.currentMenuPos();
+        aup.menu.currentMenuPos();
 		page.setTitle(resp);
 
-		WHP.controller.showCanvas();
-		WHP.menu.currentMenuPos();
+		aup.controller.showCanvas();
+		aup.menu.currentMenuPos();
 
-        WHP.controller.scrollToPos(0,0);
+        aup.controller.scrollToPos(0,0);
 	},
 
 
 	onError : function (e)
 	{
         this.active = false;
-		log("WHP/random : Error while loading actual data! : ["+e+"]");
-		WHP.controller.showErrorPage();
+		log("aup/random : Error while loading actual data! : ["+e+"]");
+		aup.controller.showErrorPage();
 	}
 }
 

@@ -1,4 +1,4 @@
-WHP.upload = {
+aup.upload = {
     allowed_types: /image.*/i,
 
     resize_width: 1000,
@@ -281,7 +281,7 @@ WHP.upload = {
             }
         });
         $("#upload-photo-share-items input").attr("checked", false);
-        $("#share-fb-label").css("display", WHP.auth.userSettings.opengraph ? "none" : "inline-block");
+        $("#share-fb-label").css("display", aup.auth.userSettings.opengraph ? "none" : "inline-block");
         $("#upload-photo-descr").val("");
 
         var self = this;
@@ -386,8 +386,8 @@ WHP.upload = {
         $("#upload-stories .stories_content, #upload-stories .dailystories_content").html("");
         $("#skip-stories").click(function() { self.completeUpload("timeline", 0) });
 
-        WHP.pages.stories.init(true);
-        WHP.pages.stories.loadCats();
+        aup.pages.stories.init(true);
+        aup.pages.stories.loadCats();
     },
 
     completeUpload: function(area, story_id) {
@@ -400,7 +400,7 @@ WHP.upload = {
         var is_tw = $("#share-twi").is(":checked") ? 1 : 0;
         var is_vk = $("#share-vk").is(":checked") ? 1 : 0;
         var is_pin = 0;
-        var is_og =  WHP.auth.userSettings.opengraph ? 1 : 0;
+        var is_og =  aup.auth.userSettings.opengraph ? 1 : 0;
 
         console.debug("Upload image...........", {
             area: area,
@@ -417,7 +417,7 @@ WHP.upload = {
         var data_url = self.canvas.toDataURL("image/jpeg");
 
         $.ajax({
-            url: WHP.netcalls.uploadCall,
+            url: aup.netcalls.uploadCall,
             data: {
                 area: area,
                 story: story_id,
@@ -430,7 +430,7 @@ WHP.upload = {
                 file: data_url
             },
             type: "POST",
-            timeout: WHP.netTimeOut,
+            timeout: aup.netTimeOut,
             success: function (r) {
                 log("OK");
                 log(r);
@@ -439,7 +439,7 @@ WHP.upload = {
                     $("#upload_close").unbind("click").click(function () { self.close() });
                     setTimeout(function() {
                         self.close();
-                        WHP.pages.timeline.show();
+                        aup.pages.timeline.show();
                         document.location.href = "/timeline";
                     }, 1500);
                 } else {
@@ -492,7 +492,7 @@ WHP.upload = {
 
     show: function() {
         $("#upload_popup").fadeIn();
-        WHP.contentCont.fadeOut();
+        aup.contentCont.fadeOut();
 
         this.init();
         this.showMain();
@@ -520,6 +520,6 @@ WHP.upload = {
     close: function() {
         this.success.hide();
         $("#upload_popup").fadeOut();
-        WHP.contentCont.show();
+        aup.contentCont.show();
     }
 };

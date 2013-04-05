@@ -1,4 +1,4 @@
-WHP.l10n.pages.footer = {
+aup.l10n.pages.footer = {
     "l10n_newsletter": {
         selector: "#l10n_newsletter",
         en: "Newsletter",

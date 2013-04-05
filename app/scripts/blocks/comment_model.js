@@ -1,4 +1,4 @@
-whp.Comment = Backbone.Model.extend({
+aup.Comment = Backbone.Model.extend({
 	defaults: {
 		// date: 1364412040,
 		// text: "Ты былааааа??????",
@@ -26,7 +26,7 @@ whp.Comment = Backbone.Model.extend({
 		// }
 	},
 	initialize: function (options) {
-		this.view = new whp.CommentView({model:this});
+		this.view = new aup.CommentView({model:this});
 	},
 
 	remove: function () {

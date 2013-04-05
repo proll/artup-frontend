@@ -1,4 +1,4 @@
-whp_feed_proto = function () { return {
+aup_feed_proto = function () { return {
 	//controller parametres
 	inited : false,
 	
@@ -115,7 +115,7 @@ whp_feed_proto = function () { return {
 		this.cleanUp(_off);
         this.photoContainer.append(this.loadingBar).css({ display : 'block'});
 		this.loadPhotoPack();
-		WHP.controller.setTitle();
+		aup.controller.setTitle();
 	},
 	
 	hide: function()
@@ -152,7 +152,7 @@ whp_feed_proto = function () { return {
 		{
 			var urla = this.urlPrefix+"/"+pageParam;
 			if (!this.show1)
-				setLink( "http://" + WHP.domain + "/" + urla);
+				setLink( "http://" + aup.domain + "/" + urla);
 		}
 		
 		this.curUrl = this.controlUrl;
@@ -161,7 +161,7 @@ whp_feed_proto = function () { return {
 		
 		$.ajax({
 			  url: this.controlUrl,
-			  timeout : WHP.netTimeOut,
+			  timeout : aup.netTimeOut,
 			  data : { offset : this.curOffset, limit : this.imageLimit, r :  Math.random() },
 			  success: bind(function (r,s,x){ var curl = url; this.onData(r,s,x, curl); }, this),
 			  error: bind(this.onError, this)
@@ -181,10 +181,10 @@ whp_feed_proto = function () { return {
 		var resp = getObjectJson(response);	
 		if (resp.error)
 		{
-			log("WHP/feed_prot : error while loading page data! Err =["+response+"]");
-			if (!WHP.errors.hasNetError(resp))
+			log("aup/feed_prot : error while loading page data! Err =["+response+"]");
+			if (!aup.errors.hasNetError(resp))
 			{
-				WHP.controller.showErrorPage();
+				aup.controller.showErrorPage();
 			}
 			return false;
 		}
@@ -226,7 +226,7 @@ whp_feed_proto = function () { return {
 		}
 		
 		if (this.controlCanvas)
-			WHP.controller.showCanvas()
+			aup.controller.showCanvas()
 		else
 			this.mainCont.css({ display : 'block' });
 			
@@ -234,12 +234,12 @@ whp_feed_proto = function () { return {
 			window.scroll(0,0);
 		
 		this.checkPagingState();	
-		//WHP.resetH();
+		//aup.resetH();
 	},
 
     getPhotoPage : function()
     {
-        WHP.pages.photo.imagesList.setContentLink(this.response, this.parent.curOffset + this.N, this.parent.controlUrl);
+        aup.pages.photo.imagesList.setContentLink(this.response, this.parent.curOffset + this.N, this.parent.controlUrl);
     },
 
 	newImage: function(resp)
@@ -273,7 +273,7 @@ whp_feed_proto = function () { return {
         {
             element_div.image_link.click(bind(this.getPhotoPage, element_div));
         }
-		element_div.image_link.attr('href', WHP.links.getPhotoLink( resp.id));
+		element_div.image_link.attr('href', aup.links.getPhotoLink( resp.id));
 
 
         setImageOnload(element_div.image, resp['i212x212'], element_div.image_cont);
@@ -284,14 +284,14 @@ whp_feed_proto = function () { return {
 	//error callback
 	onError : function (response, status, xhr)
 	{
-		log("WHP/feed_prot/ : Error while loading actual data! Err = ["+response+"]");
-		WHP.controller.showErrorPage();
+		log("aup/feed_prot/ : Error while loading actual data! Err = ["+response+"]");
+		aup.controller.showErrorPage();
 	},	
 	
 	getPage : function (_a)
 	{
 		if (this.controlCanvas)
-			WHP.controller.hideCanvas()
+			aup.controller.hideCanvas()
 		else
 			this.mainCont.css({ display : 'none' });
 			

@@ -1,6 +1,6 @@
-whp.PostCollection = Backbone.Collection.extend({
+aup.PostCollection = Backbone.Collection.extend({
 	url: "/api/timeline/",
-	model: whp.Post,
+	model: aup.Post,
 	more: true,
 
 	// 

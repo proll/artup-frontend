@@ -1,4 +1,4 @@
-whp.TimelineView = Backbone.View.extend({
+aup.TimelineView = Backbone.View.extend({
 	tagName: "div",
 	className: "timeline",
 

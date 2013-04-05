@@ -1,4 +1,4 @@
-whp_window_proto = function () { return {
+aup_window_proto = function () { return {
 	mainCall : "",
 	inited : false,
 	
@@ -113,7 +113,7 @@ whp_window_proto = function () { return {
 	mouseDownEvent : function (e)
 	{
 		this.scrollDown = true;
-		WHP.menu.downListEvent(this.scrollBarJQ);
+		aup.menu.downListEvent(this.scrollBarJQ);
 		
 		this.mousePos.dnX = e.pageX;
 		this.mousePos.dnY = e.pageY;		

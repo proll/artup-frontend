@@ -1,4 +1,4 @@
-whp.PhotoPageView = whp.PageView.extend({
+aup.PhotoPageView = aup.PageView.extend({
 	el: "body",
 
 	addPhoto: function (photo_model) {
@@ -6,7 +6,7 @@ whp.PhotoPageView = whp.PageView.extend({
 	},
 
 	render: function(in_popup){
-		this.popup_view = new whp.PopupView;
+		this.popup_view = new aup.PopupView;
 		this.popup_view.on('show', function(){
 			this.model.trigger("view:ready");
 		}, this);
@@ -21,7 +21,7 @@ whp.PhotoPageView = whp.PageView.extend({
 			this.popup_view.show();
 
 		} else {
-			this.setElement("#whp-container");
+			this.setElement("#aup-container");
 
 			if (this.renderedHtml) {
 				this.$el.append(this.renderedHtml);

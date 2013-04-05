@@ -1,4 +1,4 @@
-whp.CommentPane = Backbone.Model.extend({
+aup.CommentPane = Backbone.Model.extend({
 	url: "/api/photo/comment/add/",
 	defaults: {
 		offset: 	0,
@@ -15,7 +15,7 @@ whp.CommentPane = Backbone.Model.extend({
 
 	initialize: function (options) {
 
-		this.collection = new whp.CommentCollection();
+		this.collection = new aup.CommentCollection();
 
 		this.collection.on("load:success", function () {
 					this.set("offset", this.get("offset") + this.get("limit"));
@@ -40,7 +40,7 @@ whp.CommentPane = Backbone.Model.extend({
 				this.set('adding', false);
 			},this)
 
-		this.view = new whp.CommentPaneView({
+		this.view = new aup.CommentPaneView({
 			collection: this.collection, 
 			model: this
 		});
@@ -103,10 +103,10 @@ whp.CommentPane = Backbone.Model.extend({
 
 	// add my new comment
 	addMyComment: function(text) {
-		var new_comment = new whp.Comment({
+		var new_comment = new aup.Comment({
 			date: (new Date()).getTime()/1000,
 			text: text,
-			user: whp.app.user.settings.get("user")
+			user: aup.app.user.settings.get("user")
 		})
 		this.collection.unshift(new_comment);
 		this.addComment(text);

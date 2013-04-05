@@ -1,4 +1,4 @@
-WHP.menu = {
+aup.menu = {
 	inited : false,
 	panelAuth : null,
 	panelMenu : null,
@@ -33,7 +33,7 @@ WHP.menu = {
 		$('html').click(bind(this.htmlClick, this));
 		$('html').mouseup(bind(this.htmlMouseUp, this));
 		$('html').mousemove(bind(this.htmlMouseMove, this));
-        $("#show_upload").click(function() { WHP.upload.show() });
+        $("#show_upload").click(function() { aup.upload.show() });
 		
 		this.panelAuth = document.getElementById("header_controls");
 		this.panelMenu = document.getElementById("main_content");
@@ -53,9 +53,9 @@ WHP.menu = {
 		//menu button events
 		this.loginButton = this.menuNA.find(".controls_login_container").find(".controls_link_text");
 		this.logoutButton = $(this.panelAuth).find( ".controls_logout_button" );
-		this.logoutButton.click( function(e){ WHP.auth.logout();e.stopPropagation(); } );
-		this.loginButton.click( function(e){ WHP.loginMenus.showLoginMenu();e.stopPropagation(); } );
-		this.downloadButton.click(function(e) { WHP.download.togglePopup(e); e.preventDefault(); return false; });
+		this.logoutButton.click( function(e){ aup.auth.logout();e.stopPropagation(); } );
+		this.loginButton.click( function(e){ aup.loginMenus.showLoginMenu();e.stopPropagation(); } );
+		this.downloadButton.click(function(e) { aup.download.togglePopup(e); e.preventDefault(); return false; });
 
 		//auth
 
@@ -69,18 +69,18 @@ WHP.menu = {
         this.main_link_logo = $('#menu_layer').find(".main_link_logo");
         this.main_link_logo.click(bind(this.logoClickFunc, this));
 
-        WHP.loginMenus.init();
+        aup.loginMenus.init();
 
 		this.inited = true;
 	},
 
     logoClickFunc: function (e)
     {
-        if  (WHP.auth.status)
+        if  (aup.auth.status)
         {
-            WHP.controller.navigateTo(WHP.pages.timeline.urlStr);
+            aup.controller.navigateTo(aup.pages.timeline.urlStr);
         }else{
-            WHP.controller.navigateTo(WHP.pages.landing.urlStr);
+            aup.controller.navigateTo(aup.pages.landing.urlStr);
         }
 
         return cancelEvent(e);
@@ -116,27 +116,27 @@ WHP.menu = {
 	htmlClick: function (e)
 	{
         log("HTML CLIK");
-        if (!WHP.controller.inited)
+        if (!aup.controller.inited)
             return false;
 
 
         //menus
-        WHP.download.hidePopup();
-		WHP.loginMenus.hideLoginMenu();
-		WHP.loginMenus.hideLoginMenu2();
-        WHP.pages.settings.hideWindow1();
-        WHP.popup_message.hideAlert();
+        aup.download.hidePopup();
+		aup.loginMenus.hideLoginMenu();
+		aup.loginMenus.hideLoginMenu2();
+        aup.pages.settings.hideWindow1();
+        aup.popup_message.hideAlert();
 
-        WHP.pages.settings.hideWindow2();
-        WHP.pages.settings.hideWindow1();
+        aup.pages.settings.hideWindow2();
+        aup.pages.settings.hideWindow1();
 
-        WHP.pages.profile.hideWindow1();
+        aup.pages.profile.hideWindow1();
 
-		if ( WHP.pages.user.pointsHelper.windCont.style.display == "block" )
-			WHP.pages.user.pointsHelper.hide();
+		if ( aup.pages.user.pointsHelper.windCont.style.display == "block" )
+			aup.pages.user.pointsHelper.hide();
 			
-		if ( WHP.pages.profile.pointsHelper.windCont.style.display == "block" )
-			WHP.pages.profile.pointsHelper.hide();
+		if ( aup.pages.profile.pointsHelper.windCont.style.display == "block" )
+			aup.pages.profile.pointsHelper.hide();
 	},
 	
 	onScrollEvent: function (e)
@@ -198,10 +198,10 @@ WHP.menu = {
 		{
 			var me = _ar[i];
             var meHref = new String(me.href);
-            meHref = meHref.replace("http://"+WHP.domain,"");
-            meHref = meHref.replace("https://"+WHP.domain,"");
+            meHref = meHref.replace("http://"+aup.domain,"");
+            meHref = meHref.replace("https://"+aup.domain,"");
             meHref = meHref.replace("http://weheartpics.com","");
-            meHref = meHref.replace("//"+WHP.domain+"/","");
+            meHref = meHref.replace("//"+aup.domain+"/","");
 
             //remove ?query
             if (meHref.indexOf("?")>-1)
@@ -245,32 +245,32 @@ WHP.menu = {
 
     checkMenuState: function ()
     {
-        if (WHP.auth.status)
+        if (aup.auth.status)
         {
             this.menuA.css({ display : 'block' });
             setClass(this.logoutButton[0], "controls_logout_button");
             this.menuNA.css({ display : 'none' });
         }else{
             this.menuA.css({ display : 'none' });
-            //setClass(WHP.menu.loginButton[0], "controls_login_button");
+            //setClass(aup.menu.loginButton[0], "controls_login_button");
             this.menuNA.css({ display : 'block' });
         }
     },
 
     transformLinks : function()
     {
-        var profileLink = WHP.menu.menuA.links[0];
+        var profileLink = aup.menu.menuA.links[0];
 
         //profile on auth
-        if (WHP.auth.status)
+        if (aup.auth.status)
         {
             //set profile
-            log("CHANGE = ["+$(WHP.menu.menuA.links[0]).attr("href")+"]");
+            log("CHANGE = ["+$(aup.menu.menuA.links[0]).attr("href")+"]");
 
-			var profile = $(WHP.menu.menuA.links[0]);
-            profile.attr("href", WHP.links.getUserProfileLink(WHP.auth.status.id));
-			if (WHP.auth.userObject) {
-                profile.text(WHP.auth.userObject.first_name);
+			var profile = $(aup.menu.menuA.links[0]);
+            profile.attr("href", aup.links.getUserProfileLink(aup.auth.status.id));
+			if (aup.auth.userObject) {
+                profile.text(aup.auth.userObject.first_name);
             }
         }
     },
@@ -297,7 +297,7 @@ WHP.menu = {
 	currentMenuPos : function()
 	{
         this.transformLinks();
-		if (WHP.auth.status)
+		if (aup.auth.status)
 		{
 			var elem = this.menuA;
 		}else{
@@ -312,13 +312,13 @@ WHP.menu = {
 }
 
 
-WHP.loginMenus = {
+aup.loginMenus = {
     loginWindowWind : null,
     loginWindowWind2 : null,
 
     init : function()
     {
-        this.loginWindowWind = $(WHP.menu.menuNA).find( ".controls_auth_window" );
+        this.loginWindowWind = $(aup.menu.menuNA).find( ".controls_auth_window" );
         this.loginWindowWind.click(bind(function(event) {
             event.stopPropagation();
         }, this));
@@ -341,7 +341,7 @@ WHP.loginMenus = {
         //this.loginWindowWind.css({ display : 'block' });
         //this.loginWindowWind.reset();
         //this.hideLoginMenu2();
-        WHP.pages.getstarted.showPopup();
+        aup.pages.getstarted.showPopup();
     },
 
     showLoginMenu2 : function()
@@ -353,7 +353,7 @@ WHP.loginMenus = {
         var scrollTop = getScrollTop();
 
         var dt = 0;
-        if (WHP.controller.curPage.urlStr == "photo")
+        if (aup.controller.curPage.urlStr == "photo")
             dt = -10;
 
         var H = 300;
@@ -363,9 +363,9 @@ WHP.loginMenus = {
             {
 
                 this.loginWindowWind2.css({ position : 'absolute' });
-                this.loginWindowWind2.css({ top : (scrollTop + (WHP.screenH - H)*0.5 )+'px', left : (WHP.screenWl-285)*0.5+dt +'px' });
+                this.loginWindowWind2.css({ top : (scrollTop + (aup.screenH - H)*0.5 )+'px', left : (aup.screenWl-285)*0.5+dt +'px' });
             }else
-                this.loginWindowWind2.css({ top : (WHP.screenH - H)*0.5 +'px', left : (WHP.screenWl-285)*0.5+dt +'px' });
+                this.loginWindowWind2.css({ top : (aup.screenH - H)*0.5 +'px', left : (aup.screenWl-285)*0.5+dt +'px' });
             //cancelEvent(e);
         }
 
@@ -374,7 +374,7 @@ WHP.loginMenus = {
 
         this.hideLoginMenu();
 
-        WHP.main_fader.show();
+        aup.main_fader.show();
     },
 
     hideLoginMenu : function()
@@ -393,7 +393,7 @@ WHP.loginMenus = {
             return false;
 
         this.loginWindowWind2.css({ display : 'none' });
-        WHP.main_fader.hide();
+        aup.main_fader.hide();
     },
 
     setLoginWindow : function(_wind)
@@ -553,8 +553,8 @@ WHP.loginMenus = {
 
         _wind.forgetButton =  $("#auth-popup_login-email_forgot");
         _wind.forgetButton.click(bind(function(){
-            WHP.pages.getstarted.hidePopup();
-            WHP.controller.navigateTo(WHP.pages.resendpw.urlStr);
+            aup.pages.getstarted.hidePopup();
+            aup.controller.navigateTo(aup.pages.resendpw.urlStr);
         },_wind));
 
 
@@ -567,18 +567,18 @@ WHP.loginMenus = {
         _wind.fbLinksButton.click(bind(function() {
             if (this.linkedFb)
                 return false;
-            WHP.pages.settings.linker.FB.showErrMsg = this.showErrMsg4;
-            WHP.pages.settings.linker.FB.onLink = bind(this.linkFbCallback,this);
-            WHP.pages.settings.linker.FB.linkFb();
+            aup.pages.settings.linker.FB.showErrMsg = this.showErrMsg4;
+            aup.pages.settings.linker.FB.onLink = bind(this.linkFbCallback,this);
+            aup.pages.settings.linker.FB.linkFb();
         }, _wind));
 
         _wind.twLinksButton = _wind.states[6].find(".signin_tw_button");
         _wind.twLinksButton.click(bind(function() {
             if (this.linkedTw)
                 return false;
-            WHP.pages.settings.linker.TW.showErrMsg = this.showErrMsg4;
-            WHP.pages.settings.linker.TW.onLink = bind(this.linkTwCallback,this);
-            WHP.pages.settings.linker.TW.linkTw();
+            aup.pages.settings.linker.TW.showErrMsg = this.showErrMsg4;
+            aup.pages.settings.linker.TW.onLink = bind(this.linkTwCallback,this);
+            aup.pages.settings.linker.TW.linkTw();
         }, _wind));
         _wind.linkTwCallback = bind(function(response){
             this.linkedTw = true;
@@ -595,7 +595,7 @@ WHP.loginMenus = {
         {
             if (this.errorMessageTimeout4!=-1)
                 clearTimeout(this.errorMessageTimeout4);
-            this.errorMessageTimeout4 = setTimeout(bind(function() { _wind.error4.text(""); this.errorMessageTimeout4 = -1; }, this),WHP.errorMessTO);
+            this.errorMessageTimeout4 = setTimeout(bind(function() { _wind.error4.text(""); this.errorMessageTimeout4 = -1; }, this),aup.errorMessTO);
         },_wind);
 
         _wind.showErrMsg4 = bind(function(_txt)
@@ -642,7 +642,7 @@ WHP.loginMenus = {
         {
             if (this.errorMessageTimeout3!=-1)
                 clearTimeout(this.errorMessageTimeout3);
-            this.errorMessageTimeout3 = setTimeout(bind(function() { _wind.error3.text(""); this.errorMessageTimeout3 = -1; }, this),WHP.errorMessTO);
+            this.errorMessageTimeout3 = setTimeout(bind(function() { _wind.error3.text(""); this.errorMessageTimeout3 = -1; }, this),aup.errorMessTO);
         },_wind);
 
         _wind.showErrMsg3 = bind(function(_txt)
@@ -660,7 +660,7 @@ WHP.loginMenus = {
             var resp = getObjectJson(response);
             if (resp.error)
             {
-                log("WHP/registration : error while loading page data! Err =["+response+"]");
+                log("aup/registration : error while loading page data! Err =["+response+"]");
                 if (resp.error.code == "API_Rejected")
                 {
                     this.showErrMsg3("Email already sent. Please check your mail");
@@ -678,14 +678,14 @@ WHP.loginMenus = {
 
         _wind.resendFail = bind(function(e)
         {
-            WHP.auth.showAuthErr("Something went wrong");
+            aup.auth.showAuthErr("Something went wrong");
         }, _wind);
 
         _wind.resendConfirmation = bind(function(){
             $.ajax({
-                url:WHP.netcalls.resendCall,
+                url:aup.netcalls.resendCall,
                 data : { r : Math.random(), login :  this.mail },
-                timeout:WHP.netTimeOut,
+                timeout:aup.netTimeOut,
                 method : "POST",
                 success:bind(this.resendOk, this),
                 error:bind(this.resendFail, this)
@@ -708,7 +708,7 @@ WHP.loginMenus = {
             var password = this.passInput.val();
             if  (password.length>=16)
             {
-                WHP.auth.showAuthErr("You can't use more than 16 characters");
+                aup.auth.showAuthErr("You can't use more than 16 characters");
             }
 
             if (e.keyCode == 13){this.applyForm1();}
@@ -721,7 +721,7 @@ WHP.loginMenus = {
 
             if (!validateEmail(email))
             {
-                WHP.auth.showAuthErr("Doesn't look like a valid email");
+                aup.auth.showAuthErr("Doesn't look like a valid email");
                 this.mailInput.focus();
                 this.mailInput.addClass("input_error");
                 return false;
@@ -730,15 +730,15 @@ WHP.loginMenus = {
 
             if (password.length<6)
             {
-                WHP.auth.showAuthErr("Please use at least 6 characters");
+                aup.auth.showAuthErr("Please use at least 6 characters");
                 this.passInput.focus();
                 this.passInput.addClass("input_error");
                 return false;
             }
 
 
-            WHP.auth.STD.showErrMsg = WHP.auth.showAuthErr;
-            WHP.auth.STD.login(email, password);
+            aup.auth.STD.showErrMsg = aup.auth.showAuthErr;
+            aup.auth.STD.login(email, password);
             this.mail = email;
             this.pass = password;
 
@@ -752,7 +752,7 @@ WHP.loginMenus = {
         {
             if (this.errorMessageTimeout1!=-1)
                 clearTimeout(this.errorMessageTimeout1);
-            this.errorMessageTimeout1 = setTimeout(bind(function() { _wind.error1.text(""); this.errorMessageTimeout1 = -1; }, this),WHP.errorMessTO);
+            this.errorMessageTimeout1 = setTimeout(bind(function() { _wind.error1.text(""); this.errorMessageTimeout1 = -1; }, this),aup.errorMessTO);
         },_wind);
 
         _wind.showErrMsg1 = bind(function(_txt)
@@ -772,7 +772,7 @@ WHP.loginMenus = {
             var password = this.firstName.val();
             if  (password.length>=32)
             {
-                WHP.auth.showAuthErr("You can't use more than 32 characters");
+                aup.auth.showAuthErr("You can't use more than 32 characters");
             }
 
 
@@ -783,7 +783,7 @@ WHP.loginMenus = {
             var password = this.lastName.val();
             if  (password.length>=32)
             {
-                WHP.auth.showAuthErr("You can't use more than 32 characters");
+                aup.auth.showAuthErr("You can't use more than 32 characters");
             }
 
 
@@ -795,7 +795,7 @@ WHP.loginMenus = {
         {
             if (this.errorMessageTimeout2!=-1)
                 clearTimeout(this.errorMessageTimeout2);
-            this.errorMessageTimeout2 = setTimeout(bind(function() { _wind.error2.text(""); this.errorMessageTimeout2 = -1; }, this),WHP.errorMessTO);
+            this.errorMessageTimeout2 = setTimeout(bind(function() { _wind.error2.text(""); this.errorMessageTimeout2 = -1; }, this),aup.errorMessTO);
         },_wind);
 
         _wind.showErrMsg2 = bind(function(_txt)
@@ -832,9 +832,9 @@ WHP.loginMenus = {
             this.ln = ln;
             this.netConnect2 = true;
             $.ajax({
-                url:WHP.netcalls.regCall,
+                url:aup.netcalls.regCall,
                 data : { r : Math.random(), login :  this.mail, passw : this.pass, first_name : fn, last_name : ln },
-                timeout:WHP.netTimeOut,
+                timeout:aup.netTimeOut,
                 method : "POST",
                 success:bind(this.onRegOk, this),
                 error:bind(this.onRegFail, this)
@@ -864,15 +864,15 @@ WHP.loginMenus = {
             {
                 if (resp.error.code == "API_AlreadyInUse")
                 {
-                    WHP.auth.showRegStep1Error("This email already registered");
+                    aup.auth.showRegStep1Error("This email already registered");
                     this.setState(6);
                     return false;
                 }
                 if (resp.error.code == "API_BadParams") {
-                    WHP.auth.showRegStep2Error("Enter your first and last name");
+                    aup.auth.showRegStep2Error("Enter your first and last name");
                     return false;
                 }
-                WHP.auth.showRegStep2Error("Something went wrong");
+                aup.auth.showRegStep2Error("Something went wrong");
                 return false;
             }
 
@@ -884,9 +884,9 @@ WHP.loginMenus = {
                 return false;
             }
 
-            WHP.auth.STD.onData(resp, true);
+            aup.auth.STD.onData(resp, true);
             //this.setState(5);
-            WHP.controller.navigateTo(WHP.pages.findfriends.urlStr);
+            aup.controller.navigateTo(aup.pages.findfriends.urlStr);
 
 
         }, _wind);
@@ -1009,7 +1009,7 @@ WHP.loginMenus = {
         {
             if (this.errorMessageTimeout4!=-1)
                 clearTimeout(this.errorMessageTimeout4);
-            this.errorMessageTimeout4 = setTimeout(bind(function() { _wind.error4.text(""); this.errorMessageTimeout4 = -1; }, this),WHP.errorMessTO);
+            this.errorMessageTimeout4 = setTimeout(bind(function() { _wind.error4.text(""); this.errorMessageTimeout4 = -1; }, this),aup.errorMessTO);
         },_wind);
 
         _wind.showErrMsg4 = bind(function(_txt)
@@ -1028,7 +1028,7 @@ WHP.loginMenus = {
 
             if (!validateEmail(email))
             {
-                WHP.auth.showLoginError("Doesn't look like a valid email");
+                aup.auth.showLoginError("Doesn't look like a valid email");
                 this.login_mailInput.focus();
                 this.login_mailInput.addClass("input_error");
                 return false;
@@ -1036,8 +1036,8 @@ WHP.loginMenus = {
 
 
 
-            WHP.auth.STD.showErrMsg = this.showErrMsg4;
-            WHP.auth.STD.login(email, password);
+            aup.auth.STD.showErrMsg = this.showErrMsg4;
+            aup.auth.STD.login(email, password);
 
         },_wind);
 

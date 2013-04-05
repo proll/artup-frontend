@@ -1,4 +1,4 @@
-whp.Config = function() {
+aup.Config = function() {
 
 	return {
 	}

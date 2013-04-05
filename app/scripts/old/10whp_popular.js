@@ -1,4 +1,4 @@
-WHP.pages.photoPopular = {
+aup.pages.photoPopular = {
 	//controller parametres
 	urlStr : "popular",
 	title : "Popular",
@@ -13,7 +13,7 @@ WHP.pages.photoPopular = {
 	init: function ()
 	{
 		this.mainObject = id$('popular');
-		this.feedObject = new whp_feed_proto();
+		this.feedObject = new aup_feed_proto();
 		
 		
 		var feed_cont = $(this.mainObject).find(".popular_photo_box");
@@ -22,7 +22,7 @@ WHP.pages.photoPopular = {
 		this.feedObject.urlPrefix = this.urlStr;
 		this.feedObject.changeUrl = true;
         this.feedObject.useGalleryPhoto = true;
-		this.feedObject.controlUrl = WHP.netcalls.popularCall;
+		this.feedObject.controlUrl = aup.netcalls.popularCall;
 
         this.inited = true;
 	},
@@ -54,7 +54,7 @@ WHP.pages.photoPopular = {
 	{
         if (_auth)
         {
-            WHP.controller.navigateTo("timeline");
+            aup.controller.navigateTo("timeline");
         }
 	}
 }

@@ -1,4 +1,4 @@
-whp.NavbarView = Backbone.View.extend({
+aup.NavbarView = Backbone.View.extend({
 	template: "blocks/navbar",
 	el: ".navbar-header",
 	_navItemPrefix:"navbar__item-",
@@ -13,12 +13,12 @@ whp.NavbarView = Backbone.View.extend({
 	},
 
 	initialize: function(){
-		this.template = whp.Templates.get(this.template);
+		this.template = aup.Templates.get(this.template);
 		this.render();
 		this.model.on("change:currentItem", this.changeItem, this);
-		// whp.on("auth:required auth:not-required", this.render, this);
-		whp.on("usersettings:ready", this.toggleAuth, this);
-		whp.on("auth:clear", this.toggleUnauth, this);
+		// aup.on("auth:required auth:not-required", this.render, this);
+		aup.on("usersettings:ready", this.toggleAuth, this);
+		aup.on("auth:clear", this.toggleUnauth, this);
 		
 	},
 	render: function(){

@@ -1,4 +1,4 @@
-whp_newfaces_proto = function () { return {
+aup_newfaces_proto = function () { return {
 	//controller parametres
 	inited : false,
 	
@@ -106,7 +106,7 @@ whp_newfaces_proto = function () { return {
 			return false;
 		
 		if ((!this.initLoad) && (this.controlCanvas) && (this.curOffset==0))
-			WHP.controller.scrollToPos(0,0);
+			aup.controller.scrollToPos(0,0);
 
 			
 		log("Load = ["+this.curOffset+"] ["+this.elementsLimit+"]");
@@ -114,7 +114,7 @@ whp_newfaces_proto = function () { return {
 		this.loading = true;
 		this.jqxhr = $.ajax({
 			  url: this.controlUrl,
-			  timeout : WHP.netTimeOut,
+			  timeout : aup.netTimeOut,
 			  data : { offset : this.curOffset, limit : this.elementsLimit, r : Math.random() },
 			  success: bind(this.onData, this),
 			  error: bind(this.onError, this)
@@ -133,10 +133,10 @@ whp_newfaces_proto = function () { return {
 		var resp = getObjectJson(response);	
 		if (resp.error)
 		{
-			log("WHP/timeline_prot : error while loading page data! Err =["+response+"]");
-			if (!WHP.errors.hasNetError(resp))
+			log("aup/timeline_prot : error while loading page data! Err =["+response+"]");
+			if (!aup.errors.hasNetError(resp))
 			{
-				WHP.controller.showErrorPage();
+				aup.controller.showErrorPage();
 			}
 			return false;
 		}
@@ -164,7 +164,7 @@ whp_newfaces_proto = function () { return {
 		if (this.curOffset >= this.curTotal)
 			this.loadingBar.css({ display : 'none'});
 			
-		//WHP.resetH();
+		//aup.resetH();
 		this.initLoad = false;
 	},
 	
@@ -211,7 +211,7 @@ whp_newfaces_proto = function () { return {
 		element_div.followButton.click(bind(this.unfollowClick,element_div));
         element_div.okButton.click(bind(this.followClick,element_div));
 		
-		element_div.name.attr('href', WHP.links.getUserProfileLink( element_div.uid ));
+		element_div.name.attr('href', aup.links.getUserProfileLink( element_div.uid ));
 		
 		element_div.setButtonLabel = bind(this.setButtonLabel,element_div);
 		element_div.followResponse = bind(this.followResponse,element_div);
@@ -235,14 +235,14 @@ whp_newfaces_proto = function () { return {
 
     unfollowClick: function()
     {
-        call = WHP.netcalls.unfollowCall;
+        call = aup.netcalls.unfollowCall;
         this.follow = false;
 
         this.buttonLabl.html("<div class='button_loading'></div>");
         $.ajax({
             url: call,
             data : { r :Math.random(), user : this.uid },
-            timeout : WHP.netTimeOut,
+            timeout : aup.netTimeOut,
             success: bind(this.followResponse, this),
             error: bind(this.followError, this)
         });
@@ -254,15 +254,15 @@ whp_newfaces_proto = function () { return {
         if (this.activeNet)
             return false;
 
-		var call = WHP.netcalls.followCall;
+		var call = aup.netcalls.followCall;
         this.follow = true;
         this.activeNet = true;
 		this.okbuttonLabl.html("<div class='button_loading'></div>");
-        WHP.opengraph.makeFolowAction(this.uid);
+        aup.opengraph.makeFolowAction(this.uid);
 		$.ajax({
 			  url: call,
               data : { r :Math.random(), user : this.uid },
-			  timeout : WHP.netTimeOut,
+			  timeout : aup.netTimeOut,
 			  success: bind(this.followResponse, this),
 			  error: bind(this.followError, this)
 		});
@@ -312,7 +312,7 @@ whp_newfaces_proto = function () { return {
 			return false;
 			
 		var sensitivity = 50;
-		if ($(document).scrollTop()+WHP.screenH-$(document).height()>-sensitivity)
+		if ($(document).scrollTop()+aup.screenH-$(document).height()>-sensitivity)
 		{
 			//log("end");	
 			this.loadElements();

@@ -1,4 +1,4 @@
-WHP.pages.photo = {
+aup.pages.photo = {
     urlStr:"photo", //temp name for error page
     title:"",
     rndEnable:true,
@@ -82,7 +82,7 @@ WHP.pages.photo = {
         this.mainImage.likeShadow = $(this.mainObject).find(".photobig_like_shadow");
 
 
-        this.imagesList = new whp_photolist_prototype();
+        this.imagesList = new aup_photolist_prototype();
         this.imagesList.rollover_plate =  a;
         this.mainImage.infoCont = $(this.mainObject).find(".photobig_text_container");
         this.imagesList.parent = this;
@@ -180,9 +180,9 @@ WHP.pages.photo = {
         var params = q.split("/");
         var pageId = parseInt(params[0]);
         if (isNaN(pageId)) {
-            log("WHP/pages/photo : parametres error");
+            log("aup/pages/photo : parametres error");
             this.curPageId = null;
-            WHP.controller.showErrorPage(1);
+            aup.controller.showErrorPage(1);
             return false;
         }
 
@@ -210,9 +210,9 @@ WHP.pages.photo = {
 
         this.removePhoto.checkButtonVisibility();
         this.getPicture();
-        WHP.pages.photo.setHearts();
+        aup.pages.photo.setHearts();
 
-        $('#photobackbutton').css({ visibility: WHP.controller.history.length > 0 ? 'visible' : 'hidden'});
+        $('#photobackbutton').css({ visibility: aup.controller.history.length > 0 ? 'visible' : 'hidden'});
 
     },
 
@@ -254,13 +254,13 @@ WHP.pages.photo = {
 
         this.removePhoto.checkButtonVisibility();
 
-        $('#photobackbutton').css({ visibility: WHP.controller.history.length > 0 ? 'visible' : 'hidden'});
+        $('#photobackbutton').css({ visibility: aup.controller.history.length > 0 ? 'visible' : 'hidden'});
 
         var self = this;
         $.ajax({
-            url:WHP.netcalls.photoInfoCall,
+            url:aup.netcalls.photoInfoCall,
             data : { r : Math.random(), photo : this.curPageId },
-            timeout:WHP.netTimeOut,
+            timeout:aup.netTimeOut,
             dataType: "json",
             success: function (e) {
                 console.debug("API/PHOTO1111", e);
@@ -273,20 +273,20 @@ WHP.pages.photo = {
     onError: function(response)
     {
         var status = response['status'];
-        log("WHP/timeline_prot : error status = ["+status+"]");
+        log("aup/timeline_prot : error status = ["+status+"]");
         this.loading = false;
         if (status!=0)
         {
             this.photoGetTry++;
             if (this.photoGetTry >= this.photoGetMaxTries)
             {
-                WHP.controller.showErrorPage(1);
+                aup.controller.showErrorPage(1);
                 return false;
             }else{
                 setTimeout(bind(this.getPicture,this), 1000*3.0);
             }
         }else{
-            WHP.controller.showErrorPage();
+            aup.controller.showErrorPage();
         }
         //
     },
@@ -294,7 +294,7 @@ WHP.pages.photo = {
     setTitle : function()
     {
         this.title = this.getStoryName(this.curPageObject.photo.story)+" by "+this.curPageObject.photo.user.name;
-        WHP.controller.setTitle();
+        aup.controller.setTitle();
 
     },
 
@@ -306,12 +306,12 @@ WHP.pages.photo = {
             return false;
 
         this.photoGetTry = 0;
-        WHP.controller.scrollToPos(0,0);
+        aup.controller.scrollToPos(0,0);
         var resp = getObjectJson(response);
         if (resp.error) {
-            log("WHP/pages/photo : got picture error = [" + resp.error.code + "]");
-            if (!WHP.errors.hasNetError(resp)) {
-                WHP.controller.showErrorPage(1);
+            log("aup/pages/photo : got picture error = [" + resp.error.code + "]");
+            if (!aup.errors.hasNetError(resp)) {
+                aup.controller.showErrorPage(1);
             }
             return false;
         }
@@ -319,9 +319,9 @@ WHP.pages.photo = {
         if (!resp.photo.user) {
             var self = this;
             $.ajax({
-                url:WHP.netcalls.photoInfoCall,
+                url:aup.netcalls.photoInfoCall,
                 data : { r : Math.random(), photo : resp.photo.id },
-                timeout:WHP.netTimeOut,
+                timeout:aup.netTimeOut,
                 dataType: "json",
                 success: function (e) {
                     self.onData(e, Ncur)
@@ -352,7 +352,7 @@ WHP.pages.photo = {
             this.comments.lastParent = 0;
             this.comments.lastIndex = 0;
             this.comments.commentsTotal = 0;
-            WHP.pages.photo.setHearts();
+            aup.pages.photo.setHearts();
             this.comments.setWrappers();
             this.comments.checkScrollToComments();
             //this.comments.comments.commentsCurrent = this.comments.commentsCurrent + this.comments.getCurrentRootComments(resp.comments.list);
@@ -364,7 +364,7 @@ WHP.pages.photo = {
 
         this.removePhoto.checkButtonVisibility();
 
-        WHP.controller.showCanvas();
+        aup.controller.showCanvas();
 
         if (resp.photo.comments_count==0)
         {
@@ -381,7 +381,7 @@ WHP.pages.photo = {
         var max_imageS = 810;
         var min_imageS = 512;
 
-        var screenH = WHP.screenHl;
+        var screenH = aup.screenHl;
 
         var screen_step = 140;
         var round_step = 12;
@@ -510,7 +510,7 @@ WHP.pages.photo = {
     resetPos : function()
     {
         this.rolloverElem.cP = 0;
-        this.css({ right:  WHP.pages.photo.defaultStep + 'px'});
+        this.css({ right:  aup.pages.photo.defaultStep + 'px'});
         this.disableBack = false;
     },
 
@@ -542,7 +542,7 @@ WHP.pages.photo = {
         var B = Math.sin(Math.PI*0.5*A);
 
         this.rolloverElem.cP = (1-B)*this.rolloverElem.p0 + B*this.rolloverElem.p1;
-        this.css({ right: -this.rolloverElem.cP*18 + WHP.pages.photo.defaultStep + 'px'});
+        this.css({ right: -this.rolloverElem.cP*18 + aup.pages.photo.defaultStep + 'px'});
     },
 
     getStoryName : function (resp)
@@ -586,7 +586,7 @@ WHP.pages.photo = {
         log("SetImage");
         log(_resp);
         this.mainImage.authorLCD.text(_resp.photo.user.name);
-        this.mainImage.authorLCD.attr("href", WHP.links.getUserProfileLink(_resp.photo.user.id));
+        this.mainImage.authorLCD.attr("href", aup.links.getUserProfileLink(_resp.photo.user.id));
 
         var timeS = this.mainImage.find(".photobig_timeshtamp");
         timeS.text(getTimeFormatedTl(_resp.photo.timestamp*1000));
@@ -616,7 +616,7 @@ WHP.pages.photo = {
             this.mainImage.scenarioLCD.removeAttr("href");
         }else{
             setClass(this.mainImage.scenarioLCD,"photobig_theme_text");
-            this.mainImage.scenarioLCD.attr("href", WHP.links.getScenarioLink(_resp.photo.story.id));
+            this.mainImage.scenarioLCD.attr("href", aup.links.getScenarioLink(_resp.photo.story.id));
         }
 
         this.mainImage.setViewLikes();
@@ -630,9 +630,9 @@ WHP.pages.photo = {
 
     clickLike: function()
     {
-        if (!WHP.auth.status)
+        if (!aup.auth.status)
         {
-            WHP.loginMenus.showLoginMenu();
+            aup.loginMenus.showLoginMenu();
             return false;
         }
 
@@ -651,7 +651,7 @@ WHP.pages.photo = {
 
         this.mainImage.setViewLikes();
         this.likeLists.setLikesMe();
-        WHP.actions.likes.likePhoto(this.curPageObject.photo.id, this.curPageObject.photo.wasvote, "LIKE_PHOTO");
+        aup.actions.likes.likePhoto(this.curPageObject.photo.id, this.curPageObject.photo.wasvote, "LIKE_PHOTO");
     },
 
     setViewLikes: function()
@@ -669,9 +669,9 @@ WHP.pages.photo = {
         var hasComments = this.comments.commentsList.length > 0;
 
         var hasLikes = (this.likeLists.likes.length > 0);
-        if (WHP.pages.photo.curPageObject)
-        if (WHP.pages.photo.curPageObject.photo)
-             hasLikes =  hasLikes || (WHP.pages.photo.curPageObject.photo.wasvote!=0);
+        if (aup.pages.photo.curPageObject)
+        if (aup.pages.photo.curPageObject.photo)
+             hasLikes =  hasLikes || (aup.pages.photo.curPageObject.photo.wasvote!=0);
 
         var hasNewComment = (this.comments.newCommentContainer.style.display == 'block') && (this.comments.newCommentContainer.parentNode!=null);
 
@@ -686,7 +686,7 @@ WHP.pages.photo = {
             this.comments.addCommentCont.wrapper.css({ display : 'none'});
 
         //hearts
-        var heartSplitters = $(WHP.pages.photo.mainObject).find( ".heart_split_container" );
+        var heartSplitters = $(aup.pages.photo.mainObject).find( ".heart_split_container" );
         if (hasLikes)
         {
             $(heartSplitters[1]).css( { display : 'block' });
@@ -719,7 +719,7 @@ WHP.pages.photo = {
         {
             setClass(this.parent.mainImage.share_tw_ico, "photobig_share_tw_0");
             setClass(this.parent.mainImage.share_fb_ico, "photobig_share_fb_0");
-            this.sharePageId = WHP.pages.photo.curPageId;
+            this.sharePageId = aup.pages.photo.curPageId;
             this.sharedFB = false;
             this.sharedTW = false;
             this.sharedPT = false;
@@ -729,26 +729,26 @@ WHP.pages.photo = {
 
         onFBCallback : function (e)
         {
-            if ((e) && (this.sharePageId == WHP.pages.photo.curPageId))
+            if ((e) && (this.sharePageId == aup.pages.photo.curPageId))
             {
                 this.sharedFB = true;
                 this.parent.mainImage.share_fb.disableAndMove();
                 setClass(this.parent.mainImage.share_fb_ico, "photobig_share_fb_1");
 
-                WHP.stats.trackShare("SHARE_FACEBOOK", WHP.pages.photo.curPageId);
+                aup.stats.trackShare("SHARE_FACEBOOK", aup.pages.photo.curPageId);
             }
             return true;
         },
 
         onTWCallback : function (e)
         {
-            if (this.sharePageId == WHP.pages.photo.curPageId)
+            if (this.sharePageId == aup.pages.photo.curPageId)
             {
                 this.sharedTW = true;
                 this.parent.mainImage.share_tw.disableAndMove();
                 setClass(this.parent.mainImage.share_tw_ico, "photobig_share_tw_1");
 
-                WHP.stats.trackShare("SHARE_TWITTER", WHP.pages.photo.curPageId);
+                aup.stats.trackShare("SHARE_TWITTER", aup.pages.photo.curPageId);
             }
             return true;
         },
@@ -767,7 +767,7 @@ WHP.pages.photo = {
             if (this.sharedTW)
                 return false;
 
-            var url = "http:" + WHP.links.getPhotoLink(this.parent.curPageObject.photo.id);
+            var url = "http:" + aup.links.getPhotoLink(this.parent.curPageObject.photo.id);
 
             var p = [];
             p.push("[pic] ");//0
@@ -785,7 +785,7 @@ WHP.pages.photo = {
                 p.push("by "+ this.parent.curPageObject.photo.user.name+" ");
             }
             p.push(url); //4   +13 symbols
-            p.push(" %23whp");       //5
+            p.push(" %23aup");       //5
 
 
 
@@ -795,7 +795,7 @@ WHP.pages.photo = {
             {
                 p.splice(5,1);
                 log("1* ["+p.join("").length+"] ["+p.join("")+"]");
-                //whp
+                //aup
                 if (p.join("")>140)
                 {
                     //pic
@@ -839,7 +839,7 @@ WHP.pages.photo = {
                 return false;
 
             var pic = this.parent.curPageObject.photo['i106x106'];
-            var url = "http:"+WHP.links.getPhotoLink(this.parent.curPageObject.photo.id);
+            var url = "http:"+aup.links.getPhotoLink(this.parent.curPageObject.photo.id);
             var storyName = this.parent.getStoryName(this.parent.curPageObject.photo.story);
 
             /*
@@ -858,7 +858,7 @@ WHP.pages.photo = {
                 caption: "WeHeartPics.com",
                 description : "",
                 actions: [
-                    { name: 'Get WeHeartPics', link: WHP.apple_store_link }
+                    { name: 'Get WeHeartPics', link: aup.apple_store_link }
                 ],
                 picture: pic
             }, bind(this.onFBCallback, this));
@@ -874,7 +874,7 @@ WHP.pages.photo = {
             this.pTurlChecker.start();
 
             var img = this.parent.curPageObject.photo['i1000x1000'];
-            var url = "http://"+WHP.links.getPhotoLink(this.parent.curPageObject.photo.id);
+            var url = "http://"+aup.links.getPhotoLink(this.parent.curPageObject.photo.id);
             var title = this.parent.getStoryName(this.parent.curPageObject.photo.story);
 
 
@@ -890,8 +890,8 @@ WHP.pages.photo = {
             p.push(this.getStoryName(this.parent.curPageObject.photo)+" ");//1
 
 
-            if (WHP.auth.status)
-            if (this.parent.curPageObject.photo.user.id != WHP.auth.status.id)
+            if (aup.auth.status)
+            if (this.parent.curPageObject.photo.user.id != aup.auth.status.id)
             {
                 p.push("by "+ this.parent.curPageObject.photo.user.name+" ");
             }
@@ -914,14 +914,14 @@ WHP.pages.photo = {
             var link = "http://pinterest.com/pin/create/bookmarklet/?media="+img+"&url="+url+"&title="+title+"&is_video=false&description="+desc;
             this.pTwindow.location = link;
 
-            WHP.stats.trackShare("SHARE_PINTEREST", WHP.pages.photo.curPageId);
+            aup.stats.trackShare("SHARE_PINTEREST", aup.pages.photo.curPageId);
             //http://pinterest.com/pin/create/bookmarklet/
 
         },
 
         onPTCallback : function (e)
         {
-            if (this.sharePageId == WHP.pages.photo.curPageId)
+            if (this.sharePageId == aup.pages.photo.curPageId)
             {
                 this.sharedPT = true;
                 this.parent.mainImage.share_tw.disableAndMove();
@@ -958,7 +958,7 @@ WHP.pages.photo = {
 
         init : function()
         {
-            this.shareTW = WHP.pages.photo.mainImage.share_tw_ico.get()[0];
+            this.shareTW = aup.pages.photo.mainImage.share_tw_ico.get()[0];
             this.shareTW.hasIntelloLinker = true;
             this.pTurlChecker.onTimerEvent = bind(this.ptChecker, this);
             this.setShareEvents();
@@ -1018,13 +1018,13 @@ WHP.pages.photo = {
         {
             //return false;
 
-            if (!WHP.auth.status)
+            if (!aup.auth.status)
                 return false;
 
             if (!this.parent.curPageObject)
                 return false;
 
-            if (WHP.auth.status.id != this.parent.curPageObject.photo.user.id)
+            if (aup.auth.status.id != this.parent.curPageObject.photo.user.id)
                 return false;
 
 
@@ -1116,9 +1116,9 @@ WHP.pages.photo = {
             //return false;
 
             $.ajax({
-                url:WHP.netcalls.deletePhotoCall,
+                url:aup.netcalls.deletePhotoCall,
                 data : { r : Math.random(), photo :  curPageId },
-                timeout:WHP.netTimeOut,
+                timeout:aup.netTimeOut,
                 success:bind(function (e) { this.onData(e, curPageId); }, this),
                 error:bind(this.onError, this)
             });
@@ -1126,7 +1126,7 @@ WHP.pages.photo = {
 
         moveto : function()
         {
-            WHP.controller.navigateTo(WHP.links.getUserProfileLink(WHP.auth.status.id));
+            aup.controller.navigateTo(aup.links.getUserProfileLink(aup.auth.status.id));
             return false;
         },
 
@@ -1197,14 +1197,14 @@ WHP.pages.photo = {
 
         stepBack : function()
         {
-            WHP.controller.afterRemoveBack = true;
+            aup.controller.afterRemoveBack = true;
             history.back();
         },
 
         getPrevMainPage : function()
         {
             var ret = null;
-            var hist = WHP.controller.history;
+            var hist = aup.controller.history;
 
             for (var i = hist.length-1; i>=0; i--)
             {
@@ -1220,7 +1220,7 @@ WHP.pages.photo = {
 
         moveBack : function()
         {
-            var hist = WHP.controller.history;
+            var hist = aup.controller.history;
 
 
             var retUrl = "";
@@ -1235,7 +1235,7 @@ WHP.pages.photo = {
 
             if (retUrl!="")
             {
-                WHP.controller.navigateTo(retUrl);
+                aup.controller.navigateTo(retUrl);
             }else{
                 this.moveto();
             }
@@ -1248,23 +1248,23 @@ WHP.pages.photo = {
                 var resp = getObjectJson(response);
                 if (resp.error)
                 {
-                    if (!WHP.errors.hasNetError(resp))
+                    if (!aup.errors.hasNetError(resp))
                     {
-                        WHP.controller.showErrorPage(1);
+                        aup.controller.showErrorPage(1);
                     }
                     return false;
                 }
             }
 
-            WHP.controller.removedList.push(removedId);
+            aup.controller.removedList.push(removedId);
 
 
-            var hist = WHP.controller.history;
+            var hist = aup.controller.history;
 
             //back to the main page if user opened only this photo
             if (hist.length == 0)
             {
-                WHP.controller.navigateTo("timeline");
+                aup.controller.navigateTo("timeline");
                 return false;
             }
 
@@ -1274,7 +1274,7 @@ WHP.pages.photo = {
 
         onError : function (response)
         {
-            WHP.controller.showErrorPage(1);
+            aup.controller.showErrorPage(1);
         }
     },
 
@@ -1320,8 +1320,8 @@ WHP.pages.photo = {
             $(this.newCommentContainer).css({ display : 'none' });
 
             var curId = new Number(this.parent.curPageId);
-            $(WHP.pages.photo.commentsCont).append(this.loadingBar);
-            WHP.actions.comments.getComments(WHP.pages.photo.curPageId, bind(function (e) { if (curId == this.parent.curPageId) this.onData(e);}, this), bind(this.onErr, this));
+            $(aup.pages.photo.commentsCont).append(this.loadingBar);
+            aup.actions.comments.getComments(aup.pages.photo.curPageId, bind(function (e) { if (curId == this.parent.curPageId) this.onData(e);}, this), bind(this.onErr, this));
             this.displayCommentBlock();
         },
 
@@ -1338,22 +1338,22 @@ WHP.pages.photo = {
             var resp = getObjectJson(response);
             if (resp.error)
             {
-                log("WHP/pages/photo/comments : Err = ["+resp.error.code+"]");
-                if (!WHP.errors.hasNetError(resp))
+                log("aup/pages/photo/comments : Err = ["+resp.error.code+"]");
+                if (!aup.errors.hasNetError(resp))
                 {
-                    //WHP.controller.showErrorPage();
+                    //aup.controller.showErrorPage();
                 }
                 return false;
             }
 
             this.loadingBar.detach();
             //positon delta
-            var level1 = WHP.pages.photo.commentMargin;
+            var level1 = aup.pages.photo.commentMargin;
             this.commentsTotal = resp.comments.total;
 
             //set hearts
 
-            WHP.pages.photo.setHearts();
+            aup.pages.photo.setHearts();
 
 
             var lastPr = 0;
@@ -1365,11 +1365,11 @@ WHP.pages.photo = {
                 element_div.parentN = this.lastParent;
                 element_div.index = parseInt(new Number(i));
 
-                $(WHP.pages.photo.commentsCont).append(element_div);
+                $(aup.pages.photo.commentsCont).append(element_div);
                 this.commentsList.push(element_div);
             }
 
-            WHP.pages.photo.setHearts();
+            aup.pages.photo.setHearts();
             this.setWrappers();
             this.commentsCurrent = this.commentsCurrent + this.getCurrentRootComments(resp.comments.list);
 
@@ -1385,33 +1385,33 @@ WHP.pages.photo = {
             }else{
                 //no more comments
             }
-           // WHP.resetH();
+           // aup.resetH();
         },
 
 
         checkScrollToComments : function()
         {
             log("CHECK");
-            if (WHP.controller.visible)
+            if (aup.controller.visible)
             {
                 log("VISIBLE");
-                if (WHP.pages.photo.scrollToComments)
+                if (aup.pages.photo.scrollToComments)
                 {
                     log("SCROLL");
                     var pos = $(this.addCommentCont).offset().top-86;
-                    WHP.smoothScrollTo(0, pos);
+                    aup.smoothScrollTo(0, pos);
                 }
-                WHP.pages.photo.scrollToComments = false;
+                aup.pages.photo.scrollToComments = false;
             }
 
         },
 
         newComment : function (_comObj)
         {
-            var element_div = $(WHP.pages.photo.commentTemplate).clone();
+            var element_div = $(aup.pages.photo.commentTemplate).clone();
 
             element_div.author = $(element_div).find( ".comment_username" );
-            element_div.author.attr("href", WHP.links.getUserProfileLink(_comObj.user.id));
+            element_div.author.attr("href", aup.links.getUserProfileLink(_comObj.user.id));
             element_div.author.text(_comObj.user.name);
 
             element_div.timeShtamp = $(element_div).find( ".comment_info" );
@@ -1437,7 +1437,7 @@ WHP.pages.photo = {
 
             if (element_div.level != 0)
             {
-                element_div.marginer.css( { 'margin-left' : WHP.pages.photo.commentMargin} );
+                element_div.marginer.css( { 'margin-left' : aup.pages.photo.commentMargin} );
             }
 
 
@@ -1474,9 +1474,9 @@ WHP.pages.photo = {
 
         startPostComment : function (e)
         {
-            if (!WHP.auth.status)
+            if (!aup.auth.status)
             {
-                WHP.loginMenus.showLoginMenu();
+                aup.loginMenus.showLoginMenu();
                 return false;
             }
 
@@ -1488,14 +1488,14 @@ WHP.pages.photo = {
             var resp = getObjectJson(response);
             if (resp.error)
             {
-                log("WHP/pages/photo/comments : get post comment error = ["+resp.error.code+"]");
-                if (!WHP.errors.hasNetError(resp))
+                log("aup/pages/photo/comments : get post comment error = ["+resp.error.code+"]");
+                if (!aup.errors.hasNetError(resp))
                 {
-                    //WHP.controller.showErrorPage();
+                    //aup.controller.showErrorPage();
                 }
                 return false;
             }
-            log("WHP/pages/photo/comments : get comment ["+response+"]");
+            log("aup/pages/photo/comments : get comment ["+response+"]");
         },
 
 
@@ -1506,13 +1506,13 @@ WHP.pages.photo = {
 
         beginPost : function (_reply)
         {
-            if (!WHP.auth.status)
+            if (!aup.auth.status)
             {
-                WHP.loginMenus.showLoginMenu();
+                aup.loginMenus.showLoginMenu();
                 return false;
             }
 
-            var level1 = WHP.pages.photo.commentMargin;
+            var level1 = aup.pages.photo.commentMargin;
             var lastIndex = this.commentsList.length-1;
             if (_reply)
             {
@@ -1542,7 +1542,7 @@ WHP.pages.photo = {
             $(this.newCommentContainer).css({ display : 'block' });
             this.newCommentTextInput.value = "";
 
-            //this.newCommentUserName.innerHTML = WHP.auth.userObject.name;
+            //this.newCommentUserName.innerHTML = aup.auth.userObject.name;
             this.commentOnKey();
 
             this.lastIndex = lastIndex;
@@ -1550,27 +1550,27 @@ WHP.pages.photo = {
             if (this.lastIndex>=0)
                 $(this.newCommentContainer).insertAfter(this.commentsList[lastIndex])
             else
-                $(WHP.pages.photo.commentsCont).append(this.newCommentContainer);
+                $(aup.pages.photo.commentsCont).append(this.newCommentContainer);
 
-            WHP.pages.photo.setHearts();
+            aup.pages.photo.setHearts();
 
 
             var s1 = $(document).scrollTop();
-            var s2 = s1+WHP.screenHl;
+            var s2 = s1+aup.screenHl;
 
             var p1 = $(this.newCommentContainer).offset().top;
             var p2 = p1+$(this.newCommentContainer).height();
 
             if ((p1<s1) || (p1>s2) || (p2<s1) || (p2>s2))
             {
-                newP = Math.max(0, p1-WHP.screenHl*0.5);
-                WHP.smoothScrollTo( 0, newP, bind(this.focusInput, this));
+                newP = Math.max(0, p1-aup.screenHl*0.5);
+                aup.smoothScrollTo( 0, newP, bind(this.focusInput, this));
             }else{
                 this.newCommentTextInput.focus();
             }
 
-            this.newCommentName.html(WHP.auth.userObject.name+" :");
-            this.newCommentName.attr('href', WHP.links.getUserProfileLink(WHP.auth.status.id));
+            this.newCommentName.html(aup.auth.userObject.name+" :");
+            this.newCommentName.attr('href', aup.links.getUserProfileLink(aup.auth.status.id));
 
             addIntelloLinks(this.newCommentContainer);
 
@@ -1580,11 +1580,11 @@ WHP.pages.photo = {
         commentOnKey : function (e)
         {
             var minH = 70;
-            var charLimit = WHP.pages.photo.comments.charLimit;
-            var okButton = WHP.pages.photo.comments.newCommentButtonOk;
-            var input = WHP.pages.photo.comments.newCommentTextInput;
-            var inputC = WHP.pages.photo.comments.newCommentTextInputC;
-            var messageBox = WHP.pages.photo.comments.newCommentMessageCont;
+            var charLimit = aup.pages.photo.comments.charLimit;
+            var okButton = aup.pages.photo.comments.newCommentButtonOk;
+            var input = aup.pages.photo.comments.newCommentTextInput;
+            var inputC = aup.pages.photo.comments.newCommentTextInputC;
+            var messageBox = aup.pages.photo.comments.newCommentMessageCont;
             var lengthI = input.value.length;
             var delt = charLimit - lengthI;
 
@@ -1639,25 +1639,25 @@ WHP.pages.photo = {
                 return false;
 
             log("2post comment");
-            if (!WHP.auth.status)
+            if (!aup.auth.status)
             {
-                WHP.loginMenus.showLoginMenu();
+                aup.loginMenus.showLoginMenu();
                 return false;
             }
 
 
             log("3post comment");
             this.postCommentNow = true;
-            var input = WHP.pages.photo.comments.newCommentTextInput;
-            var charLimit = WHP.pages.photo.comments.charLimit;
-            var photo_id = WHP.pages.photo.curPageId;
-            var reply = WHP.pages.photo.comments.newCommentReply;
+            var input = aup.pages.photo.comments.newCommentTextInput;
+            var charLimit = aup.pages.photo.comments.charLimit;
+            var photo_id = aup.pages.photo.curPageId;
+            var reply = aup.pages.photo.comments.newCommentReply;
 
             if ((input.value.length <= charLimit) && (input.value.length>0))
             {
                 log("4post comment");
                 var comBody = messageCheckSPaces(input.value);
-                WHP.actions.comments.postComment( photo_id , reply, comBody, bind(this.postCommentCallback, WHP.pages.photo.comments), bind(this.errcbComment, this));
+                aup.actions.comments.postComment( photo_id , reply, comBody, bind(this.postCommentCallback, aup.pages.photo.comments), bind(this.errcbComment, this));
             }
         },
 
@@ -1672,10 +1672,10 @@ WHP.pages.photo = {
             var resp = getObjectJson(response);
             if (resp.error)
             {
-                log("WHP/pages/photo/likeLists : get lists error = ["+resp.error.code+"]");
-                if (!WHP.errors.hasNetError(resp))
+                log("aup/pages/photo/likeLists : get lists error = ["+resp.error.code+"]");
+                if (!aup.errors.hasNetError(resp))
                 {
-                    //WHP.controller.showErrorPage();
+                    //aup.controller.showErrorPage();
                 }
                 return false;
             }
@@ -1693,21 +1693,21 @@ WHP.pages.photo = {
             this.setWrappers();
             $(element_div).insertAfter(this.newCommentContainer);
             $(this.newCommentContainer).remove();
-            WHP.pages.photo.setHearts();
+            aup.pages.photo.setHearts();
             this.displayCommentBlock();
         },
 
         cancelComment : function (e)
         {
-            var comments = WHP.pages.photo.comments;
+            var comments = aup.pages.photo.comments;
             comments.setWrappers();
             $(comments.newCommentContainer).remove();
-            WHP.pages.photo.setHearts();
+            aup.pages.photo.setHearts();
         },
 
         setWrappers : function (_lastComment, _curLevel)
         {
-            var level1 = WHP.pages.photo.commentMargin;
+            var level1 = aup.pages.photo.commentMargin;
             for (var i=0; i<this.commentsList.length; i++)
             {
                 var element_div = this.commentsList[i];
@@ -1832,13 +1832,13 @@ WHP.pages.photo = {
 
         getLikesLists : function()
         {
-            WHP.pages.photo.likeLists.clearCanvas();
-            WHP.pages.photo.likeLists.listContainer.css({ display : 'none' });
+            aup.pages.photo.likeLists.clearCanvas();
+            aup.pages.photo.likeLists.listContainer.css({ display : 'none' });
 
 
             var curId = new Number(this.parent.curPageId);
-            WHP.actions.likes.getLikeList(    WHP.pages.photo.curPageId, bind( function(e) {  if (curId == this.parent.curPageId) WHP.pages.photo.likeLists.dataCallBack(e); }, WHP.pages.photo.likeLists));
-            //WHP.actions.likes.getDislikeList( WHP.pages.photo.curPageId, bind( this.dataCallBack, this));
+            aup.actions.likes.getLikeList(    aup.pages.photo.curPageId, bind( function(e) {  if (curId == this.parent.curPageId) aup.pages.photo.likeLists.dataCallBack(e); }, aup.pages.photo.likeLists));
+            //aup.actions.likes.getDislikeList( aup.pages.photo.curPageId, bind( this.dataCallBack, this));
         },
 
         dataCallBack : function(response)
@@ -1846,10 +1846,10 @@ WHP.pages.photo = {
             var resp = getObjectJson(response);
             if (resp.error)
             {
-                log("WHP/pages/photo/likeLists : get lists error = ["+resp.error.code+"]");
-                if (!WHP.errors.hasNetError(resp))
+                log("aup/pages/photo/likeLists : get lists error = ["+resp.error.code+"]");
+                if (!aup.errors.hasNetError(resp))
                 {
-                    //WHP.controller.showErrorPage();
+                    //aup.controller.showErrorPage();
                 }
                 return false;
             }
@@ -1865,21 +1865,21 @@ WHP.pages.photo = {
             var str = "";
             for (var i=0; i<this.likes.length; i++)
             {
-                if (this.likes[i].name == WHP.auth.userObject.name) continue;
+                if (this.likes[i].name == aup.auth.userObject.name) continue;
                 if (i!=this.likes.length-1)
-                    str = str + "<a href='" + WHP.links.getUserProfileLink(this.likes[i].id) + "' class='photobig_like_username'>"+this.likes[i].name+"</a>, "
+                    str = str + "<a href='" + aup.links.getUserProfileLink(this.likes[i].id) + "' class='photobig_like_username'>"+this.likes[i].name+"</a>, "
                 else
-                    str = str + "<a href='" + WHP.links.getUserProfileLink(this.likes[i].id) + "' class='photobig_like_username'>"+this.likes[i].name+"</a>";
+                    str = str + "<a href='" + aup.links.getUserProfileLink(this.likes[i].id) + "' class='photobig_like_username'>"+this.likes[i].name+"</a>";
             }
             this.likesBody.innerHTML = str;
 
 
-            WHP.pages.photo.likeLists.setLikesMe();
-            WHP.pages.photo.setHearts();
+            aup.pages.photo.likeLists.setLikesMe();
+            aup.pages.photo.setHearts();
 
             addIntelloLinks(this.likesBody);
 
-            //WHP.resetH();
+            //aup.resetH();
         },
 
         clearCanvas : function()
@@ -1897,63 +1897,63 @@ WHP.pages.photo = {
 
         clearLikesMe : function()
         {
-            WHP.pages.photo.likeLists.meDislike.innerHTML = "";
-            WHP.pages.photo.likeLists.meLike.innerHTML = "";
+            aup.pages.photo.likeLists.meDislike.innerHTML = "";
+            aup.pages.photo.likeLists.meLike.innerHTML = "";
         },
 
         setLikesMe : function()
         {
-            if (WHP.pages.photo.curPageObject == null)
+            if (aup.pages.photo.curPageObject == null)
                 return false;
 
-            if (WHP.pages.photo.curPageObject.photo.wasvote > 0)
+            if (aup.pages.photo.curPageObject.photo.wasvote > 0)
             {
-                WHP.pages.photo.likeLists.meDislike.innerHTML = "";
-                if (WHP.pages.photo.likeLists.likes.length >0)
-                    WHP.pages.photo.likeLists.meLike.innerHTML = "<a href='" + WHP.links.getUserProfileLink(WHP.auth.status.id) + "' class='photobig_like_username'>"+WHP.auth.userObject.name+"</a>"+", "
+                aup.pages.photo.likeLists.meDislike.innerHTML = "";
+                if (aup.pages.photo.likeLists.likes.length >0)
+                    aup.pages.photo.likeLists.meLike.innerHTML = "<a href='" + aup.links.getUserProfileLink(aup.auth.status.id) + "' class='photobig_like_username'>"+aup.auth.userObject.name+"</a>"+", "
                 else
-                    WHP.pages.photo.likeLists.meLike.innerHTML = "<a href='" + WHP.links.getUserProfileLink(WHP.auth.status.id) + "' class='photobig_like_username'>"+WHP.auth.userObject.name+"</a>";
+                    aup.pages.photo.likeLists.meLike.innerHTML = "<a href='" + aup.links.getUserProfileLink(aup.auth.status.id) + "' class='photobig_like_username'>"+aup.auth.userObject.name+"</a>";
 
-                addIntelloLinks(WHP.pages.photo.likeLists.meLike);
+                addIntelloLinks(aup.pages.photo.likeLists.meLike);
             }else{
                 this.clearLikesMe();
             }
 
             //check likes displaying
 
-            if ((this.likes.length>0) || (WHP.pages.photo.curPageObject.photo.wasvote!=0))
+            if ((this.likes.length>0) || (aup.pages.photo.curPageObject.photo.wasvote!=0))
             {
                 this.listContainer.css({ display : 'block' });
             }else{
                 this.listContainer.css({ display : 'none' });
             }
 
-            WHP.pages.photo.setHearts();
-            WHP.pages.photo.likeLists.checkLikesStatus();
+            aup.pages.photo.setHearts();
+            aup.pages.photo.likeLists.checkLikesStatus();
         },
         checkLikesStatus : function()
         {
-            var sourceLikes = WHP.pages.photo.curPageObject.photo.like;
+            var sourceLikes = aup.pages.photo.curPageObject.photo.like;
 
             if (sourceLikes == 1)
-                WHP.pages.photo.likeLists.likesHeader.innerHTML = sourceLikes + "&nbsp;Like"
+                aup.pages.photo.likeLists.likesHeader.innerHTML = sourceLikes + "&nbsp;Like"
             else
-                WHP.pages.photo.likeLists.likesHeader.innerHTML = sourceLikes + "&nbsp;Likes";
+                aup.pages.photo.likeLists.likesHeader.innerHTML = sourceLikes + "&nbsp;Likes";
 
         },
 
         init : function()
         {
-            this.listContainer = $(WHP.pages.photo.mainObject).find( ".photobig_likesbox_holder");
-            var obj = $(WHP.pages.photo.mainObject).find( ".photobig_like_header" );
+            this.listContainer = $(aup.pages.photo.mainObject).find( ".photobig_likesbox_holder");
+            var obj = $(aup.pages.photo.mainObject).find( ".photobig_like_header" );
             this.likesHeader = obj[0];
             this.dislikesHeader = obj[1];
 
-            var obj = $(WHP.pages.photo.mainObject).find( ".photobig_like_body" );
+            var obj = $(aup.pages.photo.mainObject).find( ".photobig_like_body" );
             this.likesBodyC = obj[0];
             this.dislikesBodyC = obj[1];
 
-            var obj = $(WHP.pages.photo.mainObject).find( ".photobig_like_body_cont" );
+            var obj = $(aup.pages.photo.mainObject).find( ".photobig_like_body_cont" );
             this.likesBody = obj[0];
             this.dislikesBody = obj[1];
 

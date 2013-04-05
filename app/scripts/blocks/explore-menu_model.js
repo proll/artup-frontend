@@ -1,4 +1,4 @@
-whp.ExploreMenu = Backbone.Model.extend({
+aup.ExploreMenu = Backbone.Model.extend({
 	defaults:{
 		sorts:[
 			{
@@ -60,7 +60,7 @@ whp.ExploreMenu = Backbone.Model.extend({
 				this.set("category", this.defaults.category);
 		}, this);
 
-		this.view = new whp.ExploreMenuView({
+		this.view = new aup.ExploreMenuView({
 			model: this
 		});
 	},

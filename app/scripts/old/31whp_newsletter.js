@@ -1,4 +1,4 @@
-WHP.newsletter = {
+aup.newsletter = {
 
     init: function() {
         var self = this;
@@ -9,7 +9,7 @@ WHP.newsletter = {
         this.init();
 
         $("#newsletter_popup").fadeIn();
-        WHP.contentCont.fadeOut();
+        aup.contentCont.fadeOut();
     },
 
     send: function() {
@@ -18,6 +18,6 @@ WHP.newsletter = {
 
     hide: function() {
         $("#newsletter_popup").fadeOut();
-        WHP.contentCont.fadeIn();
+        aup.contentCont.fadeIn();
     }
 };

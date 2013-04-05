@@ -1,4 +1,4 @@
-whp.Timeline = Backbone.Model.extend({
+aup.Timeline = Backbone.Model.extend({
 	defaults: {
 		offset: 	0,
 		limit: 		15,
@@ -8,7 +8,7 @@ whp.Timeline = Backbone.Model.extend({
 	},
 
 	initialize: function (options) {
-		this.collection = new whp.PostCollection();
+		this.collection = new aup.PostCollection();
 
 		this.collection.on("load:success", function () {
 			this.set("offset", this.get("offset") + this.get("limit"));
@@ -24,7 +24,7 @@ whp.Timeline = Backbone.Model.extend({
 		this.collection.on("add", this.addPic, this);
 		this.collection.on("reset", this.resetPosts, this);
 
-		this.view = new whp.TimelineView({
+		this.view = new aup.TimelineView({
 			collection:this.collection, 
 			model: this
 		});
@@ -32,7 +32,7 @@ whp.Timeline = Backbone.Model.extend({
 		this.on("needmore", this.needMore, this);
 
 		if(this.get("scrollload")) {
-			whp.on("pagebottom:reached", function () {
+			aup.on("pagebottom:reached", function () {
 				this.trigger("needmore");
 			}, this);
 		}

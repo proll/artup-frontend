@@ -1,4 +1,4 @@
-whp.PhotoPage = whp.Page.extend({
+aup.PhotoPage = aup.Page.extend({
 	visited: false,
 	defaults: {
 	},
@@ -10,13 +10,13 @@ whp.PhotoPage = whp.Page.extend({
 		// if(!this.visited) {
 
 			this.visited = true;
-			this.view = new whp.PhotoPageView({
+			this.view = new aup.PhotoPageView({
 				model: this, 
 				template:"pages/photo-page"
 			});
 
 
-			this.photo = new whp.Photo(options);
+			this.photo = new aup.Photo(options);
 
 			this.view.render(true);
 			this.photo.activate();

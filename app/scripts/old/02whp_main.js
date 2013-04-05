@@ -1,4 +1,4 @@
-WHP = {
+aup = {
 	inited : false,
 	netTimeOut : 30000,
     errorMessTO : 4000,
@@ -109,7 +109,7 @@ WHP = {
 
             this.promoteImg.css({ display: 'none' });
             this.parent.footer.css({ height : 61+'px'});
-            WHP.resetH();
+            aup.resetH();
         },
 
         changeFooterH : function()
@@ -146,8 +146,8 @@ WHP = {
                     this.promoteFirst = true;
                     this.showAct2();
                 }
-                var posTo = $(document).height() - WHP.screenHl;
-                WHP.smoothScrollTo(0, posTo, null, true);
+                var posTo = $(document).height() - aup.screenHl;
+                aup.smoothScrollTo(0, posTo, null, true);
                 return true;
             }
             return false;
@@ -254,11 +254,11 @@ WHP = {
 		}
 
 
-        if (WHP.controller.curPage)
-        if (WHP.controller.curPage.onResizeEvent)
+        if (aup.controller.curPage)
+        if (aup.controller.curPage.onResizeEvent)
         {
             var e = { type : "onResizeEvent", newHeight : newH, newWidth : newW };
-            WHP.controller.curPage.onResizeEvent(e);
+            aup.controller.curPage.onResizeEvent(e);
         }
 
 		//get viewport size
@@ -275,16 +275,16 @@ WHP = {
 
 
 
-        if (WHP.controller.curPage)
-        if (WHP.controller.curPage.onResizeEvent)
+        if (aup.controller.curPage)
+        if (aup.controller.curPage.onResizeEvent)
         {
             var e = { type : "onResizeEvent", newHeight : newH, lastHeight : this.changeContentEventLastH, delt : (newH - this.changeContentEventLastH)};
-            WHP.controller.curPage.onResizeEvent(e);
+            aup.controller.curPage.onResizeEvent(e);
         }
 
         // log("["+this.screenWl+"]x["+this.screenHl+"]");
 		this.mainObject.style.width = this.screenWl - this.scrollsWidth +'px';
-		WHP.menu.menuObject.css({ width : (this.screenWl - this.scrollsWidth)+'px'});
+		aup.menu.menuObject.css({ width : (this.screenWl - this.scrollsWidth)+'px'});
 
 
         this.main_fader.css({width:this.screenWl+'px', height:this.screenHl+'px'});
@@ -366,12 +366,12 @@ WHP = {
 		
 		AddHandler(window, "resize", this.resize, this);
 		//init modules
-        WHP.serviceMessages.init();
-        WHP.timelineMessages.init();
-        WHP.stats.init();
-		WHP.menu.init();
-		WHP.auth.init();
-        WHP.popup_message.init();
+        aup.serviceMessages.init();
+        aup.timelineMessages.init();
+        aup.stats.init();
+		aup.menu.init();
+		aup.auth.init();
+        aup.popup_message.init();
 
 
 
@@ -398,7 +398,7 @@ WHP = {
 		for (var key in this.netcalls)
 		{
             if (this.netcalls[key].indexOf("//") < 0) {
-                this.netcalls[key] = "//"+WHP.domain+"/"+this.netcalls[key]+"/";
+                this.netcalls[key] = "//"+aup.domain+"/"+this.netcalls[key]+"/";
             }
 		}
 	},
@@ -521,7 +521,7 @@ WHP = {
         var scrollY = (1-B)*this.smoothScrollParams.p0.y + B*this.smoothScrollParams.p1.y;
 
 
-        WHP.menu.setShadow(scrollY);
+        aup.menu.setShadow(scrollY);
         window.scrollTo(scrollX,scrollY);
 
         if (A==1)
@@ -541,7 +541,7 @@ WHP = {
 
         if (!_Notlimit)
         {
-            this.smoothScrollParams.p1.y = Math.max(0, Math.min($(document).height() - WHP.screenHl, _y));
+            this.smoothScrollParams.p1.y = Math.max(0, Math.min($(document).height() - aup.screenHl, _y));
         }else{
             this.smoothScrollParams.p1.y = _y;
         }
@@ -676,7 +676,7 @@ WHP = {
 
 
             this.box.css({ display : ""});
-            WHP.main_fader.show();
+            aup.main_fader.show();
 
 
 
@@ -687,9 +687,9 @@ WHP = {
             if (browser.ie)
             {
                 this.box.css({ position : 'absolute' });
-                this.box.css({ top : (scrollTop + (WHP.screenH - this.box.outerWidth())*0.5 )+'px', left : (WHP.screenWl-this.box.outerWidth())*0.5 -20 +'px' });
+                this.box.css({ top : (scrollTop + (aup.screenH - this.box.outerWidth())*0.5 )+'px', left : (aup.screenWl-this.box.outerWidth())*0.5 -20 +'px' });
             }else
-                this.box.css({ top : (WHP.screenH - this.box.outerHeight())*0.5 +'px', left : (WHP.screenWl-this.box.outerWidth())*0.5 -20 +'px' });
+                this.box.css({ top : (aup.screenH - this.box.outerHeight())*0.5 +'px', left : (aup.screenWl-this.box.outerWidth())*0.5 -20 +'px' });
 
 
 
@@ -711,14 +711,14 @@ WHP = {
                 return false;
 
             this.box.css({ display : "none" });
-            WHP.main_fader.hide();
+            aup.main_fader.hide();
         }
     }
 }
 
 //additional modules
-WHP.pages = {}
-WHP.actions = {}
+aup.pages = {}
+aup.actions = {}
 
 
 

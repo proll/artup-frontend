@@ -1,4 +1,4 @@
-whp.User = Backbone.Model.extend({
+aup.User = Backbone.Model.extend({
 	cookie_time : 365,
 
 	defaults: {
@@ -12,7 +12,7 @@ whp.User = Backbone.Model.extend({
 
 	initialize: function(){
 
-		this.settings = new whp.UserSettings;
+		this.settings = new aup.UserSettings;
 		this.settings.getGeoPosition();
 		
 		this.settings.on("error", function(err) {
@@ -27,8 +27,8 @@ whp.User = Backbone.Model.extend({
 
 		
 		/* Global events */
-		whp.on("auth:success", 	this.setSession, 	this);
-		whp.on("auth:clear", 	this.clearSession, 	this);
+		aup.on("auth:success", 	this.setSession, 	this);
+		aup.on("auth:clear", 	this.clearSession, 	this);
 	},
 
 	getSession: function () {

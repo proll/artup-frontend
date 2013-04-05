@@ -1,4 +1,4 @@
-WHP.pages.landing = {
+aup.pages.landing = {
     urlStr : "",	//temp name for error page
     title : "",
     video_url: "http://player.vimeo.com/video/53165732",
@@ -77,26 +77,26 @@ WHP.pages.landing = {
             $("#promo-descr-3").fadeIn(500);
         });
 
-        $("#l10n_" + WHP.l10n.locale).addClass("active");
+        $("#l10n_" + aup.l10n.locale).addClass("active");
 
         $("#l10n_ru").click(function() {
             $(".main-header-l10n span").removeClass("active");
             $(this).addClass("active");
-            WHP.l10n.locale = "ru";
-            WHP.l10n.localize_page("landing");
+            aup.l10n.locale = "ru";
+            aup.l10n.localize_page("landing");
         });
 
         $("#l10n_en").click(function() {
             $(".main-header-l10n span").removeClass("active");
             $(this).addClass("active");
-            WHP.l10n.locale = "en";
-            WHP.l10n.localize_page("landing");
+            aup.l10n.locale = "en";
+            aup.l10n.localize_page("landing");
         });
 
         this.sendMailObj = $(this.mainObject).find(".landin_android");
 
         var dn = $(this.mainObject).find(".timeline_empty_download_iphone");
-        dn.click(function() { WHP.stats.trackDownload("DOWNLOAD_LANDING") });
+        dn.click(function() { aup.stats.trackDownload("DOWNLOAD_LANDING") });
 
 
         if (browser.opera)
@@ -161,12 +161,12 @@ WHP.pages.landing = {
     show: function (_q)
     {
         //_q - query string
-        WHP.controller.showCanvas();
-        WHP.controller.setTitle();
-        WHP.stats.trackShowMainButton();
+        aup.controller.showCanvas();
+        aup.controller.setTitle();
+        aup.stats.trackShowMainButton();
 
         $(".main-header-l10n").show();
-        WHP.l10n.localize_page("landing");
+        aup.l10n.localize_page("landing");
     },
 
     hide: function ()
@@ -240,9 +240,9 @@ WHP.pages.landing = {
             return false;
 
         $.ajax({
-            url:WHP.netcalls.promoCall,
+            url:aup.netcalls.promoCall,
             data : { r : Math.random(), email :  this.input.val() },
-            timeout:WHP.netTimeOut,
+            timeout:aup.netTimeOut,
             success:bind(this.parent.promoOk, this),
             error:bind(this.parent.promoFail, this)
         });
@@ -268,14 +268,14 @@ WHP.pages.landing = {
     {
 //        if (_auth)
 //        {
-//            WHP.controller.navigateTo(WHP.pages.timeline.urlStr);
+//            aup.controller.navigateTo(aup.pages.timeline.urlStr);
 //        }
     },
 
 
     restore: function ()
     {
-        WHP.controller.showCanvas();
+        aup.controller.showCanvas();
     }
 }
 

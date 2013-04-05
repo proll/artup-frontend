@@ -1,4 +1,4 @@
-whp.DailyListMenu = Backbone.Model.extend({
+aup.DailyListMenu = Backbone.Model.extend({
 	url: "/api/story/daily/list/",
 	defaults:{
 		offset: 	0,
@@ -21,7 +21,7 @@ whp.DailyListMenu = Backbone.Model.extend({
 		}, this);
 
 
-		this.view = new whp.DailyListMenuView({
+		this.view = new aup.DailyListMenuView({
 			model: this
 		});
 

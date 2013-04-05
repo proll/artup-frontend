@@ -1,11 +1,11 @@
-whp.DailyListMenuView = Backbone.View.extend({
+aup.DailyListMenuView = Backbone.View.extend({
 	template: "blocks/dailylist-menu",
 	tagName: "div",
 	className: "dailylist-menu",
 	rendered: false,
 
 	initialize: function(){
-		this.template = whp.Templates.get(this.template);
+		this.template = aup.Templates.get(this.template);
 		this.model.on("change:stories", this.renderAppend, this);
 
 		this.model.on("activate", this.activate, this);

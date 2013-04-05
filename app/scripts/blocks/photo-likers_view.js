@@ -1,4 +1,4 @@
-whp.PhotoLikersView = Backbone.View.extend({
+aup.PhotoLikersView = Backbone.View.extend({
 	template: 	'blocks/photo-likers',
 	tagName: 	'div',
 	className: 	'photo-likers',
@@ -6,7 +6,7 @@ whp.PhotoLikersView = Backbone.View.extend({
 	image: null,
 
 	initialize: function(options){
-		this.template = whp.Templates.get(this.template);
+		this.template = aup.Templates.get(this.template);
 
 		this.model.on('load:success', this.render, this);
 		this.model.on('update:vote', this.updateTotal, this);
