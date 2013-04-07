@@ -248,5 +248,8 @@ aup.App = Backbone.Model.extend({
 		 * APPLICATION READY
 		 */
 		aup.trigger("app:init");
+
+
+		// aup.navigate("/explore");
 	}
 });

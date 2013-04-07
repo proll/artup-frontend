@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Artup"
+AuthUserFile /var/www/artup.fe/web/.htpasswd
+Require valid-user

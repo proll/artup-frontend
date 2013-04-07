@@ -133,6 +133,8 @@ Backbone.sync = function(method, model, options){
 		}
 	}
 	options.url = (options.url || (model.url && _.result(model, 'url'))) + "?" + _.map(credentials, function(value, key){ return key+"="+value}).join("&");
+
+	options.url	= "/api/gate.php?method=" + options.url;
     return Backbone._sync(method, model, options);
 }
 
