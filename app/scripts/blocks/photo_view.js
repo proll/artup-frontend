@@ -56,8 +56,10 @@ aup.PhotoView = Backbone.View.extend({
 		var wasvote = parseInt(this.model.get("photo").wasvote) || 0;
 
 		if(!wasvote) {
+			if(!this.model.addVote()) {
+				return false;
+			}
 			this.$vote.toggleClass("active", true);
-			this.model.addVote();
 		} else {
 			this.$vote.toggleClass("active", false);
 			this.model.removeVote();

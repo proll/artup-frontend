@@ -1,6 +1,6 @@
-aup.TimelineView = Backbone.View.extend({
+aup.PhotofeedView = Backbone.View.extend({
 	tagName: "div",
-	className: "timeline",
+	className: "photofeed",
 
 	initialize: function(options){
 		this.collection = options.collection;
@@ -12,7 +12,7 @@ aup.TimelineView = Backbone.View.extend({
 
 		this.model = options.model;
 
-		this.$cont = $('<div class="timeline__container"></div>').appendTo(this.$el);
+		this.$cont = $('<div class="photofeed__container"></div>').appendTo(this.$el);
 		this.showSpinner();
 	},
 
@@ -23,7 +23,7 @@ aup.TimelineView = Backbone.View.extend({
 
 	showSpinner: function () {
 		if(!this.$spinner) {
-			this.$spinner = $('<div class="timeline__spinner"></div>').appendTo(this.$el);
+			this.$spinner = $('<div class="photofeed__spinner"></div>').appendTo(this.$el);
 		} else {
 			this.$spinner.toggleClass("hidden", false);
 		}

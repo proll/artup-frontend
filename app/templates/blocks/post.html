@@ -1,32 +1,32 @@
 {{#ifEq type 'PHOTO'}}
 	<div class="row">
-		<div class="span6 timeline__photo">
+		<div class="span6 photofeed__photo">
 			<a href="/photo/{{ photo.id }}/"><img src="{{ photo.i1000x1000 }}" alt="{{ photo.caption }}" width="620" height="620"></a>
-			<div class="timeline__story">
-				<span class="timeline__story-name">{{ photo.story.name }}</span> <span class="timeline__story-by">by</span> <a href="/user/{{ photo.user.id }}/" class="timeline__user-name">{{ photo.user.name }}</a> <span class="timeline__ts" data-ts="{{ timestamp }}">{{_timegap timestamp}}</span> 
+			<div class="photofeed__story">
+				<span class="photofeed__story-name">{{ photo.story.name }}</span> <span class="photofeed__story-by">by</span> <a href="/user/{{ photo.user.id }}/" class="photofeed__user-name">{{ photo.user.name }}</a> <span class="photofeed__ts" data-ts="{{ timestamp }}">{{_timegap timestamp}}</span> 
 			</div>
 		</div>
-		<div class="span4 timeline__comment">
+		<div class="span4 photofeed__comment">
 			{{#if photo.caption}}
-				<h2 class="timeline__caption">{{_uinput photo.caption }}</h2>
+				<h2 class="photofeed__caption">{{_uinput photo.caption }}</h2>
 			{{/if}}
 			{{#if photo.location}}
 			{{#if photo.location.name }}
-				<h3 class="timeline__location-name">{{ photo.location.name }}</h3>
+				<h3 class="photofeed__location-name">{{ photo.location.name }}</h3>
 			{{/if}}
 			{{#if photo.location.address }}
-				<h4 class="timeline__location-addr">{{ photo.location.address }}</h4>
+				<h4 class="photofeed__location-addr">{{ photo.location.address }}</h4>
 			{{/if}}
 			{{/if}}
 		</div>
 	</div>
 {{else}}
 	{{#ifEq type 'LIKE'}}
-		<h2 class="timeline__like-h">Likes</h2>
+		<h2 class="photofeed__like-h">Likes</h2>
 		<div class="row">
-			<div class="span10 timeline__likes">
+			<div class="span10 photofeed__likes">
 				{{#each photos}}
-				<div class="timeline__like">
+				<div class="photofeed__like">
 					<a href="/photo/{{id}}/" title="{{caption}}"><img src="{{i212x212}}" alt="{{caption}}" width="212" height="212"></a>
 				</div>
 				{{/each}}

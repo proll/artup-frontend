@@ -24,6 +24,20 @@
 	}
 }
 
+.clearright {
+	*zoom: 1;
+	&:after {
+		display: table;
+		content: "";
+		// Fixes Opera/contenteditable bug:
+		// http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
+		line-height: 0;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
 .pseudo{
 	color: @linkColor;
 	border-bottom: 1px dotted @linkColor;

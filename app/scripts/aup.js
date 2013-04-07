@@ -102,6 +102,15 @@ window.aup = {
 	},
 	navigate: function (path, options) {
 		aup.app.router.navigate(path, options);
+	},
+
+	is_needauth: function() {
+		if(!aup.user.is_auth()) {
+			aup.trigger("auth:show");
+			return true;
+		} else {
+			return false;
+		}
 	}
 };
 
@@ -116,9 +125,11 @@ Backbone.sync = function(method, model, options){
 			token: options.userData.token
 		}
 	}else{
-		credentials = {
-			uid: aup.app.user.get("uid"),
-			token: aup.app.user.get("token")
+		if(!!aup.app.user.get("uid")) {
+			credentials = {
+				uid: aup.app.user.get("uid"),
+				token: aup.app.user.get("token")
+			}
 		}
 	}
 	options.url = (options.url || (model.url && _.result(model, 'url'))) + "?" + _.map(credentials, function(value, key){ return key+"="+value}).join("&");

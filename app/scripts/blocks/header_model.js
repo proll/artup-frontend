@@ -25,7 +25,7 @@ aup.Header = Backbone.Model.extend({
 				title: 	"Dialogs",
 				description: 	"Here you can find hot photo reports from friends"
 			},
-			default:{
+			defaults:{
 				title: 	"Default",
 				description: 	"So i'm so default"
 			}
@@ -42,9 +42,9 @@ aup.Header = Backbone.Model.extend({
 
 	changeItem: function (itemName) {
 		if(!!this.get("items")[itemName]) {
-			this.set("currentItem",itemName);
+			this.set("currentItem", itemName);
 		} else {
-			this.set("currentItem", "default");
+			this.set("currentItem", 'defaults' );
 		}
 	}
 	// ,

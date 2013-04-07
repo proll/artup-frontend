@@ -43,6 +43,9 @@ aup.PhotoShare = Backbone.Model.extend({
 	},
 
 	reportPhoto: function() {
+		if(aup.is_needauth()) {
+			return false;
+		}
 		if(this.reporting) return;
 
 		var report_data = {
@@ -60,6 +63,7 @@ aup.PhotoShare = Backbone.Model.extend({
 				success: 	_.bind(this.reportSuccess, this),
 				error: 		_.bind(this.reportError, this)
 			});
+		return this;
 	},
 
 	reportSuccess: function() {
@@ -77,6 +81,10 @@ aup.PhotoShare = Backbone.Model.extend({
 
 	// Facebook auth + share
 	shareFB : function(e) {
+		// if(aup.is_needauth()) {
+		// 	return false;
+		// }
+
 		if (this.fb_shared || this.fb_sharing) {
 			return false;
 		}
@@ -89,6 +97,7 @@ aup.PhotoShare = Backbone.Model.extend({
 		} else {
 			aup.app.auth.FB.login();
 		}
+		return this;
 	},
 
 	shareAuthedFB: function() {

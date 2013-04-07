@@ -9,8 +9,8 @@ aup.HeaderView = Backbone.View.extend({
 	},
 	render: function(){
 		var template = this.template( this.model.get("items")[this.model.get("currentItem")] );	
-		
-		if( this.model.get("currentItem").title == this.model.defaults.currentItem.title ) {
+
+		if(this.model.get("currentItem") === 'defaults' ) {
 			this.$el.toggleClass("hidden", true);
 		} else {
 			this.$el.toggleClass("hidden", false);

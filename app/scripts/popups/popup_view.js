@@ -2,7 +2,8 @@ aup.PopupView = Backbone.View.extend({
 	template: "popups/popup",
 	className: 'popup',
 	events: {
-		"click .popup__close": "hide"
+		"click .popup__close": "hide",
+		"click .popup__td": "bgClick",
 	},
 	options : {},
 	defaults: {
@@ -17,7 +18,7 @@ aup.PopupView = Backbone.View.extend({
 		this.template = aup.Templates.get(this.template);
 		 _.defaults(this.options, this.defaults);
 		 this.transitionEvent = $.support.transition && $.support.transition.end;
-		 _.bindAll(this, "show", "showFader", "hideFader", "showPopup", "hidePopup");
+		 // _.bindAll(this, "show", "showFader", "hideFader", "showPopup", "hidePopup");
 		this.on("fader:show", function(){
 			this.showPopup();
 		}, this);
@@ -37,6 +38,8 @@ aup.PopupView = Backbone.View.extend({
 		var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
 							  window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 		window.requestAnimationFrame = requestAnimationFrame;
+
+
 	},
 
 	render: function(){
@@ -58,6 +61,22 @@ aup.PopupView = Backbone.View.extend({
 		$("body").css("overflow", "auto");
 	},
 
+	bgClick: function(e) {
+		if(!!e && !!e.srcElement && e.srcElement.className=='popup__td') {
+			this.hide();
+		}
+	},
+
+	reactKeypress: function(e) {
+		// ESC press
+		if(e.keyCode == 27) {
+			var $src_el = $(e.srcElement);
+			if(!$src_el.is(':input')) {
+				this.hide();
+			}
+		}
+	},
+
 	createFader: function(){
 		if(this.$fader) return this.$fader;
 		
@@ -65,13 +84,15 @@ aup.PopupView = Backbone.View.extend({
 			$("body").append("<div id='fader' class='in'></div>");	
 		}
 		this.$fader = $("#fader");
+
 		return  this.$fader;
 	},
 
 	showFader: function(){
 		if(!this.$fader){ this.createFader() };
+		var that = this;
+		this.$fader.attr("style", "");
 		if(this.transitionEvent){
-			var that = this;
 			this.$fader.show().toggleClass("in", true);
 			setTimeout( function(){
 				that.$fader.removeClass("in");
@@ -87,8 +108,8 @@ aup.PopupView = Backbone.View.extend({
 	},
 
 	hideFader: function(){
+		var that = this;
 		if(this.transitionEvent){
-			var that = this;
 			this.$fader.toggleClass("in", true);
 			this.$fader.one(that.transitionEvent, function(evt){
 				if(evt.target == that.$fader[0]){
@@ -106,8 +127,8 @@ aup.PopupView = Backbone.View.extend({
 		var $body = $(document.body);
 		$body.append(this.render());
 		$body.css("overflow", "hidden");
+		var that = this;
 		if(this.transitionEvent){
-			var that = this;
 			that.$el.toggleClass("in", true);
 			setTimeout( function(){
 				that.$el.removeClass("in");
@@ -119,11 +140,13 @@ aup.PopupView = Backbone.View.extend({
 		}else{
 			that.trigger("popup:show");
 		}
+
+		$(document).on("keyup.popup", _.bind(this.reactKeypress, this));
 	},
 
 	hidePopup: function(){
+		var that = this;
 		if(this.transitionEvent){
-			var that = this;
 			that.$el.toggleClass("in", true);
 			this.$el.one(that.transitionEvent, function(evt){
 				if(evt.target == that.$el[0]){
@@ -135,6 +158,8 @@ aup.PopupView = Backbone.View.extend({
 			this.$el.detach();
 			that.trigger("popup:hide");
 		}
+
+		$(document).off("keyup.popup");
 	},
 
 	show: function(){

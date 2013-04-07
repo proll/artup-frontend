@@ -57,9 +57,14 @@ aup.CommentPaneView = Backbone.View.extend({
 
 	addMyComment: function() {
 		var text = $.trim(this.$input.val());
-		if(!text || this.model.get('adding')) return;
+		if(!text || this.model.get('adding')) {
+			return false;
+		}
 
-		this.model.addMyComment( text );
+		var can_comment = this.model.addMyComment( text );
+		if(!can_comment) {
+			return false;
+		}
 
 		// clear textarea
 		this.$input.val('');

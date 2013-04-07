@@ -103,6 +103,10 @@ aup.CommentPane = Backbone.Model.extend({
 
 	// add my new comment
 	addMyComment: function(text) {
+		if(aup.is_needauth()) {
+			return false;
+		}
+
 		var new_comment = new aup.Comment({
 			date: (new Date()).getTime()/1000,
 			text: text,

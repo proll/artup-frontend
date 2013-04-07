@@ -1,4 +1,4 @@
-aup.Timeline = Backbone.Model.extend({
+aup.Photofeed = Backbone.Model.extend({
 	defaults: {
 		offset: 	0,
 		limit: 		15,
@@ -15,7 +15,7 @@ aup.Timeline = Backbone.Model.extend({
 			this.set("loading", false);
 		}, this);
 		this.collection.on("load:error", function () {
-			console.error("timeline:load:error")
+			console.error("photofeed:load:error")
 			this.set("loading", false);
 		}, this)
 		this.collection.on("load:start", function () {
@@ -24,7 +24,7 @@ aup.Timeline = Backbone.Model.extend({
 		this.collection.on("add", this.addPic, this);
 		this.collection.on("reset", this.resetPosts, this);
 
-		this.view = new aup.TimelineView({
+		this.view = new aup.PhotofeedView({
 			collection:this.collection, 
 			model: this
 		});

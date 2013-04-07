@@ -1,24 +1,16 @@
-<div class="row">
-	<div class="photo__pic span7 offset3">
-		<div class="photo__pic-tile">
-			<img src="/images/empty.png" data-orig="{{ photo.i1000x1000 }}" alt="{{ photo.caption }}" width="100%" class="lazy">
-		</div>
-		{{#if photo.wasvote}}
-		<div class="i photo__vote i-vote active">
-			<span class="photo__vote-title">{{photo.like}}</span>
-		</div>
-		{{else}}
-		<div class="i photo__vote i-vote">
-			<span class="photo__vote-title">{{photo.like}}</span>
-		</div>
-		{{/if}}
-		<div class="photo__story">
-			<span class="photo__story-name">{{ photo.story.name }}</span> <span class="photo__story-by">by</span> <a href="/user/{{ photo.user.id }}/" class="photo__user-name unm">{{ photo.user.name }}</a> <span class="photo__ts" data-ts="{{ photo.timestamp }}">{{_timegap photo.timestamp}}</span>
-		</div>
+<div class="photo__pic">
+	<div class="photo__pic-tile">
+		<img src="/images/empty.png" data-orig="{{ photo.i1000x1000 }}" alt="{{ photo.caption }}" width="100%" class="lazy">
+	</div>
+	<div class="i photo__vote i-vote{{#if photo.wasvote}} active{{/if}}">
+		<span class="photo__vote-title">{{photo.like}}</span>
+	</div>
+	<div class="photo__story">
+		<span class="photo__story-name">{{ photo.story.name }}</span> <span class="photo__story-by">by</span> <a href="/user/{{ photo.user.id }}/" class="photo__user-name unm">{{ photo.user.name }}</a> <span class="photo__ts" data-ts="{{ photo.timestamp }}">{{_timegap photo.timestamp}}</span>
 	</div>
 </div>
-<div class="photo__text-row row">
-	<div class="photo__pic-col1 span4 offset3">
+<div class="photo__text-row">
+	<div class="photo__pic-col1">
 		{{#if photo.caption}}
 			<h2 class="photo__caption">{{_uinput photo.caption }}</h2>
 		{{/if}}
@@ -40,7 +32,7 @@
 		{{/if}}
 		<div class="photo-likers__cont"></div>
 	</div>
-	<div class="photo__pic-col2 span3">
+	<div class="photo__pic-col2">
 		<div class="photo-comment-pane__cont"></div>
 		<div class="photo-share__cont"></div>
 	</div>

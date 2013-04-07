@@ -5,10 +5,13 @@ aup.PicTileGrid = Backbone.Model.extend({
 		filter: 	"all",
 		sort: 		"date",
 		user: 		null,
+
+		max_timestamp: 0,
 		
 		loading: 	false,
 		sleeped: 	true,
 		scrollload: true,
+		timestamp_offset: false,
 		addphoto:   true,
 
 	},
@@ -18,7 +21,11 @@ aup.PicTileGrid = Backbone.Model.extend({
 
 		this.collection.on("load:success", function () {
 							this.set("offset", this.get("offset") + this.get("limit"));
+							if(this.collection.models && this.collection.models.length) {
+								this.set('max_timestamp', _.last(this.collection.models).get('timestamp'));
+							}
 							this.set("loading", false);
+
 						}, this)
 						.on("load:error", function () {
 							console.error("pic_grid:load:error")
@@ -95,6 +102,20 @@ aup.PicTileGrid = Backbone.Model.extend({
 					delete data.user;
 				}
 
+				if(this.get('timestamp_offset') && (data.sort === 'date' || !!data.sort)) {
+					delete data.offset;
+				} else {
+					delete data.max_timestamp;
+				}
+
+
+				// clear out unnesessary fields
+				delete data.loading;
+				delete data.sleeped;
+				delete data.scrollload;
+				delete data.timestamp_offset;
+				delete data.addphoto;
+
 				this.collection.fetch({data: data});
 			} 
 		}
@@ -102,6 +123,7 @@ aup.PicTileGrid = Backbone.Model.extend({
 
 	reset: function () {
 		this.set("offset", this.defaults.offset);
+		this.set("max_timestamp", Math.ceil((new Date()).getTime()/1000));
 		this.collection.reset();
 		this.trigger("needmore");
 		return false;
@@ -113,6 +135,8 @@ aup.PicTileGrid = Backbone.Model.extend({
 	},
 
 	activate: function() {
+		this.set("offset", this.defaults.offset);
+		this.set("max_timestamp", Math.ceil((new Date()).getTime()/1000));
 		this.set("sleeped", false);
 		this.trigger("needmore");
 	},

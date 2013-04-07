@@ -39,7 +39,7 @@ aup.DailyListMenu = Backbone.Model.extend({
 			limit: 		this.get("limit"),
 		};
 
-		console.log(options)
+		// console.log(options)
 
 
 		options.success  	= _.bind(this.success, this);

@@ -33,7 +33,7 @@ aup.PicTileGridView = Backbone.View.extend({
 		if(!this.collection.length) {
 			this.$el.toggleClass("pic-tile-grid_new-load", true);
 		}
-		if(this.$spinner) {
+		if(this.$spinner && this.collection.more) {
 			this.$spinner.toggleClass("hidden", false);
 		}
 	},
@@ -49,8 +49,10 @@ aup.PicTileGridView = Backbone.View.extend({
 		if(this.$addphoto) {
 			this.$addphoto.attr("href", "/add/" + this.model.get("category") + "/" + this.model.get("story") + "/")
 		}
-		if(this.$spinner) {
-			this.$spinner.toggleClass("hidden", true);
+
+
+		if(this.$spinner && !this.collection.more) {
+		 	this.$spinner.toggleClass("hidden", true);
 		}
 	},	
 });
