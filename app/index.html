@@ -3,20 +3,8 @@
 <head>
 	<meta charset="UTF-8"/>
 	<link rel="dns-prefetch" href="http://img.weheartpics.com" />
-	<title>WeHeartPics</title>
-	<meta name="description" content="Enough with sharing links and occasional moments, take care about the real lives of people.">
-
-	<!-- Facebook -->
-	<meta property="og:title" content="WeHeartPics" />
-	<meta property="og:type" content="website" />
-	<meta property="og:image" content="http://weheartpics.com/img/social_ico.png" />
-	<meta property="og:url" content="http://weheartpics.com/" />
-	<meta property="og:site_name" content="WeHeartPics" />
-	<meta property="og:description" content="We Heart Pics позволяет вам не думать о том, что снимать. Множество идей для фотографий на каждый день!"/>
-
-	<!-- Facebook app -->
-	<meta property="fb:admins" content="100000074821361, 501545068" />
-	<meta property="fb:app_id" content="205868409437437" />
+	<title>ArtUpp</title>
+	<meta name="description" content="ArtUP">
 
 	<!-- Mobile readiness tags -->
 	<meta name="HandheldFriendly" content="True" />
@@ -46,6 +34,9 @@
 	<meta name="format-detection" content="telephone=no"/>
 	<meta name="format-detection" content="address=no"/>
 
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Caption:400,700' rel='stylesheet' type='text/css'>
+
+	
 	<!-- build:css /styles/aup.css -->
 	<link rel="stylesheet" href="/styles/css/aup.css"/>
 	<!-- endbuild -->
@@ -57,6 +48,7 @@
 <body>
 <div class="navbar navbar-fixed-top navbar-header"></div>
 <header class="page-header"></header>
+<div class="page-line"></div>
 <div class="container" id="aup-container"></div>
 <footer></footer>
 <div class="auth-popup hide"></div>
@@ -69,7 +61,6 @@
 		ext: "html",
 		files: [
 			"blocks/navbar",
-			"blocks/header",
 			"blocks/pictile",
 			"blocks/pictile-grid",
 			"blocks/explore-menu",
@@ -149,8 +140,6 @@
 	<!-- Common Blocks -->
 	<script src="/scripts/blocks/navbar_model.js"></script>
 	<script src="/scripts/blocks/navbar_view.js"></script>
-	<script src="/scripts/blocks/header_model.js"></script>
-	<script src="/scripts/blocks/header_view.js"></script>
 
 
 
@@ -175,8 +164,8 @@
 	<!-- Photofeed Page -->
 	<script src="/scripts/pages/photofeed-page_model.js"></script>
 	<script src="/scripts/pages/photofeed-page_view.js"></script>
-	<script src="/scripts/blocks/timeline_model.js"></script>
-	<script src="/scripts/blocks/timeline_view.js"></script>
+	<script src="/scripts/blocks/photofeed_model.js"></script>
+	<script src="/scripts/blocks/photofeed_view.js"></script>
 	<script src="/scripts/blocks/post_model.js"></script>
 	<script src="/scripts/blocks/post_view.js"></script>
 	<script src="/scripts/blocks/post_collection.js"></script>

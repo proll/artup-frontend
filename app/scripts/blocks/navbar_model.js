@@ -3,23 +3,18 @@ aup.Navbar = Backbone.Model.extend({
 		user: null,
 		items:[
 			{
-				title: 	"Photofeed",
-				name: 	"photofeed",
-				link: "/photofeed",
+				title: 	"Подбор картин",
+				name: 	"explore",
+				link: "/explore",
 				active: true
 			},
 			{
-				title: 	"Explore",
-				name: 	"explore",
-				link: "/explore",
-			},
-			{
-				title: 	"Popular",
-				name: 	"popular",
-				link: "/explore/5/41/popular/all/",
+				title: 	"Все о проекте",
+				name: 	"about",
+				link: "/about"
 			},
 		],
-		currentItem: "photofeed",
+		currentItem: "explore",
 	},
 	
 	// TODO: доделать currentItem должен корелировать с items..active

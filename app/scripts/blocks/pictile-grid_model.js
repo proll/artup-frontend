@@ -12,7 +12,7 @@ aup.PicTileGrid = Backbone.Model.extend({
 		sleeped: 	true,
 		scrollload: true,
 		timestamp_offset: false,
-		addphoto:   true,
+		addphoto:   false,
 
 	},
 

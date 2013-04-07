@@ -30,29 +30,29 @@ aup.ExplorePage = aup.Page.extend({
 			});
 			this.grid = new aup.PicTileGrid( _.extend(options, {user: this.get("uid")}) );
 			this.menu = new aup.ExploreMenu(options);
-			this.story_menu = new aup.StoryMenu(options);
-			this.story_menu.fetch();
+			// this.story_menu = new aup.StoryMenu(options);
+			// this.story_menu.fetch();
 
 			this.view.render();
 			this.grid.activate();
 			this.view.addGrid(this.grid);
 			this.view.addMenu(this.menu);
-			this.view.addStoryMenu(this.story_menu);
+			// this.view.addStoryMenu(this.story_menu);
 
-			this.story_menu.activate();
+			// this.story_menu.activate();
 		} else {
 
 			this.grid.set( _.extend(options, {user: this.get("uid")}) );
 			this.menu.set(options);
-			this.story_menu.set(options);
+			// this.story_menu.set(options);
 			
 			this.view.render();
 			this.grid.activate();
 			this.view.addGrid(this.grid);
 			this.view.addMenu(this.menu);
-			this.view.addStoryMenu(this.story_menu);
+			// this.view.addStoryMenu(this.story_menu);
 
-			this.story_menu.activate();
+			// this.story_menu.activate();
 			this.grid.reset();
 
 		}
@@ -61,6 +61,6 @@ aup.ExplorePage = aup.Page.extend({
 
 	sleep: function () {
 		this.grid.sleep();
-		this.story_menu.sleep();
+		// this.story_menu.sleep();
 	}
 });

@@ -49,8 +49,8 @@
 	float: left;
 	display: block;
 	// Vertically center the text given @navbarHeight
-	padding: 23px 26px 18px 28px;
-	margin-left: -20px; // negative indent to left-align the text down the page
+	padding: ((@navbarHeight - 28px) / 2) 15px ((@navbarHeight - 28px) / 2);
+	margin-left: -15px; // negative indent to left-align the text down the page
 
 	&:hover,
 	&:focus {
@@ -238,10 +238,11 @@
 .navbar .nav > li > a {
 	float: none;
 	// Vertically center the text given @navbarHeight
-	padding: ((@navbarHeight - @navbarLineHeight) / 2)+4 25px ((@navbarHeight - @navbarLineHeight) / 2)-4;
+	padding: ((@navbarHeight - @navbarLineHeight) / 2)+4 15px ((@navbarHeight - @navbarLineHeight) / 2)-4;
 	color: @navbarLinkColor;
 	text-decoration: none;
 	text-shadow: 0 1px 0 @navbarBackgroundHighlight;
+	text-transform: uppercase;
 }
 .navbar .nav .dropdown-toggle .caret {
 	margin-top: 8px;

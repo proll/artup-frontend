@@ -14,8 +14,9 @@
 @blue:                  #005abe;
 @red:                   #c81414;
 @red_hover:             #d21f00;
-@grayDarker:            #333;
-@gray:                  #808080;
+@grayDarker:            #232322;
+@gray2: 		        #464646;
+@gray:                  #505050;
 @grayLight:             #999;
 @grayLighter:           #ccc;
 @grayLighter2:          #fdfdfd;
@@ -28,11 +29,11 @@
 
 // GRID
 // --------------------------------------------------
-@gridColumns:             13;
+@gridColumns:             12;
 
 // Default 1390px grid
 // -------------------------
-@gridColumnWidth:         70px;
+@gridColumnWidth:         40px;
 @gridGutterWidth:         40px;
 @gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
 
@@ -104,7 +105,8 @@
 @linkColor:			 	@blue;
 @linkColorHover:		darken(@linkColor, 15%);
 
-@sansFontFamily:		Helvetica, Arial, sans-serif;
+@sansFontFamily:		'PT Sans Caption', Helvetica, Arial, sans-serif;
+@serifFontFamily:       "Times New Roman", Times, Georgia, serif;
 
 @baseFontSize:		  	14px;
 @baseFontFamily:		@sansFontFamily;
@@ -199,21 +201,21 @@
 
 // Navbar
 // -------------------------
-@navbarFontSize:                  14px;
-@navbarLineHeight:                20px;
+@navbarFontSize:                  12px;
+@navbarLineHeight:                32px;
 @navbarCollapseWidth:             @gridRowMinWidthPhone;
 @navbarPreCollapseWidth:      	  @gridRowWidthTablet;
 @navbarCollapseDesktopWidth:      @navbarCollapseWidth + 1;
 
-@navbarHeight:                    65px;
+@navbarHeight:                    	104px;
 @navbarBackgroundHighlight:       #ffffff;
 @navbarBackground:                #ffffff;
-@navbarBorder:                    darken(@navbarBackground, 12%);
+@navbarBorder:                    @grayDarker;
 
-@navbarText:                      #333333;
-@navbarLinkColor:                 #333333;
-@navbarLinkColorHover:            #333333;
-@navbarLinkColorActive:           #111111;
+@navbarText:                      #242421;
+@navbarLinkColor:                 #242421;
+@navbarLinkColorHover:            #8c8c8b;
+@navbarLinkColorActive:           #8c8c8b;
 @navbarLinkBackgroundHover:       #ffffff;
 @navbarLinkBackgroundActive:      #ffffff;
 

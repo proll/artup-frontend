@@ -22,7 +22,6 @@ aup.App = Backbone.Model.extend({
 
 
 		this.navbar = new aup.Navbar;
-		this.header = new aup.Header;
 
 		// 404 page
 		this.pages.add(new aup.Page({
@@ -61,7 +60,6 @@ aup.App = Backbone.Model.extend({
 			if(router == "explore") {
 
 				this.navbar.set("currentItem", "explore");
-				this.header.changeItem("explore");
 
 				this.pages.getPage("explore").render({
 					category:   route[0],
@@ -73,14 +71,12 @@ aup.App = Backbone.Model.extend({
 			} else if (router == "photofeed") {
 
 				this.navbar.set("currentItem", "photofeed");
-				this.header.changeItem("photofeed");
 
 				this.pages.getPage("photofeed").render();
 
 			} else if (router == "photo") {
 
 				this.navbar.set("currentItem", "photo");
-				this.header.changeItem("photo");
 
 				// first open photo
 				if(this.router.route_passed <= 1) {
@@ -96,7 +92,6 @@ aup.App = Backbone.Model.extend({
 				}
 			} else {
 				if(!!route[0]) {
-					this.header.changeItem(route[0]);
 					this.navbar.set("currentItem", route[0]);
 				}
 			}
