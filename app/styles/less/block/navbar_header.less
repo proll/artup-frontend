@@ -149,3 +149,13 @@ body {
 		line-height: 0;
 	}
 }
+
+.min-nav {
+	.navbar .brand {
+		padding: ((@navbarMinHeight - 28px) / 2) 15px ((@navbarMinHeight - 28px) / 2);
+	}
+
+	.navbar .nav > li > a {
+		padding: ((@navbarMinHeight - @navbarLineHeight) / 2)+4 15px ((@navbarMinHeight - @navbarLineHeight) / 2)-4;
+	}
+}

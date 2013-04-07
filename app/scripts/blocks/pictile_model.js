@@ -23,6 +23,7 @@ aup.PicTile = Backbone.Model.extend({
 	},
 	fetch: function () {
 		this.set('width',  Math.round(Math.random() * 80) + 160);
+		this.set('timestamp',  Math.round( this.get('timestamp') / (Math.random() * 1000000)) );
 		this.set("src", this.get("i212x212"));
 	},
 

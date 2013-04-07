@@ -636,9 +636,9 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #ffffff;
-  opacity: 0.95;
-  filter: alpha(opacity=95);
+  background-color: #d8d8d4;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
   z-index: 1060;
   -webkit-transition: opacity 0.5s;
   -moz-transition: opacity 0.5s;
@@ -2269,6 +2269,12 @@ body {
 .navbar .brand {
   line-height: 0;
 }
+.min-nav .navbar .brand {
+  padding: 3px 15px 3px;
+}
+.min-nav .navbar .nav > li > a {
+  padding: 5px 15px -3px;
+}
 .pic-tile-grid {
   overflow: hidden;
   margin-left: -40px;
@@ -2305,10 +2311,6 @@ body {
 .pic-tile-loaded .pictile__img {
   opacity: 1;
 }
-.pictile__a {
-  font-size: 11px;
-  color: #505050;
-}
 .pictile__a:hover {
   color: #505050;
   text-decoration: none;
@@ -2317,10 +2319,15 @@ body {
   margin-bottom: 8px;
 }
 .pictile__author {
+  font-size: 11px;
+  color: #505050;
   display: block;
   line-height: 1.2;
+  text-transform: uppercase;
 }
 .pictile__price {
+  font-size: 11px;
+  color: #505050;
   font-family: "Times New Roman", Times, Georgia, serif;
   font-style: italic;
   display: block;

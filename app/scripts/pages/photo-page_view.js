@@ -8,7 +8,7 @@ aup.PhotoPageView = aup.PageView.extend({
 	render: function(in_popup){
 		this.popup_view = new aup.PopupView({class: "photo-popup"});
 		this.popup_view.on('show', function(){
-			this.reposition();
+			// this.reposition();
 		}, this);
 
 		this.popup_view.on('hide', function(){
@@ -42,7 +42,7 @@ aup.PhotoPageView = aup.PageView.extend({
 			}
 
 		}
-		this.model.photo.on('photo:ready', this.reposition, this);
+		// this.model.photo.on('photo:ready', this.reposition, this);
 		
 
 
@@ -54,14 +54,14 @@ aup.PhotoPageView = aup.PageView.extend({
 		this.trigger("page:render", this.model);
 		this.trigger("enterDocument", this.model);
 
-		$(window).on('resize.photo_page', _.bind(this.reposition, this));
+		// $(window).on('resize.photo_page', _.bind(this.reposition, this));
 	},
 
 	show: function() {
 	},
 
 	remove: function() {
-		$(window).off('resize.photo_page');
+		// $(window).off('resize.photo_page');
 	},
 
 	reposition: function() {

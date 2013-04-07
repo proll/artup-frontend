@@ -3,7 +3,8 @@
 		<div class="pictile__img-cont">
 			<img data-orig="{{src}}" src="/images/empty.png" alt="{{caption}}" width="{{width}}" height="{{height}}" class="pictile__img">
 		</div>
-		{{#if caption}}<span class="pictile__author">{{caption}}</span>{{/if}}
-		<span class="pictile__price">{{timestamp}} Р.</span>
 	</a>
+		<a class="i i-star pictile__like"></a>
+		{{#if caption}}<span class="pictile__author">{{caption}}</span>{{/if}}
+		<span class="pictile__price">{{_price timestamp}} Р.</span>
 </div>
