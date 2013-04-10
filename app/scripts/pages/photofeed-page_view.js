@@ -1,5 +1,5 @@
-aup.PhotoFeedPageView = aup.PageView.extend({
-	addTimeline: function (timeline_model) {
-		this.$el.find('.timeline-col').html(timeline_model.view.$el);
+aup.PhotofeedPageView = aup.PageView.extend({
+	addPhotofeed: function (photofeed_model) {
+		this.$el.find('.photofeed-col').html(photofeed_model.view.$el);
 	},
 });

@@ -18,7 +18,9 @@ aup.PhotoPage = aup.Page.extend({
 
 			this.photo = new aup.Photo(options);
 
-			this.view.render(true);
+			options.in_popup = !!options.in_popup;
+			this.view.render(options.in_popup);
+
 			this.photo.activate();
 			this.view.addPhoto(this.photo);
 		// }

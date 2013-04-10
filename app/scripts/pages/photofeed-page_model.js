@@ -1,4 +1,4 @@
-aup.PhotoFeedPage = aup.Page.extend({
+aup.PhotofeedPage = aup.Page.extend({
 	visited: false,
 	defaults: {
 	},
@@ -7,46 +7,38 @@ aup.PhotoFeedPage = aup.Page.extend({
 		options 		= options || {};
 	},
 	render: function(options) {
+		if(aup.is_needauth()) {
+			return false;
+		}
+
 		if(!this.visited) {
 
 			this.visited = true;
-			this.view = new aup.PhotoFeedPageView({
+			this.view = new aup.PhotofeedPageView({
 				model: this, 
 				template:"pages/photofeed-page"
 			});
-			this.timeline = new aup.Timeline(options);
-			// this.menu = new aup.ExploreMenu(options);
-			// this.story_menu = new aup.StoryMenu(options);
-			// this.story_menu.fetch();
+			this.photofeed = new aup.Photofeed(options);
 
 			this.view.render();
-			this.timeline.activate();
-			this.view.addTimeline(this.timeline);
-			// this.view.addMenu(this.menu);
-			// this.view.addStoryMenu(this.story_menu);
-
-			// this.story_menu.activate();
+			this.photofeed.activate();
+			this.view.addPhotofeed(this.photofeed);
 		} else {
 
-			this.timeline.set(options);
-			// this.menu.set(options);
-			// this.story_menu.set(options);
+			this.photofeed.set(options);
 			
 			this.view.render();
-			this.timeline.activate();
-			this.view.addTimeline(this.timeline);
-			// this.view.addMenu(this.menu);
-			// this.view.addStoryMenu(this.story_menu);
+			this.photofeed.activate();
+			this.view.addPhotofeed(this.photofeed);
 
-			// this.story_menu.activate();
-			this.timeline.reset();
+			this.photofeed.reset();
 
 		}
 
 	},
 
 	sleep: function () {
-		this.timeline.sleep();
+		this.photofeed.sleep();
 		// this.story_menu.sleep();
 	}
 });

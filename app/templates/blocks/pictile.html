@@ -1,1 +1,10 @@
-<a href="/photo/{{id}}/" title="{{caption}}"><img data-orig="{{src}}" src="/images/empty.png" alt="{{caption}}" width="196" height="196"></a>
+<div style="width:{{width}}px">
+	<a href="/photo/{{id}}/" class="pictile__a" title="{{caption}}">
+		<div class="pictile__img-cont">
+			<img data-orig="{{src}}" src="/images/empty.png" alt="{{caption}}" width="{{width}}" height="{{height}}" class="pictile__img">
+		</div>
+	</a>
+		<a class="i i-star pictile__like"></a>
+		{{#if caption}}<span class="pictile__author">{{caption}}</span>{{/if}}
+		<span class="pictile__price">{{_price timestamp}} Р.</span>
+</div>

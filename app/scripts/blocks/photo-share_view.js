@@ -36,36 +36,37 @@ aup.PhotoShareView = Backbone.View.extend({
 	},
 
 	reportPhoto: function() {
-		this.$el.toggleClass("photo-share_reporting", true);
-		this.model.reportPhoto();
+		if(this.model.reportPhoto()) {
+			this.$el.toggleClass("photo-share_reporting", true);
+		}
 		return false;
 	},
 
 	shareFB: function(e) {
 		e.preventDefault();
-		this.$el.toggleClass("photo-share_fb-sharing", true);
 		this.model.shareFB();
+		this.$el.toggleClass("photo-share_fb-sharing", true);
 		return false;
 	},
 
 	shareTW: function(e) {
 		e.preventDefault();
-		this.$el.toggleClass("photo-share_tw-sharing", true);
 		this.model.shareTW();
+		this.$el.toggleClass("photo-share_tw-sharing", true);
 		return false;
 	},
 
 	shareVK: function(e) {
 		e.preventDefault();
-		this.$el.toggleClass("photo-share_vk-sharing", true);
 		this.model.shareVK();
+		this.$el.toggleClass("photo-share_vk-sharing", true);
 		return false;
 	},
 
 	sharePT: function(e) {
 		e.preventDefault();
-		this.$el.toggleClass("photo-share_pt-sharing", true);
 		this.model.sharePT();
+		this.$el.toggleClass("photo-share_pt-sharing", true);
 		return false;
 	},
 });

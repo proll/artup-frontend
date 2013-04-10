@@ -3,9 +3,12 @@ aup.Auth = Backbone.Model.extend({
 
 	initialize: function (){
 
-		this.FB  = new aup.FB({url:"/api/auth/", app_id: "205868409437437"});
+		// this.FB  = new aup.FB({url:"/api/auth/", app_id: "205868409437437"});
+		// this.TW  = new aup.TW({url:"/api/auth/", url_token:"/api/auth/twitter/request_token/"});
+		// this.VK  = new aup.VK({url:"/api/auth/", app_id:3154513, redirect_url: "http://weheartpics.com/go/close_vk.html"});
+		this.FB  = new aup.FB({url:"/api/auth/", app_id: "158924664268573"});
 		this.TW  = new aup.TW({url:"/api/auth/", url_token:"/api/auth/twitter/request_token/"});
-		this.VK  = new aup.VK({url:"/api/auth/", app_id:3154513, redirect_url: "http://weheartpics.com/go/close_vk.html"});
+		this.VK  = new aup.VK({url:"/api/auth/", app_id:3154513, redirect_url: "http://artupp.ru/go/close_vk.html"});
 		this.signin 		= new aup.Signin({url:"/api/auth/signin/"});
 		this.registration 	= new aup.Registration({url:"/api/auth/signup/"});
 

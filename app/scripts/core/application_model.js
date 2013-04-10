@@ -22,7 +22,6 @@ aup.App = Backbone.Model.extend({
 
 
 		this.navbar = new aup.Navbar;
-		this.header = new aup.Header;
 
 		// 404 page
 		this.pages.add(new aup.Page({
@@ -37,7 +36,7 @@ aup.App = Backbone.Model.extend({
 
 
 		
-		this.photofeed = new aup.PhotoFeedPage({
+		this.photofeed = new aup.PhotofeedPage({
 			name: "photofeed",
 			template: "pages/photofeed-page"
 		});
@@ -61,7 +60,6 @@ aup.App = Backbone.Model.extend({
 			if(router == "explore") {
 
 				this.navbar.set("currentItem", "explore");
-				this.header.changeItem("explore");
 
 				this.pages.getPage("explore").render({
 					category:   route[0],
@@ -71,21 +69,29 @@ aup.App = Backbone.Model.extend({
 				});
 
 			} else if (router == "photofeed") {
+
 				this.navbar.set("currentItem", "photofeed");
-				this.header.changeItem("photofeed");
 
 				this.pages.getPage("photofeed").render();
+
 			} else if (router == "photo") {
 
 				this.navbar.set("currentItem", "photo");
-				this.header.changeItem("photo");
 
-				this.pages.getPage("photo").render({
-					photo_id: route[0]
-				});
+				// first open photo
+				if(this.router.route_passed <= 1) {
+					this.pages.getPage("photo").render({
+						photo_id: route[0],
+						in_popup: false
+					});
+				} else {
+					this.pages.getPage("photo").render({
+						photo_id: route[0],
+						in_popup: true,
+					});
+				}
 			} else {
 				if(!!route[0]) {
-					this.header.changeItem(route[0]);
 					this.navbar.set("currentItem", route[0]);
 				}
 			}
@@ -94,15 +100,24 @@ aup.App = Backbone.Model.extend({
 
 
 		this.router.on("reset:explore", function () {
-			this.explore.sleep();
+			if(this.router.current_route != 'photo') this.explore.sleep();
 		}, this);
 		this.router.on("reset:photofeed", function () {
-			this.photofeed.sleep();
+			if(this.router.current_route != 'photo') this.photofeed.sleep();
 		}, this);
 		this.router.on("reset:photo", function () {
+			console.log("reset:photo");
 			this.photo.sleep();
 		}, this);
 
+		aup.on('historyback', function(){
+			aup.navigate(this.router.back_path);
+		}, this);
+
+
+		aup.on('auth:clear', function(){
+			aup.navigate('/', {trigger: true});
+		});
 
 
 
@@ -213,38 +228,7 @@ aup.App = Backbone.Model.extend({
 		}, this)
 
 
-		// this.user.on("no-login", function () {
-		// 	aup.trigger("auth:required");
-		// 	// aup.trigger("auth:not-required")
-		// });
-
-		// this.user.on("login", function (credentials) {
-		// 	aup.trigger("user:login", credentials);
-		// });
-
-		// this.user.on("settings", function () {
-		// 	aup.trigger("auth:success", this.user.toJSON());
-		// }, this);
-
-		// this.user.on("change", function () {
-		// 	aup.trigger("user:change", this.user.toJSON());
-		// }, this);
-
-		// this.navbar.on("login", function () {
-		// 	aup.trigger("auth:required");
-		// });
-
-		// this.navbar.on("register", function () {
-		// 	aup.trigger("auth:register");
-		// });
-
-		// this.profile.on("user:token", function (token) {
-		// 	aup.trigger("user:token", token)
-		// });
-
-		// this.profile.on("user:update", function(userObj){
-		// 	aup.trigger("user:update", userObj) 
-		// });
+		
 
 
 		/**
@@ -254,7 +238,7 @@ aup.App = Backbone.Model.extend({
 			$doc = $(document);
 
 		$(window).scroll(function(){
-			if( $win.scrollTop()+100 >= ($doc.height() - $win.height()) ) {
+			if( $win.scrollTop()+150 >= ($doc.height() - $win.height()) ) {
 				aup.trigger("pagebottom:reached");
 			}
 		});
@@ -264,5 +248,8 @@ aup.App = Backbone.Model.extend({
 		 * APPLICATION READY
 		 */
 		aup.trigger("app:init");
+
+
+		// aup.navigate("/explore");
 	}
 });

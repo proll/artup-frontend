@@ -1,3 +1,7 @@
+body {
+	padding-top:@navbarHeight + 1;
+}
+
 @navbarHeaderGap: 25px;
 @navbarHeaderDropGap: 16px;
 
@@ -27,6 +31,11 @@
 	.i-nav-drop-arrow {
 		margin-left: 10px;
 	}
+}
+
+.navbar .nav > li > a {
+	letter-spacing: 1px;
+	font-weight: 700;
 }
 
 
@@ -100,5 +109,53 @@
 
 	.nav__drop-menu {
 		display: block;
+	}
+}
+
+
+.btn-add {
+	padding: 8px 20px;
+
+	margin-top: 0;
+	border: 0 none;
+	font-size: 13px;
+	line-height: 1;
+	.box-shadow(0 1px 3px rgba(36,36,33,0.45));
+	.buttonBackground(#f9f9f9, #e1e1e1, @gray, 0 1px rgba(255,255,255,0.9));
+	.border-radius(999px);
+}
+
+.navbar {
+
+	.btn-add {
+		margin-top: 0;
+		letter-spacing: 0;
+		font-weight: 400;
+	}
+
+	.nav.pull-right {
+		margin-right: -15px;
+
+		.nav__add {
+			font-size: 13px;
+
+			a {
+				text-transform: none
+			}
+		}
+	}
+
+	.brand {
+		line-height: 0;
+	}
+}
+
+.min-nav {
+	.navbar .brand {
+		padding: ((@navbarMinHeight - 28px) / 2) 15px ((@navbarMinHeight - 28px) / 2);
+	}
+
+	.navbar .nav > li > a {
+		padding: ((@navbarMinHeight - @navbarLineHeight) / 2)+4 15px ((@navbarMinHeight - @navbarLineHeight) / 2)-4;
 	}
 }

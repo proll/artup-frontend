@@ -3,29 +3,29 @@ aup.ExploreMenu = Backbone.Model.extend({
 		sorts:[
 			{
 				name: "date",
-				title: "Date"
+				title: "Дата"
 			},
 			{
 				name: "location",
-				title: "Location"
+				title: "Гео"
 			},
 			{
 				name: "popular",
-				title: "Popular"
+				title: "Популярное"
 			}
 		],
 		filters:[
 			{
 				name: "all",
-				title: "All"
+				title: "Все"
 			},
 			{
 				name: "friends",
-				title: "Friends"
+				title: "Около"
 			},
 			{
 				name: "my",
-				title: "My"
+				title: "Моё"
 			}
 		],
 		sort: "date",

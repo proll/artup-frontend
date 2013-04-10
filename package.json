@@ -1,6 +1,6 @@
 {
   "author": "Gleb Polushkin",
-  "name": "whp-frontend",
+  "name": "aup-frontend",
   "version": "0.0.0-53",
   "dependencies": {
     "connect": "2.5.x",
@@ -28,7 +28,7 @@
   "scripts": {
     "start": "node tasks/server.js"
   },
-  "subdomain": "proll.whp",
+  "subdomain": "proll.aup",
   "engines": {
     "node": "0.8.x"
   }

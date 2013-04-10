@@ -1,15 +1,15 @@
 <div class="navbar-inner">
 	<div class="container">
-		<a class="brand" href="/"><div class="navbar__logo"><img src="/images/ico/logo.png" width="28" height="24" alt="We heart"></div></a>
+		<a class="brand" href="/"><div class="navbar__logo"><img src="/images/ico/logo.png" width="100" height="28" alt="art up"></div></a>
 		<div class="nav-collapse collapse">
 			<ul class="nav">
 				{{#each items}}
 					<li class="navbar__item-{{name}}{{#if active}} active{{/if}}"><a href="{{link}}">{{title}}</a></li>
 				{{/each}}
-					<li class="nav__add-photo"><a href="/add"><i class="i i-add"></i><span class="nav__add-photo-title">Add photo</span></a></li>
 			</ul>
 			<ul class="nav pull-right">
-				<li class="nav__login"><a href="/login">Log In</a></li>
+				<li class="nav__login"><a href="/login">Вход и регистрация</a></li>
+				<li class="nav__add"><a href="/add"><span class="btn btn-add">Разместить объявление</span></a></li>
 				<li class="nav__profile-drop"><a href="/profile"><div class="i i-no-avatar"></div><span class="nav__profile-name">oh, hello!</span><i class="i i-nav-drop-arrow"></i></a>
 					<ul class="nav__drop-menu">
 						<li class="nav__profile"><a href="/profile">Profile</a></li>

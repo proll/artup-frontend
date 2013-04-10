@@ -1,25 +1,25 @@
-// .pic-tile-grid {
-// 	overflow: hidden;
-// 	margin-left: -20px;
-// 	margin-top: 30px;
-// }
+// Photo page + popup
+.photo-row {
+	max-width: 730px;
+	margin: 0 auto;
+}
 
 
-// .pic-tile-grid__container {
-// 	overflow: hidden;
-// }
+	.photo__pic-col1 {
+		float: left;
+		width: 55%;
+	}
 
-
-// .pic-tile-grid__spinner {
-// 	width: 100%;
-// 	height: 54px;
-// 	background: url(/images/ani/spinner.gif)  center 0px no-repeat;
-// }
+	.photo__pic-col2 {
+		float: left;
+		margin-left: 5%;
+		width: 40%;
+	}
 
 
 .photo__pic-tile {
 	background: @grayLighter2 url(/images/ani/loading_ani_s2.gif) center center no-repeat;
-	height: 730px;
+	width: 100%;
 
 
 	img {
@@ -28,8 +28,8 @@
 	}
 }
 .photo-loaded {
-	background-image: none;
 	.photo__pic-tile {
+		background-image: none;
 		img {
 			opacity: 1;
 		}
@@ -39,6 +39,7 @@
 
 .photo__text-row {
 	margin-top: 16px;
+	overflow: hidden;
 }
 
 
@@ -127,8 +128,7 @@
 	}
 
 		.photo__location-map {
-			width: 290px;
-			height: 84px;
+			width: 100%;
 			background-color: @grayLighter2;
 			margin-bottom: 10px
 		}
@@ -160,10 +160,12 @@
 
 	.photo-likers__total {
 		font-size: 16px;
+		line-height: 1.75;
 		font-weight: normal;
 		color: @grayDarker;
 		margin: 0 0 10px 0;
 		padding: 0;
+
 		.transition(color 0.2s);
 	}
 
@@ -221,6 +223,11 @@
 					text-decoration: underline;
 				}
 			}
+
+		.photo-share__download {
+			*zoom: 1;
+			clear: left;
+		}
 
 		.photo-share__download,
 		.photo-share__report {
@@ -296,4 +303,41 @@
 			}
 		}
 	}
+
+
+
+
+
+.photo-popup {
+	&.popup__table TD {
+		vertical-align: top;
+	}
+
+	.popup__inner {
+		width: 730px + 2*85px;
+		min-height: 730px + 2*35px;
+		padding-top: 35px;
+		padding-bottom: 35px;
+	}
+
+	.popup__close {
+		width: 31px;
+		height: 31px;
+		margin-right: 26px;
+
+		position: relative;
+		display: block;
+		float: right;
+
+
+		.close {
+			line-height: 0;
+			font-size: 0;
+			
+			.i;
+			.i-popup-x;
+			vertical-align: top;
+		}
+	}
+}
 

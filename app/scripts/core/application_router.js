@@ -1,5 +1,14 @@
 aup.Router = Backbone.Router.extend({
-	_prevRoute: "",
+	_previous_route: '',
+	previous_route: '',
+
+	current_route: '',
+	
+	_back_path: '',
+	back_path: '',
+
+	route_passed: 0,
+
 	routes: {
 		"": "default",
 		"logout": "logout",
@@ -8,8 +17,10 @@ aup.Router = Backbone.Router.extend({
 		"explore/:category/:story/:sort/:filter/": "explore",
 		"photofeed": "photofeed",
 		"photofeed/": "photofeed",
-		"artwork/:artwork/": "artwork",
-		"*default": "default"
+		"photo/:photo/": "photo",
+		"user/:user/": "user",
+		
+		"*default": "default",
 	},
 
 
@@ -21,8 +32,12 @@ aup.Router = Backbone.Router.extend({
 		// console.log("hello photofeed");
 	},
 
-	artwork: function () {
-		// console.log("hello artwork");
+	photo: function () {
+		// console.log("hello photo");
+	},
+
+	user: function () {
+		// console.log("hello user");
 	},
 
 	logout:function(){
@@ -41,13 +56,30 @@ aup.Router = Backbone.Router.extend({
 	initialize: function(){
 		_(this.routes).each(function(destination) {
 			this.on("route:" + destination, function(){
-				if(this._prevRoute && this._prevRoute != destination){
-					this.trigger("reset", this._prevRoute, destination);
-					this.trigger("reset:" + this._prevRoute);
+				this.route_passed++;
+
+				if(!this.back_path) {
+				} else {
+
 				}
-				this._prevRoute = destination;
+
+				if(this._previous_route && this._previous_route != destination){
+					this.trigger("reset", this._previous_route, destination, this._back_path);
+					this.trigger("reset:" + this._previous_route);
+				}
+				this._previous_route = destination;
+				this._back_path = Backbone.history.fragment;
+
 			}, this)
+
+
 		}, this);
+
+		this.on('reset', function(_previous_route, destination, _back_path) {
+			this.back_path = _back_path;
+			this.current_route = destination;
+			this.previous_route = _previous_route;
+		})
 	}
 
 });

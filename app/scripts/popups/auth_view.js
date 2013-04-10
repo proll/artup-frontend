@@ -83,6 +83,7 @@ aup.AuthView = Backbone.View.extend({
 	},
 
 	show: function () {
+		console.log(this.$el)
 		this.$el.toggleClass("hide", false);
 		return false;
 	},

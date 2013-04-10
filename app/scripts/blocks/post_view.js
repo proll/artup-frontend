@@ -1,7 +1,7 @@
 aup.PostView = Backbone.View.extend({
 	template: "blocks/post",
 	tagName: "div",
-	className: "timeline__post",
+	className: "photofeed__post",
 	$image: null,
 	image: null,
 

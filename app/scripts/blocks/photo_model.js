@@ -91,6 +91,8 @@ aup.Photo = Backbone.Model.extend({
 			apple_store_link: 	'http://itunes.apple.com/app/weheartpics/id488515478?mt=8',
 		});
 		this.view.addShare(this.photo_share);
+
+		this.trigger('photo:ready');
 	},
 
 	fetch: function (options) {
@@ -139,9 +141,15 @@ aup.Photo = Backbone.Model.extend({
 	},
 
 	addVote: function() {
-		this.get("photo").like++;
-		this.get("photo").wasvote = 1;
-		this.vote(1);
+		if(aup.is_needauth()) {
+			return false;
+		} else {
+			this.get("photo").like++;
+			this.get("photo").wasvote = 1;
+			this.vote(1);
+			return this;
+		}
+
 	},
 
 	removeVote: function() {

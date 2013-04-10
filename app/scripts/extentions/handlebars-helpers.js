@@ -56,6 +56,15 @@ Handlebars.registerHelper('_decl_en', function(num, formsJSON) {
 
 
 /**
+ * Helper for declation support for EN Handlebars 
+ * sample {{_decl 123 '["day", "days"]'}}
+ */
+Handlebars.registerHelper('_price', function(num) {
+	return num.toString().replace(/(\d)(?=(\d{3}))/g, "$1 ");
+});
+
+
+/**
  * Helper timegap Handlebars 
  * sample {{_timegap 12312312}}
  */

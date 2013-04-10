@@ -43,6 +43,10 @@ aup.User = Backbone.Model.extend({
 		}
 	},
 
+	is_auth: function() {
+		return !!this.get('token');
+	},
+
 	setSession: function(user_obj) {
 		_.setCookie("uid",	user_obj.session.uid,	this.cookie_time);
 		_.setCookie("token",user_obj.session.token,	this.cookie_time);

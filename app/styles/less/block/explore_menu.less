@@ -1,17 +1,18 @@
-.explore-menu-row {
-	padding: 6px 0;
-	border-bottom: 1px solid @grayLighter;
+.page-line {
+	background-color: @grayDarker;
+	height: 39px;
+	margin-bottom: -39px;
+}
 
-	.iexp {
-		vertical-align: middle;
-		margin-right: 2px;
-	}
+.explore-menu-row {
+	padding: 0;
+	background-color: @grayDarker;
 }
 
 
 .explore-menu__items {
 	float: left;
-	border-left: 1px solid @grayLighter;
+	border-left: 1px solid @gray2;
 	padding: 3px 12px 3px 25px;
 }
 
@@ -25,8 +26,11 @@
 		display: inline-block;
 	}
 	.explore-menu__item-title {
-		font-size: 14px;
-		color: @gray !important;
+		font-size: 12px;
+		font-weight: 700;
+		text-transform: uppercase;
+
+		color: @white !important;
 		display: inline-block;
 		line-height: 32px;
 		height: 32px;
@@ -36,51 +40,13 @@
 
 	&:hover {
 		.explore-menu__item-title {
-			color: @grayDarker !important;
-		}
-
-		.iexp-date {
-			.iexp-date_hover;
-		}
-		.iexp-location {
-			.iexp-location_hover;
-		}
-		.iexp-popular {
-			.iexp-popular_hover;
-		}
-		.iexp-all {
-			.iexp-all_hover;
-		}
-		.iexp-friends {
-			.iexp-friends_hover;
-		}
-		.iexp-my {
-			.iexp-my_hover;
+			color: @white !important;
 		}
 	}
 
 	&.active {
 		.explore-menu__item-title {
-			color: @blue !important;
-		}
-
-		.iexp-date {
-			.iexp-date_active;
-		}
-		.iexp-location {
-			.iexp-location_active;
-		}
-		.iexp-popular {
-			.iexp-popular_active;
-		}
-		.iexp-all {
-			.iexp-all_active;
-		}
-		.iexp-friends {
-			.iexp-friends_active;
-		}
-		.iexp-my {
-			.iexp-my_active;
+			color: @grayLighter !important;
 		}
 	}
 
