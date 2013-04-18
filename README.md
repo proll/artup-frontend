@@ -20,5 +20,5 @@
 ## Сборка проекта и запуск локального сервера
 npm install
 - ./bin/deploy help 	- комментарии по доступным командам
-- ./bin/deploy server 	- Запуск локального сервера [http://localhost:3003] для отладки app
+- ./bin/deploy server 	- Запуск локального сервера [http://localhost:3007] для отладки app
 - ./bin/deploy build 	- Делает sprite, less, squeeze - в папке deploy будет собранный проект
