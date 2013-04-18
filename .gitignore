@@ -1,9 +1,9 @@
 .DS_Store
-#app/images/sprites/*.png
 nbproject
+#app/images/sprites/*.png
 app/images/sprites/*.json
 node_modules
-deploy/*
+/deploy/*
 .dropbox
 Icon?
-deploy
+/deploy
