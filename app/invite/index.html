@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html class="invite-page">
+<head>
+	<meta charset="UTF-8"/>
+	<link rel="dns-prefetch" href="http://img.weheartpics.com" />
+	<title>ArtUpp</title>
+	<meta name="description" content="ArtUP">
+
+	<!-- Mobile readiness tags -->
+	<meta name="HandheldFriendly" content="True" />
+	<meta name="MobileOptimized" content="320" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta http-equiv="cleartype" content="on">
+
+	<!-- To point that it is a mobile version at the same time -->
+	<link rel="alternate" media="handheld" href="" />
+
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ico/fav144.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/fav114.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/fav72.png" />
+	<link rel="apple-touch-icon-precomposed" href="/images/ico/fav57.png" />
+	<link rel="shortcut icon" href="/images/ico/fav57.png">
+
+	 <!-- Tile icon for Win8 (144x144 + tile color) -->
+	<meta name="msapplication-TileImage" content="/images/ico/fav144.png">
+	<meta name="msapplication-TileColor" content="#222222">
+
+	<meta name="application-name" content="WeHeartPics" />
+	<meta name="format-detection" content="telephone=no"/>
+	<meta name="format-detection" content="address=no"/>
+
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Caption:400,700' rel='stylesheet' type='text/css'>
+
+	
+	<!-- build:css /styles/aup.css -->
+	<link rel="stylesheet" href="/styles/css/aup.css"/>
+	<!-- endbuild -->
+
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Caption:400,700' rel='stylesheet' type='text/css'>
+
+	<!-- build:js /scripts/mdrnzr.js -->
+	<script src="/scripts/vendor/modernizr.custom.24244.js"></script>
+	<!-- endbuild -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40173710-1', 'artupp.ru');
+  ga('send', 'pageview');
+</script>
+</head>
+<body>
+<header></header>
+<div class="aup-invite-container">
+	<div class="invite-logo"><a href="/"><img src="/images/t/logo.png" alt=""></a></div>
+	<div class="invite-logo-main"><a href="/"><img src="/images/t/logo2.png" alt=""></a></div>
+
+	<div class="invite-info">
+		<h1>Создаем арт-рынок в России</h1>
+		<p>Вы автор? Арт-дилер? Менеджер? Хотите инвестировать в искусство?<br/>Оставляйте емейл — у нас скоро будут для вас новости</p>
+		<span class="err">:)</span>
+		<form class="invite-form">
+			<div class="invite-form-block">
+				<input type="text" class="invite-email" placeholder="электронная почта">
+				<a href="submit" class="invite-btn"><i class="i i-arr-invite"></i></a>
+				<button type="submit" class="hidden"></button>
+			</div>
+		</form>
+	</div>
+
+	<div class="invite-info-herro">
+		<h1>Спасибо!</h1>
+		<p>Мы запомнили ваш адрес и пришлем<br/>
+приглашение, когда все начнется</p>
+	</div>
+
+</div>
+<footer></footer>
+
+<!-- build:js /scripts/jquery.js -->
+	<script src="/scripts/vendor/jquery/jquery.js"></script>
+	<script src="/scripts/vendor/jquery/jquery.mousewheel.min.js"></script>
+	<script src="/scripts/vendor/jquery/jquery.autosize.js"></script>
+<!-- endbuild -->
+
+<!-- build:js /scripts/vendor.js -->
+	<script src="/scripts/vendor/lodash.js"></script>
+	<script src="/scripts/vendor/backbone/backbone-0.9.10.js"></script>
+	<script src="/scripts/vendor/handlebars/handlebars.js"></script>
+<!-- endbuild -->
+
+<!-- build:js /scripts/aup_invite.js -->
+	<script src="/scripts/invite_app.js"></script>
+<!-- endbuild -->
+</body>
+</html>

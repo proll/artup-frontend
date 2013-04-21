@@ -3,33 +3,30 @@ aup.Auth = Backbone.Model.extend({
 
 	initialize: function (){
 
-		// this.FB  = new aup.FB({url:"/api/auth/", app_id: "205868409437437"});
+		// this.FB  = new aup.FB({url:"/api/auth/", app_id: "158924664268573"});
 		// this.TW  = new aup.TW({url:"/api/auth/", url_token:"/api/auth/twitter/request_token/"});
-		// this.VK  = new aup.VK({url:"/api/auth/", app_id:3154513, redirect_url: "http://weheartpics.com/go/close_vk.html"});
-		this.FB  = new aup.FB({url:"/api/auth/", app_id: "158924664268573"});
-		this.TW  = new aup.TW({url:"/api/auth/", url_token:"/api/auth/twitter/request_token/"});
-		this.VK  = new aup.VK({url:"/api/auth/", app_id:3154513, redirect_url: "http://artupp.ru/go/close_vk.html"});
+		// this.VK  = new aup.VK({url:"/api/auth/", app_id:3154513, redirect_url: "http://artupp.ru/go/close_vk.html"});
 		this.signin 		= new aup.Signin({url:"/api/auth/signin/"});
 		this.registration 	= new aup.Registration({url:"/api/auth/signup/"});
 
-		this.on("twitter:hi", function (user_obj) {
-			this.TW.fetch(user_obj);
-		}, this);
+		// this.on("twitter:hi", function (user_obj) {
+		// 	this.TW.fetch(user_obj);
+		// }, this);
 
-		this.on("vkontakte:hi", function (user_obj) {
-			this.VK.fetch(user_obj);
-		}, this);
+		// this.on("vkontakte:hi", function (user_obj) {
+		// 	this.VK.fetch(user_obj);
+		// }, this);
 
-		this.FB.on 			("auth:success", this.authSuccess, this);
-		this.TW.on 			("auth:success", this.authSuccess, this);
-		this.VK.on 			("auth:success", this.authSuccess, this);
+		// this.FB.on 			("auth:success", this.authSuccess, this);
+		// this.TW.on 			("auth:success", this.authSuccess, this);
+		// this.VK.on 			("auth:success", this.authSuccess, this);
 		this.signin.on		("auth:success", this.authSuccess, this);
 		this.registration.on("auth:success", this.authSuccess, this);
 
 
-		this.FB.on 			("error", this.error, this);
-		this.TW.on 			("error", this.error, this);
-		this.VK.on 			("error", this.error, this);
+		// this.FB.on 			("error", this.error, this);
+		// this.TW.on 			("error", this.error, this);
+		// this.VK.on 			("error", this.error, this);
 		this.signin.on		("error", this.error, this);
 		this.registration.on("error", this.error, this);
 

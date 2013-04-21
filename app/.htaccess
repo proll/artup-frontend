@@ -1,6 +1,6 @@
 AuthType Basic
 AuthName "Artup"
-AuthUserFile /var/www/artup.fe/web/.htpasswd
+AuthUserFile /var/www/prollsandbox.artup.fe/web/.htpasswd
 Require valid-user
 
 <IfModule mod_rewrite.c>

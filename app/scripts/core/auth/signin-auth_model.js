@@ -1,5 +1,5 @@
 aup.Signin = Backbone.Model.extend({
-	url: 		"/api/auth/signin/",
+	url: 		'http://api.artupp.ru/v1/auth',
 
 	initialize: function (){},
 
@@ -11,12 +11,11 @@ aup.Signin = Backbone.Model.extend({
 	fetch: function(user_obj){
 		var that = this;
 		$.ajax({
-			type: 'GET',
+			type: 'POST',
 			url:  _.toSafeUrl(this.url),
-			dataType: 'json',
 			data: {
-				login : user_obj.login, 
-				passw : user_obj.password
+				email : user_obj.login, 
+				password : user_obj.password
 			}
 		})
 		.success(function(response, status, xhr){
@@ -31,21 +30,13 @@ aup.Signin = Backbone.Model.extend({
 		var resp = _.toJSON(response);
 		if (!!resp) {
 			if (!!resp.error) {
-				if (resp.error.code == "API_BadParams") {
-					this.trigger("error", {description:"Wrong e-mail and password combination :("});
-				} else if (resp.error.code == "API_AuthFailed") {
-					this.trigger("error", {description:"Wrong e-mail and password combination"});
-				} else if (resp.error.code == "API_PendingConfirmation") {
-					this.trigger("error", {description:"We have sent you an e-mail to confirm"});
-				} else {
-					this.trigger("error", {description:"Something went wrong"});
-				}
+				this.trigger('error', {description:'Something went wrong ('+resp.error+')'});
 			} else {
-				this.trigger("auth:success", 
+				this.trigger('auth:success', 
 					{
 						response: resp, 
-						user: resp.user, 
-						session:{ token: resp.user.token, uid: resp.user.id }
+						user: resp.result.user, 
+						session:{ token: resp.result.token, uid: resp.result.id },
 					}
 				);
 			}
@@ -54,6 +45,7 @@ aup.Signin = Backbone.Model.extend({
 	},
 
 	error : function(e) {
-		this.trigger("error", {description:"Something went wrong"});
+		console.error(e)
+		this.trigger('error', {description:'Something went wrong'});
 	}
 });

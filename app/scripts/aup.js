@@ -1,4 +1,4 @@
-var browser = {
+window.browser = {
 	ie6: !window.XMLHttpRequest,
     ie: navigator.userAgent.indexOf('MSIE') > -1,
     // ie_version : getInternetExplorerVersion(),
@@ -22,7 +22,7 @@ var browser = {
 
 
 window.aup = {
-	root: "http://webdev.weheartpics.com",
+	root: "http://prollsandbox.artupp.ru",
 	Models: {},
 	Collections: {},
 	Views: {},
@@ -134,7 +134,7 @@ Backbone.sync = function(method, model, options){
 	}
 	options.url = (options.url || (model.url && _.result(model, 'url'))) + "?" + _.map(credentials, function(value, key){ return key+"="+value}).join("&");
 
-	options.url	= "/api/gate.php?method=" + options.url;
+	// options.url	= "/api/gate.php?method=" + options.url;
     return Backbone._sync(method, model, options);
 }
 

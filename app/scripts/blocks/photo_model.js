@@ -1,5 +1,6 @@
 aup.Photo = Backbone.Model.extend({
-	url: "/api/photo/",
+	base_url: "http://api.artupp.ru/v1/links/",
+	url: "http://api.artupp.ru/v1/links/",
 	defaults: {
 		sleeped: true,
 		photo_id: 0,
@@ -98,9 +99,8 @@ aup.Photo = Backbone.Model.extend({
 	fetch: function (options) {
 		options = options || {};
 		options.type = "post";
-		options.data = options.data || {
-			photo: this.get("photo_id")
-		};
+		this.url = base_url + this.get("photo_id")
+		options.data = options.data || {};
 
 		options.success  	= _.bind(this.success, this);
 		options.error  		= _.bind(this.error, this);

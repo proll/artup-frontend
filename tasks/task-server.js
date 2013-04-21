@@ -36,9 +36,9 @@ module.exports = function(grunt) {
 			//if /api/ called proxying to API
 			function(req, res, next){
 				var requestedPath = url.parse(req.url).pathname;
-				if(requestedPath.indexOf("/api/") == 0 || requestedPath.indexOf("/favicon.ico")==0){
+				if(requestedPath.indexOf("/v1/") == 0 || requestedPath.indexOf("/favicon.ico")==0){
 					proxy.proxyRequest(req, res, {
-						host: "webdev.weheartpics.com",
+						host: "http://api.artupp.ru/",
 						port: 80
 					});
 					return false;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="invite-page">
+<html>
 <head>
 	<meta charset="UTF-8"/>
 	<link rel="dns-prefetch" href="http://img.weheartpics.com" />
@@ -20,12 +20,17 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/fav72.png" />
 	<link rel="apple-touch-icon-precomposed" href="/images/ico/fav57.png" />
 	<link rel="shortcut icon" href="/images/ico/fav57.png">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
 
 	 <!-- Tile icon for Win8 (144x144 + tile color) -->
 	<meta name="msapplication-TileImage" content="/images/ico/fav144.png">
 	<meta name="msapplication-TileColor" content="#222222">
 
 	<meta name="application-name" content="WeHeartPics" />
+	<!-- http://developer.apple.com/library/ios/#documentation/AppleApplications/Reference/SafariWebContent/PromotingAppswithAppBanners/PromotingAppswithAppBanners.html -->
+	<!-- <meta name="apple-itunes-app" content="app-id=488515478, affiliate-data=myAffiliateData, app-argument=myURL"> -->
+
+	<!-- Skype phone parse disable -->
 	<meta name="format-detection" content="telephone=no"/>
 	<meta name="format-detection" content="address=no"/>
 
@@ -36,49 +41,55 @@
 	<link rel="stylesheet" href="/styles/css/aup.css"/>
 	<!-- endbuild -->
 
-	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Caption:400,700' rel='stylesheet' type='text/css'>
-
 	<!-- build:js /scripts/mdrnzr.js -->
 	<script src="/scripts/vendor/modernizr.custom.24244.js"></script>
 	<!-- endbuild -->
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-40173710-1', 'artupp.ru');
-  ga('send', 'pageview');
-</script>
 </head>
 <body>
-<header></header>
-<div class="aup-invite-container">
-	<div class="invite-logo"><a href="/"><img src="/images/t/logo.png" alt=""></a></div>
-	<div class="invite-logo-main"><a href="/"><img src="/images/t/logo2.png" alt=""></a></div>
-
-	<div class="invite-info">
-		<h1>Создаем арт-рынок в России</h1>
-		<p>Вы автор? Арт-дилер? Менеджер? Хотите инвестировать в искусство?<br/>Оставляйте емейл — у нас скоро будут для вас новости</p>
-		<span class="err">:)</span>
-		<form class="invite-form">
-			<div class="invite-form-block">
-				<input type="text" class="invite-email" placeholder="электронная почта">
-				<a href="submit" class="invite-btn"><i class="i i-arr-invite"></i></a>
-				<button type="submit" class="hidden"></button>
-			</div>
-		</form>
-	</div>
-
-	<div class="invite-info-herro">
-		<h1>Спасибо!</h1>
-		<p>Мы запомнили ваш адрес и пришлем<br/>
-приглашение, когда все начнется</p>
-	</div>
-
-</div>
+<div class="navbar navbar-fixed-top navbar-header"></div>
+<header class="page-header"></header>
+<div class="page-line"></div>
+<div class="container" id="aup-container"></div>
 <footer></footer>
+<div class="auth-popup hide"></div>
+
+
+<!-- build:templates -->
+<script type="text/javascript">
+	var templates = {
+		path: "/templates",
+		ext: "html",
+		files: [
+			"blocks/navbar",
+			"blocks/pictile",
+			"blocks/pictile-grid",
+			"blocks/explore-menu",
+			"blocks/story-menu",
+			"blocks/dailylist-menu",
+			"blocks/post",
+			"blocks/photo",
+			"blocks/photo_phone",
+			"blocks/photo-likers",
+			"blocks/comment",
+			"blocks/comment-pane",
+			"blocks/photo-share",
+
+
+			"misc/pinterest-share",
+
+
+
+			"popups/auth",
+			"pages/404-page",
+			"pages/explore-page",
+			"pages/photofeed-page",
+			"pages/photo-page",
+
+			"popups/popup",
+		]
+	}
+</script>
+<!-- endbuild -->
 
 <!-- build:js /scripts/jquery.js -->
 	<script src="/scripts/vendor/jquery/jquery.js"></script>
@@ -92,8 +103,103 @@
 	<script src="/scripts/vendor/handlebars/handlebars.js"></script>
 <!-- endbuild -->
 
-<!-- build:js /scripts/aup_invite.js -->
-	<script src="/scripts/invite_app.js"></script>
+<!-- <script src="/scripts/vendor/jquery-ui-draggable.min.js"></script>
+<script src="/scripts/vendor/jquery.mousewheel.min.js"></script>
+<script src="/scripts/vendor/instagram.min.js"></script> -->
+
+<!-- build:js /scripts/aup.js -->
+	<script src="/scripts/extentions/lodash-extention.js"></script>
+	<script src="/scripts/extentions/handlebars-helpers.js"></script>
+	<script src="/scripts/aup.js"></script>
+
+	<script src="/scripts/core/page_model.js"></script>
+	<script src="/scripts/core/page_view.js"></script>
+	<script src="/scripts/core/pages_collection.js"></script>
+
+	<script src="/scripts/popups/popup_view.js"></script>
+
+	<!-- Auth, Login, Login Social, Registration -->
+	<script src="/scripts/core/user-settings_model.js"></script>
+	<script src="/scripts/core/user_model.js"></script>
+	<script src="/scripts/core/auth/registration_model.js"></script>
+	<script src="/scripts/core/auth/signin-auth_model.js"></script>
+	<script src="/scripts/core/auth/twitter-auth_model.js"></script>
+	<script src="/scripts/core/auth/vkontakte-auth_model.js"></script>
+	<script src="/scripts/core/auth/facebook-auth_model.js"></script>
+	<script src="/scripts/popups/auth_view.js"></script>
+	<script src="/scripts/popups/auth_model.js"></script>
+
+
+	<!-- APP -->
+	<script src="/scripts/core/config.js"></script>
+	<script src="/scripts/core/statistic.js"></script>
+	<script src="/scripts/core/application_model.js"></script>
+	<script src="/scripts/core/application_router.js"></script>
+
+
+	<!-- Common Blocks -->
+	<script src="/scripts/blocks/navbar_model.js"></script>
+	<script src="/scripts/blocks/navbar_view.js"></script>
+
+
+
+
+	<!-- Explore Page-->
+	<script src="/scripts/pages/explore-page_model.js"></script>
+	<script src="/scripts/pages/explore-page_view.js"></script>
+	<script src="/scripts/blocks/pictile_model.js"></script>
+	<script src="/scripts/blocks/pictile_view.js"></script>
+	<script src="/scripts/blocks/explore-menu_model.js"></script>
+	<script src="/scripts/blocks/explore-menu_view.js"></script>
+	<script src="/scripts/blocks/story-menu_model.js"></script>
+	<script src="/scripts/blocks/story-menu_view.js"></script>
+	<script src="/scripts/blocks/dailylist-menu_model.js"></script>
+	<script src="/scripts/blocks/dailylist-menu_view.js"></script>
+
+
+	<script src="/scripts/blocks/pictile_collection.js"></script>
+	<script src="/scripts/blocks/pictile-grid_model.js"></script>
+	<script src="/scripts/blocks/pictile-grid_view.js"></script>
+
+	<!-- Photofeed Page -->
+	<script src="/scripts/pages/photofeed-page_model.js"></script>
+	<script src="/scripts/pages/photofeed-page_view.js"></script>
+	<script src="/scripts/blocks/photofeed_model.js"></script>
+	<script src="/scripts/blocks/photofeed_view.js"></script>
+	<script src="/scripts/blocks/post_model.js"></script>
+	<script src="/scripts/blocks/post_view.js"></script>
+	<script src="/scripts/blocks/post_collection.js"></script>
+
+
+	<!-- Photo popup/page -->
+	<script src="/scripts/pages/photo-page_model.js"></script>
+	<script src="/scripts/pages/photo-page_view.js"></script>
+	<script src="/scripts/blocks/photo_model.js"></script>
+	<script src="/scripts/blocks/photo_view.js"></script>
+	<script src="/scripts/blocks/photo-likers_model.js"></script>
+	<script src="/scripts/blocks/photo-likers_view.js"></script>
+	<!-- comments -->
+	<script src="/scripts/blocks/comment_model.js"></script>
+	<script src="/scripts/blocks/comment_view.js"></script>
+	<script src="/scripts/blocks/comment_collection.js"></script>
+	<script src="/scripts/blocks/comment-pane_model.js"></script>
+	<script src="/scripts/blocks/comment-pane_view.js"></script>
+	<script src="/scripts/blocks/photo-share_model.js"></script>
+	<script src="/scripts/blocks/photo-share_view.js"></script>
+
+
 <!-- endbuild -->
+
+<!-- GA Analytics dont use it on dev env -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40173710-1', 'artupp.ru');
+  ga('send', 'pageview');
+
+</script>
 </body>
 </html>
