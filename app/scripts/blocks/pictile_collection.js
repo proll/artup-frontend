@@ -1,16 +1,18 @@
 aup.PicTileCollection = Backbone.Collection.extend({
-	url: "http://api.artupp.ru/v1/users/",
+	url: "http://api.artupp.ru/v1/links/",
 	model: aup.PicTile,
 	more: true,
 
-	// 
+	//
 	// we need only the list of photos
 	// ______________________________
 	parse: function(resp, options) {
+
 		resp = _.toJSON(resp);
 		if(!resp.success) {
 			return false;
 		}
+
 		if(!!resp.result) {
 			this.more = resp.result.more;
 
@@ -23,13 +25,13 @@ aup.PicTileCollection = Backbone.Collection.extend({
 
 	},
 
-	// 
+	//
 	// it have to add only
 	// ______________________________
 	fetch: function (options) {
 		if(this.more) {
 			options = options || {};
-			options.type = "post";
+			options.type = "get";
 			options.update = true;
 			options.remove = false;
 			options.data = options.data || {

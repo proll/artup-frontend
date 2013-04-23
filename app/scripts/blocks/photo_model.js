@@ -3,7 +3,7 @@ aup.Photo = Backbone.Model.extend({
 	url: "http://api.artupp.ru/v1/links/",
 	defaults: {
 		sleeped: true,
-		photo_id: 0,
+		id: 0,
 		// photo: {
 		// 	story: {
 		// 		storycat: {
@@ -66,40 +66,40 @@ aup.Photo = Backbone.Model.extend({
 
 
 	initMisc: function () {
-		this.photo_likers = new aup.PhotoLikers({
-			photo_id: 		this.get("photo_id"),
-			likers_count: 	this.get("photo").like,
-			photo_model: 	this
-		})
-		this.view.addLikers(this.photo_likers);
+//		this.photo_likers = new aup.PhotoLikers({
+//			id: 		this.get("id"),
+//			//likers_count: 	this.get("photo").like,
+//			photo_model: 	this
+//		})
+//		this.view.addLikers(this.photo_likers);
 
-		this.photo_comments = new aup.CommentPane({
-			photo_id: 		this.get("photo_id"),
-			limit:          6,
-			total: 			this.get("photo").comments_count
-		});
-		this.view.addComments(this.photo_comments);
+//		this.photo_comments = new aup.CommentPane({
+//			id: 		this.get("photo_id"),
+//			limit:          6,
+//			total: 			this.get("photo").comments_count
+//		});
+//		this.view.addComments(this.photo_comments);
 
-		this.photo_share = new aup.PhotoShare({
-			photo_id: 			this.get("photo_id"),
-			photo_link: 		this.get('photo').i1000x1000,
-			photo_sm_link: 		this.get('photo').i106x106,
-			link: 				this.get('photo').site_url,
-			story_name: 		this.get('photo').story.name,
-			caption: 			this.get('photo').caption,
-			user: 				this.get('photo').user,
-			story: 				this.get('photo').story,
-			apple_store_link: 	'http://itunes.apple.com/app/weheartpics/id488515478?mt=8',
-		});
-		this.view.addShare(this.photo_share);
+//		this.photo_share = new aup.PhotoShare({
+//			photo_id: 			this.get("photo_id"),
+//			photo_link: 		this.get('photo').i1000x1000,
+//			photo_sm_link: 		this.get('photo').i106x106,
+//			link: 				this.get('photo').site_url,
+//			story_name: 		this.get('photo').story.name,
+//			caption: 			this.get('photo').caption,
+//			user: 				this.get('photo').user,
+//			story: 				this.get('photo').story,
+//			apple_store_link: 	'http://itunes.apple.com/app/weheartpics/id488515478?mt=8',
+//		});
+//		this.view.addShare(this.photo_share);
 
 		this.trigger('photo:ready');
 	},
 
 	fetch: function (options) {
 		options = options || {};
-		options.type = "post";
-		this.url = base_url + this.get("photo_id")
+		options.type = "get";
+		this.url = this.base_url + this.get("id");
 		options.data = options.data || {};
 
 		options.success  	= _.bind(this.success, this);
@@ -125,9 +125,9 @@ aup.Photo = Backbone.Model.extend({
 	},
 
 	reset: function () {
-		// this.set("offset", this.defaults.offset);
-		// this.collection.reset();
-		// this.trigger("needmore");
+//		 this.set("offset", this.defaults.offset);
+//		 this.collection.reset();
+//		 this.trigger("needmore");
 		return false;
 	},
 
@@ -140,46 +140,46 @@ aup.Photo = Backbone.Model.extend({
 		this.set("sleeped", true);
 	},
 
-	addVote: function() {
-		if(aup.is_needauth()) {
-			return false;
-		} else {
-			this.get("photo").like++;
-			this.get("photo").wasvote = 1;
-			this.vote(1);
-			return this;
-		}
+//	addVote: function() {
+//		if(aup.is_needauth()) {
+//			return false;
+//		} else {
+//			this.get("photo").like++;
+//			this.get("photo").wasvote = 1;
+//			this.vote(1);
+//			return this;
+//		}
+//
+//	},
 
-	},
+//	removeVote: function() {
+//		this.get("photo").like--;
+//		this.get("photo").wasvote = 0;
+//		this.vote(0);
+//	},
 
-	removeVote: function() {
-		this.get("photo").like--;
-		this.get("photo").wasvote = 0;
-		this.vote(0);
-	},
-
-
-	// TODO: Have to do secure call of ajax
-	// without repeat requests
-	vote: function(is_like) {
-		$.ajax({
-			url: 	'/api/photo/vote/',
-			type: 	'POST',
-			data : {  
-				photo: 	this.get("photo_id"),
-				like: 	is_like
-			},
-			timeout: 30000
-		});
-
-		this.trigger("update:vote", {vote_count: this.get("photo").like, my: is_like});
-	},
+//
+//	// TODO: Have to do secure call of ajax
+//	// without repeat requests
+//	vote: function(is_like) {
+//		$.ajax({
+//			url: 	'/api/photo/vote/',
+//			type: 	'POST',
+//			data : {
+//				photo: 	this.get("id"),
+//				like: 	is_like
+//			},
+//			timeout: 30000
+//		});
+//
+//		this.trigger("update:vote", {vote_count: this.get("photo").like, my: is_like});
+//	},
 
 	remove: function () {
-		this.photo_likers.remove();
-		this.photo_comments.remove();
-		this.photo_share.remove();
-		
+//		this.photo_likers.remove();
+//		this.photo_comments.remove();
+//		this.photo_share.remove();
+
 		this.stopListening();
 		this.clear({silent: true});
 		this.view.remove();

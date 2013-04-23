@@ -19,8 +19,9 @@ aup.PicTileView = Backbone.View.extend({
 		var template = this.template(this.model.toJSON());
 		this.$el.html(template);
 		this.$image = this.$el.find("img");
+
 		this.image = new Image();
-		this.image.src = this.$image.data("orig");
+		this.image.src = this.model.get('src');
 		this.image.onload = _.bind(this.onImageLoad, this);
 		this.image.onerror = _.bind(this.onImageError, this);
 	},
@@ -30,7 +31,7 @@ aup.PicTileView = Backbone.View.extend({
 		this.image = null;
 
 		this.$el.toggleClass("pic-tile-loaded", true);
-		this.$image.attr("src", this.$image.data("orig"));
+		this.$image.attr("src", this.model.get('src'));
 	},
 
 	onImageError: function () {

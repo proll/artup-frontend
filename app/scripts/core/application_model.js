@@ -15,7 +15,7 @@ aup.App = Backbone.Model.extend({
 		this.auth = new aup.Auth;
 		this.user = new aup.User;
 
-		
+
 		// GLOBAL objects
 		aup.config = this.config;
 		aup.user = this.user;
@@ -35,7 +35,7 @@ aup.App = Backbone.Model.extend({
 
 
 
-		
+
 		this.photofeed = new aup.PhotofeedPage({
 			name: "photofeed",
 			template: "pages/photofeed-page"
@@ -65,7 +65,7 @@ aup.App = Backbone.Model.extend({
 					category:   route[0],
 					story:  	route[1],
 					sort: 		route[2],
-					filter: 	route[3], 
+					filter: 	route[3],
 				});
 
 			} else if (router == "photofeed") {
@@ -81,12 +81,12 @@ aup.App = Backbone.Model.extend({
 				// first open photo
 				if(this.router.route_passed <= 1) {
 					this.pages.getPage("photo").render({
-						photo_id: route[0],
+						id: route[0],
 						in_popup: false
 					});
 				} else {
 					this.pages.getPage("photo").render({
-						photo_id: route[0],
+						id: route[0],
 						in_popup: true,
 					});
 				}
@@ -136,7 +136,7 @@ aup.App = Backbone.Model.extend({
 		// this.router.on("reset", function(prev, destination){
 		// 	var prevPage = this.pages.getPage(prev)
 		// 	if(this.pages.havePage(prev)){
-		// 		this.pages.getPage(prev).remove();	
+		// 		this.pages.getPage(prev).remove();
 		// 	}
 		// }, this);
 
@@ -161,7 +161,7 @@ aup.App = Backbone.Model.extend({
 		// 	aup.trigger("auth:confirm", token);
 		// });
 
-		
+
 
 
 
@@ -181,7 +181,7 @@ aup.App = Backbone.Model.extend({
 		this.on("vkontakte:hi", function (user_obj) {
 			this.auth.trigger("vkontakte:hi", user_obj);
 		}, this);
-		
+
 		this.on("error", function (err) {
 			console.error("error");
 			if(!!err && !!err.description) {
@@ -228,7 +228,7 @@ aup.App = Backbone.Model.extend({
 		}, this)
 
 
-		
+
 
 
 		/**
