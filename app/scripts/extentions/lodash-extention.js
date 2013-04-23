@@ -23,9 +23,9 @@ _.toJSON = function (obj) {
 
 _.toSafeUrl = function (url) {
 	if(url.indexOf("&") == -1) {
-		url += "?r="+Math.random();
+		url += "?s="+Math.random();
 	}else{
-		url += "r="+Math.random();
+		url += "s="+Math.random();
 	}
 	return url;
 }
