@@ -17,6 +17,13 @@ aup.PicTileCollection = Backbone.Collection.extend({
 			this.more = resp.result.more;
 
 			if(!!resp.result.items) {
+
+                // подмена id на photo_id
+                _.each(resp.result.items, function(item) {
+                    item['photo_id'] = item.id;
+                    delete item.id;
+                });
+
 				return resp.result.items;
 			} else {
 				return false;

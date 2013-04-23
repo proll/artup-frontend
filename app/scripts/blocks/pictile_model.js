@@ -1,7 +1,7 @@
 aup.PicTile = Backbone.Model.extend({
 	defaults: {
 		src: '',
-		// "id": XXX,
+		// "photo_id": XXX,
 		// "name": "Pencil Icon PSD",
 		// "description": "I made this for fun."
 		// "price": 100,
