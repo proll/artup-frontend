@@ -111,7 +111,11 @@ window.aup = {
 		} else {
 			return false;
 		}
-	}
+	},
+
+	is_authed: function() {
+		return (!!aup.user && aup.user.is_auth());
+	},
 };
 
 Backbone._sync = Backbone.sync;

@@ -47,18 +47,18 @@ aup.UserSettings = Backbone.Model.extend({
 	},
 
 	fetch: function(){
-		var that = this;
-		$.ajax({
-			type: 'GET',
-			url: _.toSafeUrl(this.url),
-			dataType: 'json'
-		})
-		.success(function(response, status, xhr){
-			that.success(response, status, xhr);
-		})
-		.error(function(response, status, xhr){
-			that.error(data);
-		})
+		// var that = this;
+		// $.ajax({
+		// 	type: 'GET',
+		// 	url: _.toSafeUrl(this.url),
+		// 	dataType: 'json'
+		// })
+		// .success(function(response, status, xhr){
+		// 	that.success(response, status, xhr);
+		// })
+		// .error(function(response, status, xhr){
+		// 	that.error(data);
+		// })
 	},
 
 	success: function (response, status, xhr) {

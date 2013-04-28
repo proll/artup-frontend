@@ -32,8 +32,8 @@ aup.User = Backbone.Model.extend({
 	},
 
 	getSession: function () {
-		var uid 	= _.getCookie("uid"),
-			token 	= _.getCookie("token");
+		var uid 	= localStorage.getItem("aup_uid");
+			token 	= localStorage.getItem("aup_token");
 
 		if(!!uid && !!token) {
 			this.set({
@@ -48,15 +48,15 @@ aup.User = Backbone.Model.extend({
 	},
 
 	setSession: function(user_obj) {
-		_.setCookie("uid",	user_obj.session.uid,	this.cookie_time);
-		_.setCookie("token",user_obj.session.token,	this.cookie_time);
+		localStorage.setItem("aup_uid", user_obj.session.uid);
+		localStorage.setItem("aup_token", user_obj.session.token);
 		this.set(user_obj.session);
 	},
 
 
 	clearSession: function () {
-		_.clearCookie("uid");
-		_.clearCookie("token");	
+		localStorage.setItem("aup_uid", "");
+		localStorage.setItem("aup_token", "");
 		this.set({uid:"", token:""});
 	}
 });

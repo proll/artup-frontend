@@ -1,0 +1,91 @@
+// Profile page
+.page-profile {
+	margin-top: 52px + 39px;
+}
+
+.profile__info {
+	text-align: center;
+}
+
+	.profile__ulink-cont {
+		position: relative;		
+	}
+
+	.profile__ulink {
+		font-family: @serifFontFamily;
+		text-decoration: underline;
+		font-style: italic;
+		font-size: 13px;
+
+		color: @grayDarker;
+		position: absolute;
+		left: 50%;
+		margin-left: 40px + 13px;
+	}
+
+	.profile__uavatar {
+		width: 80px;
+		height: 80px;
+		.border-radius(9999px);
+		overflow: hidden;
+		display: inline-block;
+
+		margin-bottom: 20px;
+	}
+
+	.profile__uname {
+		padding: 0;
+		margin: 0;
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 1;
+		letter-spacing: 1px;
+		margin-bottom: 20px;
+	}
+
+	.profile__about {
+		margin: 0 200px
+	}
+
+.profile__info-tabs {
+	text-align: center;
+	margin-bottom: 40px;
+	.user-select(none);
+}
+
+.profile__toggle-tab-1,
+.profile__toggle-tab-2 {
+	font-family: @serifFontFamily;
+	// border-bottom: 1px dotted @grayDarker;
+	text-decoration: underline;
+	display: inline-block;
+	cursor: pointer;
+	font-size: 14px;
+	line-height: 1;
+}
+
+
+.profile-tab-1 {
+	display: block;
+}
+
+.profile__toggle-tab-2 {
+	display: inline-block;
+}
+.profile-tab-2,
+.profile__toggle-tab-1 {
+	display: none;
+}
+
+.profile_pics {
+	.profile-tab-1,
+	.profile__toggle-tab-2 {
+		display: none;
+	}
+	.profile-tab-2{
+		display: block;
+	}
+	.profile__toggle-tab-1 {
+		display: inline-block;
+	}
+}

@@ -98,7 +98,7 @@ aup.PicTileGrid = Backbone.Model.extend({
 					delete data.story;
 				}
 
-				if(data.filter != "user" && data.filter != "friends" || !data.user) {
+				if(!data.user) {
 					delete data.user;
 				}
 

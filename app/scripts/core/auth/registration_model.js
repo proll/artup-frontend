@@ -35,7 +35,7 @@ aup.Registration = Backbone.Model.extend({
 					{
 						response: resp,
 						user: resp.user, 
-						session:{ token: resp.result.token, uid: resp.result.id }
+						session:{ token: resp.result.token, uid: resp.result.user.id }
 					}
 				);
 			}

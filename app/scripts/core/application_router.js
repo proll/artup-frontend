@@ -10,7 +10,8 @@ aup.Router = Backbone.Router.extend({
 	route_passed: 0,
 
 	routes: {
-		"": "default",
+		"": "landing",
+		"/": "landing",
 		"logout": "logout",
 		"explore": "explore",
 		"explore/": "explore",
@@ -18,7 +19,8 @@ aup.Router = Backbone.Router.extend({
 		"photofeed": "photofeed",
 		"photofeed/": "photofeed",
 		"photo/:photo/": "photo",
-		"user/:user/": "user",
+		"u/:user/": "profile",
+		"profile": "profile",
 		
 		"*default": "default",
 	},
@@ -36,8 +38,12 @@ aup.Router = Backbone.Router.extend({
 		// console.log("hello photo");
 	},
 
-	user: function () {
-		// console.log("hello user");
+	profile: function () {
+		// console.log("hello profile");
+	},
+
+	landing: function () {
+		// console.log("hello landing");
 	},
 
 	logout:function(){

@@ -47,6 +47,11 @@ aup.App = Backbone.Model.extend({
 			template: "pages/explore-page"
 		});
 		this.pages.add(this.explore);
+		this.profile = new aup.ProfilePage({
+			name: "profile",
+			template: "pages/profile-page"
+		});
+		this.pages.add(this.profile);
 
 		this.photo = new aup.PhotoPage({
 			name: "photo",
@@ -57,7 +62,26 @@ aup.App = Backbone.Model.extend({
 
 		this.router.on("route", function (router, route, params) {
 
-			if(router == "explore") {
+			aup.trigger('route', router, route, params);
+
+
+			if(router == 'landing') {
+
+					aup.navigate('/explore', {trigger: true});
+
+			} else if(router == "profile") {
+
+			var page = this.pages.getPage('profile');
+				if(!route[0] && !aup.is_authed()) {
+					aup.navigate('/', {trigger: true});
+				} else {
+					page.render({
+						mine:    	!route[0],
+						user:    	!!route[0] ? route[0] : aup.user.get('uid'),
+					});
+				}
+
+			} else if(router == "explore") {
 
 				this.navbar.set("currentItem", "explore");
 
@@ -104,6 +128,9 @@ aup.App = Backbone.Model.extend({
 		}, this);
 		this.router.on("reset:photofeed", function () {
 			if(this.router.current_route != 'photo') this.photofeed.sleep();
+		}, this);
+		this.router.on("reset:profile", function () {
+			if(this.router.current_route != 'photo') this.profile.sleep();
 		}, this);
 		this.router.on("reset:photo", function () {
 			console.log("reset:photo");
